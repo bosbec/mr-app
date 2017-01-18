@@ -4,8 +4,8 @@
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         xmlns:android = "http://schemas.android.com/apk/res/android"
-        id        = "com.bosbec.testapp"
-        version   = "0.3.2">
+        id        = "com.bosbec.mr-app"
+        version   = "0.3.3">
   <!-- VERSION HERE -->
   
   <name>Mobile Response App</name>
