@@ -1,0 +1,63 @@
+﻿<div ng-controller="MessagesController">
+    <div ng-show="successText!=null" class="alert alert-success">
+        <i class="fa fa-envelope"></i><a href="#/conversations/{{ inbox.inboxId }}">{{ successText }}</a>
+    </div>
+    <div ng-show="errorText!=null" class="alert alert-danger">{{ errorText }}</div>
+
+    <div class="scrollable content-container content-container-chat">
+        <div id="chat-container" class="scrollable-content">
+            <div class="list-group">
+                <div ng-repeat="message in messages | orderBy:'-createdOn':true"
+                     id="{{'msg'+ ($index + 1)}}"
+                     class="list-group-item message-chat"
+                     ng-class="{ 'message-chat-me': message.author === 'me', 'message-chat-other': message.author === 'other', 'last-message': $index >= messages.length-1}" ng-class="(!message.isRead) ? 'new-item' : ''">
+                    
+                    <div ng-if="conversation.avatars" class="list-item-avatar">
+                        <img class="avatar" ng-if="conversation.avatars" ng-repeat="avatar in conversation.avatars" ng-show="avatar.avatar != null && avatar.userId == message.authorId" height="50" alt="avatar" src="{{ avatar.avatar }}"/>
+                    </div>
+                    <div>
+                        <b>{{ message.authorDisplayName }}</b><br/>
+                        <div ng-bind-html="message.content"></div>
+                        <div ng-repeat="metadata in message.metaData">
+                            <div ng-if="metadata._type == 'image' || metadata._type == 'file' || metadata._type == 'position' || metadata._type == 'form'" class="attachment">
+                                <a ng-if="metadata._type == 'image'" ng-click="openExternalLink(metadata.url);">
+                                    <img height="50" alt="thumb" src="{{ metadata.thumbnail }}"/>
+                                </a>
+                                <a ng-if="metadata._type == 'file'" ng-click="openExternalLink(metadata.url);">
+                                    <span><i class="fa fa-paperclip"></i>{{metadata.name}}</span>
+                                </a>
+                                <a ng-if="metadata._type == 'position'" ng-click="openExternalLink('https://www.google.com/maps/preview/@'+metadata.value);">
+                                    <img height="50" alt="map" src="https://lh3.googleusercontent.com/MOf9Kxxkj7GvyZlTZOnUzuYv0JAweEhlxJX6gslQvbvlhLK5_bSTK6duxY2xfbBsj43H=w50" />
+                                </a>
+                                <div ng-if="metadata._type == 'form'" ng-click="openFormModal(message.formId)"><span><i class="fa fa-clipboard"></i>View form</span></div>
+                            </div>
+                        </div>
+                        <span class="smallDateTime">{{ message.createdOn }}</span>
+                    </div>
+                </div>
+                <div id="last-message" class="list-group-item message-chat-end">
+                    <div>
+                       ...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="send-chat-message">
+        <form ng-submit="sendMessage(newMessage)" name="newMessageForm">
+            <a href="" ng-click="sendMessage(newMessage)" class="btn btn-primary btn-align-right" ng-disable="newMessagesForm.$invalid"><span><i class="fa fa-arrow-right"></i></span></a>
+            <textarea ng-model="newMessage" class="form-control send-message" placeholder="Compose message" required></textarea>
+        </form>
+    </div>
+
+    <div ui-content-for="modals">
+        <div ng-include="'Partials/overlay.htm'"></div>
+    </div>
+
+</div>
+
+
+
+
+

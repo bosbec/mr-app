@@ -1,0 +1,302 @@
+﻿html,body {
+    height:100%;
+}
+
+.app {
+    
+}
+
+.ios-body {
+    padding-top: 23px;
+    background-color: #ccc;
+}
+
+.app-name 
+{	
+	background-color: #fff;
+	border-bottom: 1px solid #ccc;	
+}
+
+.modal {
+    display: block;
+}
+
+.modal-content {
+    z-index: 1050;
+}
+
+.formModal {
+    padding-top: 15px;
+}
+
+.formModalIframe {
+    border: 0;
+    background-color: white;
+    display: block;
+}
+
+.closeModal {
+    position: absolute;
+    margin-left: 90%;
+    z-index: 1060;
+}
+
+.content-container {
+    margin-top: 50px;
+    padding-bottom: 81px;
+}
+
+.login {
+	background-color: #fff
+}
+
+.smallDateTime {
+	font-size: 0.8em;
+	color: #999;
+}
+.error-label {
+	color: #f00;
+	background-color: #fee;
+	padding: 7px;
+	margin: 7px 0;
+	border: 1px solid #fbb;
+}
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+
+.form-new-conversation {
+    max-width: 600px;
+    padding: 15px;
+    margin: 0 auto;
+}
+.form-new-conversation input[type="text"] {
+  margin-bottom: 10px;
+}
+
+
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="text"] {
+  margin-bottom: 10px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.new-item {
+    background-color: lightgreen;
+}
+
+
+
+.alert {
+    position: absolute;
+    z-index: 10000;
+    text-align: center;
+    width: 90%;
+    margin-top: -40px;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.alert-new-message {
+    position: absolute;
+    z-index: 10000;
+    text-align: center;
+    width: 60%;
+    margin-top: 10px;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+.list-item-avatar {
+    float: left;
+    padding-right: 10px;
+    margin-left: -10px;
+    margin-top: -5px;
+}
+.list-item-button {
+    float: right;
+    margin-top: -5px;
+    margin-right: -10px;
+}
+.list-item-attachment {
+    float: right;
+    margin-top: -5px;
+    margin-right: -10px;
+}
+.content-container-chat {
+    margin-top: 50px;
+    /*padding-bottom: 141px;*/
+    padding-bottom: 75px;
+}
+.message-chat {
+    width: 60%;
+    margin: 6px 6px 6px 6px;
+    border-radius: 6px;
+}
+.message-chat-me {
+    background-color: aliceblue;
+    float: right;
+}
+.message-chat-other {
+    background-color: lightgoldenrodyellow;
+    float: left;
+}
+.message-chat-end {
+    float: left;
+    width: 100%;
+    height: 40px;
+    margin: 1px;
+    background-color: inherit;
+    border: 0;
+}
+#last-message {
+}
+.send-chat-message {
+    background-color: white;
+    position: absolute;
+    bottom: 0;
+    padding: 3px 3px 3px 3px;
+    width: 100%;
+}
+.attachment {
+    background-color: white;
+    border: 1px solid #ddd;
+    color: #007aff;
+    padding: 3px 7px 3px 7px;
+    margin-top: 5px;
+    border-radius: 6px;
+}
+.attachment img {
+    padding: 3px;
+}
+.attachment i {
+    margin-right: 5px;
+}
+.externalLink {
+    display: block;
+}
+.btn-align-right {
+    display: inline;
+    float: right;
+    width: 10%;
+}
+
+.send-message {
+    float: left;
+    width: 90%;
+}
+.navbar-brand {
+    padding-top: 1px;
+}
+.navbar-icongroup {
+    
+}
+.navbar-icongroup i {
+    position: relative;
+    top: 5px;
+}
+
+.avatar {
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    resize: both;
+    height: 40px;
+}
+.profile-avatar {
+    border-radius: 75px;
+    border: 1px solid #ccc;
+    resize: both;
+    height: 150px;
+}
+.navbar-active-item i {
+    border: 1px solid silver;
+    color: white;
+    background-color: #007aff;
+    padding: 7px 9px;
+    border-radius: 25px;
+}
+.modal {
+    background-color: white;
+}
+.modal-content {
+    height: 100vh;
+}
+.modal-body {
+    
+}
+.intro-content {
+    height: 88vh;
+}
+.intro-footer {
+    
+}
+.intro-image {
+    padding-top: 20vh;
+    padding-bottom: 25px;
+    width: 90%;
+}
+.intro-screenshot {
+    width: 75%;
+    align-content: center;
+    -webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+}
+.intro-heading {
+    padding-top: 20px;
+    font-size: 18px;
+}
+.intro-ingress {
+    font-size: 12px;
+    font-style: italic;
+}
+.intro-text {
+    font-size: 12px;
+}
+.intro-btn {
+    width: 85px;
+}
+.intro-close {
+    margin-top: -20px;
+    margin-right: -15px;
+}
+.intro-dots {
+    position: absolute;
+    padding-top: 5px;
+    margin-left: 30%;
+    float: left;
+}
+.intro-dots i {
+    padding: 1px;
+}
