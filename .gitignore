@@ -1,0 +1,5 @@
+.idea/
+platforms/
+credentials.json
+buildzip/
+node_modules/
