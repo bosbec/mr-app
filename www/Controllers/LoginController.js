@@ -150,10 +150,12 @@
                                 $rootScope.myAppUser = response;
                                 //console.log($rootScope.myAppUser);
 
+                                //"appid": "A014B-AC83E", //test
+                                //"projectid": "482590317251", //test
                                 // registerDevice ---
                                 var registerDeviceRequest = {
-                                    "appid": "A014B-AC83E",
-                                    "projectid": "482590317251",
+                                    "appid": "64032-F5A58",
+                                    "projectid":"71435688512",
                                     "onPush": function(push) {
                                         console.log("RootBroadcast: newPush");
                                         $rootScope.$broadcast('newPush', push);
