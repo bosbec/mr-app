@@ -5,7 +5,8 @@
             var lastCallTimestamp;
 
             var apiSettings = {
-                baseApiUrl: 'https://api.mobileresponse.se/app/',
+                baseApiUrl: 'https://appapi.mobileresponse.io/',
+                //baseApiUrl: 'https://api.mobileresponse.se/app/',
                 //baseApiUrl: 'http://api.test.mobileresponse.se/app/',
                 instanceName: 'mobileresponse',
                 method: 'POST'
@@ -24,7 +25,8 @@
             function authenticate(userCredentials, callback, error) {
                 var request = { data: userCredentials };
                 //console.log(request);
-                call('authenticate',
+                call('authentication/authenticate',
+                //call('authenticate',
                     request,
                     function(response) {
                         if (response.data != null) {

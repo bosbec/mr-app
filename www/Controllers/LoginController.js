@@ -132,7 +132,6 @@
             };
             apiFactory.functions.authenticate(credentials,
                 function (response) {
-
                     if (response != null) {
 
                         if ($scope.saveCredentials) {
@@ -141,14 +140,13 @@
                                 'password': password,
                                 'keepMeSignedIn': $scope.keepMeSignedIn
                             };
-                            //console.log("Saved credentials");
                         }
                         $rootScope.keepMeSignedIn = $scope.keepMeSignedIn;
                         $rootScope.authenticationToken = response;
-                        usersFactory.getUser(apiFactory.myAppUser,
+
+                        usersFactory.getUser(apiFactory.myAppUser.appUserId,
                             function (response) {
                                 $rootScope.myAppUser = response;
-                                //console.log($rootScope.myAppUser);
 
                                 //"appid": "A014B-AC83E", //test
                                 //"projectid": "482590317251", //test

@@ -54,21 +54,20 @@
             }
 
             function getUser(appUserId, callback, error) {
+
                 var appUserDetailsRequest = {
                     authenticationToken: apiFactory.getToken(),
                     data: {
-                        'instanceName': apiFactory.apiSettings.instanceName,
                         'userId': appUserId
                     }
                 };
-
+                
                 apiFactory.functions.call('users/details-for-user',
                     appUserDetailsRequest,
-                    function(response) {
-                        //console.log(response.data);
+                    function (response) {
                         callback(response.data);
                     },
-                    function(e) {
+                    function (e) {
                         error(e);
                     });
             }

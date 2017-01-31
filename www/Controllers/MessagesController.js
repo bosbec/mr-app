@@ -160,7 +160,7 @@ mrApp.controller('MessagesController', [
                 }
 
                 response.data.items = parseAuthor(response.data.items);
-                console.log(response.data.items);
+                //console.log(response.data.items);
                 $scope.messages = response.data.items;
                 
                 scrollToLast();
