@@ -98,7 +98,6 @@ mrApp.controller('MessagesController', [
 
             SharedState.initialize($scope, 'formModalUrl', '');
 
-            //$scope.$emit('inConversation', { 'state': true });
             $scope.$emit('viewChanged', 'conversation');
         }
 
@@ -160,7 +159,6 @@ mrApp.controller('MessagesController', [
                 }
 
                 response.data.items = parseAuthor(response.data.items);
-                //console.log(response.data.items);
                 $scope.messages = response.data.items;
                 
                 scrollToLast();
@@ -200,33 +198,15 @@ mrApp.controller('MessagesController', [
                 angular.copy($scope.conversation.participants, sendTo);
                 sendTo.push($scope.conversation.userId);
 
-                //var sendMessageRequest = {
-                //    authenticationToken: $scope.authenticationToken,
-                //    data: {
-                //        'instanceName': apiFactory.apiSettings.instanceName,
-                //        'inboxId': $scope.conversation.inboxId,
-                //        'participants': sendTo,
-                //        'message': message
-                //    }
-                //};
-                ////console.log(sendMessageRequest);
-                //apiFactory.functions.call('conversations/create-message', sendMessageRequest, function(response) {
-                //    showAlert('Message sent', 'success', 1000);
-                //    listMessages($scope.authenticationToken, conversationId);
-                //}, function(error) {
-                //    showAlert('Message sent', 'error', 5000);
-                //    console.log(error);
-                //});
-
                 var replyRequest = {
                     authenticationToken: $scope.authenticationToken,
                     data: {
                         'conversationId': conversationId,
                         'message': message,
-                        'metadata': {}
+                        'metadata': [{}]
                     }
                 };
-                //console.log(replyRequest);
+                console.log(replyRequest);
                 apiFactory.functions.call('conversations/reply', replyRequest, function (response) {
                     showAlert('Message sent', 'success', 1000);
                     listMessages($scope.authenticationToken, conversationId);
