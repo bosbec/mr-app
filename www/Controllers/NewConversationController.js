@@ -66,7 +66,6 @@
 
         function init() {
             $scope.$emit('viewChanged', 'newconversation');
-            console.log($scope.inboxId);
         }
 
         init();

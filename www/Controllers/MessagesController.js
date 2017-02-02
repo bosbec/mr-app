@@ -187,7 +187,6 @@ mrApp.controller('MessagesController', [
         }
         
         $scope.sendMessage = function (message) {
-            console.log('Message: ' + message);
             if (message == null) {
                 showAlert('No text in message', 'error', 1000);
             } else {

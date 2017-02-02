@@ -52,6 +52,9 @@
         function onHttpCallError(event, state) {
             console.log(event);
             console.log(state);
+            if (state.status === 401) { // Unauthorized => relogin
+                $location.path('/login/');
+            }
             //alert("httpCallError: " + state);
         }
 

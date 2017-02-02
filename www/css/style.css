@@ -261,11 +261,13 @@
 .intro-footer {
     
 }
+
 .intro-image {
     padding-top: 20vh;
     padding-bottom: 25px;
     width: 90%;
 }
+
 .intro-screenshot {
     width: 75%;
     align-content: center;
@@ -273,6 +275,7 @@
     -moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
     box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
 }
+
 .intro-heading {
     padding-top: 20px;
     font-size: 18px;
@@ -299,4 +302,14 @@
 }
 .intro-dots i {
     padding: 1px;
+}
+
+@media screen and (orientation:landscape) {
+    .intro-image {
+        width: 20%;
+    }
+
+    .intro-screenshot {
+        width: 20%;
+    }
 }

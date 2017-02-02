@@ -33,7 +33,6 @@
         function getAppUserDetails(appUserId) {
             usersFactory.getUser(appUserId, function (appUser) {
                 $scope.myAppUser = appUser;
-                console.log($scope.myAppUser);
                 $scope.profile = {
                     'firstName': appUser.firstname,
                     'lastName': appUser.lastname,
@@ -45,7 +44,7 @@
                 if (appUser.email == null && appUser.phoneNumber == null) {
                     showAlert("Please update your profile with phone and/or email", "error", 20000);
                 }
-                //console.log($scope.myAppUser);
+
             }, function (error) {
                 showAlert("Unable to get user details", "error", 5000);
             });
@@ -61,14 +60,7 @@
                     showAlert("Error saving profile", "error", 5000);
                 });
         };
-
-        //$scope.modal1 = false;
-
-        //$scope.ShowModal = function () {
-        //    console.log("Modal:"+ scope.modal1);
-        //    $scope.modal1 = true;
-        //};
-
+        
         init();
 
     }

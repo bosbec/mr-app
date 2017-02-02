@@ -147,6 +147,7 @@
                         'pageSize': pageSize
                     }
                 };
+               
                 apiFactory.functions.call('inboxes/list-content',
                     listConversationsRequest,
                     function(response) {
@@ -174,6 +175,8 @@
                         } else {
                             error('No conversations');
                         }
+                    }, function (e) {
+                        error(e);
                     });
 
             }
