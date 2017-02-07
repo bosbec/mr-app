@@ -1,6 +1,6 @@
 ﻿mrApp.controller('MainController', [
-    'ApiFactory','$rootScope', '$scope', '$location', '$filter', '$timeout', 'ConversationsFactory','DeviceFactory','SharedState',
-    function(apiFactory, $rootScope, $scope, $location, $filter, $timeout, conversationsFactory, deviceFactory, SharedState) {
+    'ApiFactory', '$rootScope', '$scope', '$location', '$localStorage', '$filter', '$timeout', 'ConversationsFactory', 'DeviceFactory', 'SharedState',
+    function(apiFactory, $rootScope, $scope, $location, $localStorage, $filter, $timeout, conversationsFactory, deviceFactory, SharedState) {
 
         $scope.inConversation = false;
         $scope.currentView = 'main';
@@ -50,10 +50,21 @@
         }
 
         function onHttpCallError(event, state) {
-            console.log(event);
-            console.log(state);
+            //console.log(event);
+            //console.log(state);
             if (state.status === 401) { // Unauthorized => relogin
-                $location.path('/login/');
+                console.log("Auto Authenticate");
+                apiFactory.functions.autoAuthenticate(function (response) {
+                        if ($rootScope.currentInboxId != undefined) {
+                            $location.path('/conversations/' + $rootScope.currentInboxId);
+                        } else {
+                            $location.path('/main');
+                        }
+                    },
+                    function () {
+                        console.log("auto login failed, redirect to login");
+                        $location.path('/login/');
+                    });
             }
             //alert("httpCallError: " + state);
         }

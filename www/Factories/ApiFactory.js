@@ -1,5 +1,5 @@
 ﻿angular.module('ApiFactory', [])
-    .factory('ApiFactory', ['$rootScope','$http', function($rootScope, $http) {
+    .factory('ApiFactory', ['$rootScope', '$http', '$localStorage', function ($rootScope, $http, $localStorage) {
 
             var authenticationToken;
             var lastCallTimestamp;
@@ -22,11 +22,29 @@
                 return lastCallTimestamp;
             }
 
+            function autoAuthenticate(callback, error) {
+                var storedCredentials = $localStorage.savedCredentials;
+
+                if (storedCredentials === undefined) {
+                    console.log("missing credentials");
+                    error(function () {
+                        return "missing credentials";
+                    });
+                } else {
+                    var credentials = {
+                        'instanceName': apiSettings.instanceName,
+                        'UserName': storedCredentials.userName,
+                        'Password': storedCredentials.password
+                    };
+                    authenticate(credentials, callback, error);
+                }
+            }
+
             function authenticate(userCredentials, callback, error) {
                 var request = { data: userCredentials };
                 //console.log(request);
                 call('authentication/authenticate',
-                //call('authenticate',
+                    //call('authenticate',
                     request,
                     function(response) {
                         if (response.data != null) {
@@ -65,7 +83,7 @@
                             //console.log('ERROR');
                             //console.log(e);
                             $rootScope.$broadcast('httpCallError', e);
-                            error(e);
+                            //error(e);
                         });
             }
 
@@ -87,6 +105,7 @@
                 myAppUser: appUser,
                 lastCallTimestamp: getLastCallTimestamp,
                 functions: {
+                    autoAuthenticate: autoAuthenticate,
                     authenticate: authenticate,
                     call: call,
                     callReturnId: callReturnId
