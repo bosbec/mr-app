@@ -51,6 +51,7 @@
                             //console.log(response.data);
                             angular.copy({ appUserId: response.data.appUserId }, appUser);
                             authenticationToken = response.data.id;
+                            $rootScope.authenticationToken = response.data.id;
                             callback(response.data.id);
                         } else {
                             callback(response.data);
