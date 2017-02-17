@@ -103,6 +103,10 @@
             $scope.currentView = 'conversations';
         };
 
+        $scope.hideGroupMembers = function () {
+            $scope.currentView = 'groups-list';
+        };
+
         $scope.swipeRight = function () {
             console.log("SwipeRight: " + $scope.currentView);
             if ($scope.currentView === 'conversation') {
@@ -161,6 +165,11 @@
                 }
             } else if (part == 'newConversation') {
                 if ($rootScope.authenticationToken != undefined) {
+                    return true;
+                }
+            }
+            else if (part == 'mobileresponse') {
+                if ($rootScope.mobileResponseToken != undefined) {
                     return true;
                 }
             }

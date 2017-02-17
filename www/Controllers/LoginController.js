@@ -1,6 +1,6 @@
 ﻿mrApp.controller('LoginController', [
-    'ApiFactory', '$rootScope', '$scope', '$location', '$window', '$routeParams', '$localStorage', 'UsersFactory', 'DeviceFactory', 'SettingsFactory', 'SharedState',
-    function (apiFactory, $rootScope, $scope, $location, $window, $routeParams, $localStorage, usersFactory, deviceFactory, settingsFactory, SharedState) {
+    'ApiFactory', '$rootScope', '$scope', '$location', '$window', '$routeParams', '$localStorage', 'UsersFactory', 'DeviceFactory', 'SettingsFactory', 'MobileResponseFactory', 'SharedState',
+    function (apiFactory, $rootScope, $scope, $location, $window, $routeParams, $localStorage, usersFactory, deviceFactory, settingsFactory, mobileResponseFactory, SharedState) {
         
         var command = $routeParams.param1;
 
@@ -86,7 +86,7 @@
             clearRegistration();
         };
 
-        $scope.Register = function () {
+        $scope.Register = function() {
 
             if (!$scope.registrationForm.$invalid) {
 
@@ -101,28 +101,36 @@
                     return false;
                 }
 
-                usersFactory.registerUser(apiFactory.apiSettings.instanceName, userName, password, function (response) {
-                    console.log("SUCCESS: Register response");
-                    console.log(response);
+                usersFactory.registerUser(apiFactory.apiSettings.instanceName,
+                    userName,
+                    password,
+                    function(response) {
+                        console.log("SUCCESS: Register response");
+                        console.log(response);
 
-                    if (response.data.userId != null) {
-                        var newUserId = response.data.userId;
-                        login(apiFactory.apiSettings.instanceName, userName, password, function (response) {
-                            $location.path('/profile/' + newUserId);
-                            return true;
-                        }, function (error) {
+                        if (response.data.userId != null) {
+                            var newUserId = response.data.userId;
+                            login(apiFactory.apiSettings.instanceName,
+                                userName,
+                                password,
+                                function(response) {
+                                    $location.path('/profile/' + newUserId);
+                                    return true;
+                                },
+                                function(error) {
 
-                        });
-                    }
+                                });
+                        }
 
-                }, function (error) {
-                    $scope.registration.error.show = true;
-                    $scope.registration.error.message = error[0].errorMessage;
-                });
+                    },
+                    function(error) {
+                        $scope.registration.error.show = true;
+                        $scope.registration.error.message = error[0].errorMessage;
+                    });
 
             }
         };
-
+        
         function apiLogin(instanceName, userName, password, callback, error) {
 
             var credentials = {
@@ -147,6 +155,14 @@
                         usersFactory.getUser(apiFactory.myAppUser.appUserId,
                             function (response) {
                                 $rootScope.myAppUser = response;
+
+                                mobileResponseFactory.functions.autoAuthenticate(
+                                    function (response) {
+                                        console.log("Mobile Response auto login: success");
+                                    },
+                                    function(error) {
+                                        console.log("Mobile Response auto login: error");
+                                    });
 
                                 //"appid": "A014B-AC83E", //test
                                 //"projectid": "482590317251", //test

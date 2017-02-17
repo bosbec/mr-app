@@ -1,3 +1,62 @@
-﻿<div>
-    
+﻿<div ng-controller="ConnectController">
+    <div ng-show="successText!=null" class="alert alert-success">{{ successText }}</div>
+    <div ng-show="errorText!=null" class="alert alert-danger">{{ errorText }}</div>
+    <div class="scrollable content-container">
+        <div class="scrollable-content overthrow">
+            
+            <div class="list-group" ng-hide="mobileResponseToken == null">
+                <div class="list-group-item">
+                    <form name="disconnectForm" class="form-group form-signin">
+                        <h1 class="text-center">Connect</h1>
+                        <div>
+                            <i>You are now connected to your Mobile Response account.</i>
+                        </div>
+                        <div>
+                            <br />
+                        </div>
+                        <button class="btn btn-lg btn-primary btn-block" ng-click="Disconnect()" type="submit">Disconnect</button>
+                    </form>
+                  
+                </div>
+            </div>
+
+
+            <div class="list-group" ng-show="mobileResponseToken == null">
+
+                <div class="list-group-item">
+                    <h1 class="text-center">Connect</h1>
+
+                    <form name="connectForm" role="form" class="form-group form-signin">
+                        <div>
+                            <div>
+                                <i>If you have a Mobile Response account you can connect your administrator and access your services and resources from the app.</i>
+                            </div>
+                            <div>
+                                <br/>
+                            </div>
+
+                            <label>Username</label>
+                            <input type="text" ng-model="mrUserName" class="form-control" placeholder="" required="" autofocus>
+
+                            <label>Password</label>
+                            <input type="password" ng-model="mrPassword" class="form-control" placeholder="" required="" autofocus>
+
+                            <button class="btn btn-lg btn-primary btn-block" ng-disabled="connectForm.$invalid" ng-click="Connect(connectForm)" type="submit">Connect</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+            <div class="list-group" ng-show="groups.length">
+                <div ng-repeat="group in groups" class="list-group-item">
+                    {{ group.name }}
+                </div>
+            </div>
+
+        </div>
+
+    </div>
 </div>
+
+

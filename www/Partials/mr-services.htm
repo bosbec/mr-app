@@ -1,0 +1,22 @@
+﻿<div ng-controller="MrServicesController">
+    <div class="scrollable content-container">
+        <div class="scrollable-content overthrow">
+
+            <div class="list-group" ng-show="items.length">
+
+                <div ng-repeat="item in items" class="list-group-item">
+                    <div class="list-item-symbol">
+                        <img class="item-symbol" alt="group-symbol" src="/www/images/mr/Job 128x128.png"/>
+                    </div>
+                    <div>
+                        {{ item.name }}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+

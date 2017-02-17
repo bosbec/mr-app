@@ -61,6 +61,36 @@ mrApp.config(function ($routeProvider) {
         resolve: checkToken
     });
 
+    $routeProvider.when('/connect',
+    {
+        templateUrl: 'Partials/connect.htm',
+        resolve: checkToken
+    });
+
+    $routeProvider.when('/mr/groups',
+    {
+        templateUrl: 'Partials/mr-groups.htm',
+        resolve: checkToken
+    });
+
+    $routeProvider.when('/mr/groups/:param1',
+    {
+        templateUrl: 'Partials/mr-group-members.htm',
+        resolve: checkToken
+    });
+
+    $routeProvider.when('/mr/units',
+    {
+        templateUrl: 'Partials/mr-units.htm',
+        resolve: checkToken
+    });
+
+    $routeProvider.when('/mr/services',
+    {
+        templateUrl: 'Partials/mr-services.htm',
+        resolve: checkToken
+    });
+
     $routeProvider.when('/intro/:param1',
     {
         templateUrl: 'Partials/intro-container.htm',

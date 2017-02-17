@@ -205,7 +205,7 @@ mrApp.controller('MessagesController', [
                         'metadata': [{}]
                     }
                 };
-                console.log(replyRequest);
+                //console.log(replyRequest);
                 apiFactory.functions.call('conversations/reply', replyRequest, function (response) {
                     showAlert('Message sent', 'success', 1000);
                     listMessages($scope.authenticationToken, conversationId);

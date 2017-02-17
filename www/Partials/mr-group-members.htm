@@ -1,0 +1,49 @@
+﻿<div ng-controller="MrGroupsController">
+    <div class="scrollable content-container">
+        <div class="scrollable-content overthrow">
+
+            <div class="list-group" ng-show="items.length">
+                
+                <div class="list-group-item" ng-click="">
+                    <h1><img src="/www/images/mr/Group 128x128.png" width="50"/> {{ activeGroup.name }}
+                    </h1>
+                    <div>
+                        <button class="btn btn-primary" ng-hide="expandUnits" ng-click="ToggleExpand()"><i class="fa fa-chevron-down"></i> Expand all</button>
+                        <button class="btn btn-primary" ng-show="expandUnits" ng-click="ToggleExpand()"><i class="fa fa-chevron-up"></i> Compress all</button>
+                    </div>
+                </div>
+
+                <div ng-repeat="unit in items" class="list-group-item" ng-click="ToggleUnitInfo(unit)">
+                    <div ng-hide="unit.expand"><i class="fa fa-chevron-down pull-right"></i>
+                    </div>
+                    <div ng-show="unit.expand"><i class="fa fa-chevron-up pull-right"></i></div>
+                    <div class="list-item-symbol">
+                        <img class="item-symbol item-symbol-unit" alt="group-symbol" src="/www/images/mr/Unit 128x128.png"/>
+                    </div>
+                    <div>
+                        <div class="unit-info-container">
+                            <span ng-show="unit.firstName">{{unit.firstName}}</span> <span ng-show="unit.lastName">{{unit.lastName}}</span>
+                            <br/>
+                            <span ng-show="unit.phone"><i class="fa fa-phone-square"></i> {{unit.phone}}</span> 
+                            <span ng-show="unit.email"><i class="fa fa-envelope"></i> {{unit.email}}</span>
+                        </div>
+                        <div class="unit-metadata-container" ng-show="unit.expand || expandUnits">
+                            <div class="unit-metadata-item" ng-repeat="(key,value) in unit.metaData">
+                                <div class="unit-metadata-key">{{key}}</div>:
+                                <div class="unit-metadata-value">{{value}}</div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+
+                
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+

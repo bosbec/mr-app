@@ -10,7 +10,8 @@ var mrApp = angular.module('mrApp', [
     'UsersFactory',
     'ConversationsFactory',
     'DeviceFactory',
-    'SettingsFactory'
+    'SettingsFactory',
+    'MobileResponseFactory'
 ]);
 
 mrApp.run(function () {
