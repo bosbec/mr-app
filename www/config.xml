@@ -5,7 +5,7 @@
         xmlns:gap = "http://phonegap.com/ns/1.0"
         xmlns:android = "http://schemas.android.com/apk/res/android"
         id        = "com.bosbec.mr-app"
-        version   = "0.3.9"> <!-- VERSION HERE -->
+        version   = "0.4.0"> <!-- VERSION HERE -->
   <!--id        = "com.phonegap.hello-world"-->
  
   <name>Mobile Response App</name>
@@ -19,7 +19,7 @@
   </author>
 
   <gap:config-file platform="ios" parent="CFBundleShortVersionString">
-    <string>0.3.9</string>
+    <string>0.4.0</string>
     <!-- VERSION HERE -->
   </gap:config-file>
 
