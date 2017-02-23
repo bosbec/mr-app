@@ -28,10 +28,6 @@
                         return "missing credentials";
                     });
                 } else {
-                    //var credentials = {
-                    //    'UserName': storedCredentials.username,
-                    //    'Password': storedCredentials.password
-                    //};
                     authenticate(storedCredentials, callback, error);
                 }
             }
@@ -40,7 +36,6 @@
                 var request = { data: userCredentials };
                 console.log(request);
                 call('authenticate',
-                    //call('authenticate',
                     request,
                     function(response) {
                         if (response.data != null) {

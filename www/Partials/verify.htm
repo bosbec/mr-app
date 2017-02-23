@@ -1,0 +1,109 @@
+﻿<div ng-controller="VerifyController">
+    <div ng-show="successText!=null" class="alert alert-success">{{ successText }}</div>
+    <div ng-show="errorText!=null" class="alert alert-danger">{{ errorText }}</div>
+    <div class="scrollable content-container">
+        <div class="scrollable-content overthrow">
+
+            <div class="list-group">
+
+                <div class="list-group-item" ng-show="verifyType=='phone'">
+
+                    <h1 class="text-center">Verify Phone</h1>
+
+                    <form name="verifyPhoneForm" role="form" class="form-group form-signin">
+                        <div>
+                            <div>
+                                <i>You need to verify that you are the owner of the number. Enter your number and click verify to send a sms with a verfication code.</i>
+                            </div>
+                            <div>
+                                <br/>
+                            </div>
+
+                            <label>Phone number (with country prefix)</label>
+                            <input type="text" ng-model="phoneNumber" class="form-control" placeholder="" autofocus>
+                            <button ng-hide="verificationResponse.valid" class="btn btn-lg btn-primary btn-block" ng-click="ValidateNumber(phoneNumber)" type="submit">Validate number</button>
+
+                            <div ng-show="verificationResponse.valid" class="unit-metadata-container">
+                                <div>Number is valid: {{verificationResponse.number}}</div>
+                                <div>Country: <img ng-show="verificationResponse.country.flag" src="{{verificationResponse.country.flag}}"/> {{verificationResponse.country.name}}
+                                </div>
+                                <div>Prefix: {{verificationResponse.country.prefix}}</div>
+                            </div>
+                            <button ng-show="verificationResponse.valid" class="btn btn-lg btn-primary btn-block" ng-click="SendVerificationSms(phoneNumber)" type="submit">Send verification SMS</button>
+                        </div>
+                    </form>
+
+                </div>
+
+                <div class="list-group-item" ng-show="status=='sms-sent'">
+
+                    <h1 class="text-center">Submit Code (Phone)</h1>
+
+                    <form name="verifyCodePhoneForm" role="form" class="form-group form-signin">
+                        <div>
+                            <div>
+                                <i>Enter the code you received in the sms we sent you.</i>
+                            </div>
+                            <div>
+                                <br />
+                            </div>
+
+                            <label>Code</label>
+                            <input type="text" ng-model="verificationCodePhone" class="form-control" placeholder="" autofocus>
+                            <button class="btn btn-lg btn-primary btn-block" ng-click="ValidateCodePhone(verificationCodePhone,phoneNumber)" type="submit">Validate code</button>
+                            
+                        </div>
+                    </form>
+
+                </div>
+
+                <div class="list-group-item" ng-show="verifyType=='email'">
+
+                    <h1 class="text-center">Verify Email</h1>
+
+                    <form name="verifyPhoneForm" role="form" class="form-group form-signin">
+                        <div>
+                            <div>
+                                <i>You need to verify that you are the owner of the email address. Write your email address and click verify to send an email with a verfication code.</i>
+                            </div>
+                            <div>
+                                <br/>
+                            </div>
+
+                            <label>Email address</label>
+                            <input type="text" ng-model="email" class="form-control" placeholder="" autofocus>
+
+                            <button class="btn btn-lg btn-primary btn-block" ng-click="SendVerificationEmail(email)" type="submit">Send verification email</button>
+                        </div>
+                    </form>
+
+                </div>
+
+                <div class="list-group-item" ng-show="status=='email-sent'">
+
+                    <h1 class="text-center">Submit Code (Email)</h1>
+
+                    <form name="verifyCodeEmailForm" role="form" class="form-group form-signin">
+                        <div>
+                            <div>
+                                <i>Enter the code you received in the email we sent you.</i>
+                            </div>
+                            <div>
+                                <br />
+                            </div>
+
+                            <label>Code</label>
+                            <input type="text" ng-model="verificationCodeEmail" class="form-control" placeholder="" autofocus>
+                            <button class="btn btn-lg btn-primary btn-block" ng-click="ValidateCodeEmail(verificationCodeEmail,email)" type="submit">Validate code</button>
+
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+

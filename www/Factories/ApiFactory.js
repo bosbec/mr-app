@@ -6,8 +6,6 @@
 
             var apiSettings = {
                 baseApiUrl: 'https://appapi.mobileresponse.io/1/',
-                //baseApiUrl: 'https://api.mobileresponse.se/app/',
-                //baseApiUrl: 'http://api.test.mobileresponse.se/app/',
                 instanceName: 'mobileresponse',
                 method: 'POST'
             };
@@ -42,9 +40,7 @@
 
             function authenticate(userCredentials, callback, error) {
                 var request = { data: userCredentials };
-                //console.log(request);
                 call('authentication/authenticate',
-                    //call('authenticate',
                     request,
                     function(response) {
                         if (response.data != null) {

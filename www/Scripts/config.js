@@ -55,6 +55,12 @@ mrApp.config(function ($routeProvider) {
         resolve: checkToken
     });
 
+    $routeProvider.when('/verify/:param1/:param2',
+    {
+        templateUrl: 'Partials/verify.htm',
+        resolve: checkToken
+    });
+
     $routeProvider.when('/settings',
     {
         templateUrl: 'Partials/settings.htm',

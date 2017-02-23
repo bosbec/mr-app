@@ -4,14 +4,45 @@
 
             <div class="list-group" ng-show="items.length">
 
-                <div ng-repeat="item in items" class="list-group-item">
-                    <div class="list-item-symbol">
-                        <img class="item-symbol" alt="services-symbol" src="images/mr/Job-128x128.png"/>
-                    </div>
+                <div class="list-group-item" ng-click="">
                     <div>
-                        {{ item.name }}
+                        <button class="btn btn-primary" ng-hide="expandItems" ng-click="ToggleExpand()"><i class="fa fa-chevron-down"></i> Expand all</button>
+                        <button class="btn btn-primary" ng-show="expandItems" ng-click="ToggleExpand()"><i class="fa fa-chevron-up"></i> Compress all</button>
                     </div>
                 </div>
+
+                <div ng-repeat="item in items" class="list-group-item" ng-click="ToggleInfo(item)">
+                    <div ng-hide="item.expand">
+                        <i class="fa fa-chevron-down pull-right"></i>
+                    </div>
+                    <div ng-show="item.expand"><i class="fa fa-chevron-up pull-right"></i>
+                    </div>
+                    <div class="list-item-symbol">
+                        <img class="item-symbol item-symbol-unit" alt="services-symbol" src="images/mr/Job-128x128.png"/>
+                    </div>
+                    <div>
+                        <div class="unit-info-container">
+                            <span ng-show="item.data.templateName"><b>{{item.data.templateName}}</b></span>
+                            <br/>
+                            <span ng-show="item.data.description">{{item.data.description}}</span>
+                        </div>
+                        <div class="unit-metadata-container" ng-show="item.expand || expandItems">
+                            <div class="unit-metadata-item" ng-repeat="parameter in item.data.configurableParameters">
+                                <div><b>Parameter: {{$index}}</b></div>
+                                <div class="unit-metadata-key">Alias</div>
+                                <div class="unit-metadata-value">{{parameter.alias}}</div><br/>
+                                <div class="unit-metadata-key">Title</div>
+                                <div class="unit-metadata-value">{{parameter.title}}</div><br/>
+                                <div class="unit-metadata-key">Tooltip</div>
+                                <div class="unit-metadata-value">{{parameter.toolTip}}</div>
+                                
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
             </div>
 
         </div>

@@ -7,27 +7,52 @@
         <div class="scrollable-content overthrow">
 
             <div class="list-group">
-                
+
                 <div class="list-group-item text-center">
                     <img class="profile-avatar" ng-show="myAppUser.avatar != null" alt="avatar" src="{{ myAppUser.avatar }}"/>
                     <h1>{{ myAppUser.displayName }}</h1>
                 </div>
 
+                <!--<div class="list-group-item text-center">
+                    <div>
+                        <button class="btn btn-primary" ng-click="OpenVerify('phone');"><i class="fa fa-phone"></i> Change Phone</button>
+                        <button class="btn btn-primary" ng-click="OpenVerify('email');"><i class="fa fa-envelope"></i> Change Email</button>
+                    </div>
+                </div>-->
+
                 <div class="list-group-item">
 
                     <form name="profileForm" role="form" class="form-group form-signin">
                         <div>
+                            <div ng-show="myAppUser.phoneNumber">
+                                <label>Phone (click to change)</label>
+                                <button class="btn btn-primary btn-block" ng-click="OpenVerify('phone');"><i class="fa fa-phone"></i> {{ myAppUser.phoneNumber }}</button>
+                            </div>
+
+                            <div ng-hide="myAppUser.phoneNumber">
+                                <label>Phone (click to set)</label>
+                                <button class="btn btn-primary btn-block" ng-click="OpenVerify('phone');"><i class="fa fa-phone"></i> Set phone number</button>
+                            </div>
+
+                            <div ng-show="myAppUser.email">
+                                <label>Email (click to change)</label>
+                                <button class="btn btn-primary btn-block" ng-click="OpenVerify('email');"><i class="fa fa-envelope"></i> {{ myAppUser.email }}</button>
+                            </div>
+
+                            <div ng-hide="myAppUser.email">
+                                <label>Email (click to set)</label>
+                                <button class="btn btn-primary btn-block" ng-click="OpenVerify('email');"><i class="fa fa-envelope"></i> Set email</button>
+                            </div>
+                            <div>
+                                <br/>
+                            </div>
+
                             <label>First name</label>
                             <input type="text" ng-model="profile.firstName" class="form-control" placeholder="{{ myAppUser.firstname }}" autofocus>
 
                             <label>Last name</label>
                             <input type="text" ng-model="profile.lastName" class="form-control" placeholder="{{ myAppUser.lastname }}">
 
-                            <label>Phone (mobile with country prefix)</label>
-                            <input type="text" ng-model="profile.phone" class="form-control" placeholder="{{ myAppUser.phoneNumber }}">
-
-                            <label>Email</label>
-                            <input type="text" ng-model="profile.email" class="form-control" placeholder="{{ myAppUser.email }}">
 
                             <label>Avatar (url)</label>
                             <input type="text" ng-model="profile.avatar" class="form-control" placeholder="{{ myAppUser.avatar }}">

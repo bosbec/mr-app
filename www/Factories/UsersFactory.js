@@ -1,7 +1,8 @@
 ﻿angular.module('UsersFactory', [])
     .factory('UsersFactory',['$rootScope', '$http', '$timeout', 'ApiFactory',function($rootScope, $http, $timeout, apiFactory) {
 
-            var users = [];
+        var users = [];
+        var restApiKey = "f6895bf2-f3c8-49e5-8393-8691dbbed5af"; //bosbecappsys
 
             function myUser() {
                 return $rootScope.myAppUser;
@@ -84,9 +85,11 @@
                         'password': password
                     }
                 };
+                //console.log(registerUserRequest);
                 apiFactory.functions.call('users/register',
                     registerUserRequest,
-                    function(response) {
+                    function (response) {
+                        //console.log(response);
                         if (response.errors.length > 0) {
                             error(response.errors);
                         }
@@ -100,7 +103,8 @@
                         }
 
                     },
-                    function(e) {
+                    function (e) {
+                        //console.log(e);
                         if (e.data != null && e.data.errors != null) {
                             error(e.data.errors);
                         } else {
@@ -115,23 +119,67 @@
 
             function updateProfile(firstName, lastName, email, phone, avatar, callback, error) {
 
+                //var updateProfileRequest = {
+                //    "AuthenticationToken": apiFactory.getToken(),
+                //    "Data": {
+                //        "Firstname": firstName,
+                //        "Lastname": lastName,
+                //        "EmailAddress": email,
+                //        "PhoneNumber": phone,
+                //        "Avatar": avatar
+                //    }
+                //};
+
                 var updateProfileRequest = {
                     "AuthenticationToken": apiFactory.getToken(),
                     "Data": {
                         "Firstname": firstName,
                         "Lastname": lastName,
-                        "EmailAddress": email,
-                        "PhoneNumber": phone,
                         "Avatar": avatar
                     }
                 };
-                console.log(updateProfileRequest);
                 apiFactory.functions.call('users/change-information',
                     updateProfileRequest,
                     function(response) {
                         callback(response);
                     },
                     function(e) {
+                        error(e);
+                    });
+            }
+
+            function updatePhone(phone, callback, error) {
+
+                var updateProfileRequest = {
+                    "AuthenticationToken": apiFactory.getToken(),
+                    "Data": {
+                        "PhoneNumber": phone
+                    }
+                };
+                apiFactory.functions.call('users/change-information',
+                    updateProfileRequest,
+                    function (response) {
+                        callback(response);
+                    },
+                    function (e) {
+                        error(e);
+                    });
+            }
+
+            function updateEmail(email, callback, error) {
+
+                var updateProfileRequest = {
+                    "AuthenticationToken": apiFactory.getToken(),
+                    "Data": {
+                        "EmailAddress": email
+                    }
+                };
+                apiFactory.functions.call('users/change-information',
+                    updateProfileRequest,
+                    function (response) {
+                        callback(response);
+                    },
+                    function (e) {
                         error(e);
                     });
             }
@@ -144,16 +192,133 @@
                         'query': searchText
                     }
                 };
-                //console.log(findUserRequest);
                 apiFactory.functions.call('inboxes/search',
                     findUserRequest,
                     function(response) {
-                        //console.log(response);
                         callback(response.data);
                     },
                     function(e) {
                         error(e);
                     });
+            }
+
+            function validatePhone(phone, callback, error) {
+                $http({
+                        url: 'https://api2.mobileresponse.io/utilities/parse?phone=' + phone,
+                        method: 'GET',
+                        data: null
+                    })
+                    .then(function(response) {
+                            callback(response);
+                        },
+                        function(e) {
+                            error(e);
+                        });
+            }
+
+            function sendVerificationSms(phone, appUserId, callback, error) {
+                var request = {
+                    "workflowId": "fbda91c4-d3e4-4721-81f0-cf785e8adfce",
+                    "triggerNames": "send-verify-phone-sms",
+                    "metadata": {
+                        "verify-number": phone,
+                        "app-user-id": appUserId
+                    }
+                };
+                $http({
+                    url: 'https://rest.mobileresponse.io/1/workflows',
+                        method: 'POST',
+                        data: request,
+                        headers: { 'Content-Type': 'application/json', 'api-key': restApiKey }
+                    })
+                    .then(function(response) {
+                            callback(response);
+                        },
+                        function(e) {
+                            error(e);
+                        });
+            }
+
+            function validateCodePhone(code, phone, appUserId, callback, error) {
+                var request = {
+                    "workflowId": "fbda91c4-d3e4-4721-81f0-cf785e8adfce",
+                    "triggerNames": "validate-code-phone",
+                    "metadata": {
+                        "app-user-id": appUserId,
+                        "verify-phone-code": code
+                    },
+                    "RequestSettings": {
+                        "content-type": "json",
+                        "ResponseData": {
+                            "foundunit": "incomingunit.metadata.app-user-id"
+                        }
+                    }
+                };
+                $http({
+                    url: 'https://rest.mobileresponse.io/1/workflows',
+                    method: 'POST',
+                    data: request,
+                    headers: { 'Content-Type': 'application/json', 'api-key': restApiKey }
+                })
+                    .then(function (response) {
+                        callback(response);
+                    },
+                        function (e) {
+                            error(e);
+                        });
+            }
+
+            function sendVerificationEmail(email, appUserId, callback, error) {
+                var request = {
+                    "workflowId": "fbda91c4-d3e4-4721-81f0-cf785e8adfce",
+                    "triggerNames": "send-verify-email",
+                    "metadata": {
+                        "verify-email": email,
+                        "app-user-id": appUserId
+                    }
+                };
+                console.log(request);
+                $http({
+                    url: 'https://rest.mobileresponse.io/1/workflows',
+                    method: 'POST',
+                    data: request,
+                    headers: { 'Content-Type': 'application/json', 'api-key': restApiKey }
+                })
+                    .then(function (response) {
+                        callback(response);
+                    },
+                        function (e) {
+                            error(e);
+                        });
+            }
+
+            function validateCodeEmail(code, email, appUserId, callback, error) {
+                var request = {
+                    "workflowId": "fbda91c4-d3e4-4721-81f0-cf785e8adfce",
+                    "triggerNames": "validate-code-email",
+                    "metadata": {
+                        "app-user-id": appUserId,
+                        "verify-email-code": code
+                    },
+                    "RequestSettings": {
+                        "content-type": "json",
+                        "ResponseData": {
+                            "foundunit": "incomingunit.metadata.app-user-id"
+                        }
+                    }
+                };
+                $http({
+                    url: 'https://rest.mobileresponse.io/1/workflows',
+                    method: 'POST',
+                    data: request,
+                    headers: { 'Content-Type': 'application/json', 'api-key': restApiKey }
+                })
+                    .then(function (response) {
+                        callback(response);
+                    },
+                        function (e) {
+                            error(e);
+                        });
             }
 
             return {
@@ -165,7 +330,14 @@
                 getInboxUserDetails: getInboxUserDetails,
                 registerUser: registerUser,
                 updateProfile: updateProfile,
-                findUser: findUser
+                updatePhone: updatePhone,
+                updateEmail: updateEmail,
+                findUser: findUser,
+                validatePhone: validatePhone,
+                sendVerificationSms: sendVerificationSms,
+                validateCodePhone: validateCodePhone,
+                sendVerificationEmail: sendVerificationEmail,
+                validateCodeEmail: validateCodeEmail
             };
         }
     ]);

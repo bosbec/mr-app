@@ -60,6 +60,10 @@
                     showAlert("Error saving profile", "error", 5000);
                 });
         };
+
+        $scope.OpenVerify = function (type) {
+            $location.path('/verify/' + type + '/' + appUserId);
+        };
         
         init();
 
