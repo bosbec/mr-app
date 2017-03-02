@@ -1,6 +1,6 @@
 ﻿mrApp.controller('LoginController', [
-    'ApiFactory', '$rootScope', '$scope', '$location', '$window', '$routeParams', '$localStorage', 'UsersFactory', 'DeviceFactory', 'SettingsFactory', 'MobileResponseFactory', 'SharedState',
-    function (apiFactory, $rootScope, $scope, $location, $window, $routeParams, $localStorage, usersFactory, deviceFactory, settingsFactory, mobileResponseFactory, SharedState) {
+    'ApiFactory', '$rootScope', '$scope','$timeout', '$location', '$window', '$routeParams', '$localStorage', 'UsersFactory', 'DeviceFactory', 'SettingsFactory', 'MobileResponseFactory', 'SharedState',
+    function (apiFactory, $rootScope, $scope,$timeout, $location, $window, $routeParams, $localStorage, usersFactory, deviceFactory, settingsFactory, mobileResponseFactory, SharedState) {
         
         var command = $routeParams.param1;
 
@@ -66,14 +66,24 @@
             }
         };
 
+        $scope.forgotPassword = {
+            show: false,
+            error: {
+                show: false,
+                message: ''
+            }
+        };
+
         $scope.ShowSignin = function () {
             $scope.registration.show = false;
             $scope.signin.show = true;
+            $scope.forgotPassword.show = false;
         };
 
         $scope.ShowRegistration = function () {
             $scope.registration.show = true;
             $scope.signin.show = false;
+            $scope.forgotPassword.show = false;
         };
 
         function clearRegistration() {
@@ -110,10 +120,12 @@
 
                         if (response.data.userId != null) {
                             var newUserId = response.data.userId;
-                            login(apiFactory.apiSettings.instanceName,
+                            apiLogin(apiFactory.apiSettings.instanceName,
                                 userName,
                                 password,
                                 function(response) {
+                                    console.log("Register: ApiLogin");
+                                    console.log(response);
                                     $location.path('/profile/' + newUserId);
                                     return true;
                                 },
@@ -131,6 +143,64 @@
             }
         };
         
+        $scope.ShowForgotPassword = function () {
+            $scope.forgotPassword.show = true;
+            $scope.signin.show = false;
+            $scope.registration.show = false;
+        };
+
+        $scope.RequestResetPassword = function (userName, phone, email) {
+            console.log("Username: " + userName + " Email:" + email + " Phone: " + phone);
+            if (userName === undefined) {
+                userName = "";
+            }
+            if (email === undefined) {
+                email = "";
+            }
+            if (phone === undefined) {
+                phone = "";
+            }
+            usersFactory.requestResetPassword(userName,
+                phone,
+                email,
+                function (response) {
+                    console.log("RequestResetPassword: success");
+                    console.log(response);
+                    $scope.forgotPassword = {
+                        show: true,
+                        error: {
+                            show: false,
+                            message: ''
+                        },
+                        success: {
+                            show: true,
+                            message: 'We have sent a link to restore your password to ' + response.data.linkSentTo
+                        }
+                    };
+                    $timeout(function() {
+                            $scope.registration.show = false;
+                            $scope.signin.show = true;
+                            $scope.forgotPassword.show = false;
+                        },
+                        5000);
+                },
+                function (error) {
+                    console.log("RequestResetPassword: error");
+                    console.log(error);
+                    $scope.forgotPassword = {
+                        show: true,
+                        error: {
+                            show: true,
+                            message: 'There is no email or phone to send restore password link to'
+                        },
+                        success: {
+                            show: false,
+                            message: ''
+                        }
+                    };
+                });
+        }
+
         function apiLogin(instanceName, userName, password, callback, error) {
 
             var credentials = {
@@ -246,20 +316,7 @@
                 login();
             }
         };
-
-
-        //function logout() {
-        //    $scope.keepMeSignedIn = false;
-        //    $localStorage.savedCredentials.keepMeSignedIn = $scope.keepMeSignedIn;
-        //    $rootScope.authenticationToken = undefined;
-        //    $location.path('/login');
-        //    $window.location.reload();
-        //}
-
-        //$scope.Logout = function () {
-        //    logout();
-        //};
-
+        
         init();
 
     }

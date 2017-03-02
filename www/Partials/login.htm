@@ -30,7 +30,7 @@
                 <div class="list-group-item">
                     <form class="form-signin" name="registrationForm" role="form">
                         <div>
-                            <a ng-show="!registration.show" href="" ng-click="ShowRegistration()">Register new user</a>
+                            <button ng-show="!registration.show" class="btn btn-primary" ng-click="ShowRegistration()">Register new user</button>
                         </div>
                         <div ng-show="registration.show">
                             <h3>Register new user</h3>
@@ -41,6 +41,26 @@
                             <br/>
                             <button class="btn btn-lg btn-primary btn-block" ng-click="Register()" type="submit">Register</button>
                             <a ng-show="!registrationForm.$invalid" href="" ng-click="ClearRegistration()">Clear registration</a>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="list-group-item">
+                    <form class="form-signin" name="forgotPassword" role="form">
+                        <div>
+                            <button ng-show="!forgotPassword.show" class="btn btn-primary" ng-click="ShowForgotPassword()">Forgot password</button>
+                        </div>
+                        <div ng-show="forgotPassword.show">
+                            <h3>Request reset password</h3>
+                            <div>Enter your username, phone number or email address and we will send you a link to reset your password</div>
+                            <br/>
+                            <div ng-if="forgotPassword.error.show" class="error-label">{{ forgotPassword.error.message }}</div>
+                            <div ng-if="forgotPassword.success.show" class="success-label">{{ forgotPassword.success.message }}</div>
+                            <input type="text" ng-model="forgotPassword.userName" class="form-control" placeholder="UserName">
+                            <input type="text" ng-model="forgotPassword.userPhone" class="form-control" placeholder="Phone Number">
+                            <input type="text" ng-model="forgotPassword.userEmail" class="form-control" placeholder="Email Address">
+                            <br />
+                            <button class="btn btn-lg btn-primary btn-block" ng-click="RequestResetPassword(forgotPassword.userName,forgotPassword.userPhone,forgotPassword.userEmail)" type="submit">Request reset password</button>
                         </div>
                     </form>
                 </div>

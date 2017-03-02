@@ -1,5 +1,7 @@
 ﻿angular.module('MobileResponseFactory', [])
-    .factory('MobileResponseFactory', ['$rootScope', '$http', '$localStorage', function ($rootScope, $http, $localStorage) {
+    .factory('MobileResponseFactory', [
+        '$rootScope', '$http', '$localStorage','ApiFactory',
+        function ($rootScope, $http, $localStorage, apiFactory) {
 
             var authenticationToken;
             var lastCallTimestamp;
@@ -22,24 +24,31 @@
             function autoAuthenticate(callback, error) {
                 var storedCredentials = $localStorage.mobileResponseCredentials;
 
-                if (storedCredentials === undefined) {
-                    console.log("missing credentials");
-                    error(function () {
-                        return "missing credentials";
+                if (storedCredentials === null) {
+                    //console.log("missing credentials");
+                    return error(function() {
+                        "missing credentials";
                     });
                 } else {
+                    if (storedCredentials.appUserId != apiFactory.myAppUser.appUserId) {
+                        //console.log("Incorrect credentials");
+                        return error(function() {
+                            "Incorrect credentials";
+                        });
+                    }
+
                     authenticate(storedCredentials, callback, error);
                 }
             }
 
             function authenticate(userCredentials, callback, error) {
                 var request = { data: userCredentials };
-                console.log(request);
+                //console.log(request);
                 call('authenticate',
                     request,
                     function(response) {
                         if (response.data != null) {
-                            console.log(response.data);
+                            //console.log(response.data);
                             angular.copy({ administrator: response.data.administratorId }, administrator);
                             authenticationToken = response.data.id;
                             $rootScope.mobileResponseToken = response.data.id;

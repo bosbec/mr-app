@@ -86,7 +86,7 @@
                     }
                 };
                 //console.log(registerUserRequest);
-                apiFactory.functions.call('users/register',
+                apiFactory.functions.call('public/register',
                     registerUserRequest,
                     function (response) {
                         //console.log(response);
@@ -321,6 +321,26 @@
                         });
             }
 
+            function requestResetPassword(username, phone, email, callback, error) {
+                var requestResetRequest = {
+                    "Data": {
+                        "InstanceName": apiFactory.apiSettings.instanceName,
+                        "Username": username,
+                        "PhoneNumber": phone,
+                        "EmailAdress": email
+                    }
+                };
+                console.log(requestResetRequest);
+                apiFactory.functions.call('public/request-change-forgotten-password-code',
+                    requestResetRequest,
+                    function(response) {
+                        callback(response);
+                    },
+                    function(e) {
+                        error(e);
+                    });
+            }
+
             return {
                 myUser: myUser,
                 addUser: addUser,
@@ -337,7 +357,8 @@
                 sendVerificationSms: sendVerificationSms,
                 validateCodePhone: validateCodePhone,
                 sendVerificationEmail: sendVerificationEmail,
-                validateCodeEmail: validateCodeEmail
+                validateCodeEmail: validateCodeEmail,
+                requestResetPassword: requestResetPassword
             };
         }
     ]);

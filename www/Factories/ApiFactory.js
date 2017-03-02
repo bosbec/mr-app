@@ -5,7 +5,8 @@
             var lastCallTimestamp;
 
             var apiSettings = {
-                baseApiUrl: 'https://appapi.mobileresponse.io/1/',
+                //baseApiUrl: 'https://appapi.mobileresponse.io/1/',
+                baseApiUrl: 'http://appapi.test.mobileresponse.se/1/',
                 instanceName: 'mobileresponse',
                 method: 'POST'
             };
