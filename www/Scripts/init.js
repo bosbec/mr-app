@@ -6,6 +6,7 @@ var mrApp = angular.module('mrApp', [
     'ApiFactory',
     'mobile-angular-ui',
     'mobile-angular-ui.gestures',
+    'angularMoment',
     'ngSanitize',
     'UsersFactory',
     'ConversationsFactory',

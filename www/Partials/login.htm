@@ -1,5 +1,8 @@
 ﻿<div ng-controller="LoginController" class="login">
 
+    <div ng-show="successText!=null" class="alert alert-success">{{ successText }}</div>
+    <div ng-show="errorText!=null" class="alert alert-danger">{{ errorText }}</div>
+
     <div class="scrollable content-container">
         <div class="scrollable-content overthrow">
 

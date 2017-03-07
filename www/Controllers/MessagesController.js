@@ -48,8 +48,8 @@ mrApp.controller('FormModalController',
 ]);
 
 mrApp.controller('MessagesController', [
-    'ApiFactory', '$scope', '$location', '$routeParams', '$window', 'UsersFactory', 'ConversationsFactory', '$timeout', '$filter', 'SharedState', 'SettingsFactory',
-    function(apiFactory, $scope, $location, $routeParams, $window, usersFactory, conversationsFactory, $timeout, $filter, SharedState, settingsFactory) {
+    'ApiFactory', '$scope', '$location', '$routeParams', '$window','moment', 'UsersFactory', 'ConversationsFactory', '$timeout', '$filter', 'SharedState', 'SettingsFactory',
+    function(apiFactory, $scope, $location, $routeParams, $window,moment, usersFactory, conversationsFactory, $timeout, $filter, SharedState, settingsFactory) {
 
         var conversationId = $routeParams.param1;
 
@@ -156,7 +156,10 @@ mrApp.controller('MessagesController', [
                         //    }
                         //}
                     }
+                    response.data.items[i].createdOnFormatted = moment.utc(response.data.items[i].createdOn).fromNow();
                 }
+
+                
 
                 response.data.items = parseAuthor(response.data.items);
                 $scope.messages = response.data.items;

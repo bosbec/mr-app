@@ -12,10 +12,38 @@
         $scope.keepMeSignedIn = true;
         $scope.signingin = false;
 
+        $scope.successText = null;
+        $scope.errorText = null;
+
+        function showAlert(text, type, duration) {
+            if (type == 'success') {
+                $scope.successText = text;
+                $timeout(function () {
+                    $scope.successText = null;
+                    $scope.signingin = false;
+                }, duration);
+            }
+            if (type == 'error') {
+                $scope.errorText = text;
+                $timeout(function () {
+                    $scope.errorText = null;
+                    $scope.signingin = false;
+                }, duration);
+            }
+
+        }
+
         $scope.error = {
             show: false,
             message: ''
         };
+
+        function onHttpUnauthorized(event, state) {
+            console.log("Login: onHttpUnauthorized");
+            showAlert("Login failed! Password is incorrect", "error", 5000);
+        }
+
+        $scope.$on('httpUnauthorized', onHttpUnauthorized);
 
         function init() {
             $scope.$emit('viewChanged', 'login');

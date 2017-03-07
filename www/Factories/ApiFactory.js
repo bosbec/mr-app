@@ -1,12 +1,13 @@
 ﻿angular.module('ApiFactory', [])
-    .factory('ApiFactory', ['$rootScope', '$http', '$localStorage', function ($rootScope, $http, $localStorage) {
+    .factory('ApiFactory', ['$rootScope', '$http', '$localStorage','moment', function ($rootScope, $http, $localStorage, moment) {
 
             var authenticationToken;
             var lastCallTimestamp;
+            var tokenExpiresTimestamp;
 
             var apiSettings = {
-                //baseApiUrl: 'https://appapi.mobileresponse.io/1/',
-                baseApiUrl: 'http://appapi.test.mobileresponse.se/1/',
+                baseApiUrl: 'https://appapi.mobileresponse.io/1/',
+                //baseApiUrl: 'http://appapi.test.mobileresponse.se/1/',
                 instanceName: 'mobileresponse',
                 method: 'POST'
             };
@@ -19,6 +20,14 @@
 
             function getLastCallTimestamp() {
                 return lastCallTimestamp;
+            }
+
+            function getMinutesSinceLastCall() {
+                return moment.utc().diff(moment.utc(getLastCallTimestamp()), "minutes");
+            }
+
+            function getMinutesUntilTokenExpires() {
+                return moment.utc().diff(moment.utc(tokenExpiresTimestamp()), "minutes");
             }
 
             function autoAuthenticate(callback, error) {
@@ -49,6 +58,7 @@
                             angular.copy({ appUserId: response.data.appUserId }, appUser);
                             authenticationToken = response.data.id;
                             $rootScope.authenticationToken = response.data.id;
+                            tokenExpiresTimestamp = response.data.expiresOn;
                             callback(response.data.id);
                         } else {
                             callback(response.data);
@@ -80,7 +90,11 @@
                             $rootScope.$broadcast('loading', false);
                             //console.log('ERROR');
                             //console.log(e);
-                            $rootScope.$broadcast('httpCallError', e);
+                            if (e.status === 401) {
+                                $rootScope.$broadcast('httpUnauthorized', e);
+                            } else {
+                                $rootScope.$broadcast('httpCallError', e);
+                            }
                             //error(e);
                         });
             }
@@ -102,6 +116,9 @@
                 apiSettings: apiSettings,
                 myAppUser: appUser,
                 lastCallTimestamp: getLastCallTimestamp,
+                tokenExpiresTimestamp: tokenExpiresTimestamp,
+                getMinutesSinceLastCall: getMinutesSinceLastCall,
+                getMinutesUntilTokenExpires: getMinutesUntilTokenExpires,
                 functions: {
                     autoAuthenticate: autoAuthenticate,
                     authenticate: authenticate,

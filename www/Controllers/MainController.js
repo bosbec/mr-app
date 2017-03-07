@@ -9,15 +9,15 @@
         $scope.alertLoading = false;
         $scope.deviceType = 0;
 
+        $scope.autoLoginAttempts = 0;
         
-        var checkWhatsNew = function() {
+        var checkWhatsNew = function () {
+            //console.log("What-is-new");
             conversationsFactory.whatIsNew(function(messages) {
-                    //console.log(apiFactory.lastCallTimestamp());
                     if (messages != null && messages.length > 0) {
                         //BROADCAST
                         $scope.$broadcast('newMessages', messages);
                     }
-                    //console.log("isDevice: " + deviceFactory.isDevice());
                     if (!deviceFactory.isDevice()) {
                         $timeout(function() {
                                 checkWhatsNew();
@@ -26,10 +26,29 @@
                     }
                 },
                 function(error) {
-                    console.log("What-is-new:");
+                    console.log("ERROR What-is-new:");
                     console.log(error);
                 });
         };
+
+        var checkIfInactive = function () {
+            var inactiveMinutes = apiFactory.getMinutesSinceLastCall();
+            //console.log(inactiveMinutes);
+            if (inactiveMinutes >= 5) {
+                $scope.$broadcast('userIsInactive', { "inactiveMinutes": inactiveMinutes });
+            }
+            $timeout(function() {
+                checkIfInactive();
+            },
+            (30 * 1000));
+        };
+
+        function onInactiveUser(event, state) {
+            console.log(state);
+            checkWhatsNew();
+        }
+
+        $scope.$on('userIsInactive', onInactiveUser);
 
         function onShowAlertNewMessage(event, state) {
             $scope.alertNewMessage = state;
@@ -50,30 +69,57 @@
         }
 
         function onHttpCallError(event, state) {
-            //console.log(event);
-            //console.log(state);
             if (state.status === 401) { // Unauthorized => relogin
-                console.log("Auto Authenticate");
-                apiFactory.functions.autoAuthenticate(function (response) {
+                $scope.autoLoginAttempts++;
+                console.log("Main: Auto Authenticate" + $scope.autoLoginAttempts);
+
+                if ($scope.autoLoginAttempts > 2) {
+                    $scope.autoLoginAttempts = 0;
+                    console.log("auto login failed, tried 3 times... ");
+                    $scope.$broadcast('autoLoginFailed', state);
+                } else {
+
+                    apiFactory.functions.autoAuthenticate(function(response) {
+                            if ($rootScope.currentInboxId != undefined) {
+                                $location.path('/conversations/' + $rootScope.currentInboxId);
+                            } else {
+                                $location.path('/main');
+                            }
+                        },
+                        function(error) {
+                            console.log("auto login failed, redirect to login");
+                            $location.path('/login/');
+                        });
+                }
+            }
+        }
+
+        function onAutoLoginFailed(event, state) {
+            $location.path('/login/');
+        }
+
+        function onHttpUnauthorized(event, state) {
+            $scope.autoLoginAttempts++;
+            console.log("Auto Authenticate" + $scope.autoLoginAttempts);
+
+            if ($scope.autoLoginAttempts > 2) {
+                $scope.autoLoginAttempts = 0;
+                console.log("auto login failed, tried 3 times... ");
+                $scope.$broadcast('autoLoginFailed', state);
+            } else {
+
+                apiFactory.functions.autoAuthenticate(function(response) {
                         if ($rootScope.currentInboxId != undefined) {
                             $location.path('/conversations/' + $rootScope.currentInboxId);
                         } else {
                             $location.path('/main');
                         }
                     },
-                    function () {
-                        console.log("auto login failed, redirect to login");
-                        $location.path('/login/');
+                    function(error) {
+                        console.log("auto login failed");
+                        $scope.$broadcast('autoLoginFailed', state);
                     });
             }
-            //alert("httpCallError: " + state);
-        }
-
-        function onHttpUnauthorized(event, state) {
-            //console.log(event);
-            //console.log(state);
-            //alert("httpUnauthorized: " + state);
-            $location.path('/login/');
         }
 
         function onLoading(event, state) {
@@ -94,6 +140,8 @@
         $scope.$on('appResumed', onResume);
 
         $scope.$on('httpCallError', onHttpCallError);
+
+        $scope.$on('autoLoginFailed', onAutoLoginFailed);
 
         $scope.$on('httpUnauthorized', onHttpUnauthorized);
         
@@ -138,6 +186,7 @@
                                     }
                                 });
                             checkWhatsNew();
+                            checkIfInactive();
                         });
 
                 }
