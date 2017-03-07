@@ -55,8 +55,16 @@
 	color: #999;
 }
 .error-label {
-	color: #f00;
-	background-color: #fee;
+	color: black;
+    background-color: lightcoral;
+	padding: 7px;
+	margin: 7px 0;
+	border: 1px solid #fbb;
+}
+
+.success-label {
+    color: black;
+	background-color: lightgreen;
 	padding: 7px;
 	margin: 7px 0;
 	border: 1px solid #fbb;
@@ -113,6 +121,9 @@
   border-top-right-radius: 0;
 }
 
+.sign-in-logo {
+    margin-left: 50%;
+}
 .new-item {
     background-color: lightgreen;
 }

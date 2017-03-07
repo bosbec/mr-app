@@ -1,7 +1,7 @@
 ﻿mrApp.controller('SettingsController',
 [
-    '$scope','$timeout','SettingsFactory',
-    function ($scope,$timeout, settingsFactory) {
+    '$scope','$timeout','SettingsFactory','ApiFactory',
+    function ($scope,$timeout, settingsFactory,apiFactory) {
 
         $scope.successText = null;
         $scope.errorText = null;
@@ -25,6 +25,8 @@
         $scope.numberOfConversations = 10;
         $scope.numberOfMessages = 10;
         $scope.showIntro = false;
+        $scope.tokenExpiresTimestamp = null;
+        $scope.tokenExpiresIn = null;
 
         $scope.SaveSettings = function () {
             settingsFactory.setNumberOfConversations($scope.numberOfConversations);
@@ -36,6 +38,8 @@
         function init() {
             $scope.numberOfConversations = settingsFactory.getNumberOfConversations();
             $scope.numberOfMessages = settingsFactory.getNumberOfMessages();
+            $scope.tokenExpiresTimestamp = apiFactory.getTokenExpiresTimestamp();
+            $scope.tokenExpiresIn = apiFactory.getMinutesUntilTokenExpires();
         }
         
         init();

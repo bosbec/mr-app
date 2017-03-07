@@ -40,7 +40,7 @@
             $timeout(function() {
                 checkIfInactive();
             },
-            (30 * 1000));
+            (20 * 1000));
         };
 
         function onInactiveUser(event, state) {
@@ -215,6 +215,16 @@
             } else if (part == 'newConversation') {
                 if ($rootScope.authenticationToken != undefined) {
                     return true;
+                }
+            }
+            else if (part == 'connect') {
+                if ($rootScope.myAppUser != undefined) {
+                    var userMetaData = $rootScope.myAppUser.metaData;
+                    if (userMetaData != undefined) {
+                        if (userMetaData[0].mobileresponse === "allow") {
+                            return true;
+                        } 
+                    }
                 }
             }
             else if (part == 'mobileresponse') {

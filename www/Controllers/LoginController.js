@@ -188,12 +188,15 @@
             if (phone === undefined) {
                 phone = "";
             }
+
+
+
             usersFactory.requestResetPassword(userName,
                 phone,
                 email,
                 function (response) {
-                    console.log("RequestResetPassword: success");
-                    console.log(response);
+                    //console.log("RequestResetPassword: success");
+                    //console.log(response);
                     $scope.forgotPassword = {
                         show: true,
                         error: {
@@ -238,6 +241,7 @@
             };
             apiFactory.functions.authenticate(credentials,
                 function (response) {
+                    //console.log(response);
                     if (response != null) {
 
                         if ($scope.saveCredentials) {

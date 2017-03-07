@@ -48,7 +48,7 @@
                 <br/>
             </div>
             <div>
-                <a class="list-group-item" ng-show="validateLoad('mobileresponse')==false && validateLoad('profile') == true" href="#/connect"><img src="images/mr/Trigger-128x128.png" width="24" /> Connect</a>
+                <a class="list-group-item" ng-show="validateLoad('connect')==true && validateLoad('mobileresponse')==false && validateLoad('profile') == true" href="#/connect"><img src="images/mr/Trigger-128x128.png" width="24" /> Connect</a>
                 <a class="list-group-item" ng-show="validateLoad('profile')" href="#/profile/{{ myAppUser.id }}"><i class="fa fa-user"></i> Profile</a>
                 <a class="list-group-item" ng-show="validateLoad('profile')" href="#/settings"><i class="fa fa-cog"></i> Settings</a>
                 <a class="list-group-item" ng-show="validateLoad('profile')" href="#/intro/manual"><i class="fa fa-question"></i> Introduction</a>

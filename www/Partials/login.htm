@@ -14,7 +14,8 @@
                             <a ng-show="!signin.show" href="" ng-click="ShowSignin()">Back to sign in</a>
                         </div>
                         <div ng-show="signin.show">
-                            <h2 class="form-signin-heading">Please sign in</h2>
+                            <h1><img  class="form-signin-heading" src="images/mobile-response-logo.png"/></h1>
+                            <h2 class="form-signin-heading">Sign in</h2>
                             <div ng-if="signin.error.show" class="error-label">{{ signin.error.message }}</div>
                             <input type="text" ng-disabled="signingin" ng-model="credentials.userName" class="form-control" placeholder="UserName" required autofocus>
                             <input type="password" ng-disabled="signingin" ng-model="credentials.password" class="form-control" placeholder="Password" required>
@@ -33,7 +34,7 @@
                 <div class="list-group-item">
                     <form class="form-signin" name="registrationForm" role="form">
                         <div>
-                            <button ng-show="!registration.show" class="btn btn-primary" ng-click="ShowRegistration()">Register new user</button>
+                            <h3><a ng-show="!registration.show" href="" ng-click="ShowRegistration()">Register new user</a></h3>
                         </div>
                         <div ng-show="registration.show">
                             <h3>Register new user</h3>
@@ -42,7 +43,7 @@
                             <input type="password" ng-model="register.password" class="form-control" placeholder="Password (*)" required>
                             <input type="password" ng-model="register.password2" class="form-control" placeholder="Password again (*)" required>
                             <br/>
-                            <button class="btn btn-lg btn-primary btn-block" ng-click="Register()" type="submit">Register</button>
+                            <button class="btn btn-lg btn-primary btn-block" ng-disabled="registrationForm.$invalid" ng-click="Register()" type="submit">Register</button>
                             <a ng-show="!registrationForm.$invalid" href="" ng-click="ClearRegistration()">Clear registration</a>
                         </div>
                     </form>
@@ -51,7 +52,7 @@
                 <div class="list-group-item">
                     <form class="form-signin" name="forgotPassword" role="form">
                         <div>
-                            <button ng-show="!forgotPassword.show" class="btn btn-primary" ng-click="ShowForgotPassword()">Forgot password</button>
+                            <h3><a ng-show="!forgotPassword.show" href="" ng-click="ShowForgotPassword()">Request reset password</a></h3>
                         </div>
                         <div ng-show="forgotPassword.show">
                             <h3>Request reset password</h3>
@@ -59,11 +60,11 @@
                             <br/>
                             <div ng-if="forgotPassword.error.show" class="error-label">{{ forgotPassword.error.message }}</div>
                             <div ng-if="forgotPassword.success.show" class="success-label">{{ forgotPassword.success.message }}</div>
-                            <input type="text" ng-model="forgotPassword.userName" class="form-control" placeholder="UserName">
-                            <input type="text" ng-model="forgotPassword.userPhone" class="form-control" placeholder="Phone Number">
-                            <input type="text" ng-model="forgotPassword.userEmail" class="form-control" placeholder="Email Address">
+                            <input type="text" ng-model="forgotPassword.userName" ng-required="!(forgotPassword.userPhone || forgotPassword.userEmail)" class="form-control" placeholder="UserName">
+                            <input type="text" ng-model="forgotPassword.userPhone" ng-required="!(forgotPassword.userName || forgotPassword.userEmail)" class="form-control" placeholder="Phone Number">
+                            <input type="text" ng-model="forgotPassword.userEmail" ng-required="!(forgotPassword.userName || forgotPassword.userPhone)" class="form-control" placeholder="Email Address">
                             <br />
-                            <button class="btn btn-lg btn-primary btn-block" ng-click="RequestResetPassword(forgotPassword.userName,forgotPassword.userPhone,forgotPassword.userEmail)" type="submit">Request reset password</button>
+                            <button class="btn btn-lg btn-primary btn-block" ng-disabled="forgotPassword.$invalid" ng-click="RequestResetPassword(forgotPassword.userName,forgotPassword.userPhone,forgotPassword.userEmail)" type="submit">Request reset password</button>
                         </div>
                     </form>
                 </div>

@@ -22,12 +22,16 @@
                 return lastCallTimestamp;
             }
 
+            function getTokenExpiresTimestamp() {
+                return tokenExpiresTimestamp;
+            }
+
             function getMinutesSinceLastCall() {
                 return moment.utc().diff(moment.utc(getLastCallTimestamp()), "minutes");
             }
 
             function getMinutesUntilTokenExpires() {
-                return moment.utc().diff(moment.utc(tokenExpiresTimestamp()), "minutes");
+                return moment.utc().diff(moment.utc(getTokenExpiresTimestamp()), "minutes");
             }
 
             function autoAuthenticate(callback, error) {
@@ -54,7 +58,6 @@
                     request,
                     function(response) {
                         if (response.data != null) {
-                            //console.log(response.data);
                             angular.copy({ appUserId: response.data.appUserId }, appUser);
                             authenticationToken = response.data.id;
                             $rootScope.authenticationToken = response.data.id;
@@ -76,26 +79,21 @@
                         method: apiSettings.method,
                         data: request
                     })
-                    .then(function (response) {
-                        $rootScope.$broadcast('loading', false);
-                            //console.log(url);
-                            //console.log(response);
+                    .then(function(response) {
+                            $rootScope.$broadcast('loading', false);
                             if (response.data.status === "Unauthorized") {
                                 $rootScope.$broadcast('httpUnauthorized', response);
                             }
                             lastCallTimestamp = response.data.time;
                             callback(response.data);
                         },
-                        function (e) {
+                        function(e) {
                             $rootScope.$broadcast('loading', false);
-                            //console.log('ERROR');
-                            //console.log(e);
                             if (e.status === 401) {
                                 $rootScope.$broadcast('httpUnauthorized', e);
                             } else {
                                 $rootScope.$broadcast('httpCallError', e);
                             }
-                            //error(e);
                         });
             }
 
@@ -115,8 +113,8 @@
                 authenticationToken: getAuthenticationToken,
                 apiSettings: apiSettings,
                 myAppUser: appUser,
-                lastCallTimestamp: getLastCallTimestamp,
-                tokenExpiresTimestamp: tokenExpiresTimestamp,
+                getLastCallTimestamp: getLastCallTimestamp,
+                getTokenExpiresTimestamp: getTokenExpiresTimestamp,
                 getMinutesSinceLastCall: getMinutesSinceLastCall,
                 getMinutesUntilTokenExpires: getMinutesUntilTokenExpires,
                 functions: {

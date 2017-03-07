@@ -66,6 +66,14 @@
                 apiFactory.functions.call('users/details-for-user',
                     appUserDetailsRequest,
                     function (response) {
+                        if (response.data.id === "685d0963-75d8-4b60-b819-278a23c87948" || response.data.id === "f53d5d79-a451-4bdb-ad30-c5ccff843c75" || response.data.id === "ac79491c-f8f4-4a3a-84f8-210a9a4a49d3" || response.data.id === "78f2c311-c9cd-489c-a118-d90c0f79e35f" || response.data.id === "b36e5865-27d3-47fc-831e-eeecaafd53d1") {
+                            var userMetaData = [
+                                {
+                                    "mobileresponse": "allow"
+                                }
+                            ];
+                            response.data.metaData = userMetaData;
+                        }
                         callback(response.data);
                     },
                     function (e) {
@@ -85,11 +93,9 @@
                         'password': password
                     }
                 };
-                //console.log(registerUserRequest);
                 apiFactory.functions.call('public/register',
                     registerUserRequest,
                     function (response) {
-                        //console.log(response);
                         if (response.errors.length > 0) {
                             error(response.errors);
                         }
@@ -104,7 +110,6 @@
 
                     },
                     function (e) {
-                        //console.log(e);
                         if (e.data != null && e.data.errors != null) {
                             error(e.data.errors);
                         } else {
@@ -118,18 +123,7 @@
             }
 
             function updateProfile(firstName, lastName, email, phone, avatar, callback, error) {
-
-                //var updateProfileRequest = {
-                //    "AuthenticationToken": apiFactory.getToken(),
-                //    "Data": {
-                //        "Firstname": firstName,
-                //        "Lastname": lastName,
-                //        "EmailAddress": email,
-                //        "PhoneNumber": phone,
-                //        "Avatar": avatar
-                //    }
-                //};
-
+                
                 var updateProfileRequest = {
                     "AuthenticationToken": apiFactory.getToken(),
                     "Data": {
