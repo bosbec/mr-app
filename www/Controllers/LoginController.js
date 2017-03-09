@@ -260,10 +260,10 @@
 
                                 mobileResponseFactory.functions.autoAuthenticate(
                                     function (response) {
-                                        console.log("Mobile Response auto login: success");
+                                        console.log("[SUCCESS] Mobile Response auto login");
                                     },
-                                    function(error) {
-                                        console.log("Mobile Response auto login: error");
+                                    function (error) {
+                                        console.log("[ERROR] Mobile Response auto login: " + error);
                                     });
 
                                 //"appid": "A014B-AC83E", //test

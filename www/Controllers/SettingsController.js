@@ -35,6 +35,10 @@
             showAlert('Settings saved', 'success', 5000);
         };
 
+        $scope.ClearLocalStorage = function() {
+            settingsFactory.clearLocalStorage();
+        };
+
         function init() {
             $scope.numberOfConversations = settingsFactory.getNumberOfConversations();
             $scope.numberOfMessages = settingsFactory.getNumberOfMessages();

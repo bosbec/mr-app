@@ -58,6 +58,11 @@
                 console.log("ShowIntro: " + $localStorage.showIntro);
             }
 
+            function clearLocalStorage() {
+                $localStorage.$reset();
+                console.log("LocalStorage: reset");
+            }
+
             function init() {
                 initSettings();
             }
@@ -71,7 +76,8 @@
                 getNumberOfMessages: getNumberOfMessages,
                 setNumberOfConversations: setNumberOfConversations,
                 setNumberOfMessages: setNumberOfMessages,
-                setShowIntro: setShowIntro
+                setShowIntro: setShowIntro,
+                clearLocalStorage: clearLocalStorage
             };
         }
     ]);

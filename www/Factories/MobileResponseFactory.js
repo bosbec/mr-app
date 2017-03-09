@@ -23,18 +23,11 @@
 
             function autoAuthenticate(callback, error) {
                 var storedCredentials = $localStorage.mobileResponseCredentials;
-
-                if (storedCredentials === null) {
-                    //console.log("missing credentials");
-                    return error(function() {
-                        "missing credentials";
-                    });
+                if (storedCredentials === undefined) {
+                    //error("missing credentials");
                 } else {
                     if (storedCredentials.appUserId != apiFactory.myAppUser.appUserId) {
-                        //console.log("Incorrect credentials");
-                        return error(function() {
-                            "Incorrect credentials";
-                        });
+                        error("Incorrect credentials");
                     }
 
                     authenticate(storedCredentials, callback, error);
