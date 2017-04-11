@@ -324,7 +324,8 @@
             apiLogin(apiFactory.apiSettings.instanceName,
                 $scope.credentials.userName,
                 $scope.credentials.password,
-                function(response) {
+                function (response) {
+                    console.log("login: " + response);
                     setSigningIn(false);
 
                     if (response.email == null && response.phoneNumber == null) {

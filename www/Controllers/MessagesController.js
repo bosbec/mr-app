@@ -109,6 +109,13 @@ mrApp.controller('MessagesController', [
             });
         }
 
+        function formatText(text) {
+            var linebreakRegex = /([\n])/g;
+            return text.replace(linebreakRegex, function (row) {
+                return "<br />";
+            });
+        }
+
         function parseAuthor(messages) {
             for (var i = 0; i < messages.length; i++) {
                 if (angular.equals(messages[i].authorId, usersFactory.myUser().id)) {
@@ -133,9 +140,12 @@ mrApp.controller('MessagesController', [
             };
             
             apiFactory.functions.call('conversations/list-messages', listMessagesRequest, function (response) {
-                
+
+                var formatTimestamp = settingsFactory.getFormatTimestamp();
+
                 for (var i = 0; i < response.data.items.length; i++) {
                     response.data.items[i].content = linkify(response.data.items[i].content);
+                    response.data.items[i].content = formatText(response.data.items[i].content);
                     if (response.data.items[i].metaData.length > 0) {
 
                         if (response.data.items[i].metaData[0]._type === "form") {
@@ -156,13 +166,19 @@ mrApp.controller('MessagesController', [
                         //    }
                         //}
                     }
-                    response.data.items[i].createdOnFormatted = moment.utc(response.data.items[i].createdOn).fromNow();
-                }
 
-                
+                    if (formatTimestamp) {
+                        response.data.items[i].createdOnFormatted = moment.utc(response.data.items[i].createdOn)
+                            .fromNow();
+                    } else {
+                        response.data.items[i].createdOnFormatted = moment.utc(response.data.items[i].createdOn)
+                            .format("YYYY-MM-DD HH:mm:ss");
+                    }
+                }
 
                 response.data.items = parseAuthor(response.data.items);
                 $scope.messages = response.data.items;
+                //console.log(response.data.items);
                 
                 scrollToLast();
 

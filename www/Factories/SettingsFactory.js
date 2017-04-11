@@ -5,6 +5,7 @@
         function($localStorage) {
             var defaultNumberOfConversations = 15;
             var defaultNumberOfMessages = 20;
+            var formatTimestamp = true;
 
             function getSettings() {
                 return $localStorage.settings;
@@ -63,6 +64,19 @@
                 console.log("LocalStorage: reset");
             }
 
+            function setFormatTimestamp(state) {
+                // state true/false
+                $localStorage.formatTimestamp = state;
+            }
+
+            function getFormatTimestamp() {
+                if ($localStorage.formatTimestamp) {
+                    return formatTimestamp;
+                } else {
+                    return $localStorage.formatTimestamp;
+                }
+            }
+
             function init() {
                 initSettings();
             }
@@ -77,6 +91,8 @@
                 setNumberOfConversations: setNumberOfConversations,
                 setNumberOfMessages: setNumberOfMessages,
                 setShowIntro: setShowIntro,
+                setFormatTimestamp: setFormatTimestamp,
+                getFormatTimestamp: getFormatTimestamp,
                 clearLocalStorage: clearLocalStorage
             };
         }

@@ -15,7 +15,7 @@
                     "PageSize": 100
                 }
             };
-            console.log(listUnitsRequest);
+            //console.log(listUnitsRequest);
             mobileResponseFactory.functions.call("units/list",
                 listUnitsRequest,
                 function(response) {
@@ -28,7 +28,7 @@
         }
 
         $scope.ToggleUnitInfo = function (unit) {
-            console.log(unit);
+            //console.log(unit);
             if (unit.expand) {
                 unit.expand = false;
             } else {

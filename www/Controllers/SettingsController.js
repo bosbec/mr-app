@@ -27,11 +27,13 @@
         $scope.showIntro = false;
         $scope.tokenExpiresTimestamp = null;
         $scope.tokenExpiresIn = null;
+        $scope.formatTimestamp = true;
 
         $scope.SaveSettings = function () {
             settingsFactory.setNumberOfConversations($scope.numberOfConversations);
             settingsFactory.setNumberOfMessages($scope.numberOfMessages);
             settingsFactory.setShowIntro($scope.showIntro);
+            settingsFactory.setFormatTimestamp($scope.formatTimestamp);
             showAlert('Settings saved', 'success', 5000);
         };
 
@@ -44,6 +46,10 @@
             $scope.numberOfMessages = settingsFactory.getNumberOfMessages();
             $scope.tokenExpiresTimestamp = apiFactory.getTokenExpiresTimestamp();
             $scope.tokenExpiresIn = apiFactory.getMinutesUntilTokenExpires();
+            $scope.formatTimestamp = settingsFactory.getFormatTimestamp();
+            if ($scope.formatTimestamp === undefined) {
+                $scope.formatTimestamp = true;
+            }
         }
         
         init();

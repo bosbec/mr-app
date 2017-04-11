@@ -26,6 +26,11 @@
                             <label class="checkbox">
                                 <input type="checkbox" ng-model="showIntro" value="showIntro"> Show introduction
                             </label>
+                            
+                            <label>Format timestamp (ON = show timeago)</label>
+                            <ui-switch ng-model="formatTimestamp"></ui-switch>
+
+                            <br/>
 
                             <button class="btn btn-lg btn-primary btn-block" ng-click="SaveSettings(settingsForm)" type="submit">Save Settings</button>
                         </div>

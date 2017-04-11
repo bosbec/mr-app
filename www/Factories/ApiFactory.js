@@ -56,7 +56,9 @@
                 var request = { data: userCredentials };
                 call('authentication/authenticate',
                     request,
-                    function(response) {
+                    function (response) {
+                        //console.log("Authenticate");
+                        //console.log(response);
                         if (response.data != null) {
                             angular.copy({ appUserId: response.data.appUserId }, appUser);
                             authenticationToken = response.data.id;
