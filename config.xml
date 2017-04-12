@@ -116,6 +116,7 @@
     <splash platform="ios" src="www/res/screens/ios/screen-iphone-portrait-568h-2x.png" width="640" height="1136" />
     <splash platform="ios" src="www/res/screens/ios/screen-iphone-portrait-667h.png" width="750" height="1334" />
     <splash platform="ios" src="www/res/screens/ios/screen-iphone-portrait-736h.png" width="1242" height="2208" />
+    <splash platform="ios" src="www/res/screens/ios/screen-iphone-landscape-736@3x.png" width="2208" height="1242" />
     <splash platform="ios" src="www/res/screens/ios/screen-ipad-portrait.png" width="768" height="1024" />
     <splash platform="ios" src="www/res/screens/ios/screen-ipad-portrait-2x.png" width="1536" height="2048" />
     <splash platform="ios" src="www/res/screens/ios/screen-ipad-landscape.png" width="1024" height="768" />
