@@ -241,7 +241,6 @@
             };
             apiFactory.functions.authenticate(credentials,
                 function (response) {
-                    //console.log(response);
                     if (response != null) {
 
                         if ($scope.saveCredentials) {

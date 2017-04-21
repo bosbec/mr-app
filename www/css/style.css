@@ -361,6 +361,9 @@
 .unit-metadata-value {
     display: inline;
 }
+.hideMessageContainer {
+    float: right;
+}
 
 
 
