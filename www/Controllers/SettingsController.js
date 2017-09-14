@@ -39,6 +39,7 @@
 
         $scope.ClearLocalStorage = function() {
             settingsFactory.clearLocalStorage();
+            $scope.$emit('reload', 'reload');
         };
 
         function init() {

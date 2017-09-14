@@ -52,7 +52,7 @@
                 <a class="list-group-item" ng-show="validateLoad('profile')" href="#/profile/{{ myAppUser.id }}"><i class="fa fa-user"></i> Profile</a>
                 <a class="list-group-item" ng-show="validateLoad('profile')" href="#/settings"><i class="fa fa-cog"></i> Settings</a>
                 <a class="list-group-item" ng-show="validateLoad('profile')" href="#/intro/manual"><i class="fa fa-question"></i> Introduction</a>
-                <a class="list-group-item" ng-show="validateLoad('logout')" href="#/logout"><i class="fa fa-sign-out"></i> Logout</a>
+                <a class="list-group-item" ng-show="validateLoad('logout')" href="#" ng-click="Logout()"><i class="fa fa-sign-out"></i> Logout</a>
             </div>
 
         </div>
@@ -153,7 +153,7 @@
 <script src="Controllers/NewConversationController.js" type="text/javascript"></script>
 <script src="Controllers/SettingsController.js" type="text/javascript"></script>
 <script src="Controllers/ConnectController.js" type="text/javascript"></script>
-    <script src="Controllers/VerifyController.js"></script>
+<script src="Controllers/VerifyController.js" type="text/javascript"></script>
 
 <script src="Controllers/MrGroupsController.js"></script>
 <script src="Controllers/MrUnitsController.js"></script>

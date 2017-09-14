@@ -1,6 +1,6 @@
 ﻿mrApp.controller('MainController', [
-    'ApiFactory', '$rootScope', '$scope', '$location', '$localStorage', '$filter', '$timeout', 'ConversationsFactory', 'DeviceFactory', 'SharedState',
-    function(apiFactory, $rootScope, $scope, $location, $localStorage, $filter, $timeout, conversationsFactory, deviceFactory, SharedState) {
+    'ApiFactory', '$rootScope', '$scope', '$location','$window', '$localStorage', '$filter', '$timeout', 'ConversationsFactory', 'DeviceFactory', 'SharedState',
+    function(apiFactory, $rootScope, $scope, $location, $window, $localStorage, $filter, $timeout, conversationsFactory, deviceFactory, SharedState) {
 
         $scope.inConversation = false;
         $scope.currentView = 'main';
@@ -68,6 +68,25 @@
             checkWhatsNew();
         }
 
+        function onLogout(event, state) {
+
+            $rootScope.keepMeSignedIn = false;
+            $localStorage.savedCredentials.keepMeSignedIn = $rootScope.keepMeSignedIn;
+            $rootScope.authenticationToken = undefined;
+
+            $location.path('/login');
+            $window.location.reload();
+        }
+
+        $scope.$on('logout', onLogout);
+
+        function onReload(event, state) {
+            $location.path('/login');
+            $window.location.reload();
+        }
+
+        $scope.$on('reload', onReload);
+
         function onHttpCallError(event, state) {
             if (state.status === 401) { // Unauthorized => relogin
                 $scope.autoLoginAttempts++;
@@ -132,6 +151,7 @@
             $scope.currentView = currentViewName;
             //console.log($scope.currentView);
         }
+        
 
         $scope.$on('loading', onLoading);
 
@@ -146,6 +166,11 @@
         $scope.$on('httpUnauthorized', onHttpUnauthorized);
         
         $scope.$on('viewChanged', onViewChanged);
+
+        $scope.Logout = function () {
+            //console.log("Logout");
+            onLogout();
+        }
 
         $scope.hideConversation = function () {
             $scope.currentView = 'conversations';
@@ -273,6 +298,8 @@
                 });
 
         }
+
+
 
     }
 ]);

@@ -49,7 +49,7 @@ mrApp.controller('FormModalController',
 
 mrApp.controller('MessagesController', [
     'ApiFactory', '$scope', '$location', '$routeParams', '$window','moment', 'UsersFactory', 'ConversationsFactory', '$timeout', '$filter', 'SharedState', 'SettingsFactory',
-    function(apiFactory, $scope, $location, $routeParams, $window,moment, usersFactory, conversationsFactory, $timeout, $filter, SharedState, settingsFactory) {
+    function(apiFactory, $scope, $location, $routeParams, $window, moment, usersFactory, conversationsFactory, $timeout, $filter, SharedState, settingsFactory) {
 
         var conversationId = $routeParams.param1;
 
