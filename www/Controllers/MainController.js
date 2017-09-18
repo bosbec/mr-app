@@ -114,7 +114,12 @@
         }
 
         function onAutoLoginFailed(event, state) {
-            $location.path('/login/');
+            //$location.path('/login/');
+        }
+
+        function onAutoLoginFailedFinal(event, state) {
+            console.log("Auto login failed final");
+            //$location.path('/login/');
         }
 
         function onHttpUnauthorized(event, state) {
@@ -124,7 +129,7 @@
             if ($scope.autoLoginAttempts > 2) {
                 $scope.autoLoginAttempts = 0;
                 console.log("auto login failed, tried 3 times... ");
-                $scope.$broadcast('autoLoginFailed', state);
+                $scope.$broadcast('autoLoginFailedFinal', state);
             } else {
 
                 apiFactory.functions.autoAuthenticate(function(response) {
@@ -162,6 +167,8 @@
         $scope.$on('httpCallError', onHttpCallError);
 
         $scope.$on('autoLoginFailed', onAutoLoginFailed);
+
+        $scope.$on('autoLoginFailedFinal', onAutoLoginFailedFinal);
 
         $scope.$on('httpUnauthorized', onHttpUnauthorized);
         

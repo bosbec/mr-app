@@ -54,11 +54,12 @@
 
             function authenticate(userCredentials, callback, error) {
                 var request = { data: userCredentials };
+                console.log(request);
                 call('authentication/authenticate',
                     request,
-                    function (response) {
+                    function(response) {
                         //console.log("Authenticate");
-                        //console.log(response);
+                        console.log(response);
                         if (response.data != null) {
                             angular.copy({ appUserId: response.data.appUserId }, appUser);
                             authenticationToken = response.data.id;
@@ -89,14 +90,15 @@
                             lastCallTimestamp = response.data.time;
                             callback(response.data);
                         },
-                        function(e) {
+                    function (e) {
                             $rootScope.$broadcast('loading', false);
                             if (e.status === 401) {
                                 $rootScope.$broadcast('httpUnauthorized', e);
                             } else {
                                 $rootScope.$broadcast('httpCallError', e);
                             }
-                        });
+                        error(e);
+                    });
             }
 
             function callReturnId(url, request, callback, error) {
