@@ -74,8 +74,13 @@
             $localStorage.savedCredentials.keepMeSignedIn = $rootScope.keepMeSignedIn;
             $rootScope.authenticationToken = undefined;
 
-            $location.path('/login');
-            $window.location.reload();
+            //$location.path('/login');
+            //$window.location.reload();
+
+            $timeout(function() {
+                    $scope.$broadcast('reload', null);
+                },
+                100);
         }
 
         $scope.$on('logout', onLogout);
@@ -125,7 +130,9 @@
 
         function onHttpUnauthorized(event, state) {
             console.log("root signingin: " + $rootScope.signingin);
-            if (!$rootScope.signingin) {
+            console.log("root keep signedin: " + $rootScope.keepMeSignedIn);
+            
+            if (!$rootScope.signingin && $rootScope.keepMeSignedIn) {
                 $scope.autoLoginAttempts++;
                 console.log("Auto Authenticate" + $scope.autoLoginAttempts);
 
