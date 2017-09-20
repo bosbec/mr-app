@@ -88,6 +88,7 @@
         $scope.$on('reload', onReload);
 
         function onHttpCallError(event, state) {
+            
             if (state.status === 401) { // Unauthorized => relogin
                 $scope.autoLoginAttempts++;
                 console.log("Main: Auto Authenticate" + $scope.autoLoginAttempts);
@@ -114,35 +115,38 @@
         }
 
         function onAutoLoginFailed(event, state) {
-            //$location.path('/login/');
+            $location.path('/login/');
         }
 
         function onAutoLoginFailedFinal(event, state) {
             console.log("Auto login failed final");
-            //$location.path('/login/');
+            $location.path('/login/');
         }
 
         function onHttpUnauthorized(event, state) {
-            $scope.autoLoginAttempts++;
-            console.log("Auto Authenticate" + $scope.autoLoginAttempts);
+            console.log("root signingin: " + $rootScope.signingin);
+            if (!$rootScope.signingin) {
+                $scope.autoLoginAttempts++;
+                console.log("Auto Authenticate" + $scope.autoLoginAttempts);
 
-            if ($scope.autoLoginAttempts > 2) {
-                $scope.autoLoginAttempts = 0;
-                console.log("auto login failed, tried 3 times... ");
-                $scope.$broadcast('autoLoginFailedFinal', state);
-            } else {
+                if ($scope.autoLoginAttempts > 2) {
+                    $scope.autoLoginAttempts = 0;
+                    console.log("auto login failed, tried 3 times... ");
+                    $scope.$broadcast('autoLoginFailedFinal', state);
+                } else {
 
-                apiFactory.functions.autoAuthenticate(function(response) {
-                        if ($rootScope.currentInboxId != undefined) {
-                            $location.path('/conversations/' + $rootScope.currentInboxId);
-                        } else {
-                            $location.path('/main');
-                        }
-                    },
-                    function(error) {
-                        console.log("auto login failed");
-                        $scope.$broadcast('autoLoginFailed', state);
-                    });
+                    apiFactory.functions.autoAuthenticate(function(response) {
+                            if ($rootScope.currentInboxId != undefined) {
+                                $location.path('/conversations/' + $rootScope.currentInboxId);
+                            } else {
+                                $location.path('/main');
+                            }
+                        },
+                        function(error) {
+                            console.log("auto login failed");
+                            $scope.$broadcast('autoLoginFailed', state);
+                        });
+                }
             }
         }
 

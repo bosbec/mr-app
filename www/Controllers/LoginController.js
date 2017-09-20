@@ -45,6 +45,13 @@
 
         $scope.$on('httpUnauthorized', onHttpUnauthorized);
 
+        function onAutoLoginFailedFinal(event, state) {
+            console.log("Login: onAutoLoginFailedFinal");
+            showAlert("Login failed final! Password is incorrect", "error", 5000);
+        }
+
+        $scope.$on('autoLoginFailedFinal(', onAutoLoginFailedFinal);
+
         function init() {
             $scope.$emit('viewChanged', 'login');
             settingsFactory.initSettings();
@@ -78,6 +85,7 @@
                 
             }
             $scope.signingin = state;
+            $rootScope.signingin = state;
         }
 
         $scope.ClearCredentials = function () {
@@ -189,8 +197,6 @@
                 phone = "";
             }
 
-
-
             usersFactory.requestResetPassword(userName,
                 phone,
                 email,
@@ -254,23 +260,20 @@
                         $rootScope.authenticationToken = response;
 
                         usersFactory.getUser(apiFactory.myAppUser.appUserId,
-                            function (response) {
+                            function(response) {
                                 $rootScope.myAppUser = response;
 
                                 mobileResponseFactory.functions.autoAuthenticate(
-                                    function (response) {
+                                    function(response) {
                                         console.log("[SUCCESS] Mobile Response auto login");
                                     },
-                                    function (error) {
+                                    function(error) {
                                         console.log("[ERROR] Mobile Response auto login: " + error);
                                     });
 
-                                //"appid": "A014B-AC83E", //test
-                                //"projectid": "482590317251", //test
-                                // registerDevice ---
                                 var registerDeviceRequest = {
                                     "appid": "64032-F5A58",
-                                    "projectid":"71435688512",
+                                    "projectid": "71435688512",
                                     "onPush": function(push) {
                                         console.log("RootBroadcast: newPush");
                                         $rootScope.$broadcast('newPush', push);
@@ -283,7 +286,7 @@
 
                                 if (deviceFactory.isDevice) {
                                     deviceFactory.registerDevice(registerDeviceRequest,
-                                        function (status) {
+                                        function(status) {
                                             if (status) {
                                                 //alert("Device registered");
                                             } else {
@@ -292,13 +295,15 @@
                                             callback(response);
                                         });
                                 }
-                                
+
 
                             },
-                            function (e) {
+                            function(e) {
                                 error(e);
                             });
 
+                    } else {
+                        error(response);
                     }
                 },
                 function (e) {
