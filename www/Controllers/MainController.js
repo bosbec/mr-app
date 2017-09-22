@@ -18,12 +18,12 @@
                         //BROADCAST
                         $scope.$broadcast('newMessages', messages);
                     }
-                    if (!deviceFactory.isDevice()) {
-                        $timeout(function() {
-                                checkWhatsNew();
-                            },
-                            5000);
-                    }
+                    //if (!deviceFactory.isDevice()) {
+                    $timeout(function() {
+                            checkWhatsNew();
+                        },
+                        5000);
+                    //}
                 },
                 function(error) {
                     console.log("ERROR What-is-new:");
@@ -34,7 +34,7 @@
         var checkIfInactive = function () {
             var inactiveMinutes = apiFactory.getMinutesSinceLastCall();
             //console.log(inactiveMinutes);
-            if (inactiveMinutes >= 5) {
+            if (inactiveMinutes >= 3) {
                 $scope.$broadcast('userIsInactive', { "inactiveMinutes": inactiveMinutes });
             }
             $timeout(function() {
@@ -44,7 +44,7 @@
         };
 
         function onInactiveUser(event, state) {
-            console.log(state);
+            //console.log(state);
             checkWhatsNew();
         }
 
@@ -59,8 +59,8 @@
 
         function onNewPush(event, state) {
             console.log("Handle:newPush");
-            console.log(event);
-            console.log(state);
+            //console.log(event);
+            //console.log(state);
             checkWhatsNew();
         }
 
@@ -210,7 +210,7 @@
         function onViewLoaded() {
             
             $scope.deviceType = deviceFactory.getDeviceTypeId();
-            
+
             //var token = $rootScope.authenticationToken;
             var token = apiFactory.authenticationToken();
 
