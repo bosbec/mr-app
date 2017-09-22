@@ -10,20 +10,27 @@
         $scope.deviceType = 0;
 
         $scope.autoLoginAttempts = 0;
-        
-        var checkWhatsNew = function () {
+
+        var checkWhatsNew = function() {
             //console.log("What-is-new");
             conversationsFactory.whatIsNew(function(messages) {
                     if (messages != null && messages.length > 0) {
                         //BROADCAST
                         $scope.$broadcast('newMessages', messages);
                     }
+
                     //if (!deviceFactory.isDevice()) {
+                    //$timeout(function() {
+                    //        checkWhatsNew();
+                    //    },
+                    //    7000);
+                    //}
+
                     $timeout(function() {
                             checkWhatsNew();
                         },
                         7000);
-                    //}
+
                 },
                 function(error) {
                     console.log("ERROR What-is-new:");
@@ -58,7 +65,7 @@
         $scope.$on('showAlertNewMessage', onShowAlertNewMessage);
 
         function onNewPush(event, state) {
-            console.log("Handle:newPush");
+            //console.log("Handle:newPush");
             //console.log(event);
             //console.log(state);
             checkWhatsNew();
