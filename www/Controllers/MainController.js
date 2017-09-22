@@ -22,7 +22,7 @@
                     $timeout(function() {
                             checkWhatsNew();
                         },
-                        5000);
+                        7000);
                     //}
                 },
                 function(error) {
@@ -34,7 +34,7 @@
         var checkIfInactive = function () {
             var inactiveMinutes = apiFactory.getMinutesSinceLastCall();
             //console.log(inactiveMinutes);
-            if (inactiveMinutes >= 3) {
+            if (inactiveMinutes >= 5) {
                 $scope.$broadcast('userIsInactive', { "inactiveMinutes": inactiveMinutes });
             }
             $timeout(function() {

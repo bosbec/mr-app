@@ -275,13 +275,13 @@
                                     "appid": "64032-F5A58",
                                     "projectid": "71435688512",
                                     "onPush": function(push) {
-                                        console.log("RootBroadcast: newPush");
+                                        //console.log("RootBroadcast: newPush");
                                         alert("newPush");
                                         $rootScope.$broadcast('newPush', push);
                                     },
                                     "onResume": function() {
-                                        console.log("RootBroadcast: appResumed");
-                                        alert("appResumed");
+                                        //console.log("RootBroadcast: appResumed");
+                                        //alert("appResumed");
                                         $rootScope.$broadcast('appResumed', true);
                                     }
                                 };
