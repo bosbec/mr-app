@@ -31,7 +31,7 @@
       Define a specific version of PhoneGap to build into your app.
       <preference name="phonegap-version"       value="3.5.0" />
   -->
-  <!--<preference name="phonegap-version"           value="cli-5.2.0" />-->
+  <preference name="phonegap-version"           value="cli-6.4.0" />
   <!-- all: current version of PhoneGap -->
 
   <preference name="android-build-tool" value="gradle" />
