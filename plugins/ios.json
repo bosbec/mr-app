@@ -8,16 +8,16 @@
   },
   "installed_plugins": {
     "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "com.bosbec.testapp"
+      "PACKAGE_NAME": "com.bosbec.mr-app"
     },
     "cordova-plugin-device": {
-      "PACKAGE_NAME": "com.bosbec.testapp"
+      "PACKAGE_NAME": "com.bosbec.mr-app"
     },
     "com.pushwoosh.plugins.pushwoosh": {
-      "PACKAGE_NAME": "com.bosbec.testapp"
+      "PACKAGE_NAME": "com.bosbec.mr-app"
     },
     "com.phonegap.plugin.statusbar": {
-      "PACKAGE_NAME": "com.bosbec.testapp"
+      "PACKAGE_NAME": "com.bosbec.mr-app"
     }
   },
   "dependent_plugins": { }

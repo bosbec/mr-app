@@ -7,15 +7,15 @@
         "files": {}
     },
     "installed_plugins": {
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.bosbec.mrapptest"
-        },
-        "cordova-plugin-device": {
-            "PACKAGE_NAME": "com.bosbec.mrapptest"
-        },
-        "com.pushwoosh.plugins.pushwoosh": {
-            "PACKAGE_NAME": "com.bosbec.mrapptest"
-        }
+      "cordova-plugin-whitelist": {
+        "PACKAGE_NAME": "com.bosbec.mr-app"
+      },
+      "cordova-plugin-device": {
+        "PACKAGE_NAME": "com.bosbec.mr-app"
+      },
+      "com.pushwoosh.plugins.pushwoosh": {
+        "PACKAGE_NAME": "com.bosbec.mr-app"
+      }
     },
     "dependent_plugins": {}
 }
