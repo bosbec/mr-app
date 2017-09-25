@@ -29,7 +29,7 @@
                     $timeout(function() {
                             checkWhatsNew();
                         },
-                        7000);
+                        5000);
 
                 },
                 function(error) {
