@@ -47,7 +47,7 @@
             $timeout(function() {
                 checkIfInactive();
             },
-            (20 * 1000));
+            (20*1000));
         };
 
         function onInactiveUser(event, state) {
