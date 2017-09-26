@@ -1,6 +1,6 @@
 ﻿mrApp.controller('MainController', [
-    'ApiFactory', '$rootScope', '$scope', '$location','$window', '$localStorage', '$filter', '$timeout', 'ConversationsFactory', 'DeviceFactory', 'SharedState',
-    function(apiFactory, $rootScope, $scope, $location, $window, $localStorage, $filter, $timeout, conversationsFactory, deviceFactory, SharedState) {
+    'ApiFactory', '$rootScope', '$scope', '$location','$window', '$localStorage', '$filter', '$timeout', 'ConversationsFactory', 'DeviceFactory','SettingsFactory', 'SharedState',
+    function(apiFactory, $rootScope, $scope, $location, $window, $localStorage, $filter, $timeout, conversationsFactory, deviceFactory,settingsFactory, SharedState) {
 
         $scope.inConversation = false;
         $scope.currentView = 'main';
@@ -27,9 +27,10 @@
                     //}
 
                     $timeout(function() {
-                            checkWhatsNew();
+                        checkWhatsNew();
+                            console.log("Whats new interval: " + settingsFactory.getCheckWhatsNewInterval());
                         },
-                        5000);
+                        (settingsFactory.getCheckWhatsNewInterval() * 1000));
 
                 },
                 function(error) {

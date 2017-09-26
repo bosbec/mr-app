@@ -6,6 +6,7 @@
             var defaultNumberOfConversations = 15;
             var defaultNumberOfMessages = 20;
             var formatTimestamp = true;
+            var defaultCheckWhatsNewInterval = 5;
 
             function getSettings() {
                 return $localStorage.settings;
@@ -23,6 +24,13 @@
                     $localStorage.settings.numberOfMessages = defaultNumberOfMessages;
                 }
                 return $localStorage.settings.numberOfMessages;
+            }
+
+            function getCheckWhatsNewInterval() {
+                if ($localStorage.settings.checkWhatsNewInterval === undefined) {
+                    $localStorage.settings.checkWhatsNewInterval = defaultCheckWhatsNewInterval;
+                }
+                return $localStorage.settings.checkWhatsNewInterval;
             }
 
             function setNumberOfConversations(value) {
@@ -43,12 +51,22 @@
                 console.log("Number of messages: " + $localStorage.settings.numberOfMessages);
             }
 
+            function setCheckWhatsNewInterval(value) {
+                if (value > 0 && value < 3600) {
+                    $localStorage.settings.checkWhatsNewInterval = parseInt(value);
+                } else {
+                    $localStorage.settings.checkWhatsNewInterval = defaultCheckWhatsNewInterval;
+                }
+                console.log("Check what is new interval: " + $localStorage.settings.checkWhatsNewInterval);
+            }
+
             function initSettings() {
                 if ($localStorage.settings === undefined) {
                     console.log("Init localStorage.settings");
                     $localStorage.settings = {
                         'numberOfConversations': defaultNumberOfConversations,
-                        'numberOfMessages': defaultNumberOfMessages
+                        'numberOfMessages': defaultNumberOfMessages,
+                        'checkWhatsNewInterval': defaultCheckWhatsNewInterval
                     };
                     console.log($localStorage.settings);
                 }
@@ -88,8 +106,10 @@
                 getSettings: getSettings,
                 getNumberOfConversations: getNumberOfConversations,
                 getNumberOfMessages: getNumberOfMessages,
+                getCheckWhatsNewInterval: getCheckWhatsNewInterval,
                 setNumberOfConversations: setNumberOfConversations,
                 setNumberOfMessages: setNumberOfMessages,
+                setCheckWhatsNewInterval: setCheckWhatsNewInterval,
                 setShowIntro: setShowIntro,
                 setFormatTimestamp: setFormatTimestamp,
                 getFormatTimestamp: getFormatTimestamp,

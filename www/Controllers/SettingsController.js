@@ -28,10 +28,12 @@
         $scope.tokenExpiresTimestamp = null;
         $scope.tokenExpiresIn = null;
         $scope.formatTimestamp = true;
+        $scope.checkWhatsNewInterval = 5; //Seconds
 
         $scope.SaveSettings = function () {
             settingsFactory.setNumberOfConversations($scope.numberOfConversations);
             settingsFactory.setNumberOfMessages($scope.numberOfMessages);
+            settingsFactory.setCheckWhatsNewInterval($scope.checkWhatsNewInterval);
             settingsFactory.setShowIntro($scope.showIntro);
             settingsFactory.setFormatTimestamp($scope.formatTimestamp);
             showAlert('Settings saved', 'success', 5000);
@@ -48,6 +50,7 @@
             $scope.tokenExpiresTimestamp = apiFactory.getTokenExpiresTimestamp();
             $scope.tokenExpiresIn = apiFactory.getMinutesUntilTokenExpires();
             $scope.formatTimestamp = settingsFactory.getFormatTimestamp();
+            $scope.checkWhatsNewInterval = settingsFactory.getCheckWhatsNewInterval();
             if ($scope.formatTimestamp === undefined) {
                 $scope.formatTimestamp = true;
             }
