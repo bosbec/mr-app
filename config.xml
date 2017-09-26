@@ -57,7 +57,7 @@
   <preference name="DisallowOverscroll"         value="true" />
   <preference name="UIWebViewBounce"            value="false" />
 
-  <preference name="phonegap-version"           value="cli-7.0.1" />
+  <preference name="phonegap-version"           value="cli-6.3.1" />
 
   <!-- Pushwoosh plugin -->
   <gap:plugin name="pushwoosh-pgb-plugin" source="npm" />
