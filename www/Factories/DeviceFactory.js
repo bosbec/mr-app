@@ -51,14 +51,14 @@
 
             function registerPushwooshIOS(settings, callback, error) {
 
-                //alert("[iOS] Pushwoosh reg");
+                alert("[iOS] Pushwoosh reg");
 
                 var pushNotification = cordova.require("pushwoosh-cordova-plugin.PushNotification");
 
                 //set push notification callback before we initialize the plugin
                 document.addEventListener('push-notification',
                     function(event) {
-                        //alert("New push iOS");
+                        alert("New push iOS");
                         pushNotification.setApplicationIconBadgeNumber(0);
 
                         settings.onPush(event.notification);
@@ -77,7 +77,7 @@
                     }
                 );
                 
-                //pushNotification.setApplicationIconBadgeNumber(0);
+                pushNotification.setApplicationIconBadgeNumber(0);
 
             }
 
@@ -146,17 +146,17 @@
                             };
 
                             var afterRegisterFail = function() {
-                                //alert("Register failed");
+                                alert("Register failed");
                                 callback(false);
                             };
 
                             if (isAndroid()) {
-                                //alert("Android");
+                                alert("Android");
                                 registerPushwooshAndroid(settings, afterRegisterSuccess, afterRegisterFail);
                             }
 
                             if (isIOS()) {
-                                //alert("iOS");
+                                alert("iOS");
                                 registerPushwooshIOS(settings, afterRegisterSuccess, afterRegisterFail);
                             }
 
@@ -234,6 +234,7 @@
             }
 
             function isDevice() {
+                
                 if (typeof window.cordova === 'object') {
                     return true;
                 } else {

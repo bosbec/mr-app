@@ -285,7 +285,7 @@
                                         $rootScope.$broadcast('appResumed', true);
                                     }
                                 };
-
+                                alert("isDevice: " + deviceFactory.isDevice);
                                 if (deviceFactory.isDevice) {
                                     deviceFactory.registerDevice(registerDeviceRequest,
                                         function(status) {
