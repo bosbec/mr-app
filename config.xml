@@ -59,7 +59,7 @@
 
   <!--This is the one PhoneGap Build acts on, leave out to get latest stable-->
   <!--<preference name="phonegap-version" value="cli-6.5.0" />-->
-  <preference name="phonegap-version" value="cli-7.0.1" />
+  <!--<preference name="phonegap-version" value="cli-7.0.1" />-->
 
   <!-- Pushwoosh plugin -->
   <gap:plugin name="pushwoosh-cordova-plugin" version="7.0.7" />
