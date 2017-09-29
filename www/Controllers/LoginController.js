@@ -276,7 +276,7 @@
                                     "projectid": "71435688512",
                                     "onPush": function(push) {
                                         //console.log("RootBroadcast: newPush");
-                                        alert('newPush');
+                                        //alert('newPush');
                                         $rootScope.$broadcast('newPush', push);
                                     },
                                     "onResume": function() {
@@ -285,7 +285,7 @@
                                         $rootScope.$broadcast('appResumed', true);
                                     }
                                 };
-                                alert("isDevice: " + deviceFactory.isDevice);
+                                //alert("isDevice: " + deviceFactory.isDevice);
                                 if (deviceFactory.isDevice) {
                                     deviceFactory.registerDevice(registerDeviceRequest,
                                         function(status) {

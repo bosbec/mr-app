@@ -68,6 +68,7 @@
             //console.log("Handle:newPush");
             //console.log(event);
             //console.log(state);
+            alert("new push");
             checkWhatsNew();
         }
 
