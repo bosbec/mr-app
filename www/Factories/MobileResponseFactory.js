@@ -24,8 +24,9 @@
             function autoAuthenticate(callback, error) {
                 var storedCredentials = $localStorage.mobileResponseCredentials;
                 console.log(storedCredentials);
+                alert("mr auto auth: " + storedCredentials);
                 if (storedCredentials === null) {
-                    //error("missing credentials");
+                    error("missing credentials");
                 } else {
                     if (storedCredentials.appUserId != apiFactory.myAppUser.appUserId) {
                         error("Incorrect credentials");
@@ -74,6 +75,7 @@
                         function (e) {
                             $rootScope.$broadcast('mrLoading', false);
                             $rootScope.$broadcast('mrHttpCallError', e);
+                            console.log("mr auth fail");
                             error(e);
                         });
             }
