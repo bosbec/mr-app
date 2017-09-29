@@ -27,8 +27,7 @@
                     //}
 
                     $timeout(function() {
-                        checkWhatsNew();
-                            console.log("Whats new interval: " + settingsFactory.getCheckWhatsNewInterval());
+                            checkWhatsNew();
                         },
                         (settingsFactory.getCheckWhatsNewInterval() * 1000));
 

@@ -45,11 +45,39 @@ mrApp.controller('FormModalController',
         init();
 
     }
-]);
+    ]);
+
+mrApp.directive('enterSubmit', function () {
+    return {
+        restrict: 'A',
+        link: function (scope, elem, attrs) {
+            
+            elem.bind('keydown', function (event) {
+                var code = event.keyCode || event.which;
+                
+                //enter=submit, shift+enter=line break
+                if (code === 13 && event.ctrlKey) {
+                    event.preventDefault();
+                    scope.$apply(attrs.enterSubmit);
+
+                }
+
+                ////enter=submit, shift+enter=line break
+                //if (code === 13) {
+                //    if (!event.shiftKey) {
+                //        event.preventDefault();
+                //        scope.$apply(attrs.enterSubmit);
+                //    }
+                //}
+            });
+        }
+    }
+});
+
 
 mrApp.controller('MessagesController', [
-    'ApiFactory', '$scope', '$location', '$routeParams', '$window','moment', 'UsersFactory', 'ConversationsFactory', '$timeout', '$filter', 'SharedState', 'SettingsFactory',
-    function(apiFactory, $scope, $location, $routeParams, $window, moment, usersFactory, conversationsFactory, $timeout, $filter, SharedState, settingsFactory) {
+    'ApiFactory', '$scope', '$location', '$routeParams', '$window','moment', 'UsersFactory', 'ConversationsFactory', '$timeout', '$filter', 'SharedState', 'SettingsFactory','DeviceFactory',
+    function(apiFactory, $scope, $location, $routeParams, $window, moment, usersFactory, conversationsFactory, $timeout, $filter, SharedState, settingsFactory, deviceFactory) {
 
         var conversationId = $routeParams.param1;
 
@@ -149,6 +177,7 @@ mrApp.controller('MessagesController', [
                     if (response.data.items[i].metaData.length > 0) {
 
                         if (response.data.items[i].metaData[0]._type === "form") {
+                            
                             var formObj = angular.fromJson(response.data.items[i].metaData[0].value);
                             response.data.items[i].formId = formObj.id;
                         }
@@ -236,8 +265,7 @@ mrApp.controller('MessagesController', [
             }
 
         };
-
-       
+        
         // handler
         var onNewMessages = function (event, newMessages) {
             var reload = false;
