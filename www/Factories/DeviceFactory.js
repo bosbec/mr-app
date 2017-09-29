@@ -53,9 +53,8 @@
 
                 alert("[iOS] Pushwoosh reg");
 
-                //var pushNotification = cordova.require("pushwoosh-cordova-plugin.PushNotification");
-                var pushNotification = window.plugins.pushNotification;
-
+                var pushNotification = cordova.require("pushwoosh-cordova-plugin.PushNotification");
+                
                 alert(pushNotification);
 
                 //set push notification callback before we initialize the plugin
@@ -96,7 +95,7 @@
 
             }
 
-            function registerDeviceInMobileResponse(deviceToken, callback, error) {
+            function registerDeviceInMobileResponse(deviceToken, callback) {
                 //alert("Register device in Mobile Response");
 
                 //get hwid
@@ -143,7 +142,7 @@
                                     function() {
                                         callback(true);
                                     },
-                                    function(error) {
+                                    function(e) {
                                         callback(false);
                                     });
                             };

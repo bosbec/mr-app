@@ -1,6 +1,6 @@
 ﻿mrApp.controller('LoginController', [
-    'ApiFactory', '$rootScope', '$scope','$timeout', '$location', '$window', '$routeParams', '$localStorage', 'UsersFactory', 'DeviceFactory', 'SettingsFactory', 'MobileResponseFactory', 'SharedState',
-    function (apiFactory, $rootScope, $scope,$timeout, $location, $window, $routeParams, $localStorage, usersFactory, deviceFactory, settingsFactory, mobileResponseFactory, SharedState) {
+    'ApiFactory', '$rootScope', '$scope','$timeout', '$location', '$window', '$routeParams', '$localStorage','moment', 'UsersFactory', 'DeviceFactory', 'SettingsFactory', 'MobileResponseFactory', 'SharedState',
+    function (apiFactory, $rootScope, $scope, $timeout, $location, $window, $routeParams, $localStorage,moment, usersFactory, deviceFactory, settingsFactory, mobileResponseFactory, SharedState) {
         
         var command = $routeParams.param1;
 
@@ -268,7 +268,7 @@
                                         console.log("[SUCCESS] Mobile Response auto login");
                                     },
                                     function(error) {
-                                        console.log("[ERROR] Mobile Response auto login: " + error);
+                                        console.log("[WARN] Mobile Response auto login: " + error);
                                     });
 
                                 var registerDeviceRequest = {
@@ -287,8 +287,20 @@
                                 };
                                 //alert("isDevice: " + deviceFactory.isDevice);
                                 if (deviceFactory.isDevice) {
+
+                                    var statusFlag = false;
+
+                                    $timeout(function() {
+                                            if (!statusFlag) {
+                                                alert("timedout");
+                                                callback(false);
+                                            }
+                                        },
+                                        5000);
+
                                     deviceFactory.registerDevice(registerDeviceRequest,
-                                        function(status) {
+                                        function (status) {
+                                            statusFlag = true;
                                             if (status) {
                                                 //alert("Device registered");
                                             } else {
@@ -296,9 +308,8 @@
                                             }
                                             callback(response);
                                         });
+
                                 }
-
-
                             },
                             function(e) {
                                 error(e);
@@ -331,7 +342,7 @@
                 $scope.credentials.userName,
                 $scope.credentials.password,
                 function (response) {
-                    console.log("login: " + response);
+                    //console.log("login: " + response);
                     setSigningIn(false);
 
                     if (response.email == null && response.phoneNumber == null) {

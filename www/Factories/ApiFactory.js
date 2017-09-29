@@ -54,12 +54,12 @@
 
             function authenticate(userCredentials, callback, error) {
                 var request = { data: userCredentials };
-                console.log(request);
+                //console.log(request);
                 call('authentication/authenticate',
                     request,
                     function(response) {
                         //console.log("Authenticate");
-                        console.log(response);
+                        //console.log(response);
                         if (response.data != null) {
                             angular.copy({ appUserId: response.data.appUserId }, appUser);
                             authenticationToken = response.data.id;
