@@ -58,7 +58,7 @@
   <preference name="UIWebViewBounce"            value="false" />
 
   <!--This is the one PhoneGap Build acts on, leave out to get latest stable-->
-  <!--<preference name="phonegap-version"           value="cli-6.3.1" />-->
+  <preference name="phonegap-version"           value="cli-6.5.0" />
 
   <!-- Pushwoosh plugin -->
   <gap:plugin name="pushwoosh-pgb-plugin" source="npm" />
