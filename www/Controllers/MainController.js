@@ -20,10 +20,10 @@
                     }
 
                     //if (!deviceFactory.isDevice()) {
-                    //$timeout(function() {
-                    //        checkWhatsNew();
-                    //    },
-                    //    7000);
+                    //    $timeout(function() {
+                    //            checkWhatsNew();
+                    //        },
+                    //        (settingsFactory.getCheckWhatsNewInterval() * 1000));
                     //}
 
                     $timeout(function() {

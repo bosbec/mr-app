@@ -23,7 +23,8 @@
 
             function autoAuthenticate(callback, error) {
                 var storedCredentials = $localStorage.mobileResponseCredentials;
-                if (storedCredentials === undefined) {
+                console.log(storedCredentials);
+                if (storedCredentials === null) {
                     //error("missing credentials");
                 } else {
                     if (storedCredentials.appUserId != apiFactory.myAppUser.appUserId) {
@@ -64,8 +65,6 @@
                     })
                     .then(function (response) {
                         $rootScope.$broadcast('mrLoading', false);
-                            //console.log(url);
-                            //console.log(response);
                             if (response.data.status === "Unauthorized") {
                                 $rootScope.$broadcast('mrHttpUnauthorized', response);
                             }
@@ -74,10 +73,8 @@
                         },
                         function (e) {
                             $rootScope.$broadcast('mrLoading', false);
-                            //console.log('ERROR');
-                            //console.log(e);
                             $rootScope.$broadcast('mrHttpCallError', e);
-                            //error(e);
+                            error(e);
                         });
             }
 
