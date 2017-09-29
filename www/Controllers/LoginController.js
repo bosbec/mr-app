@@ -292,11 +292,11 @@
 
                                     $timeout(function() {
                                             if (!statusFlag) {
-                                                alert("timedout");
+                                                //alert("timedout");
                                                 callback(false);
                                             }
                                         },
-                                        5000);
+                                        15000);
 
                                     deviceFactory.registerDevice(registerDeviceRequest,
                                         function (status) {

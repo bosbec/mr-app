@@ -19,17 +19,17 @@
                         $scope.$broadcast('newMessages', messages);
                     }
 
-                    if (!deviceFactory.isDevice()) {
-                        $timeout(function() {
-                                checkWhatsNew();
-                            },
-                            (settingsFactory.getCheckWhatsNewInterval() * 1000));
-                    }
+                    //if (!deviceFactory.isDevice()) {
+                    //    $timeout(function() {
+                    //            checkWhatsNew();
+                    //        },
+                    //        (settingsFactory.getCheckWhatsNewInterval() * 1000));
+                    //}
 
-                    //$timeout(function() {
-                    //        checkWhatsNew();
-                    //    },
-                    //    (settingsFactory.getCheckWhatsNewInterval() * 1000));
+                    $timeout(function() {
+                            checkWhatsNew();
+                        },
+                        (settingsFactory.getCheckWhatsNewInterval() * 1000));
 
                 },
                 function(error) {

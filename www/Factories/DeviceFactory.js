@@ -51,16 +51,14 @@
 
             function registerPushwooshIOS(settings, callback, error) {
 
-                alert("[iOS] Pushwoosh reg");
+                //alert("[iOS] Pushwoosh reg");
 
                 var pushNotification = cordova.require("pushwoosh-cordova-plugin.PushNotification");
                 
-                alert(pushNotification);
-
                 //set push notification callback before we initialize the plugin
                 document.addEventListener('push-notification',
                     function(event) {
-                        alert("New push iOS");
+                        //alert("New push iOS");
                         pushNotification.setApplicationIconBadgeNumber(0);
 
                         settings.onPush(event.notification);
@@ -136,8 +134,7 @@
                             document.addEventListener("resume", settings.onResume, false);
 
                             var afterRegisterSuccess = function(token) {
-                                console.log(token);
-                                alert("Register success: " + token);
+                                //console.log(token);
                                 registerDeviceInMobileResponse(token,
                                     function() {
                                         callback(true);
