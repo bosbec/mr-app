@@ -53,7 +53,8 @@
 
                 alert("[iOS] Pushwoosh reg");
 
-                var pushNotification = cordova.require("pushwoosh-cordova-plugin.PushNotification");
+                //var pushNotification = cordova.require("pushwoosh-cordova-plugin.PushNotification");
+                var pushNotification = window.plugins.pushNotification;
 
                 alert(pushNotification);
 
