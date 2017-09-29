@@ -51,7 +51,7 @@
   <gap:plugin name="org.apache.cordova.vibration" />-->
 
   <!-- Pushwoosh plugin -->
-  <!--<gap:plugin name="pushwoosh-pgb-plugin" source="npm" />-->
+  <gap:plugin name="pushwoosh-pgb-plugin" version="7.0.6" source="npm" />
 
   <!-- Cordova app version plugin -->
   <!--<gap:plugin name="cordova-plugin-app-version" spec="0.1.8" source="npm" />-->
