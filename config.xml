@@ -61,7 +61,7 @@
   <!--<preference name="phonegap-version"           value="cli-6.5.0" />-->
 
   <!-- Pushwoosh plugin -->
-  <gap:plugin name="pushwoosh-pgb-plugin" source="npm" />
+  <!--<gap:plugin name="pushwoosh-pgb-plugin" source="npm" />-->
   
   <plugin name="cordova-plugin-inappbrowser" source="npm"/>
 
