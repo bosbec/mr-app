@@ -14,7 +14,7 @@
                             <a ng-show="!signin.show" href="" ng-click="ShowSignin()">Back to sign in</a>
                         </div>
                         <div ng-show="signin.show">
-                            <h1><img  class="form-signin-heading" src="images/mobile-response-logo.png"/></h1>
+                            <!--<h1><img  class="form-signin-heading" src="images/mobile-response-logo.png"/></h1>-->
                             <h2 class="form-signin-heading">Sign in</h2>
                             <div ng-if="signin.error.show" class="error-label">{{ signin.error.message }}</div>
                             <input type="text" ng-disabled="signingin" ng-model="credentials.userName" class="form-control" placeholder="UserName" required autofocus>

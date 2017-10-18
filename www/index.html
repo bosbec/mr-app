@@ -27,28 +27,29 @@
 
 <!-- Sidebars -->
 <div class="sidebar sidebar-left" toggleable parent-active-class="sidebar-left-in" id="mainSidebar">
-    <h1 class="app-name">
-        <a href="#/login"><img src="images/mobile-response-logo.png" class="logo" alt="Mobile Response"/></a>
-    </h1>
+    
     <div class="scrollable">
         <div class="scrollable-content" ui-turn-off="mainSidebar">
-
+            
+            <div class="app-name">
+                <a href="#/login"><img src="images/Logo-Bosbec-w100-padding-transp.png" class="logo" alt="Bosbec" /></a>
+            </div>
             <div ng-show="validateLoad('inboxes')" class="list-group" toggle="off" bubble target="mainSidebar">
                 <a ng-repeat="inbox in inboxes" class="list-group-item" href="#/conversations/{{ inbox.inboxId }}">
                     <img ng-show="inbox.icon" height="25" alt="inboxIcon" src="{{ inbox.icon }}"/> {{ inbox.inboxDisplayName }} <i class="fa fa-chevron-right pull-right"></i>
                 </a>
             </div>
             <div>
-                <a class="list-group-item" ng-show="validateLoad('mobileresponse')" href="#/mr/services"><img src="images/mr/Job-128x128.png" width="24" /> Services</a>
-                <a class="list-group-item" ng-show="validateLoad('mobileresponse')" href="#/mr/groups"><img src="images/mr/Group-128x128.png" width="24" /> Groups</a>
-                <a class="list-group-item" ng-show="validateLoad('mobileresponse')" href="#/mr/units"><img src="images/mr/Unit-128x128.png" width="24" /> Units</a>
-                <a class="list-group-item" ng-show="validateLoad('mobileresponse')" href="#/connect"><img src="images/mr/Trigger-128x128.png" width="24" /> Disconnect</a>
+                <a class="list-group-item" ng-show="validateLoad('mobileresponse')" href="#/mr/services"><img src="images/mr/Job-128x128.png" width="24"/> Services</a>
+                <a class="list-group-item" ng-show="validateLoad('mobileresponse')" href="#/mr/groups"><img src="images/mr/Group-128x128.png" width="24"/> Groups</a>
+                <a class="list-group-item" ng-show="validateLoad('mobileresponse')" href="#/mr/units"><img src="images/mr/Unit-128x128.png" width="24"/> Units</a>
+                <a class="list-group-item" ng-show="validateLoad('mobileresponse')" href="#/connect"><img src="images/mr/Trigger-128x128.png" width="24"/> Disconnect</a>
             </div>
             <div ng-show="validateLoad('mobileresponse')">
                 <br/>
             </div>
             <div>
-                <a class="list-group-item" ng-show="validateLoad('connect')==true && validateLoad('mobileresponse')==false && validateLoad('profile') == true" href="#/connect"><img src="images/mr/Trigger-128x128.png" width="24" /> Connect</a>
+                <a class="list-group-item" ng-show="validateLoad('connect')==true && validateLoad('mobileresponse')==false && validateLoad('profile') == true" href="#/connect"><img src="images/mr/Trigger-128x128.png" width="24"/> Connect</a>
                 <a class="list-group-item" ng-show="validateLoad('profile')" href="#/profile/{{ myAppUser.id }}"><i class="fa fa-user"></i> Profile</a>
                 <a class="list-group-item" ng-show="validateLoad('profile')" href="#/settings"><i class="fa fa-cog"></i> Settings</a>
                 <a class="list-group-item" ng-show="validateLoad('profile')" href="#/intro/manual"><i class="fa fa-question"></i> Introduction</a>
@@ -63,10 +64,9 @@
 
     <!-- Top Navbar -->
     <div class="navbar navbar-app navbar-absolute-top">
-
         <!--INBOX ICON-->
-        <div ng-show="validateLoad('inbox')" class="navbar-brand navbar-brand-center" yield-to="title">
-            <span><img ng-show="inbox.icon" height="48" alt="inboxIcon" src="{{ inbox.icon }}" /></span><span ng-show="!inbox.icon">{{ inbox.inboxDisplayName }}</span>
+        <div class="navbar-brand navbar-brand-center sidebar-toggle" yield-to="title">
+            <span ui-if="!mainSidebar"><img src="images/Logo-Bosbec-w100-padding-transp.png" /></span>
         </div>
 
         <!--BARS-->
@@ -76,7 +76,7 @@
                 <i ui-if="mainSidebar" class="fa fa-2x fa-arrow-left"></i>
             </div>
         </div>
-
+        
         <!-- ALERT ICONS-->
         <div ng-show="validateLoad('inbox')" class="btn-group pull-right navbar-icongroup" yield-to="navbarAction">
             
@@ -104,6 +104,9 @@
     <div ng-show="currentView!='conversation'" class="navbar navbar-app navbar-absolute-bottom">
         <div class="btn-group justified">
             <a ng-show="validateLoad('profile')" href="#/profile/{{ myAppUser.id }}" class="btn btn-navbar btn-icon-only" ng-class="{'navbar-active-item': currentView === 'profile'}"><i class="fa fa-2x fa-user"></i></a>
+            <!--<a ng-show="validateLoad('mobileresponse')" href="#/mr/services" class="btn btn-navbar btn-icon-only" ng-class="{'navbar-active-item': currentView === 'services'}"><img src="images/mr/Job-128x128.png" width="36" /></a>
+            <a ng-show="!validateLoad('mobileresponse')" href="#/profile/{{ myAppUser.id }}" class="btn btn-navbar btn-icon-only" ng-class="{'navbar-active-item': currentView === 'profile'}"><i class="fa fa-2x fa-user"></i></a>-->
+
             <a ng-show="validateLoad('inbox')" href="#/conversations/{{ inbox.inboxId }}" class="btn btn-navbar btn-icon-only" ng-class="{'navbar-active-item': currentView === 'conversations'}"><i class="fa fa-2x fa-inbox"></i></a>
             <a ng-show="validateLoad('inbox')" href="#/newconversation/" class="btn btn-navbar btn-icon-only" ng-class="{'navbar-active-item': currentView === 'newconversation'}"><i class="fa fa-2x fa-pencil"></i></a>
             

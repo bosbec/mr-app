@@ -11,10 +11,18 @@
     background-color: #ccc;
 }
 
-.app-name 
-{	
-	background-color: #fff;
-	border-bottom: 1px solid #ccc;	
+.app-name {
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+    line-height: 50px;
+}
+.navbar-app {
+    border-bottom: 1px solid #ccc;
+    height: 51px;
+}
+
+.logo {
+    
 }
 
 .modal {
@@ -228,7 +236,7 @@
     width: 90%;
 }
 .navbar-brand {
-    padding-top: 1px;
+    padding-top: 10px;
 }
 .navbar-icongroup {
     
@@ -252,7 +260,7 @@
 }
 
 .navbar-active-item i {
-    border: 1px solid silver;
+    /*border: 1px solid silver;*/
     color: white;
     background-color: #007aff;
     padding: 7px 9px;

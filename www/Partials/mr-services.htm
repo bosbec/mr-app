@@ -4,12 +4,12 @@
 
             <div class="list-group" ng-show="items.length">
 
-                <div class="list-group-item" ng-click="">
+                <!--<div class="list-group-item" ng-click="">
                     <div>
                         <button class="btn btn-primary" ng-hide="expandItems" ng-click="ToggleExpand()"><i class="fa fa-chevron-down"></i> Expand all</button>
                         <button class="btn btn-primary" ng-show="expandItems" ng-click="ToggleExpand()"><i class="fa fa-chevron-up"></i> Compress all</button>
                     </div>
-                </div>
+                </div>-->
 
                 <div ng-repeat="item in items" class="list-group-item">
                     <div ng-hide="item.expand" ng-click="ToggleInfo(item)">
@@ -24,8 +24,8 @@
                     <div>
                         <div class="unit-info-container">
                             <div ng-show="item.data.type==='execute-from-app'">
-                                <textarea class="form-control" ng-model="executeServiceText"></textarea>
-                                <a ng-click="ExecuteService(item, executeServiceText)" class="btn btn-primary btn-align-right">Execute</a>
+                                <textarea class="form-control" style="width: 60%" ng-model="executeServiceText"></textarea>
+                                <a ng-click="ExecuteService(item, executeServiceText)" class="btn btn-primary btn-align-right">Start</a>
                             </div>
                             <div>
                                 <span ng-show="item.data.templateName"><b>{{item.data.templateName}}</b></span>
