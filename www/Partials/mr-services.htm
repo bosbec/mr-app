@@ -12,7 +12,7 @@
                 </div>-->
 
                 <div ng-repeat="item in items" class="list-group-item">
-                    <div ng-hide="item.expand" ng-click="ToggleInfo(item)">
+                    <div ng-hide="item.expand" ng-click="ExpandInfo(item)">
                         <i class="fa fa-chevron-down pull-right"></i>
                     </div>
                     <div ng-show="item.expand" ng-click="ToggleInfo(item)">
@@ -23,20 +23,20 @@
                     </div>
                     <div>
                         <div class="unit-info-container">
-                            <div ng-show="item.data.type==='execute-from-app'">
-                                <textarea class="form-control" style="width: 60%" ng-model="executeServiceText"></textarea>
-                                <a ng-click="ExecuteService(item, executeServiceText)" class="btn btn-primary btn-align-right">Start</a>
-                            </div>
                             <div>
                                 <span ng-show="item.data.templateName"><b>{{item.data.templateName}}</b></span>
                                 <br />
                                 <span ng-show="item.data.description">{{item.data.description}}</span>
                             </div>
+                            <div class="service-exe-container" ng-show="item.data.executeFromApp==='true'">
+                                <input type="text" class="form-control service-exe-text" ng-model="executeServiceText" />
+                                <a ng-click="ExecuteService(item, executeServiceText)" class="btn btn-primary service-exe-btn">Start</a>
+                            </div>
                         </div>
-                            
                         <div class="unit-metadata-container" ng-show="item.expand || expandItems">
                             <div class="unit-metadata-item" ng-repeat="parameter in item.data.configurableParameters">
-                                <div><b>Parameter: {{$index}}</b></div>
+                                <div><b>Parameter: {{$index}}</b>
+                                </div>
                                 <div class="unit-metadata-key">Alias</div>
                                 <div class="unit-metadata-value">{{parameter.alias}}</div><br/>
                                 <div class="unit-metadata-key">Title</div>

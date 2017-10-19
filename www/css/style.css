@@ -352,7 +352,7 @@
     height: 42px;
 }
 .unit-info-container {
-    
+    display: block;
 }
 .unit-metadata-container {
     display: block;
@@ -379,6 +379,24 @@
 }
 .hideMessageContainer {
     float: right;
+}
+
+.service-exe-text {
+    width: 80%;
+    display: inline-block;
+}
+.service-exe-btn {
+    width: 19%;
+    float: right;
+    display: inline-block;
+    height: 100%;
+}
+.service-exe-container {
+    position: relative;
+    display: block;
+    background-color: #fff;
+    padding-top: 10px;
+    
 }
 
 

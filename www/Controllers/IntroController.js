@@ -20,9 +20,9 @@
         $scope.introContent = [
             {
                 'heading': 'Welcome',
-                'ingress': 'Welcome to the Mobile Response Messaging App',
-                'text': 'This app requires a Mobile Response account',
-                'image': './images/mr-logo-vertical.png'
+                'ingress': 'Welcome to the Bosbec App',
+                'text': 'This app requires a Bosbec account',
+                'image': './images/logo-bosbec-w800-transp-padding.png'
             },
             {
                 'heading': 'Register',
@@ -64,7 +64,7 @@
                 'heading': 'Get Started',
                 'ingress': '',
                 'text': 'That concludes the introduction. You can find the introduction in the main menu, should you need it.',
-                'image': './images/mr-logo-vertical.png'
+                'image': './images/logo-bosbec-w800-transp-padding.png'
             }
         ];
         
