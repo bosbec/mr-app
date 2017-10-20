@@ -28,7 +28,7 @@
         $scope.tokenExpiresTimestamp = null;
         $scope.tokenExpiresIn = null;
         $scope.formatTimestamp = true;
-        $scope.checkWhatsNewInterval = 5; //Seconds
+        $scope.checkWhatsNewInterval = 10; //Seconds
 
         $scope.SaveSettings = function () {
             settingsFactory.setNumberOfConversations($scope.numberOfConversations);
