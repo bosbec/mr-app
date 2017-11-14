@@ -8,7 +8,7 @@
 
             var apiSettings = {
                 baseApiUrl: 'https://api2.mobileresponse.se/',
-                //baseApiUrl: 'https://api2.test.mobileresponse.se/',
+                //baseApiUrl: 'http://api2.test.mobileresponse.se/',
                 method: 'POST'
             };
 

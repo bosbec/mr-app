@@ -2,10 +2,11 @@
 [
     '$scope', '$rootScope', '$localStorage', '$window', '$routeParams', 'MobileResponseFactory',
     function($scope, $rootScope, $localStorage, $window, $routeParams, mobileResponseFactory) {
-        
+
+        $scope.currentView = 'services';
         $scope.items = [];
         $scope.expandItems = false;
-
+        
         function listServices() {
             var listServicesRequest = {
                 "authenticationToken": mobileResponseFactory.getToken(),
@@ -54,9 +55,18 @@
             executeService(requestData);
         };
 
-        $scope.ExecuteServiceWithParameters = function (params) {
-
+        $scope.ExecuteServiceWithParameters = function(params) {
         };
+
+        $scope.OpenService = function(item) {
+            //console.log("Open item: ", item);
+            //var appsUrl = "http://apps-test.bosbec.io/#/services/";
+            var appsUrl = "http://apps.bosbec.io/#/services/";
+            var externalUrl = appsUrl + item.id + "?token=" + mobileResponseFactory.getToken();
+            console.log("externalUrl: ", externalUrl);
+            $window.open(externalUrl, '_system');
+        };
+        
 
         $scope.ToggleInfo = function (item) {
             if (item.expand) {
@@ -81,7 +91,7 @@
         
         
         function init() {
-            $scope.$emit('viewChanged', 'services-list');
+            $scope.$emit('viewChanged', 'services');
             listServices();
         }
 
