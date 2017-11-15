@@ -23,7 +23,13 @@
                     $scope.items = response.data.items;
                 },
                 function (error) {
-
+                    console("error", error);
+                    mobileResponseFactory.autoAuthenticate(function(r) {
+                        console("autoAuth: success: ", r);
+                        },
+                        function(e) {
+                            console("autoAuth: error: ", e);
+                        });
                 });
         }
 

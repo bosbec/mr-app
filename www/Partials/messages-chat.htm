@@ -16,7 +16,7 @@
                         <img class="avatar" ng-if="conversation.avatars" ng-repeat="avatar in conversation.avatars" ng-show="avatar.avatar != null && avatar.userId == message.authorId" height="50" alt="avatar" src="{{ avatar.avatar }}"/>
                     </div>
                     <div>
-                        <b>{{ message.authorDisplayName }}</b><br/>
+                        <div><b>{{ message.authorDisplayName }}</b></div>
                         <div ng-bind-html="message.content"></div>
                         <div ng-repeat="metadata in message.metaData">
                             <div ng-if="metadata._type == 'image' || metadata._type == 'file' || metadata._type == 'position' || metadata._type == 'form'" class="attachment">
@@ -33,7 +33,6 @@
                             </div>
                         </div>
                         <span class="smallDateTime">{{ message.createdOnFormatted }}</span>
-                        
                     </div>
                 </div>
                 <div id="last-message" class="list-group-item message-chat-end">
@@ -44,13 +43,12 @@
             </div>
         </div>
     </div>
-
-    <div class="send-chat-message">
-        <form ng-submit="sendMessage(newMessage)" name="newMessageForm">
-            <a href="" ng-click="sendMessage(newMessage)" class="btn btn-primary btn-align-right" ng-disable="newMessagesForm.$invalid"><span><i class="fa fa-arrow-right"></i></span></a>
-            <textarea ng-model="newMessage" enter-submit="sendMessage(newMessage)" class="form-control send-message" placeholder="Compose message" required></textarea>
-        </form>
-    </div>
+    <form ng-submit="sendMessage(newMessage)" name="newMessageForm">
+        <div class="send-chat-message-container">
+            <div class="send-chat-message-text"><textarea ng-model="newMessage" enter-submit="sendMessage(newMessage)" class="form-control send-chat-message-textarea" placeholder="Compose message" required></textarea></div>
+            <div class="send-chat-message-btn" ng-click="sendMessage(newMessage)"><a href="" class="navbar-active-item" ng-disable="newMessagesForm.$invalid"><span><i class="fa fa-arrow-right"></i></span></a></div>
+        </div>
+    </form>
 
     <div ui-content-for="modals">
         <div ng-include="'Partials/overlay.htm'"></div>

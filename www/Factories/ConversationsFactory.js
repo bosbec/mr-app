@@ -80,7 +80,7 @@
                     var user = findUserById(conversation.participants[q], users);
                     if (user != null) {
                         if (user.avatar == null) {
-                            user.avatar = "images/NoAvatar2.png";
+                            //user.avatar = "images/NoAvatar2.png";
                         } 
                         avatars.push(user);
                     } 
@@ -89,7 +89,7 @@
                 user = findUserById(conversation.userId, users);
                 if (user != null) {
                     if (user.avatar == null) {
-                        user.avatar = "images/NoAvatar2.png";
+                        //user.avatar = "images/NoAvatar2.png";
                     }
                     if (user.avatar != '') {
                         avatars.push(user);

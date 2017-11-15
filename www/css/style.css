@@ -3,7 +3,15 @@
 }
 
 .app {
-    
+    background-color: white;
+}
+.sidebar-left {
+    background-color: #aaaaaa;
+}
+
+.list-group-item.active {
+    background-color: #2196f3;
+    border-color: #2196f3;
 }
 
 .ios-body {
@@ -186,17 +194,22 @@
     /*padding-bottom: 141px;*/
     padding-bottom: 75px;
 }
+
 .message-chat {
-    width: 60%;
+    /*width: 60%;*/
+    width: 75%;
     margin: 6px 6px 6px 6px;
-    border-radius: 6px;
+    border-radius: 10px;
+    /*border: 1px solid silver;*/
+    
 }
 .message-chat-me {
-    background-color: aliceblue;
+    background-color: white;
     float: right;
+    border: 1px solid #dddddd;
 }
 .message-chat-other {
-    background-color: lightgoldenrodyellow;
+    background-color: #eeeeee;
     float: left;
 }
 .message-chat-end {
@@ -209,17 +222,42 @@
 }
 #last-message {
 }
-.send-chat-message {
+
+.send-chat-message-container {
     background-color: white;
     position: absolute;
     bottom: 0;
     padding: 3px 3px 3px 3px;
     width: 100%;
+    border-top: 1px solid #eeeeee;
 }
+
+.send-chat-message-text {
+    display: inline-block;
+    width: 100%;
+    float: left;
+    padding-right: 50px;
+}
+
+.send-chat-message-textarea {
+    width: 100%;
+}
+
+.send-chat-message-textarea.ng-invalid {
+    border: 0;
+}
+    
+    .send-chat-message-btn {
+        display: inline-block;
+        float: right;
+        margin-top: -50px;
+        padding: 10px;
+    }
+
 .attachment {
     background-color: white;
     border: 1px solid #ddd;
-    color: #007aff;
+    color: #2196f3;
     padding: 3px 7px 3px 7px;
     margin-top: 5px;
     border-radius: 6px;
@@ -239,10 +277,8 @@
     width: 10%;
 }
 
-.send-message {
-    float: left;
-    width: 90%;
-}
+
+
 .navbar-brand {
     padding-top: 10px;
 }
@@ -270,10 +306,14 @@
 .navbar-active-item i {
     /*border: 1px solid silver;*/
     color: white;
-    background-color: #007aff;
+    /*background-color: #007aff;*/
+    background-color: #2196f3;
     padding: 7px 9px;
     border-radius: 25px;
 }
+
+
+
 .modal {
     background-color: white;
 }
