@@ -80,6 +80,11 @@ a {
 	font-size: 0.8em;
 	color: #999;
 }
+
+.smallDateTime-me {
+    font-size: 0.8em;
+    color: #96cdf9;
+}
 .error-label {
 	color: black;
     background-color: lightcoral;
@@ -201,12 +206,13 @@ a {
     /*width: 60%;*/
     width: 75%;
     margin: 6px 6px 6px 6px;
-    border-radius: 10px;
+    /*border-radius: 10px;*/
     /*border: 1px solid silver;*/
     
 }
 .message-chat-me {
-    background-color: #eeeeee;
+    background-color: #2196f3;
+    color: white;
     float: right;
     /*border: 1px solid #dddddd;*/
 }
