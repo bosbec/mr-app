@@ -1,7 +1,9 @@
 ﻿html,body {
     height:100%;
 }
-
+a {
+    color: #2196f3;
+}
 .app {
     background-color: white;
 }
@@ -9,7 +11,7 @@
     background-color: #aaaaaa;
 }
 
-.list-group-item.active {
+.list-group-item.active, .list-group-item.active:focus {
     background-color: #2196f3;
     border-color: #2196f3;
 }
@@ -282,12 +284,11 @@
 .navbar-brand {
     padding-top: 10px;
 }
-.navbar-icongroup {
-    
-}
+
 .navbar-icongroup i {
     position: relative;
     top: 5px;
+    color: #2196f3;
 }
 
 .avatar {
@@ -309,10 +310,8 @@
     /*background-color: #007aff;*/
     background-color: #2196f3;
     padding: 7px 9px;
-    border-radius: 25px;
+    border-radius: 30px;
 }
-
-
 
 .modal {
     background-color: white;

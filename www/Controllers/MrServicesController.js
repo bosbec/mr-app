@@ -6,6 +6,9 @@
         $scope.currentView = 'services';
         $scope.items = [];
         $scope.expandItems = false;
+
+        //var appsBaseUrl = "http://apps-test.bosbec.io/#";
+        var appsBaseUrl = "https://apps.bosbec.io/#";
         
         function listServices() {
             var listServicesRequest = {
@@ -66,10 +69,13 @@
 
         $scope.OpenService = function(item) {
             //console.log("Open item: ", item);
-            //var appsUrl = "http://apps-test.bosbec.io/#/services/";
-            var appsUrl = "http://apps.bosbec.io/#/services/";
-            var externalUrl = appsUrl + item.id + "?token=" + mobileResponseFactory.getToken();
-            console.log("externalUrl: ", externalUrl);
+            var externalUrl = "";
+            if (item.data.dashboard !== undefined) {
+                externalUrl = appsBaseUrl + "/services/" + item.id + "?token=" + mobileResponseFactory.getToken();
+            } else {
+                externalUrl = appsBaseUrl + "/services/execute/" + item.id + "?token=" + mobileResponseFactory.getToken();
+            }
+            //console.log("externalUrl: ", externalUrl);
             $window.open(externalUrl, '_system');
         };
         

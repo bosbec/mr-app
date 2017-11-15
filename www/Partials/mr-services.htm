@@ -4,7 +4,7 @@
 
             <div class="list-group" ng-show="items.length">
 
-                <div ng-repeat="item in items" class="list-group-item">
+                <div ng-repeat="item in items | filter: !item.data.underConstruction" class="list-group-item">
 
                     <div class="list-item-symbol">
                         <img class="item-symbol item-symbol-unit" alt="services-symbol" src="images/mr/Job-128x128.png"/>
@@ -16,11 +16,11 @@
                     </div>
 
                     <div class="service-action-container">
-                        <div class="service-exe-container" ng-show="item.data.executeFromApp==='true'">
+                        <!--<div class="service-exe-container" ng-show="item.data.executeFromApp==='true'">
                             <input type="text" class="form-control service-exe-text" ng-model="executeServiceText"/>
                             <a ng-click="ExecuteService(item, executeServiceText)" class="btn btn-primary service-exe-btn">Start</a>
-                        </div>
-                        <div  ng-show="item.data.executeFromApp!=='true'">
+                        </div>-->
+                        <div>
                             <a ng-click="OpenService(item)" class="btn btn-primary">Open</a>
                         </div>
                     </div>
