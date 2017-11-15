@@ -206,12 +206,12 @@ a {
     
 }
 .message-chat-me {
-    background-color: white;
+    background-color: #eeeeee;
     float: right;
-    border: 1px solid #dddddd;
+    /*border: 1px solid #dddddd;*/
 }
 .message-chat-other {
-    background-color: #eeeeee;
+    background-color: #dddddd;
     float: left;
 }
 .message-chat-end {
