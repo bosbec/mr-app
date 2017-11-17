@@ -2,3 +2,9 @@
     padding-top: 20px;
     background-color: gray;
 }
+.modal {
+    margin-top: 20px;
+}
+.modal-body {
+   height: 85vh !important;
+}
