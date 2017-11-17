@@ -1,7 +1,7 @@
 ﻿mrApp.controller('MrServicesController',
 [
-    '$scope', '$rootScope', '$localStorage', '$window', '$routeParams', 'MobileResponseFactory',
-    function($scope, $rootScope, $localStorage, $window, $routeParams, mobileResponseFactory) {
+    '$scope', '$rootScope', '$localStorage', '$window', '$routeParams', 'MobileResponseFactory', 'SharedState',
+    function ($scope, $rootScope, $localStorage, $window, $routeParams, mobileResponseFactory, SharedState) {
 
         $scope.currentView = 'services';
         $scope.items = [];
@@ -26,12 +26,12 @@
                     $scope.items = response.data.items;
                 },
                 function (error) {
-                    console("error", error);
+                    console.log("error", error);
                     mobileResponseFactory.autoAuthenticate(function(r) {
-                        console("autoAuth: success: ", r);
+                        console.log("autoAuth: success: ", r);
                         },
                         function(e) {
-                            console("autoAuth: error: ", e);
+                            console.log("autoAuth: error: ", e);
                         });
                 });
         }
@@ -75,8 +75,11 @@
             } else {
                 externalUrl = appsBaseUrl + "/services/execute/" + item.id + "?token=" + mobileResponseFactory.getToken();
             }
-            //console.log("externalUrl: ", externalUrl);
-            $window.open(externalUrl, '_system');
+            externalUrl = externalUrl + "&header=false";
+            //$window.open(externalUrl, '_system');
+
+            SharedState.set('formModalUrl', externalUrl);
+            SharedState.turnOn('formModal');
         };
         
 
@@ -104,6 +107,7 @@
         
         function init() {
             $scope.$emit('viewChanged', 'services');
+            SharedState.initialize($scope, 'formModalUrl', '');
             listServices();
         }
 

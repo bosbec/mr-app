@@ -44,27 +44,48 @@ a {
 }
 
 .modal {
+    background-color: white;
     display: block;
+    padding: 0;
 }
 
+
 .modal-content {
+    height: 100vh;
     z-index: 1050;
 }
 
+.modal-dialog {
+    padding: 0;
+    margin: 0;
+}
+
 .formModal {
-    padding-top: 15px;
+    height: 100vh;
+}
+
+.modal-header {
+    height: 50px;
+    background-color: #2196f3;
+}
+
+.modal-body {
+    padding: 0 !important;
+    overflow: scroll !important;
+    -webkit-overflow-scrolling: touch !important;
+    height: 90vh !important;
+}
+
+.modal-close {
+    float: right;
+    color: white;
+    margin-top: -5px;
 }
 
 .formModalIframe {
     border: 0;
     background-color: white;
     display: block;
-}
-
-.closeModal {
-    position: absolute;
-    margin-left: 90%;
-    z-index: 1060;
 }
 
 .content-container {
@@ -251,6 +272,10 @@ a {
     width: 100%;
 }
 
+    .send-chat-message-textarea:focus::placeholder {
+        color: white;
+    }
+
 .send-chat-message-textarea.ng-invalid {
     border: 0;
 }
@@ -319,12 +344,6 @@ a {
     border-radius: 30px;
 }
 
-.modal {
-    background-color: white;
-}
-.modal-content {
-    height: 100vh;
-}
 
 .intro-content {
     height: 88vh;

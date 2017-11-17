@@ -1,53 +1,4 @@
-﻿mrApp.directive('iframeOnload',
-[
-    function() {
-        return {
-            scope: {
-                callBack: '&iframeOnload'
-            },
-            link: function(scope, element, attrs) {
-                element.on('load',
-                    function() {
-                        return scope.callBack();
-                    });
-            }
-        }
-    }
-]);
-
-mrApp.controller('FormModalController',
-[
-    '$scope','$timeout', 'SharedState',
-    function($scope,$timeout, SharedState) {
-
-        $scope.activeFormUrl = "Partials/loading.htm";
-
-        function loadIframe() {
-            console.log("iFrameLoaded: " + SharedState.get('formModalUrl'));
-            if (SharedState.get('formModalUrl')) {
-                $scope.activeFormUrl = SharedState.get('formModalUrl');
-            }
-        }
-
-        $scope.iframeLoadedCallBack = function() {
-            loadIframe();
-        }
-
-        function init() {
-            //console.log("Init: " + SharedState.get('formModalUrl'));
-            //loadIframe();
-            $timeout(function() {
-                    loadIframe();
-                },
-                2000);
-        }
-
-        init();
-
-    }
-    ]);
-
-mrApp.directive('enterSubmit', function () {
+﻿mrApp.directive('enterSubmit', function () {
     return {
         restrict: 'A',
         link: function (scope, elem, attrs) {
@@ -89,10 +40,11 @@ mrApp.controller('MessagesController', [
         $scope.openFormModal = function (formId) {
             var formUrl = 'http://m.mobileresponse.se/form/' + formId;
             //var formUrl = 'http://m.test.mobileresponse.se/form/' + formId;
-            $window.open(formUrl, '_system');
+            //$window.open(formUrl, '_system');
             //console.log(formUrl);
-            //SharedState.set('formModalUrl', formUrl);
-            //SharedState.turnOn('formModal');
+
+            SharedState.set('formModalUrl', formUrl);
+            SharedState.turnOn('formModal');
         };
 
         $scope.openExternalLink = function (url) {
