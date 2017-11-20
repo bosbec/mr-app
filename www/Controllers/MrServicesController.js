@@ -27,7 +27,7 @@
                 },
                 function (error) {
                     console.log("error", error);
-                    mobileResponseFactory.autoAuthenticate(function(r) {
+                    mobileResponseFactory.functions.autoAuthenticate(function(r) {
                         console.log("autoAuth: success: ", r);
                         },
                         function(e) {

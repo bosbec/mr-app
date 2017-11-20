@@ -77,7 +77,7 @@ a {
 }
 
 .modal-close {
-    float: right;
+    float: left;
     color: white;
     margin-top: -5px;
 }
