@@ -1,13 +1,12 @@
 ﻿angular.module('ApiFactory', [])
-    .factory('ApiFactory', ['$rootScope', '$http', '$localStorage','moment', function ($rootScope, $http, $localStorage, moment) {
+    .factory('ApiFactory', ['$rootScope', '$http','SettingsFactory', '$localStorage','moment', function ($rootScope, $http, settingsFactory, $localStorage, moment) {
 
             var authenticationToken;
             var lastCallTimestamp;
             var tokenExpiresTimestamp;
 
             var apiSettings = {
-                baseApiUrl: 'https://appapi.mobileresponse.io/1/',
-                //baseApiUrl: 'http://appapi.test.mobileresponse.se/1/',
+                baseApiUrl: settingsFactory.getUrls().appapi,
                 instanceName: 'mobileresponse',
                 method: 'POST'
             };

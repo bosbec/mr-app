@@ -1,14 +1,13 @@
 ﻿mrApp.controller('MrServicesController',
 [
-    '$scope', '$rootScope', '$localStorage', '$window', '$routeParams', 'MobileResponseFactory', 'SharedState',
-    function ($scope, $rootScope, $localStorage, $window, $routeParams, mobileResponseFactory, SharedState) {
+    '$scope', '$rootScope', '$localStorage', '$window','$location', '$routeParams', 'MobileResponseFactory','SettingsFactory', 'SharedState',
+    function ($scope, $rootScope, $localStorage, $window,$location, $routeParams, mobileResponseFactory, settingsFactory, SharedState) {
 
         $scope.currentView = 'services';
         $scope.items = [];
         $scope.expandItems = false;
 
-        //var appsBaseUrl = "http://apps-test.bosbec.io/#";
-        var appsBaseUrl = "https://apps.bosbec.io/#";
+        var appsBaseUrl = settingsFactory.getUrls().apps;
         
         function listServices() {
             var listServicesRequest = {
@@ -26,12 +25,14 @@
                     $scope.items = response.data.items;
                 },
                 function (error) {
-                    console.log("error", error);
+                    //console.log("error", error);
                     mobileResponseFactory.functions.autoAuthenticate(function(r) {
-                        console.log("autoAuth: success: ", r);
+                            //console.log("autoAuth: success: ", r);
+                            $location.path("/mr/services?reload=true");
                         },
                         function(e) {
-                            console.log("autoAuth: error: ", e);
+                            //console.log("autoAuth: error: ", e);
+                            $window.location.reload();
                         });
                 });
         }

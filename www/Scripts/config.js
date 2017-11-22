@@ -95,7 +95,13 @@ mrApp.config(function ($routeProvider) {
     {
         templateUrl: 'Partials/mr-services.htm',
         resolve: checkToken
-    });
+        });
+
+    $routeProvider.when('/mr/services:param1',
+        {
+            templateUrl: 'Partials/mr-services.htm',
+            resolve: checkToken
+        });
 
     $routeProvider.when('/intro/:param1',
     {

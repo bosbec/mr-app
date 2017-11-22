@@ -38,7 +38,7 @@ mrApp.controller('MessagesController', [
         $scope.activeFormUrl = '';
 
         $scope.openFormModal = function (formId) {
-            var formUrl = 'http://m.mobileresponse.se/form/' + formId;
+            var formUrl = settingsFactory.getUrls().forms + formId;
             //var formUrl = 'http://m.test.mobileresponse.se/form/' + formId;
             //$window.open(formUrl, '_system');
             //console.log(formUrl);

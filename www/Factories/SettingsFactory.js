@@ -6,7 +6,26 @@
             var defaultNumberOfConversations = 15;
             var defaultNumberOfMessages = 20;
             var formatTimestamp = true;
-            var defaultCheckWhatsNewInterval = 5;
+            var defaultCheckWhatsNewInterval = 10;
+            var urls = {};
+
+            function getUrls() {
+                // production
+                urls = {
+                    "appapi": "https://appapi.bosbec.io/1/",
+                    "api2": "https://api2.bosbec.io/",
+                    "apps": "https://apps.bosbec.io/#",
+                    "forms": "https://m.bosbec.io/form/"
+                };
+                //// test
+                //urls = {
+                //    "appapi": "https://appapi.mobileresponse.io/1/",
+                //    "api2": "https://api2.mobileresponse.se/",
+                //    "apps": "https://apps.bosbec.io/#",
+                //    "forms": "http://m.mobileresponse.se/form/"
+                //};
+                return urls;
+            }
 
             function getSettings() {
                 return $localStorage.settings;
@@ -102,6 +121,7 @@
             init();
 
             return {
+                getUrls: getUrls,
                 initSettings: initSettings,
                 getSettings: getSettings,
                 getNumberOfConversations: getNumberOfConversations,
