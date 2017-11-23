@@ -7,7 +7,7 @@
     <div class="scrollable content-container content-container-chat">
         <div id="chat-container" class="scrollable-content">
             <div class="list-group">
-                <div ng-repeat="message in messages | orderBy:'-createdOn':true"
+                <div ng-repeat="message in messages | orderBy:['-createdOnDetail','-createdOn']:true"
                      id="{{'msg'+ ($index + 1)}}"
                      class="list-group-item message-chat"
                      ng-class="{ 'message-chat-me': message.author === 'me', 'message-chat-other': message.author === 'other', 'last-message': $index >= messages.length-1}" ng-class="(!message.isRead) ? 'new-item' : ''">

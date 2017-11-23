@@ -39,7 +39,6 @@ mrApp.controller('MessagesController', [
 
         $scope.openFormModal = function (formId) {
             var formUrl = settingsFactory.getUrls().forms + formId;
-            //var formUrl = 'http://m.test.mobileresponse.se/form/' + formId;
             //$window.open(formUrl, '_system');
             //console.log(formUrl);
 
@@ -119,7 +118,6 @@ mrApp.controller('MessagesController', [
                     'pageSize': settingsFactory.getNumberOfMessages()
                 }
             };
-            
             apiFactory.functions.call('conversations/list-messages', listMessagesRequest, function (response) {
                 
                 var formatTimestamp = settingsFactory.getFormatTimestamp();
@@ -148,15 +146,15 @@ mrApp.controller('MessagesController', [
                         //    }
                         //}
                     }
-
+                    
                     if (formatTimestamp) {
                         response.data.items[i].createdOnFormatted = moment.utc(response.data.items[i].createdOn)
                             .fromNow();
                     } else {
-                        response.data.items[i].createdOnFormatted = moment.utc(response.data.items[i].createdOn)
-                            .format("YYYY-MM-DD HH:mm:ss");
+                        response.data.items[i].createdOnFormatted = moment.utc(response.data.items[i].createdOnDetail)
+                            .format("YYYY-MM-DD HH:mm:ss.SSS");
+                        console.log(response.data.items[i].content, response.data.items[i].createdOnDetail);
                     }
-                    //console.log("Msg[" + i + "]: " + response.data.items[i].createdOn +" (" + response.data.items[i].content +")");
                 }
 
                 response.data.items = parseAuthor(response.data.items);
