@@ -281,7 +281,7 @@
                                     },
                                     "onResume": function() {
                                         //console.log("RootBroadcast: appResumed");
-                                        alert("appResumed");
+                                        //alert("appResumed");
                                         $rootScope.$broadcast('appResumed', true);
                                     }
                                 };
