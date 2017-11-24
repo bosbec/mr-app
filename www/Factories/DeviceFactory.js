@@ -22,11 +22,9 @@
                 //set push notifications handler
                 document.addEventListener('push-notification',
                     function (event) {
-                        var notification = event.notification;
-                        var title = event.notification.title;
                         var userData = event.notification.userdata;
 
-                        alert("[Android] PUSH: " + title + ": " + userData);
+                        alert("[Android] PUSH: " + JSON.stringify(userData));
 
                         if (typeof (userData) != "undefined") {
                             //console.warn('user data: ' + JSON.stringify(userData));
@@ -35,6 +33,10 @@
                         settings.onPush(event.notification);
                     }
                 );
+
+                pushNotification.init({
+                    clearBadge: true
+                });
 
                 pushNotification.onDeviceReady(
                 {
