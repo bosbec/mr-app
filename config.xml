@@ -59,10 +59,10 @@
 
   <!--This is the one PhoneGap Build acts on, leave out to get latest stable-->
   <!--<preference name="phonegap-version" value="cli-6.5.0" />-->
-  <preference name="phonegap-version" value="cli-7.0.1" />
+  <!--<preference name="phonegap-version" value="cli-7.0.1" />-->
 
   <!-- Pushwoosh plugin -->
-  <gap:plugin name="pushwoosh-pgb-plugin" version="7.0.8" source="npm" />
+  <gap:plugin name="pushwoosh-pgb-plugin" version="7.0.6" source="npm" />
   <!--<gap:plugin name="pushwoosh-pgb-plugin" source="npm" />-->
   
   <plugin name="cordova-plugin-inappbrowser" source="npm"/>
