@@ -55,7 +55,7 @@
   <!--<gap:plugin name="com.pushwoosh.plugins.pushwoosh" version="7.0.7" />-->
 
   <gap:plugin name="pushwoosh-pgb-plugin" source="npm" />
-  <preference name="android-build-tool" value="gradle" />
+  <!--<preference name="android-build-tool" value="gradle" />-->
   
   <!-- Cordova app version plugin -->
   <!--<gap:plugin name="cordova-plugin-app-version" spec="0.1.8" source="npm" />-->
@@ -80,7 +80,6 @@
 
 
   <access origin="*"/>
-  <access origin="*.pushwoosh.com"/>
   <!-- allow pushwoosh service -->
   <!-- Added the following intents to support the removal of whitelist code from base cordova to a plugin -->
   <!-- Whitelist configuration. Refer to https://cordova.apache.org/docs/en/edge/guide_appdev_whitelist_index.md.html -->

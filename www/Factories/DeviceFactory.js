@@ -21,11 +21,12 @@
                 
                 //set push notifications handler
                 document.addEventListener('push-notification',
-                    function(event) {
+                    function (event) {
+                        var notification = event.notification;
                         var title = event.notification.title;
                         var userData = event.notification.userdata;
 
-                        alert("[Android] PUSH: " + event.notification);
+                        alert("[Android] PUSH: " + title + ": " + userData);
 
                         if (typeof (userData) != "undefined") {
                             //console.warn('user data: ' + JSON.stringify(userData));
