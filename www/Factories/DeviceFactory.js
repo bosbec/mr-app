@@ -39,7 +39,7 @@
                 {
                     projectid: settings.projectid,
                     appid: settings.appid,
-                    forceShow: true
+                    serviceName: ""
                 });
                 
                 //register for push notifications
