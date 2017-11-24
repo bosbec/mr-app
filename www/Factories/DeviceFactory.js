@@ -23,21 +23,16 @@
                 document.addEventListener('push-notification',
                     function (event) {
                         var userData = event.notification.userdata;
-
-                        alert("[Android] PUSH: " + JSON.stringify(userData));
-
+                        
                         if (typeof (userData) != "undefined") {
+                            alert("[Android] PUSH: " + JSON.stringify(userData));
                             //console.warn('user data: ' + JSON.stringify(userData));
                         }
 
                         settings.onPush(event.notification);
                     }
                 );
-
-                pushNotification.init({
-                    clearBadge: true
-                });
-
+                
                 pushNotification.onDeviceReady(
                 {
                     projectid: settings.projectid,
