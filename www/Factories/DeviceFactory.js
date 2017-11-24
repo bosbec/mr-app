@@ -145,7 +145,7 @@
                             };
 
                             var afterRegisterFail = function() {
-                                //alert("Register failed");
+                                alert("Register failed");
                                 callback(false);
                             };
 

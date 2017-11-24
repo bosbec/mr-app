@@ -276,12 +276,12 @@
                                     "projectid": "71435688512",
                                     "onPush": function(push) {
                                         //console.log("RootBroadcast: newPush");
-                                        //alert('newPush');
+                                        alert('newPush');
                                         $rootScope.$broadcast('newPush', push);
                                     },
                                     "onResume": function() {
                                         //console.log("RootBroadcast: appResumed");
-                                        //alert("appResumed");
+                                        alert("appResumed");
                                         $rootScope.$broadcast('appResumed', true);
                                     }
                                 };
