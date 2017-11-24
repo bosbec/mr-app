@@ -271,7 +271,7 @@
                                         console.log("[WARN] Mobile Response auto login: " + error);
                                     });
 
-                                var registerDeviceRequest = {
+                                var registerDeviceSettings = {
                                     "appid": "64032-F5A58",
                                     "projectid": "71435688512",
                                     "onPush": function(push) {
@@ -298,7 +298,7 @@
                                         },
                                         15000);
 
-                                    deviceFactory.registerDevice(registerDeviceRequest,
+                                    deviceFactory.registerDevice(registerDeviceSettings,
                                         function (status) {
                                             statusFlag = true;
                                             if (status) {
