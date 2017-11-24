@@ -18,20 +18,7 @@
                 //alert("[Android] Pushwoosh reg");
 
                 var pushNotification = cordova.require("pushwoosh-cordova-plugin.PushNotification");
-
-                pushNotification.init(
-                {
-                    "android": {
-                        "senderID": "71435688512",
-                        "forceShow": "true"
-                    },
-                    "ios": {
-                        "alert": "true",
-                        "badge": "true",
-                        "sound": "true"
-                    }
-                });
-
+                
                 //set push notifications handler
                 document.addEventListener('push-notification',
                     function(event) {
@@ -48,7 +35,12 @@
                     }
                 );
 
-                pushNotification.onDeviceReady({ projectid: settings.projectid, appid: settings.appid });
+                pushNotification.onDeviceReady(
+                {
+                    projectid: settings.projectid,
+                    appid: settings.appid,
+                    forceShow: true
+                });
                 
                 //register for push notifications
                 pushNotification.registerDevice(
