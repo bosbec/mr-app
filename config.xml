@@ -63,6 +63,7 @@
 
   <!-- Pushwoosh plugin -->
   <!--<gap:plugin name="pushwoosh-pgb-plugin" version="7.0.6" source="npm" />-->
+  <gap:plugin name="pushwoosh-pgb-plugin" source="npm" />
   
   <plugin name="cordova-plugin-inappbrowser" source="npm"/>
 
