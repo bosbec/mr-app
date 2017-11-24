@@ -25,7 +25,7 @@
                         var userData = event.notification.userdata;
                         
                         if (typeof (userData) != "undefined") {
-                            alert("[Android] PUSH: " + JSON.stringify(userData));
+                            //alert("[Android] PUSH: " + JSON.stringify(userData));
                             //console.warn('user data: ' + JSON.stringify(userData));
                         }
 

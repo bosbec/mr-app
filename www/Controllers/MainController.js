@@ -117,7 +117,7 @@ mrApp.controller('MainController', [
             //console.log("Handle:newPush");
             //console.log(event);
             //console.log(state);
-            alert("onNewPush:" + state);
+            //alert("onNewPush:" + state);
             checkWhatsNew();
         }
 
