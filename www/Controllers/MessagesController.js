@@ -2,10 +2,10 @@
     return {
         restrict: 'A',
         link: function (scope, elem, attrs) {
-            
+
             elem.bind('keydown', function (event) {
                 var code = event.keyCode || event.which;
-                
+
                 //enter=submit, shift+enter=line break
                 if (code === 13 && event.ctrlKey) {
                     event.preventDefault();
@@ -25,10 +25,41 @@
     }
 });
 
+//mrApp.directive('testdirective', ['$compile', function ($compile) {
+//    return {
+//        restrict: 'AEC',
+//        link: function (scope, element, attrs) {
+//            console.log('Link cycle', element, attrs);
+//            //console.log("element: " + element[0]);
+//            //window.elem = element;
+//            //element[0].href = "nuersattejagdettahahahaha.com";
+
+
+//            element[0].addEventListener("click", function (ev) {
+//                console.log("clickEvent: ", ev.target);
+
+//                $scope.openBosbecLinkInModal(ev.target);
+//                return false;
+//            });
+//            //setTimeout(function() { scope.$apply() });
+//            scope.$watch(
+//                function (scope) {
+//                    return scope.$eval(attrs.compile);
+//                },
+//                function (value) {
+//                    element.html(value);
+//                    $compile(element.contents())(scope);
+//                }
+//            );
+//        }
+//    };
+//}
+//]);
+
 
 mrApp.controller('MessagesController', [
-    'ApiFactory', '$scope', '$location', '$routeParams', '$window','moment', 'UsersFactory', 'ConversationsFactory', '$timeout', '$filter', 'SharedState', 'SettingsFactory','DeviceFactory',
-    function(apiFactory, $scope, $location, $routeParams, $window, moment, usersFactory, conversationsFactory, $timeout, $filter, SharedState, settingsFactory, deviceFactory) {
+    'ApiFactory', '$scope', '$location', '$routeParams', '$window', 'moment', 'UsersFactory', 'ConversationsFactory', '$timeout', '$filter', 'SharedState', 'SettingsFactory',
+    function (apiFactory, $scope, $location, $routeParams, $window, moment, usersFactory, conversationsFactory, $timeout, $filter, SharedState, settingsFactory) {
 
         var conversationId = $routeParams.param1;
 
@@ -37,20 +68,26 @@ mrApp.controller('MessagesController', [
 
         $scope.activeFormUrl = '';
 
+        $scope.messages = {
+        };
+
         $scope.openFormModal = function (formId) {
-            var formUrl = settingsFactory.getUrls().forms + formId;
+            var formUrl = settingsFactory.getUrls().forms + formId + "?appuserid=" + usersFactory.myUser().id;
             //$window.open(formUrl, '_system');
-            //console.log(formUrl);
+            console.log("openFormModal", formUrl);
 
             SharedState.set('formModalUrl', formUrl);
             SharedState.turnOn('formModal');
         };
 
-        $scope.openExternalLink = function (url) {
-            //console.log("Open external:" + url);
-            $window.open(url, '_system');
-        };
+        $scope.openBosbecLinkInModal = function (url) {
+            console.log("openBosbecLinkInModal:" + url);
 
+            SharedState.set('formModalUrl', url);
+            SharedState.turnOn('formModal');
+
+            //$window.open(url, '_blank');
+        };
 
         function showAlert(text, type, duration) {
             if (type === 'success') {
@@ -69,7 +106,7 @@ mrApp.controller('MessagesController', [
         }
 
         function init() {
-            
+
             if ($scope.authenticationToken == undefined) {
                 $location.path('/login');
             }
@@ -83,10 +120,92 @@ mrApp.controller('MessagesController', [
 
         function linkify(text) {
             var urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
-            return text.replace(urlRegex, function (url) {
-                //return '<a ng-click="openExternalLink(' + url + ');" class="externalLink">' + url + '</a>';
-                return '<a href="' + url + '" target="_system" class="externalLink">' + url + '</a>';
-            });
+            return text.replace(urlRegex,
+                function (url) {
+                    return '<a href="' + url + '" target="_blank" class="externalLink">' + url + '</a>';
+                    //return '<a ng-click="openExternalLink(' + url + ');" class="externalLink">' + url + '</a>';
+                });
+        }
+
+        function isBosbecExternalUrl(url) {
+            var urls = settingsFactory.getBosbecUrls();
+            for (var i = 0; i < urls.length; i++) {
+                if (url.indexOf(urls[i]) === 0) {
+                    //match => is bosbec url
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function handleLinks(text) {
+            var urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+            text = text.replace(urlRegex,
+                function (url) {
+                    //return '<a href="' + url + '" class="externalLink">' + url + '</a>';
+                    // check if url is in settingsurls => our own
+                    if (isBosbecExternalUrl(url)) {
+                        // if form get formId and openFormModal() add ?appuserid
+                        console.log("isBosbecUrl: " + url);
+                        return '<a ng-click="openBosbecLinkInModal(\'' +
+                            url +
+                            '\');" class="externalLink" testdirective>' +
+                            url +
+                            '</a>';
+                    } else {
+                        return '<a href="' + url + '" target="_blank" class="externalLink" testdirective>' + url + '</a>';
+                    }
+                });
+            return text;
+        }
+        
+        function extractGuid(value) {
+            var re = /([a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12})/i;
+
+            // the RegEx will match the first occurrence of the pattern
+            var match = re.exec(value);
+
+            // result is an array containing:
+            // [0] the entire string that was matched by our RegEx
+            // [1] the first (only) group within our match, specified by the
+            // () within our pattern, which contains the GUID value
+
+            return match ? match[1] : null;
+        }
+        
+        function addDynamicMetadata(message) {
+            var urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+            message.content = message.content.replace(urlRegex,
+                function(url) {
+                    // check if url is in settingsurls => our own
+                    if (isBosbecExternalUrl(url)) {
+                        
+                        var extractedValue = extractGuid(url);
+                        if (extractedValue != null) {
+                            message.metaData.push({
+                                "_type": "form",
+                                "name": "Open form",
+                                "value": {
+                                    "id": extractedValue
+                                }
+                            });
+                        } else {
+                            message.metaData.push({
+                                "_type": "bosbecLink",
+                                "name": "Open link",
+                                "url": url
+                            });
+                        }
+                    } else {
+                        message.metaData.push({
+                            "_type": "externalLink",
+                            "name": "Open external url",
+                            "url": url
+                        });
+                    }
+                    return " ";
+                });
+            return message;
         }
 
         function formatText(text) {
@@ -106,7 +225,7 @@ mrApp.controller('MessagesController', [
             }
             return messages;
         }
-        
+
         function listMessages(token, conversationId) {
 
             var listMessagesRequest = {
@@ -119,16 +238,19 @@ mrApp.controller('MessagesController', [
                 }
             };
             apiFactory.functions.call('conversations/list-messages', listMessagesRequest, function (response) {
-                
+
                 var formatTimestamp = settingsFactory.getFormatTimestamp();
 
                 for (var i = 0; i < response.data.items.length; i++) {
-                    response.data.items[i].content = linkify(response.data.items[i].content);
+                    //response.data.items[i].content = linkify(response.data.items[i].content);
                     response.data.items[i].content = formatText(response.data.items[i].content);
+
+                    //response.data.items[i].content = handleLinks(response.data.items[i].content);
+                    response.data.items[i] = addDynamicMetadata(response.data.items[i]);
+                    
                     if (response.data.items[i].metaData.length > 0) {
 
                         if (response.data.items[i].metaData[0]._type === "form") {
-                            
                             var formObj = angular.fromJson(response.data.items[i].metaData[0].value);
                             response.data.items[i].formId = formObj.id;
                         }
@@ -146,21 +268,20 @@ mrApp.controller('MessagesController', [
                         //    }
                         //}
                     }
-                    
+
                     if (formatTimestamp) {
                         response.data.items[i].createdOnFormatted = moment.utc(response.data.items[i].createdOn)
                             .fromNow();
                     } else {
                         response.data.items[i].createdOnFormatted = moment.utc(response.data.items[i].createdOnDetail)
                             .format("YYYY-MM-DD HH:mm:ss.SSS");
-                        console.log(response.data.items[i].content, response.data.items[i].createdOnDetail);
                     }
                 }
 
                 response.data.items = parseAuthor(response.data.items);
                 $scope.messages = response.data.items;
                 //console.log(response.data.items);
-                
+
                 scrollToLast();
 
                 var markAsReadRequest = {
@@ -172,20 +293,20 @@ mrApp.controller('MessagesController', [
                 apiFactory.functions.call('conversations/conversation-read', markAsReadRequest, function (response) {
                     //console.log("Conversation is read: " + conversationId);
                 });
-                
+
             });
         }
-        
+
         function scrollToLast() {
             // TODO: add $watch last-message instead
             $timeout(function () {
-                    var elem = angular.element(document.getElementById('chat-container'));
-                    var scrollableContentController = elem.controller('scrollableContent');
-                    scrollableContentController.scrollTo(angular.element(document.getElementById('last-message')));
-                },
+                var elem = angular.element(document.getElementById('chat-container'));
+                var scrollableContentController = elem.controller('scrollableContent');
+                scrollableContentController.scrollTo(angular.element(document.getElementById('last-message')));
+            },
                 400);
         }
-        
+
         $scope.sendMessage = function (message) {
             if (message == null) {
                 showAlert('No text in message', 'error', 1000);
@@ -217,7 +338,7 @@ mrApp.controller('MessagesController', [
             }
 
         };
-        
+
         // handler
         var onNewMessages = function (event, newMessages) {
             var reload = false;

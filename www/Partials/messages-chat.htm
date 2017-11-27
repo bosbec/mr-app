@@ -19,17 +19,25 @@
                         <div><b>{{ message.authorDisplayName }}</b></div>
                         <div ng-bind-html="message.content"></div>
                         <div ng-repeat="metadata in message.metaData">
-                            <div ng-if="metadata._type == 'image' || metadata._type == 'file' || metadata._type == 'position' || metadata._type == 'form'" class="attachment">
+                            <div ng-if="metadata._type == 'image' || metadata._type == 'file' || metadata._type == 'position' || metadata._type == 'form' || metadata._type == 'externalLink' || metadata._type == 'bosbecLink'" class="attachment">
                                 <a ng-if="metadata._type == 'image'" ng-click="openExternalLink(metadata.url);">
                                     <img height="50" alt="thumb" src="{{ metadata.thumbnail }}"/>
                                 </a>
                                 <a ng-if="metadata._type == 'file'" ng-click="openExternalLink(metadata.url);">
                                     <span><i class="fa fa-paperclip"></i>{{metadata.name}}</span>
                                 </a>
+                                <a ng-if="metadata._type == 'bosbecLink'" ng-click="openBosbecLinkInModal(metadata.url);">
+                                    <span><i class="fa fa-paperclip"></i>{{metadata.name}}</span>
+                                </a>
+                                <a ng-if="metadata._type == 'externalLink'" ng-click="openExternalLink(metadata.url);">
+                                    <span><i class="fa fa-external-link"></i>{{metadata.name}}</span>
+                                </a>
                                 <a ng-if="metadata._type == 'position'" ng-click="openExternalLink('https://www.google.com/maps/preview/@'+metadata.value);">
                                     <img height="50" alt="map" src="https://lh3.googleusercontent.com/MOf9Kxxkj7GvyZlTZOnUzuYv0JAweEhlxJX6gslQvbvlhLK5_bSTK6duxY2xfbBsj43H=w50" />
                                 </a>
-                                <div ng-if="metadata._type == 'form'" ng-click="openFormModal(message.formId)"><span><i class="fa fa-clipboard"></i>View form</span></div>
+                                <a ng-if="metadata._type == 'form'" ng-click="openFormModal(message.formId)">
+                                    <span><i class="fa fa-clipboard"></i>View form</span>
+                                </a>
                             </div>
                         </div>
                         <span class="smallDateTime" ng-class="{ 'smallDateTime-me': message.author === 'me'}">{{ message.createdOnFormatted }}</span>

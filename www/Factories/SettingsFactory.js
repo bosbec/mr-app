@@ -2,16 +2,16 @@
     .factory('SettingsFactory',
     [
         '$localStorage',
-        function($localStorage) {
+        function ($localStorage) {
+
             var defaultNumberOfConversations = 15;
             var defaultNumberOfMessages = 20;
             var formatTimestamp = true;
             var defaultCheckWhatsNewInterval = 10;
-            var urls = {};
 
             function getUrls() {
                 // production
-                urls = {
+                return {
                     "appapi": "https://appapi.bosbec.io/1/",
                     "api2": "https://api2.bosbec.io/",
                     "apps": "https://apps.bosbec.io/#",
@@ -24,7 +24,18 @@
                 //    "apps": "https://apps.bosbec.io/#",
                 //    "forms": "http://m.mobileresponse.se/form/"
                 //};
-                return urls;
+                //return urls;
+            }
+
+            function getBosbecUrls() {
+                return [
+                    'https://apps.bosbec.io',
+                    'https://apps.mobileresponse.io',
+                    'https://apps.mobileresponse.se',
+                    'https://m.bosbec.io',
+                    'https://m.mobileresponse.io',
+                    'https://m.mobileresponse.se'
+                ];
             }
 
             function getSettings() {
@@ -122,6 +133,7 @@
 
             return {
                 getUrls: getUrls,
+                getBosbecUrls: getBosbecUrls,
                 initSettings: initSettings,
                 getSettings: getSettings,
                 getNumberOfConversations: getNumberOfConversations,
