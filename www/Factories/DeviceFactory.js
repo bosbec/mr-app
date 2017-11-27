@@ -36,8 +36,7 @@
                 pushNotification.onDeviceReady(
                 {
                     projectid: settings.projectid,
-                    appid: settings.appid,
-                    serviceName: ""
+                    appid: settings.appid
                 });
                 
                 //register for push notifications
