@@ -80,6 +80,26 @@ mrApp.controller('MessagesController', [
             SharedState.turnOn('formModal');
         };
 
+        $scope.openBosbecFormInModal = function (url) {
+            //url =
+            //    "https://m.mobileresponse.se/form/dea5cc49-8559-4ee7-bbee-0067f9bef60c?unit=725f432d-bc11-4727-b06d-31c88544d514";
+
+            //console.log("find ? ", url.indexOf("?"));
+            if (url.indexOf("?") >= 0) {
+                url = url + "&";
+            } else {
+                url = url + "?";
+            }
+            url = url + "appuserid=" + usersFactory.myUser().id;
+
+            console.log("openBosbecFormInModal:", url);
+
+            SharedState.set('formModalUrl', url);
+            SharedState.turnOn('formModal');
+
+            //$window.open(url, '_blank');
+        };
+
         $scope.openBosbecLinkInModal = function (url) {
             console.log("openBosbecLinkInModal:" + url);
 
@@ -87,6 +107,15 @@ mrApp.controller('MessagesController', [
             SharedState.turnOn('formModal');
 
             //$window.open(url, '_blank');
+        };
+
+        $scope.openExternalLink = function (url) {
+            console.log("openExternalLink:" + url);
+
+            //SharedState.set('formModalUrl', url);
+            //SharedState.turnOn('formModal');
+
+            $window.open(url, '_blank');
         };
 
         function showAlert(text, type, duration) {
@@ -176,18 +205,18 @@ mrApp.controller('MessagesController', [
         function addDynamicMetadata(message) {
             var urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
             message.content = message.content.replace(urlRegex,
-                function(url) {
+                function (url) {
+                    console.log("url", url);
                     // check if url is in settingsurls => our own
                     if (isBosbecExternalUrl(url)) {
                         
                         var extractedValue = extractGuid(url);
+                        //console.log("extractGuid", extractedValue);
                         if (extractedValue != null) {
                             message.metaData.push({
-                                "_type": "form",
+                                "_type": "bosbecForm",
                                 "name": "Open form",
-                                "value": {
-                                    "id": extractedValue
-                                }
+                                "url": url
                             });
                         } else {
                             message.metaData.push({
@@ -199,7 +228,7 @@ mrApp.controller('MessagesController', [
                     } else {
                         message.metaData.push({
                             "_type": "externalLink",
-                            "name": "Open external url",
+                            "name": url,
                             "url": url
                         });
                     }

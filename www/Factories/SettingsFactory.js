@@ -30,11 +30,20 @@
             function getBosbecUrls() {
                 return [
                     'https://apps.bosbec.io',
+                    'https://apps-test.bosbec.io',
                     'https://apps.mobileresponse.io',
                     'https://apps.mobileresponse.se',
                     'https://m.bosbec.io',
                     'https://m.mobileresponse.io',
-                    'https://m.mobileresponse.se'
+                    'https://m.mobileresponse.se',
+                    'http://apps.bosbec.io',
+                    'http://apps.mobileresponse.io',
+                    'http://apps.mobileresponse.se',
+                    'http://m.bosbec.io',
+                    'http://m.mobileresponse.io',
+                    'http://m.mobileresponse.se',
+                    'https://qlnk.se',
+                    'http://qlnk.se'
                 ];
             }
 
