@@ -206,7 +206,7 @@ mrApp.controller('MessagesController', [
             var urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
             message.content = message.content.replace(urlRegex,
                 function (url) {
-                    console.log("url", url);
+                    //console.log("url", url);
                     // check if url is in settingsurls => our own
                     if (isBosbecExternalUrl(url)) {
                         
