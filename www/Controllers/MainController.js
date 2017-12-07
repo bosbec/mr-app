@@ -24,7 +24,8 @@ mrApp.controller('FormModalController',
 
             function loadIframe() {
                 //console.log("iFrameLoaded: " + SharedState.get('formModalUrl'));
-                if (SharedState.get('formModalUrl')) {
+                if ($scope.activeFormUrl !== SharedState.get('formModalUrl')) {
+                    console.log("change iframe", SharedState.get('formModalUrl'));
                     $scope.activeFormUrl = SharedState.get('formModalUrl');
                 }
             }

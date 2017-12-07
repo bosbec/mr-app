@@ -173,7 +173,9 @@
                     },
                     function(error) {
                         $scope.registration.error.show = true;
-                        $scope.registration.error.message = error[0].errorMessage;
+                        //$scope.registration.error.message = error[0].errorMessage;
+                        //console.log("login register error: ", error);
+                        $scope.registration.error.message = error.errorMessage;
                     });
 
             }

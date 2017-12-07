@@ -91,6 +91,7 @@
                         'password': password
                     }
                 };
+                //console.log("reg request", registerUserRequest);
                 apiFactory.functions.call('public/register',
                     registerUserRequest,
                     function (response) {
@@ -100,6 +101,7 @@
 
                         if (response.data != null) {
                             if (response.data.errors != null && response.data.errors.length > 0) {
+                                console.log("(factory)registerUser response: ", response.data.errors);
                                 error(response.data.errors[0]);
                             } else {
                                 callback(response);
@@ -108,8 +110,9 @@
 
                     },
                     function (e) {
-                        if (e.data != null && e.data.errors != null) {
-                            error(e.data.errors);
+                        console.log("(factory)registerUser error: ", e.data.data);
+                        if (e.data != null && e.data.data[0].status === "Error") {
+                            error(e.data.data[1]);
                         } else {
                             error([
                                 {

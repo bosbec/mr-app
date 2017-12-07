@@ -17,11 +17,10 @@
                     "PageSize": 100
                 }
             };
-            //console.log(listServicesRequest);
+            
             mobileResponseFactory.functions.call("workflows/list-workflow-execution-settings",
                 listServicesRequest,
-                function (response) {
-                    //console.log(response.data.items);
+                function (response) {                    
                     $scope.items = response.data.items;
                 },
                 function (error) {
@@ -76,7 +75,7 @@
             } else {
                 externalUrl = appsBaseUrl + "/services/execute/" + item.id + "?token=" + mobileResponseFactory.getToken();
             }
-            externalUrl = externalUrl + "&header=false";
+            //externalUrl = externalUrl + "&header=false";
             //$window.open(externalUrl, '_system');
 
             SharedState.set('formModalUrl', externalUrl);

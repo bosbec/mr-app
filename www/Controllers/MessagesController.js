@@ -73,48 +73,31 @@ mrApp.controller('MessagesController', [
 
         $scope.openFormModal = function (formId) {
             var formUrl = settingsFactory.getUrls().forms + formId + "?appuserid=" + usersFactory.myUser().id;
-            //$window.open(formUrl, '_system');
-            console.log("openFormModal", formUrl);
-
+            //console.log("openFormModal", formUrl);
             SharedState.set('formModalUrl', formUrl);
             SharedState.turnOn('formModal');
         };
 
         $scope.openBosbecFormInModal = function (url) {
-            //url =
-            //    "https://m.mobileresponse.se/form/dea5cc49-8559-4ee7-bbee-0067f9bef60c?unit=725f432d-bc11-4727-b06d-31c88544d514";
-
-            //console.log("find ? ", url.indexOf("?"));
             if (url.indexOf("?") >= 0) {
                 url = url + "&";
             } else {
                 url = url + "?";
             }
             url = url + "appuserid=" + usersFactory.myUser().id;
-
-            console.log("openBosbecFormInModal:", url);
-
+            //console.log("openBosbecFormInModal:", url);
             SharedState.set('formModalUrl', url);
             SharedState.turnOn('formModal');
-
-            //$window.open(url, '_blank');
         };
 
         $scope.openBosbecLinkInModal = function (url) {
-            console.log("openBosbecLinkInModal:" + url);
-
+            //console.log("openBosbecLinkInModal:" + url);
             SharedState.set('formModalUrl', url);
             SharedState.turnOn('formModal');
-
-            //$window.open(url, '_blank');
         };
 
         $scope.openExternalLink = function (url) {
-            console.log("openExternalLink:" + url);
-
-            //SharedState.set('formModalUrl', url);
-            //SharedState.turnOn('formModal');
-
+            //console.log("openExternalLink:" + url);
             $window.open(url, '_blank');
         };
 
