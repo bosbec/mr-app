@@ -5,24 +5,16 @@
             <div class="list-group" ng-show="items.length">
 
                 <div ng-repeat="item in items | filter: !item.data.underConstruction" class="list-group-item">
-
-                    <div class="list-item-symbol">
-                        <img class="item-symbol item-symbol-unit" alt="services-symbol" src="images/mr/Job-128x128.png"/>
-                    </div>
-
-                    <div class="unit-info-container">
-                        <div ng-show="item.data.templateName"><b>{{item.data.templateName}}</b></div>
-                        <div ng-show="item.data.description">{{item.data.description | limitTo:30}}</div>
-                    </div>
-
-                    <div class="service-action-container">
-                        <!--<div class="service-exe-container" ng-show="item.data.executeFromApp==='true'">
-                            <input type="text" class="form-control service-exe-text" ng-model="executeServiceText"/>
-                            <a ng-click="ExecuteService(item, executeServiceText)" class="btn btn-primary service-exe-btn">Start</a>
-                        </div>-->
-                        <div>
-                            <a ng-click="OpenService(item)" class="btn btn-primary">Open</a>
+                    
+                    <div class="service-list-item" ng-click="OpenService(item)">
+                        <!--<div class="service-list-item-icon"><i class="fa fa-3x fa-exclamation-circle"></i></div>-->
+                        <div class="list-item-avatar">
+                            <img class="service-list-item-image" alt="services-symbol" src="images/mr/Job-128x128.png"/>
                         </div>
+                        <div>
+                            <a ng-click="OpenService(item)" class="btn btn-primary pull-right">Open</a><b>{{item.data.templateName}}</b>
+                        </div>
+                         <!--<div>{{item.data.description | limitTo:30}}</div>-->
                     </div>
 
                 </div>

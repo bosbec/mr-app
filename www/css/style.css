@@ -355,7 +355,7 @@ a {
 
 
 .intro-content {
-    height: 88vh;
+    height: 83vh;
 }
 
 .intro-image {
@@ -365,7 +365,8 @@ a {
 }
 
 .intro-screenshot {
-    width: 75%;
+    width: 60%;
+    max-width: 350px;
     align-content: center;
     -webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
@@ -379,6 +380,9 @@ a {
 .intro-ingress {
     font-size: 12px;
     font-style: italic;
+}
+.intro-footer {
+    padding: 5px;
 }
 .intro-text {
     font-size: 12px;
@@ -475,6 +479,17 @@ a {
     display: inline-block;
     height: 100%;
 }
+.service-list-item {
+    height: 30px;
+}
 
+.service-list-item-icon {
+    color: #007aff;
+    display: inline-block;
+}
+
+.service-list-item-image {
+    width: 40px;
+}
 
 

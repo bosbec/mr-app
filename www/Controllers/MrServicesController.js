@@ -20,7 +20,8 @@
             
             mobileResponseFactory.functions.call("workflows/list-workflow-execution-settings",
                 listServicesRequest,
-                function (response) {                    
+                function (response) {
+                    console.log("list services", response.data.items);
                     $scope.items = response.data.items;
                 },
                 function (error) {
