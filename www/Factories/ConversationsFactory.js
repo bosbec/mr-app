@@ -147,7 +147,7 @@
                         'pageSize': pageSize
                     }
                 };
-               
+                console.log("getConv request", listConversationsRequest);
                 apiFactory.functions.call('inboxes/list-content',
                     listConversationsRequest,
                     function(response) {
