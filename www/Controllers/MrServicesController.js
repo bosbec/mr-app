@@ -76,7 +76,7 @@
             } else {
                 externalUrl = appsBaseUrl + "/services/execute/" + item.id + "?token=" + mobileResponseFactory.getToken();
             }
-            //externalUrl = externalUrl + "&header=false";
+            externalUrl = externalUrl + "&caller=app&appuserid=" + usersFactory.myUser().id;
             //$window.open(externalUrl, '_system');
 
             SharedState.set('formModalUrl', externalUrl);
