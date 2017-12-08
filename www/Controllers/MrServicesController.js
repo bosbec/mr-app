@@ -1,7 +1,7 @@
 ﻿mrApp.controller('MrServicesController',
 [
-    '$scope', '$rootScope', '$localStorage', '$window','$location', '$routeParams', 'MobileResponseFactory','SettingsFactory', 'SharedState',
-    function ($scope, $rootScope, $localStorage, $window,$location, $routeParams, mobileResponseFactory, settingsFactory, SharedState) {
+    '$scope', '$rootScope', '$localStorage', '$window','$location', '$routeParams', 'MobileResponseFactory','SettingsFactory','UsersFactory', 'SharedState',
+    function ($scope, $rootScope, $localStorage, $window,$location, $routeParams, mobileResponseFactory, settingsFactory,usersFactory, SharedState) {
 
         $scope.currentView = 'services';
         $scope.items = [];
