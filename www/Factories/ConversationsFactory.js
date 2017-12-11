@@ -205,6 +205,44 @@
 
             }
 
+            function hideConversation(conversationId, callback, error) {
+                //console.log("Hide conversation " + conversationId);
+                var hideConversationRequest = {
+                    authenticationToken: apiFactory.getToken(),
+                    data: {
+                        'conversationId': conversationId
+                    }
+                };
+                apiFactory.functions.call('conversations/hide-conversation',
+                    hideConversationRequest,
+                    function(response) {
+                        callback(response);
+                    },
+                    function(e) {
+                        error(e);
+                    });
+            }
+
+            function hideMessage(conversationId, messageId, callback, error) {
+                //console.log("Hide message " + messageId);
+                var hideMessageRequest = {
+                    authenticationToken: apiFactory.getToken(),
+                    data: {
+                        'conversationId': conversationId,
+                        'messageId': messageId
+                    }
+                };
+                //console.log("hide message request", hideMessageRequest);
+                apiFactory.functions.call('conversations/hide-message',
+                    hideMessageRequest,
+                    function (response) {
+                        callback(response);
+                    },
+                    function (e) {
+                        error(e);
+                    });
+            }
+
             return {
                 conversations: conversations,
                 listConversations: listConversations,
@@ -212,7 +250,9 @@
                 getCurrentConversation: getCurrentConversation,
                 setReloadConversations: setReloadConversations,
                 whatIsNew: whatIsNew,
-                createNewConversation: createNewConversation
+                createNewConversation: createNewConversation,
+                hideConversation: hideConversation,
+                hideMessage: hideMessage
             };
 
         }

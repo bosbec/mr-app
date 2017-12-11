@@ -35,7 +35,13 @@ mrApp.config(function ($routeProvider) {
     {
         templateUrl: 'Partials/conversations.htm',
         resolve: checkToken
-    });
+        });
+
+    $routeProvider.when('/conversations/:param1/:param2',
+        {
+            templateUrl: 'Partials/conversations.htm',
+            resolve: checkToken
+        });
 
     $routeProvider.when('/newconversation',
     {
@@ -47,7 +53,13 @@ mrApp.config(function ($routeProvider) {
     {
         templateUrl: 'Partials/messages-chat.htm',
         resolve: checkToken
-    });
+        });
+
+    $routeProvider.when('/messages/:param1/:param2',
+        {
+            templateUrl: 'Partials/messages-chat.htm',
+            resolve: checkToken
+        });
 
     $routeProvider.when('/profile/:param1',
     {

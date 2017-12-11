@@ -256,14 +256,26 @@ mrApp.controller('MainController', [
             $scope.currentView = 'groups-list';
         };
 
-        $scope.swipeRight = function () {
-            console.log("SwipeRight: " + $scope.currentView);
-            if ($scope.currentView === 'conversation') {
-                $location.path('/conversations/' + $scope.inboxes[0].inboxId);
-            } else {
-                SharedState.turnOn('mainSidebar');
-            }
-        };
+        //$scope.swipeRight = function () {
+        //    console.log("SwipeRight: " + $scope.currentView);
+        //    if ($scope.currentView === 'conversation') {
+        //        $location.path('/conversations/' + $scope.inboxes[0].inboxId);
+        //    } else {
+        //        SharedState.turnOn('mainSidebar');
+        //    }
+        //};
+
+        //$scope.swipeLeft = function () {
+
+        //    // Ui.turnOff("mainSidebar");
+        //    console.log("SwipeLeft: " + $scope.currentView);
+        //    if ($scope.currentView === 'conversation') {
+        //        alert("Do you really want to remove this conversation?");
+        //        //$location.path('/conversations/' + $scope.inboxes[0].inboxId);
+        //    } else {
+        //        //SharedState.turnOn('mainSidebar');
+        //    }
+        //};
         
         function onViewLoaded() {
             

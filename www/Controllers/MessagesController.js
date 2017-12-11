@@ -63,6 +63,9 @@ mrApp.controller('MessagesController', [
 
         var conversationId = $routeParams.param1;
 
+        $scope.isSwipe = false;
+        $scope.showHideMessage = false;
+
         $scope.currentPage = 1;
         $scope.pageSize = settingsFactory.getNumberOfMessages();
 
@@ -259,7 +262,6 @@ mrApp.controller('MessagesController', [
                     'pageSize': settingsFactory.getNumberOfMessages()
                 }
             };
-            console.log("listMsg", listMessagesRequest);
             apiFactory.functions.call('conversations/list-messages', listMessagesRequest, function (response) {
 
                 var formatTimestamp = settingsFactory.getFormatTimestamp();
@@ -367,6 +369,37 @@ mrApp.controller('MessagesController', [
             }
 
         };
+
+        $scope.swipeRight = function(message) {
+            // close conversation - back to conversations list
+            $scope.isSwipe = true;
+            $timeout(function() {
+                    $location.path('/conversations/' + $scope.inboxes[0].inboxId);
+                    $scope.isSwipe = false;
+                },
+                (100));
+        };
+
+        $scope.swipeLeft = function(message) {
+            // hide/remove message
+            $scope.isSwipe = true;
+            $timeout(function() {
+                    //console.log("message", message);
+                    if (confirm("Do you want to hide '" + message.content.substr(0, 30) + "'")) {
+                        conversationsFactory.hideMessage(conversationId, message.messageId,
+                            function(response) {
+                                //console.log("reload after hide");
+                                $location.path('/messages/' + conversationId + "/reload=" + message.messageId);
+                            },
+                            function(error) {
+                                console.log("error on hide", error);
+                            });
+                    }
+                    $scope.isSwipe = false;
+                },
+                (100));
+        };
+
 
         // handler
         var onNewMessages = function (event, newMessages) {
