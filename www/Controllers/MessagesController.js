@@ -63,6 +63,9 @@ mrApp.controller('MessagesController', [
 
         var conversationId = $routeParams.param1;
 
+        $scope.currentPage = 1;
+        $scope.pageSize = settingsFactory.getNumberOfMessages();
+
         $scope.successText = null;
         $scope.errorText = null;
 
@@ -238,17 +241,25 @@ mrApp.controller('MessagesController', [
             return messages;
         }
 
-        function listMessages(token, conversationId) {
+        $scope.LoadMore = function () {
+            var callback = function (messages) {
+                $scope.messages = [].concat($scope.messages, messages);
+            };
+            $scope.currentPage = $scope.currentPage + 1;
+            getMessages(conversationId, $scope.currentPage, callback);
+        };
 
+        function getMessages(conversationId,pageIndex,callback) {
             var listMessagesRequest = {
                 authenticationToken: $scope.authenticationToken,
                 data: {
                     'conversationId': conversationId,
                     'sortAscending': false,
-                    'pageIndex': 1,
+                    'pageIndex': pageIndex,
                     'pageSize': settingsFactory.getNumberOfMessages()
                 }
             };
+            console.log("listMsg", listMessagesRequest);
             apiFactory.functions.call('conversations/list-messages', listMessagesRequest, function (response) {
 
                 var formatTimestamp = settingsFactory.getFormatTimestamp();
@@ -259,7 +270,7 @@ mrApp.controller('MessagesController', [
 
                     //response.data.items[i].content = handleLinks(response.data.items[i].content);
                     response.data.items[i] = addDynamicMetadata(response.data.items[i]);
-                    
+
                     if (response.data.items[i].metaData.length > 0) {
 
                         if (response.data.items[i].metaData[0]._type === "form") {
@@ -291,8 +302,15 @@ mrApp.controller('MessagesController', [
                 }
 
                 response.data.items = parseAuthor(response.data.items);
-                $scope.messages = response.data.items;
-                //console.log(response.data.items);
+                callback(response.data.items);
+                
+            });
+        }
+
+        function listMessages(token, conversationId) {
+            getMessages(conversationId,$scope.PageIndex,function(messages) {
+
+                $scope.messages = messages;
 
                 scrollToLast();
 
@@ -305,7 +323,6 @@ mrApp.controller('MessagesController', [
                 apiFactory.functions.call('conversations/conversation-read', markAsReadRequest, function (response) {
                     //console.log("Conversation is read: " + conversationId);
                 });
-
             });
         }
 

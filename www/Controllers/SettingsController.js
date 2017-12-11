@@ -29,6 +29,8 @@
         $scope.tokenExpiresIn = null;
         $scope.formatTimestamp = true;
         $scope.checkWhatsNewInterval = 10; //Seconds
+        $scope.appId = "";
+        $scope.appVersion = "";
 
         $scope.SaveSettings = function () {
             settingsFactory.setNumberOfConversations($scope.numberOfConversations);
@@ -51,6 +53,8 @@
             $scope.tokenExpiresIn = apiFactory.getMinutesUntilTokenExpires();
             $scope.formatTimestamp = settingsFactory.getFormatTimestamp();
             $scope.checkWhatsNewInterval = settingsFactory.getCheckWhatsNewInterval();
+            $scope.appId = settingsFactory.getAppId();
+            $scope.appVersion = settingsFactory.getAppVersion();
             if ($scope.formatTimestamp === undefined) {
                 $scope.formatTimestamp = true;
             }

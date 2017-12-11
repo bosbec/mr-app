@@ -1,5 +1,8 @@
 ﻿angular.module('ApiFactory', [])
-    .factory('ApiFactory', ['$rootScope', '$http','SettingsFactory', '$localStorage','moment', function ($rootScope, $http, settingsFactory, $localStorage, moment) {
+    .factory('ApiFactory',
+    [
+        '$rootScope', '$http', 'SettingsFactory', '$localStorage', 'moment',
+        function($rootScope, $http, settingsFactory, $localStorage, moment) {
 
             var authenticationToken;
             var lastCallTimestamp;
@@ -38,14 +41,17 @@
 
                 if (storedCredentials === undefined) {
                     console.log("missing credentials");
-                    error(function () {
+                    error(function() {
                         return "missing credentials";
                     });
                 } else {
                     var credentials = {
                         'instanceName': apiSettings.instanceName,
                         'UserName': storedCredentials.userName,
-                        'Password': storedCredentials.password
+                        'Password': storedCredentials.password,
+                        'metaData': {
+                            'deviceType': storedCredentials.deviceType
+                        }
                     };
                     authenticate(credentials, callback, error);
                 }
@@ -53,6 +59,10 @@
 
             function authenticate(userCredentials, callback, error) {
                 var request = { data: userCredentials };
+                //request.data.metaData = {};
+                request.data.metaData.appId = settingsFactory.getAppId();
+                request.data.metaData.appVersion = settingsFactory.getAppVersion();
+                //request.data.metaData.deviceType = deviceFactory.getDeviceType();
                 //console.log(request);
                 call('authentication/authenticate',
                     request,
@@ -89,15 +99,15 @@
                             lastCallTimestamp = response.data.time;
                             callback(response.data);
                         },
-                    function (e) {
+                        function(e) {
                             $rootScope.$broadcast('loading', false);
                             if (e.status === 401) {
                                 $rootScope.$broadcast('httpUnauthorized', e);
                             } else {
                                 $rootScope.$broadcast('httpCallError', e);
                             }
-                        error(e);
-                    });
+                            error(e);
+                        });
             }
 
             function callReturnId(url, request, callback, error) {

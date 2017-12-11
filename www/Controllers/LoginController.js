@@ -245,7 +245,10 @@
             var credentials = {
                 'instanceName': instanceName,
                 'UserName': userName,
-                'Password': password
+                'Password': password,
+                'metaData': {
+                    'deviceType': deviceFactory.getDeviceType()
+                }
             };
             apiFactory.functions.authenticate(credentials,
                 function (response) {
@@ -255,6 +258,7 @@
                             $localStorage.savedCredentials = {
                                 'userName': userName,
                                 'password': password,
+                                'deviceType': deviceFactory.getDeviceType(),
                                 'keepMeSignedIn': $scope.keepMeSignedIn
                             };
                         }
@@ -340,6 +344,7 @@
         function login() {
             console.log('--- LOGIN ---');
             setSigningIn(true);
+            console.log("deviceType:", deviceFactory.getDeviceType());
             apiLogin(apiFactory.apiSettings.instanceName,
                 $scope.credentials.userName,
                 $scope.credentials.password,

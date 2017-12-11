@@ -4,6 +4,9 @@
         '$localStorage',
         function ($localStorage) {
 
+            var appId = "com.bosbec.mr-app";
+            var appVersion = "0.3.34";
+
             var defaultNumberOfConversations = 15;
             var defaultNumberOfMessages = 20;
             var formatTimestamp = true;
@@ -134,6 +137,14 @@
                 }
             }
 
+            function getAppId() {
+                return appId;
+            }
+
+            function getAppVersion() {
+                return appVersion;
+            }
+
             function init() {
                 initSettings();
             }
@@ -154,7 +165,9 @@
                 setShowIntro: setShowIntro,
                 setFormatTimestamp: setFormatTimestamp,
                 getFormatTimestamp: getFormatTimestamp,
-                clearLocalStorage: clearLocalStorage
+                clearLocalStorage: clearLocalStorage,
+                getAppId: getAppId,
+                getAppVersion: getAppVersion
             };
         }
     ]);

@@ -7,16 +7,21 @@
     <div class="scrollable content-container content-container-chat">
         <div id="chat-container" class="scrollable-content">
             <div class="list-group">
+                <div ng-show="messages.length >= pageSize" class="center-block">
+                    <a ng-click="LoadMore()" class="btn">Load more ... </a>
+                </div>
                 <div ng-repeat="message in messages | orderBy:['-createdOnDetail','-createdOn']:true"
                      id="{{'msg'+ ($index + 1)}}"
                      class="list-group-item message-chat"
                      ng-class="{ 'message-chat-me': message.author === 'me', 'message-chat-other': message.author === 'other', 'last-message': $index >= messages.length-1}" ng-class="(!message.isRead) ? 'new-item' : ''">
-                    <div ng-show="1==0" class="hideMessageContainer"><a href="#" class="text-danger" ng-click="hideMessage(message);"><i class="fa fa-2x fa-minus-circle"></i></a></div>
+                    <div ng-show="1==0" class="hideMessageContainer"><a href="#" class="text-danger" ng-click="hideMessage(message);"><i class="fa fa-2x fa-minus-circle"></i></a>
+                    </div>
                     <div ng-if="conversation.avatars" class="list-item-avatar">
                         <img class="avatar" ng-if="conversation.avatars" ng-repeat="avatar in conversation.avatars" ng-show="avatar.avatar != null && avatar.userId == message.authorId" height="50" alt="avatar" src="{{ avatar.avatar }}"/>
                     </div>
                     <div>
-                        <div><b>{{ message.authorDisplayName }}</b></div>
+                        <div><b>{{ message.authorDisplayName }}</b>
+                        </div>
                         <div ng-bind-html="message.content"></div>
                         <div ng-repeat="metadata in message.metaData">
                             <div ng-if="metadata._type == 'image' || metadata._type == 'file' || metadata._type == 'position' || metadata._type == 'form' || metadata._type == 'externalLink' || metadata._type == 'bosbecLink' || metadata._type == 'bosbecForm'" class="attachment">
@@ -33,7 +38,7 @@
                                     <span><i class="fa fa-external-link"></i>{{metadata.name}}</span>
                                 </a>
                                 <a ng-if="metadata._type == 'position'" ng-click="openExternalLink('https://www.google.com/maps/preview/@'+metadata.value);">
-                                    <img height="50" alt="map" src="https://lh3.googleusercontent.com/MOf9Kxxkj7GvyZlTZOnUzuYv0JAweEhlxJX6gslQvbvlhLK5_bSTK6duxY2xfbBsj43H=w50" />
+                                    <img height="50" alt="map" src="https://lh3.googleusercontent.com/MOf9Kxxkj7GvyZlTZOnUzuYv0JAweEhlxJX6gslQvbvlhLK5_bSTK6duxY2xfbBsj43H=w50"/>
                                 </a>
                                 <a ng-if="metadata._type == 'form'" ng-click="openFormModal(message.formId)">
                                     <span><i class="fa fa-clipboard"></i>View form</span>
@@ -47,9 +52,7 @@
                     </div>
                 </div>
                 <div id="last-message" class="list-group-item message-chat-end">
-                    <div>
-                       ...
-                    </div>
+                    <div>...</div>
                 </div>
             </div>
         </div>

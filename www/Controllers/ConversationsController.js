@@ -6,6 +6,7 @@
 
         $scope.alertText = null;
         $scope.currentPage = 1;
+        $scope.pageSize = settingsFactory.getNumberOfConversations();
 
         function init() {
             $scope.$emit('viewChanged', 'conversations');
@@ -28,24 +29,7 @@
                 $scope.conversations = conversations;
                 $scope.$emit('showAlertNewMessage', false);
             };
-
             getConversations(token, inboxId, $scope.currentPage, callback);
-
-            //conversationsFactory.listConversations(token,
-            //    inboxId,
-            //    pageIndex,
-            //    settingsFactory.getNumberOfConversations(),
-            //    function (conversations) {
-            //        if (deviceFactory.isDevice()) {
-            //            $scope.conversations = formatConversationList(conversations);
-            //        } else {
-            //            $scope.conversations = conversations;
-            //        }
-            //        $scope.$emit('showAlertNewMessage', false);
-            //    },
-            //    function(error) {
-            //        console.log(error);
-            //    });
         }
 
         function getConversations(token, inboxId, pageIndex, callback) {
@@ -66,19 +50,13 @@
         }
 
         $scope.ListMessagesInConversation = function(conversation) {
-            //console.log(conversation);
             conversationsFactory.setCurrentConversation(conversation);
             $location.path('/messages/' + conversation.itemId);
         };
 
         $scope.LoadMore = function () {
-            console.log("LoadMore");
             var callback = function (conversations) {
-                //console.log("more conversations: ", conversations);
-                //$scope.conversations = angular.merge($scope.conversations, conversations)};
                 $scope.conversations = [].concat($scope.conversations, conversations);
-                //$scope.conversations.push(conversations);
-                console.log($scope.conversations);
                 $scope.$emit('showAlertNewMessage', false);
             };
             $scope.currentPage = $scope.currentPage + 1;
