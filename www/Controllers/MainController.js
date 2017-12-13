@@ -116,7 +116,7 @@ mrApp.controller('MainController', [
 
         function onNewPush(event, state) {
             console.log("onNewPush", state);
-            //console.log(event);
+            console.log("conversationId: " + state.userdata.c);
             //console.log(state);
             //alert("onNewPush:" + state);
             checkWhatsNew();
