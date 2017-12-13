@@ -281,7 +281,7 @@
                                     "appid": "64032-F5A58",
                                     "projectid": "71435688512",
                                     "onPush": function(push) {
-                                        //console.log("RootBroadcast: newPush");
+                                        console.log("RootBroadcast: newPush", push);
                                         //alert('newPush');
                                         $rootScope.$broadcast('newPush', push);
                                     },

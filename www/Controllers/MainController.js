@@ -115,7 +115,7 @@ mrApp.controller('MainController', [
         $scope.$on('showAlertNewMessage', onShowAlertNewMessage);
 
         function onNewPush(event, state) {
-            //console.log("Handle:newPush");
+            console.log("onNewPush", state);
             //console.log(event);
             //console.log(state);
             //alert("onNewPush:" + state);
