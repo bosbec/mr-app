@@ -15,13 +15,14 @@
 
             function registerPushwooshAndroid(settings, callback, error) {
 
-                //alert("[Android] Pushwoosh reg");
+                console.log("[Android] Pushwoosh reg");
 
                 var pushNotification = cordova.require("pushwoosh-cordova-plugin.PushNotification");
                 
                 //set push notifications handler
                 document.addEventListener('push-notification',
                     function (event) {
+                        console.log("addEventListener: push-notification",event);
                         var userData = event.notification.userdata;
                         
                         if (typeof (userData) != "undefined") {
@@ -42,7 +43,7 @@
                 //register for push notifications
                 pushNotification.registerDevice(
                     function(token) {
-                        //console.log('pushNotification.registerDevice token: ' + token);
+                        console.log('pushNotification.registerDevice token: ' + token);
                         callback(token.pushToken);
                     },
                     function(status) {
@@ -152,12 +153,10 @@
                             };
 
                             if (isAndroid()) {
-                                //alert("Android");
                                 registerPushwooshAndroid(settings, afterRegisterSuccess, afterRegisterFail);
                             }
 
                             if (isIOS()) {
-                                //alert("iOS");
                                 registerPushwooshIOS(settings, afterRegisterSuccess, afterRegisterFail);
                             }
 

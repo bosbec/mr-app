@@ -286,7 +286,7 @@
                                         $rootScope.$broadcast('newPush', push);
                                     },
                                     "onResume": function() {
-                                        //console.log("RootBroadcast: appResumed");
+                                        console.log("RootBroadcast: appResumed");
                                         //alert("appResumed");
                                         $rootScope.$broadcast('appResumed', true);
                                     }
@@ -306,6 +306,7 @@
 
                                     deviceFactory.registerDevice(registerDeviceSettings,
                                         function (status) {
+                                            console.log("registerDevice: status", status);
                                             statusFlag = true;
                                             if (status) {
                                                 //alert("Device registered");
