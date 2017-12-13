@@ -4,7 +4,7 @@
     </div>
     <div ng-show="errorText!=null" class="alert alert-danger">{{ errorText }}</div>
 
-    <div class="scrollable content-container content-container-chat">
+    <div class="scrollable content-container content-container-chat" ui-swipe-right='swipeRight();' >
         <div id="chat-container" class="scrollable-content">
             <div class="list-group">
                 <div ng-show="messages.length >= pageSize" class="center-block">
@@ -13,7 +13,7 @@
                 <div ng-repeat="message in messages | orderBy:['-createdOnDetail','-createdOn']:true"
                      id="{{'msg'+ ($index + 1)}}"
                      class="list-group-item message-chat" 
-                     ui-swipe-right='swipeRight(message);'  ui-swipe-left='swipeLeft(message);' 
+                     ui-swipe-left='swipeLeft(message);' 
                      ng-class="{ 'message-chat-me': message.author === 'me', 'message-chat-other': message.author === 'other', 'last-message': $index >= messages.length-1}" ng-class="(!message.isRead) ? 'new-item' : ''">
                     <div ng-show="showHideMessage" class="hideMessageContainer">
                         <a href="#" class="text-danger" ng-click="hideMessage(message);"><i class="fa fa-2x fa-minus-circle"></i></a>

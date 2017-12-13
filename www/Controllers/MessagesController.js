@@ -370,7 +370,7 @@ mrApp.controller('MessagesController', [
 
         };
 
-        $scope.swipeRight = function(message) {
+        $scope.swipeRight = function() {
             // close conversation - back to conversations list
             $scope.isSwipe = true;
             $timeout(function() {
