@@ -60,7 +60,8 @@
                 
                 //set push notification callback before we initialize the plugin
                 document.addEventListener('push-notification',
-                    function(event) {
+                    function (event) {
+                        console.log("addEventListener: push-notification", event);
                         //alert("New push iOS");
                         pushNotification.setApplicationIconBadgeNumber(0);
 
@@ -72,6 +73,7 @@
 
                 pushNotification.registerDevice(
                     function (token) {
+                        console.log("registerDevice", token);
                         pushNotification.setApplicationIconBadgeNumber(0);
                         callback(token.pushToken);
                     },
