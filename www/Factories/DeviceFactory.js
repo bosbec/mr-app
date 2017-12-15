@@ -33,6 +33,20 @@
                         settings.onPush(event.notification);
                     }
                 );
+
+                document.addEventListener('push-receive',
+                    function (event) {
+                        console.log("addEventListener: push-receive", event);
+                        var userData = event.notification.userdata;
+
+                        if (typeof (userData) != "undefined") {
+                            // handle custom notification data
+                            console.warn('user data: ' + JSON.stringify(userData));
+                        }
+
+                        settings.onPush(event.notification);
+                    }
+                );
                 
                 pushNotification.onDeviceReady(
                 {
@@ -64,6 +78,20 @@
                         console.log("addEventListener: push-notification", event);
                         //alert("New push iOS");
                         pushNotification.setApplicationIconBadgeNumber(0);
+
+                        settings.onPush(event.notification);
+                    }
+                );
+
+                document.addEventListener('push-receive',
+                    function (event) {
+                        console.log("addEventListener: push-receive", event);
+                        var userData = event.notification.userdata;
+
+                        if (typeof (userData) != "undefined") {
+                            // handle custom notification data
+                            console.warn('user data: ' + JSON.stringify(userData));
+                        }
 
                         settings.onPush(event.notification);
                     }
