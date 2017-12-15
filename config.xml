@@ -62,8 +62,11 @@
   <!--<preference name="phonegap-version" value="cli-7.0.1" />-->
 
   <!-- Pushwoosh plugin -->
-  <gap:plugin name="pushwoosh-pgb-plugin" version="7.0.6" source="npm" />
-  <preference name="ANDROID_FOREGROUND_PUSH" value="false" />
+  <!--<gap:plugin name="pushwoosh-pgb-plugin" version="7.0.6" source="npm" />-->
+  <plugin name="pushwoosh-cordova-plugin" spec="6.4.0">
+    <variable name="IOS_FOREGROUND_ALERT_TYPE" value="NONE"/>
+    <variable name="ANDROID_FOREGROUND_PUSH" value="false"/>
+  </plugin>
  
   <!--<gap:plugin name="pushwoosh-pgb-plugin" source="npm" />-->
   
