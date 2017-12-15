@@ -5,7 +5,7 @@
         xmlns:gap = "http://phonegap.com/ns/1.0"
         xmlns:android = "http://schemas.android.com/apk/res/android"
         id        = "com.bosbec.mr-app"
-        version   = "0.3.37">
+        version   = "0.3.38">
   <!-- VERSION HERE -->
   
   <name>Bosbec</name>
@@ -62,11 +62,11 @@
   <!--<preference name="phonegap-version" value="cli-7.0.1" />-->
 
   <!-- Pushwoosh plugin -->
-  <gap:plugin name="pushwoosh-pgb-plugin" version="7.0.6" source="npm" />
-  <!--<gap:plugin name="pushwoosh-pgb-plugin" version="7.0.6" source="npm">
-    <variable name="IOS_FOREGROUND_ALERT_TYPE" value="NONE"/>
-    <variable name="ANDROID_FOREGROUND_PUSH" value="false"/>
-  </gap:plugin>-->
+  <!--<gap:plugin name="pushwoosh-pgb-plugin" version="7.0.6" source="npm" />-->
+  <gap:plugin name="pushwoosh-pgb-plugin" version="7.0.6" source="npm">
+    <variable name="IOS_FOREGROUND_ALERT_TYPE" value="ALERT"/>
+    <!--<variable name="ANDROID_FOREGROUND_PUSH" value="false"/>-->
+  </gap:plugin>
   
   <!--<plugin name="pushwoosh-cordova-plugin" spec="6.4.0">
     <variable name="IOS_FOREGROUND_ALERT_TYPE" value="NONE"/>
