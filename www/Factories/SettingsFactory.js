@@ -5,12 +5,12 @@
         function ($localStorage) {
 
             var appId = "com.bosbec.mr-app";
-            var appVersion = "0.3.39";
+            var appVersion = "0.3.40";
 
             var defaultNumberOfConversations = 15;
             var defaultNumberOfMessages = 20;
             var formatTimestamp = true;
-            var defaultCheckWhatsNewInterval = 10;
+            var defaultCheckWhatsNewInterval = 20;
 
             function getUrls() {
                 // production
