@@ -59,12 +59,12 @@
 
   <!--This is the one PhoneGap Build acts on, leave out to get latest stable-->
   <!--<preference name="phonegap-version" value="cli-6.5.0" />-->
-  <!--<preference name="phonegap-version" value="cli-7.0.1" />-->
+  <preference name="phonegap-version" value="cli-7.0.1" />
 
   <!-- Pushwoosh plugin -->
   <!--<gap:plugin name="pushwoosh-pgb-plugin" version="7.0.6" source="npm" />-->
-  <gap:plugin name="pushwoosh-pgb-plugin" version="7.0.7" source="npm">
-    <variable name="IOS_FOREGROUND_ALERT_TYPE" value="ALERT"/>
+  <gap:plugin name="pushwoosh-pgb-plugin" version="7.1.0" source="npm">
+    <!--<variable name="IOS_FOREGROUND_ALERT_TYPE" value="ALERT"/>-->
     <!--<variable name="ANDROID_FOREGROUND_PUSH" value="false"/>-->
   </gap:plugin>
   
