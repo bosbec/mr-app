@@ -116,13 +116,12 @@ mrApp.controller('MainController', [
 
         function onNewPush(event, state) {
             console.log("onNewPush", state);
-            console.log("conversationId: " + state.userdata.c);
-            //console.log(state);
             //alert("onNewPush:" + state);
             checkWhatsNew();
         }
 
         function onResume(event, state) {
+            console.log("onResume", state);
             checkWhatsNew();
         }
 

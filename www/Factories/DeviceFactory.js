@@ -87,16 +87,16 @@
                     }
                 );
 
-                ////set push notification callback before we initialize the plugin
-                //document.addEventListener('push-notification',
-                //    function (event) {
-                //        console.log("addEventListener: push-notification", event);
-                //        //alert("New push iOS");
-                //        pushNotification.setApplicationIconBadgeNumber(0);
+                //set push notification callback before we initialize the plugin
+                document.addEventListener('push-notification',
+                    function (event) {
+                        console.log("addEventListener: push-notification", event);
+                        //alert("New push iOS");
+                        pushNotification.setApplicationIconBadgeNumber(0);
 
-                //        settings.onPush(event.notification);
-                //    }
-                //);
+                        settings.onPush(event.notification);
+                    }
+                );
 
                 pushNotification.onDeviceReady({ pw_appid: settings.appid });
 
