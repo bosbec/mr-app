@@ -53,6 +53,7 @@
   <preference name="UIWebViewBounce"            value="false" />
 
   <!--This is the one PhoneGap Build acts on, leave out to get latest stable-->
+  <!--Can only build one at a time in phonegap build, comment out either iOS or Android below-->
  
   <!--iOS version, cli 6.5.0, push 7.1.0-->
   <!--<preference name="phonegap-version" />
