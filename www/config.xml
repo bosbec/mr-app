@@ -22,11 +22,11 @@
     <!-- VERSION HERE -->
   </gap:config-file>
 
-  <gap:config-file platform="android" parent="/manifest">
+  <!--<gap:config-file platform="android" parent="/manifest">
     <application android:debuggable="false" />
-  </gap:config-file>
+  </gap:config-file>-->
 
- <preference name="android-build-tool" value="gradle" />
+ <!--<preference name="android-build-tool" value="gradle" />-->
 
   <!-- Plugins -->
   <!--<plugin name="io.litehelpers.cordova.sqlite" spec="0.7.10" source="pgb" />-->
