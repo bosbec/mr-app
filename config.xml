@@ -63,7 +63,7 @@
 
   <!-- Pushwoosh plugin -->
   <!--<gap:plugin name="pushwoosh-pgb-plugin" version="7.0.6" source="npm" />-->
-  <gap:plugin name="pushwoosh-pgb-plugin" version="7.1.0" source="npm">
+  <gap:plugin name="pushwoosh-pgb-plugin" version="7.0.7" source="npm">
     <!--<variable name="IOS_FOREGROUND_ALERT_TYPE" value="ALERT"/>-->
     <!--<variable name="ANDROID_FOREGROUND_PUSH" value="false"/>-->
   </gap:plugin>
