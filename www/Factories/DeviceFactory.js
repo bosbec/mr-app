@@ -30,7 +30,7 @@
                             //console.warn('user data: ' + JSON.stringify(userData));
                         }
 
-                        settings.onPush(event.notification);
+                        settings.onPushNotification(event.notification, userData.c);
                     }
                 );
 
@@ -44,7 +44,7 @@
                             console.warn('user data: ' + JSON.stringify(userData));
                         }
 
-                        settings.onPush(event.notification);
+                        settings.onPushReceive(event.notification);
                     }
                 );
                 
@@ -64,11 +64,6 @@
                         error(status);
                     }
                 );
-
-                pushNotification.getLaunchNotification(function(event) {
-                    console.log("getLaunchNotification", event);
-                    settings.onLaunchNotification(event);
-                });
 
             }
 

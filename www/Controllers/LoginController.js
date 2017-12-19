@@ -280,18 +280,21 @@
                                 var registerDeviceSettings = {
                                     "appid": "64032-F5A58",
                                     "projectid": "71435688512",
-                                    "onPush": function(push) {
-                                        console.log("RootBroadcast: newPush", push);
+                                    "onPushReceive": function (push) {
+                                        // push received when app is open/foreground => use whatsnew
+                                        console.log("RootBroadcast: onPushReceive", push);
                                         //alert('newPush');
-                                        $rootScope.$broadcast('newPush', push);
+                                        $rootScope.$broadcast('pushReceived', push);
                                     },
                                     "onResume": function() {
                                         console.log("RootBroadcast: appResumed");
                                         //alert("appResumed");
                                         $rootScope.$broadcast('appResumed', true);
                                     },
-                                    "onLaunchNotification": function (push) {
-                                        console.log("RootBroadcast: launchNotification", push);
+                                    "onPushNotification": function (push) {
+                                        // push notification is opened from banner => get conversationid and goto conversation
+                                        console.log("RootBroadcast: pushNotification", push);
+                                        $rootScope.$broadcast('pushNotification', push);
                                     }
                                 };
                                 //alert("isDevice: " + deviceFactory.isDevice);

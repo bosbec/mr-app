@@ -114,8 +114,16 @@ mrApp.controller('MainController', [
         // start subscribing
         $scope.$on('showAlertNewMessage', onShowAlertNewMessage);
 
-        function onNewPush(event, state) {
-            console.log("onNewPush", state);
+        function onPushNotification(event, state, conversationId) {
+            console.log("onPushNotification", state);
+            //alert("onNewPush:" + state);
+            console.log("open conversation: " + conversationId);
+            $location.path('/messages/' + conversationId);
+            //checkWhatsNew();
+        }
+
+        function onPushReceived(event, state) {
+            console.log("onPushReceived", state);
             //alert("onNewPush:" + state);
             checkWhatsNew();
         }
@@ -228,7 +236,9 @@ mrApp.controller('MainController', [
 
         $scope.$on('loading', onLoading);
 
-        $scope.$on('newPush', onNewPush);
+        $scope.$on('pushNotification', onPushNotification);
+
+        $scope.$on('pushReceived', onPushReceived);
 
         $scope.$on('appResumed', onResume);
 
