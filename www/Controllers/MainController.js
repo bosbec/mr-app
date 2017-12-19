@@ -114,9 +114,10 @@ mrApp.controller('MainController', [
         // start subscribing
         $scope.$on('showAlertNewMessage', onShowAlertNewMessage);
 
-        function onPushNotification(event, state, conversationId) {
+        function onPushNotification(event, state) {
             console.log("onPushNotification", state);
             //alert("onNewPush:" + state);
+            var conversationId = state.UserDataHandler.c;
             console.log("open conversation: " + conversationId);
             $location.path('/messages/' + conversationId);
             //checkWhatsNew();

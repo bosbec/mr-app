@@ -30,7 +30,7 @@
                             //console.warn('user data: ' + JSON.stringify(userData));
                         }
 
-                        settings.onPushNotification(event.notification, userData.c);
+                        settings.onPushNotification(event.notification);
                     }
                 );
 
