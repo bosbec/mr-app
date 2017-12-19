@@ -117,7 +117,7 @@ mrApp.controller('MainController', [
         function onPushNotification(event, state) {
             console.log("onPushNotification", state);
             //alert("onNewPush:" + state);
-            var conversationId = state.UserDataHandler.c;
+            var conversationId = state.userData.c;
             console.log("open conversation: " + conversationId);
             $location.path('/messages/' + conversationId);
             //checkWhatsNew();

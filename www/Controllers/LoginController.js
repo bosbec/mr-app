@@ -280,9 +280,9 @@
                                 var registerDeviceSettings = {
                                     "appid": "64032-F5A58",
                                     "projectid": "71435688512",
-                                    "onPushReceive": function (push) {
+                                    "onPushReceived": function (push) {
                                         // push received when app is open/foreground => use whatsnew
-                                        console.log("RootBroadcast: onPushReceive", push);
+                                        console.log("RootBroadcast: onPushReceived", push);
                                         //alert('newPush');
                                         $rootScope.$broadcast('pushReceived', push);
                                     },

@@ -20,6 +20,20 @@
                 var pushNotification = cordova.require("pushwoosh-cordova-plugin.PushNotification");
                 
                 //set push notifications handler
+                document.addEventListener('push-receive',
+                    function (event) {
+                        console.log("addEventListener: push-receive", event);
+                        var userData = event.notification.userdata;
+
+                        if (typeof (userData) != "undefined") {
+                            // handle custom notification data
+                            console.warn('user data: ' + JSON.stringify(userData));
+                        }
+
+                        settings.onPushReceived(event.notification);
+                    }
+                );
+
                 document.addEventListener('push-notification',
                     function (event) {
                         console.log("addEventListener: push-notification",event);
@@ -34,19 +48,7 @@
                     }
                 );
 
-                document.addEventListener('push-receive',
-                    function (event) {
-                        console.log("addEventListener: push-receive", event);
-                        var userData = event.notification.userdata;
-
-                        if (typeof (userData) != "undefined") {
-                            // handle custom notification data
-                            console.warn('user data: ' + JSON.stringify(userData));
-                        }
-
-                        settings.onPushReceive(event.notification);
-                    }
-                );
+                
                 
                 pushNotification.onDeviceReady(
                 {
