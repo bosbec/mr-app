@@ -289,6 +289,9 @@
                                         console.log("RootBroadcast: appResumed");
                                         //alert("appResumed");
                                         $rootScope.$broadcast('appResumed', true);
+                                    },
+                                    "onLaunchNotification": function (push) {
+                                        console.log("RootBroadcast: launchNotification", push);
                                     }
                                 };
                                 //alert("isDevice: " + deviceFactory.isDevice);

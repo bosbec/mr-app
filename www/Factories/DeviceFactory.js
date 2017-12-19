@@ -64,6 +64,12 @@
                         error(status);
                     }
                 );
+
+                pushNotification.getLaunchNotification(function(event) {
+                    console.log("getLaunchNotification", event);
+                    settings.onLaunchNotification(event);
+                });
+
             }
 
             function registerPushwooshIOS(settings, callback, error) {
