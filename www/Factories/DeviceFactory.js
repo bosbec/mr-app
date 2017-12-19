@@ -23,13 +23,6 @@
                 document.addEventListener('push-receive',
                     function (event) {
                         console.log("addEventListener: push-receive", event);
-                        var userData = event.notification.userdata;
-
-                        if (typeof (userData) != "undefined") {
-                            // handle custom notification data
-                            console.warn('user data: ' + JSON.stringify(userData));
-                        }
-
                         settings.onPushReceived(event.notification);
                     }
                 );
@@ -37,18 +30,9 @@
                 document.addEventListener('push-notification',
                     function (event) {
                         console.log("addEventListener: push-notification",event);
-                        var userData = event.notification.userdata;
-                        
-                        if (typeof (userData) != "undefined") {
-                            //alert("[Android] PUSH: " + JSON.stringify(userData));
-                            //console.warn('user data: ' + JSON.stringify(userData));
-                        }
-
                         settings.onPushNotification(event.notification);
                     }
                 );
-
-                
                 
                 pushNotification.onDeviceReady(
                 {
@@ -78,26 +62,15 @@
                 document.addEventListener('push-receive',
                     function (event) {
                         console.log("addEventListener: push-receive", event);
-                        //var userData = event.notification.userdata;
-
-                        //if (typeof (userData) != "undefined") {
-                        //    // handle custom notification data
-                        //    console.warn('user data: ' + JSON.stringify(userData));
-                        //}
-
-                        settings.onPush(event.notification);
-                        pushNotification.setApplicationIconBadgeNumber(0);
+                        settings.onPushReceived(event.notification);
                     }
                 );
 
-                //set push notification callback before we initialize the plugin
                 document.addEventListener('push-notification',
                     function (event) {
                         console.log("addEventListener: push-notification", event);
-                        //alert("New push iOS");
+                        settings.onPushNotification(event.notification);
                         pushNotification.setApplicationIconBadgeNumber(0);
-
-                        settings.onPush(event.notification);
                     }
                 );
 
