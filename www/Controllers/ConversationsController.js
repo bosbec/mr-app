@@ -6,6 +6,7 @@
 
         $scope.alertText = null;
         $scope.currentPage = 1;
+        $scope.totalPages = 1;
         $scope.pageSize = settingsFactory.getNumberOfConversations();
 
         $scope.isSwipe = false;
@@ -39,11 +40,12 @@
                 inboxId,
                 pageIndex,
                 settingsFactory.getNumberOfConversations(),
-                function (conversations) {
+                function (conversationsObject) {
+                    $scope.totalPages = conversationsObject.maxPages;
                     if (deviceFactory.isDevice()) {
-                        callback(formatConversationList(conversations));
+                        callback(formatConversationList(conversationsObject.items));
                     } else {
-                        callback(conversations);
+                        callback(conversationsObject.items);
                     }
                 },
                 function (error) {

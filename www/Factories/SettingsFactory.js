@@ -5,7 +5,7 @@
         function ($localStorage) {
 
             var appId = "com.bosbec.mr-app";
-            var appVersion = "0.3.44";
+            var appVersion = "0.3.45";
 
             var defaultNumberOfConversations = 15;
             var defaultNumberOfMessages = 20;

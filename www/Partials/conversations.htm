@@ -14,8 +14,8 @@
                         <i class="fa fa-chevron-right pull-right"></i>
                     </div>
                 </div>
-                <div ng-show="conversations.length >= pageSize" class="center-block">
-                    <a ng-click="LoadMore()" class="btn"> Load more ... </a>
+                <div ng-show="currentPage < totalPages" class="center-block">
+                    <a ng-click="LoadMore()" class="btn"> Load more ... (page {{currentPage}} / {{totalPages}})</a>
                 </div>
             </div>
 

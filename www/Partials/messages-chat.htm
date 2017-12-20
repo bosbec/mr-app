@@ -7,8 +7,8 @@
     <div class="scrollable content-container content-container-chat" ui-swipe-right='swipeRight();' >
         <div id="chat-container" class="scrollable-content">
             <div class="list-group">
-                <div ng-show="messages.length >= pageSize" class="center-block">
-                    <a ng-click="LoadMore()" class="btn">Load more ... </a>
+                <div ng-show="currentPage < totalPages" class="center-block">
+                    <a ng-click="LoadMore()" class="btn">Load more ... (page {{currentPage}} / {{totalPages}})</a>
                 </div>
                 <div ng-repeat="message in messages | orderBy:['-createdOnDetail','-createdOn']:true"
                      id="{{'msg'+ ($index + 1)}}"

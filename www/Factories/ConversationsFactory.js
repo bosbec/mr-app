@@ -150,7 +150,7 @@
                 //console.log("getConv request", listConversationsRequest);
                 apiFactory.functions.call('inboxes/list-content',
                     listConversationsRequest,
-                    function(response) {
+                    function (response) {
                         if (response.data != null) {
 
                             conversations = response.data.items;
@@ -165,7 +165,8 @@
                                         conversations[k].avatars = getAvatarsForConversation(conversations[k], users);
                                     }
                                     //console.log(conversations);
-                                    callback(conversations);
+                                    response.data.items = conversations;
+                                    callback(response.data);
 
                                 },
                                 function(e) {

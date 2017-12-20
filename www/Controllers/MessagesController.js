@@ -68,6 +68,7 @@ mrApp.controller('MessagesController', [
 
         $scope.currentPage = 1;
         $scope.pageSize = settingsFactory.getNumberOfMessages();
+        $scope.totalPages = 1;
 
         $scope.successText = null;
         $scope.errorText = null;
@@ -263,7 +264,7 @@ mrApp.controller('MessagesController', [
                 }
             };
             apiFactory.functions.call('conversations/list-messages', listMessagesRequest, function (response) {
-
+                $scope.totalPages = response.data.maxPages;
                 var formatTimestamp = settingsFactory.getFormatTimestamp();
 
                 for (var i = 0; i < response.data.items.length; i++) {
@@ -313,7 +314,6 @@ mrApp.controller('MessagesController', [
             getMessages(conversationId,$scope.PageIndex,function(messages) {
 
                 $scope.messages = messages;
-
                 scrollToLast();
 
                 var markAsReadRequest = {
