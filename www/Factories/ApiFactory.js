@@ -79,7 +79,8 @@
                             callback(response.data);
                         }
                     },
-                    function(e) {
+                    function (e) {
+                        console.log(e);
                         error(e);
                     });
             }

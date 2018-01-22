@@ -140,8 +140,15 @@ mrApp.controller('MainController', [
             $localStorage.savedCredentials.keepMeSignedIn = $rootScope.keepMeSignedIn;
             $rootScope.authenticationToken = undefined;
 
-            //$location.path('/login');
-            //$window.location.reload();
+            if (deviceFactory.isDevice()) {
+                deviceFactory.unregisterDevice(
+                    function(status) {
+                        console.log("unregisteredDevice success", status);
+                    },
+                    function(status) {
+                        console.log("unregisteredDevice error", status);
+                    });
+            }
 
             $timeout(function() {
                     $scope.$broadcast('reload', null);

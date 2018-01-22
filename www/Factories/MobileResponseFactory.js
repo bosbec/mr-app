@@ -73,7 +73,7 @@
                         function (e) {
                             $rootScope.$broadcast('mrLoading', false);
                             $rootScope.$broadcast('mrHttpCallError', e);
-                            console.log("mr auth fail");
+                            console.log("mr auth fail", e);
                             error(e);
                         });
             }

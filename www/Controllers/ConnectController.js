@@ -1,7 +1,12 @@
 ﻿mrApp.controller('ConnectController',
 [
-    '$scope', '$rootScope', '$localStorage','ApiFactory', 'MobileResponseFactory',
-    function($scope, $rootScope, $localStorage, apiFactory, mobileResponseFactory) {
+    '$scope', '$rootScope', '$localStorage', '$timeout','ApiFactory', 'MobileResponseFactory',
+    function($scope, $rootScope, $localStorage, $timeout, apiFactory, mobileResponseFactory) {
+
+        $scope.error = {
+            "show": false,
+            "text": ""
+        };
 
         function connect(username, password) {
             var userCredentials = {
@@ -15,14 +20,21 @@
                     $localStorage.mobileResponseCredentials = userCredentials;
                 },
                 function (error) {
-
+                    $scope.error.text = "Failed to connect, please check your credentials";
+                    $scope.error.show = true;
+                    $timeout(function() {
+                            $scope.error.text = "";
+                            $scope.error.show = false;
+                        },
+                        3000);
+                    console.log("mr auth failed", error);
                 });
         }
 
         function disconnect() {
             $localStorage.mobileResponseCredentials = null;
             $rootScope.mobileResponseToken = null;
-            console.log("Disconneted");
+            console.log("Disconnected");
         }
 
         $scope.Connect = function () {

@@ -5,7 +5,7 @@
         function ($localStorage) {
 
             var appId = "com.bosbec.mr-app";
-            var appVersion = "0.3.45";
+            var appVersion = "0.3.46";
 
             var defaultNumberOfConversations = 15;
             var defaultNumberOfMessages = 20;
@@ -21,13 +21,12 @@
                     "forms": "https://m.bosbec.io/form/"
                 };
                 //// test
-                //urls = {
-                //    "appapi": "https://appapi.mobileresponse.io/1/",
-                //    "api2": "https://api2.mobileresponse.se/",
-                //    "apps": "https://apps.bosbec.io/#",
-                //    "forms": "http://m.mobileresponse.se/form/"
+                //return {
+                //    "appapi": "http://appapi.test.mobileresponse.se/1/",
+                //    "api2": "https://api2-test.bosbec.io/",
+                //    "apps": "https://apps-test.bosbec.io/#",
+                //    "forms": "http://m.test.mobileresponse.se/form/"
                 //};
-                //return urls;
             }
 
             function getBosbecUrls() {

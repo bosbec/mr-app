@@ -274,7 +274,7 @@
                                         console.log("[SUCCESS] Mobile Response auto login");
                                     },
                                     function(error) {
-                                        console.log("[WARN] Mobile Response auto login: " + error);
+                                        console.log("[WARN] Mobile Response auto login: ", error);
                                     });
 
                                 var registerDeviceSettings = {
