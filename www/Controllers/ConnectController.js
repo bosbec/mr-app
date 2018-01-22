@@ -46,9 +46,9 @@
         };
         
         function init() {
-            if ($localStorage.mobileResponseCredentials != null) {
-                connect($localStorage.mobileResponseCredentials.username, $localStorage.mobileResponseCredentials.password);
-            }
+            //if ($localStorage.mobileResponseCredentials != null) {
+            //    connect($localStorage.mobileResponseCredentials.username, $localStorage.mobileResponseCredentials.password);
+            //}
         }
 
         init();
