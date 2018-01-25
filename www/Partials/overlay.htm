@@ -1,5 +1,5 @@
-﻿<div ng-controller="FormModalController" class="modal modal-overlay formModal" ng-class="{'
-     -modal': deviceType == 1}" ui-if="formModal" ui-state="formModal">
+﻿<!--<div ng-controller="FormModalController" class="modal modal-overlay formModal" ng-class="{'-modal': deviceType == 1}" ui-if="formModal" ui-state="formModal">-->
+<div ng-controller="FormModalController" class="modal modal-overlay formModal" ui-if="formModal" ui-state="formModal">
     <div class="modal-dialog">
         <div class="modal-header">
             <div>
@@ -7,7 +7,8 @@
             </div>
         </div>
         <div class="modal-content">
-            <div class="modal-body" ng-class="{'ios-modal-body': deviceType == 1}">
+            <!--<div class="modal-body" ng-class="{'ios-modal-body': deviceType == 1}">-->
+            <div class="modal-body">
                 <iframe class="formModalIframe" src="{{ activeFormUrl | trustUrl }}" iframe-onload="iframeLoadedCallBack()" style="width: 100% !important; height: 100% !important; overflow: scroll !important; -webkit-overflow-scrolling: touch !important" scrolling="yes"></iframe>
             </div>
         </div>
