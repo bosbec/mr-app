@@ -20,7 +20,6 @@
 
 
 </head>
-<!--<body ng-controller="MainController" ng-class="{'ios-body': deviceType == 1}">-->
 <body ng-controller="MainController">
 
     <div ui-yield-to="modals"></div>
@@ -31,11 +30,9 @@
 
         <div class="scrollable">
             <div class="scrollable-content" ui-turn-off="mainSidebar">
-
-                <!--<div ng-class="{'app-name': deviceType != 1, 'ios-app-name': deviceType == 1}">-->
+                
                 <div class="app-name">
                     <a href="#/login">
-                        <!--<img src="images/Logo-Bosbec-w200-padding.png" style="width: 100px;" ng-class="{'logo': deviceType != 1, 'ios-logo': deviceType == 1}" alt="Bosbec"/>-->
                         <img src="images/Logo-Bosbec-w200-padding.png" style="width: 100px;" class="logo" alt="Bosbec" />
                     </a>
                 </div>
