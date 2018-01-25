@@ -34,7 +34,10 @@
 
                 <!--<div ng-class="{'app-name': deviceType != 1, 'ios-app-name': deviceType == 1}">-->
                 <div class="app-name">
-                    <a href="#/login"><img src="images/Logo-Bosbec-w200-padding.png" style="width: 100px;" ng-class="{'logo': deviceType != 1, 'ios-logo': deviceType == 1}" alt="Bosbec" /></a>
+                    <a href="#/login">
+                        <!--<img src="images/Logo-Bosbec-w200-padding.png" style="width: 100px;" ng-class="{'logo': deviceType != 1, 'ios-logo': deviceType == 1}" alt="Bosbec"/>-->
+                        <img src="images/Logo-Bosbec-w200-padding.png" style="width: 100px;" class="logo" alt="Bosbec" />
+                    </a>
                 </div>
                 <div ng-show="validateLoad('inboxes')" class="list-group" toggle="off" bubble target="mainSidebar">
                     <a ng-repeat="inbox in inboxes" class="list-group-item" href="#/conversations/{{ inbox.inboxId }}">

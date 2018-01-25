@@ -18,7 +18,7 @@
                 }
             };
             
-            mobileResponseFactory.functions.call("workflows/list-workflow-execution-settings",
+            mobileResponseFactory.functions.call("services/list-services",
                 listServicesRequest,
                 function (response) {
                     console.log("list services", response.data.items);

@@ -5,7 +5,7 @@
         xmlns:gap = "http://phonegap.com/ns/1.0"
         xmlns:android = "http://schemas.android.com/apk/res/android"
         id        = "com.bosbec.mr-app"
-        version   = "0.3.47">
+        version   = "0.3.48">
   <!-- VERSION HERE -->
   
   <name>Bosbec</name>
@@ -56,18 +56,18 @@
   <!--Can only build one at a time in phonegap build, comment out either iOS or Android below-->
  
   <!--iOS version, cli 6.5.0, push 7.1.0-->
-  <!--<preference name="phonegap-version" />
+  <preference name="phonegap-version" />
   <plugin name="pushwoosh-pgb-plugin">
     <variable name="IOS_FOREGROUND_ALERT_TYPE" value="BANNER" />
     <variable name="ANDROID_FOREGROUND_PUSH" value="false" />
-  </plugin>-->
+  </plugin>
   
   <!--Android version, cli 7.0.1, push 7.0.6-->
-  <preference name="phonegap-version" value="cli-7.0.1" />
+  <!--<preference name="phonegap-version" value="cli-7.0.1" />
   <plugin name="pushwoosh-pgb-plugin" version="7.0.6">
     <variable name="IOS_FOREGROUND_ALERT_TYPE" value="BANNER" />
     <variable name="ANDROID_FOREGROUND_PUSH" value="false" />
-  </plugin>
+  </plugin>-->
   
   <icon src="www/icon.png" />
   <splash src="www/splash.png" />
