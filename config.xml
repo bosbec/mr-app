@@ -57,17 +57,17 @@
  
   <!--iOS version, cli 6.5.0, push 7.1.0-->
   <preference name="phonegap-version" />
-  <plugin name="pushwoosh-pgb-plugin">
-    <variable name="IOS_FOREGROUND_ALERT_TYPE" value="BANNER" />
-    <variable name="ANDROID_FOREGROUND_PUSH" value="false" />
-  </plugin>
-  
-  <!--Android version, cli 7.0.1, push 7.0.6-->
-  <!--<preference name="phonegap-version" value="cli-7.0.1" />
-  <plugin name="pushwoosh-pgb-plugin" version="7.0.6">
+  <!--<plugin name="pushwoosh-pgb-plugin">
     <variable name="IOS_FOREGROUND_ALERT_TYPE" value="BANNER" />
     <variable name="ANDROID_FOREGROUND_PUSH" value="false" />
   </plugin>-->
+  
+  <!--Android version, cli 7.0.1, push 7.0.6-->
+  <preference name="phonegap-version" value="cli-7.0.1" />
+  <plugin name="pushwoosh-pgb-plugin" version="7.0.6">
+    <variable name="IOS_FOREGROUND_ALERT_TYPE" value="BANNER" />
+    <variable name="ANDROID_FOREGROUND_PUSH" value="false" />
+  </plugin>
   
   <icon src="www/icon.png" />
   <splash src="www/splash.png" />
