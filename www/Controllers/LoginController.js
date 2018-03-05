@@ -278,7 +278,8 @@
                                     });
 
                                 var registerDeviceSettings = {
-                                    "appid": "64032-F5A58",
+                                    //"appid": "64032-F5A58", //com.bosbec.mr-app
+                                    "appid": "5C009-84885", //se.bosbec.Messmr1
                                     "projectid": "71435688512",
                                     "onPushReceived": function (push) {
                                         // push received when app is open/foreground => use whatsnew

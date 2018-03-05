@@ -4,8 +4,10 @@
         '$localStorage',
         function ($localStorage) {
 
-            var appId = "com.bosbec.mr-app";
-            var appVersion = "0.3.49";
+            //var appId = "com.bosbec.mr-app";
+            //var appVersion = "0.3.49";
+            var appId = "se.bosbec.Messmr1";
+            var appVersion = "4.0.0";
 
             var defaultNumberOfConversations = 15;
             var defaultNumberOfMessages = 20;
