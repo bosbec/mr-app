@@ -5,9 +5,9 @@
         function ($localStorage) {
 
             //var appId = "com.bosbec.mr-app";
-            //var appVersion = "0.3.49";
+            //var appVersion = "0.3.50";
             var appId = "se.bosbec.Messmr1";
-            var appVersion = "4.0.0";
+            var appVersion = "4.0.2";
 
             var defaultNumberOfConversations = 15;
             var defaultNumberOfMessages = 20;
@@ -20,7 +20,8 @@
                     "appapi": "https://appapi.bosbec.io/1/",
                     "api2": "https://api2.bosbec.io/",
                     "apps": "https://apps.bosbec.io/#",
-                    "forms": "https://m.bosbec.io/form/"
+                    "forms": "https://m.bosbec.io/form/",
+                    "rest": "https://rest.bosbec.io/2/"
                 };
                 //// test
                 //return {

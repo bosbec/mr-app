@@ -1,5 +1,5 @@
 ﻿angular.module('UsersFactory', [])
-    .factory('UsersFactory',['$rootScope', '$http', '$timeout', 'ApiFactory',function($rootScope, $http, $timeout, apiFactory) {
+    .factory('UsersFactory',['$rootScope', '$http', '$timeout', 'ApiFactory','SettingsFactory',function($rootScope, $http, $timeout, apiFactory, settingsFactory) {
 
         var users = [];
         var restApiKey = "f6895bf2-f3c8-49e5-8393-8691dbbed5af"; //bosbecappsys
@@ -221,7 +221,7 @@
                     }
                 };
                 $http({
-                    url: 'https://rest.bosbec.io/2/workflows',
+                    url: settingsFactory.rest + 'workflows',
                         method: 'POST',
                         data: request,
                         headers: { 'Content-Type': 'application/json', 'api-key': restApiKey }
@@ -250,7 +250,7 @@
                     }
                 };
                 $http({
-                    url: 'https://rest.bosbec.io/2/workflows',
+                    url: settingsFactory.rest + 'workflows',
                     method: 'POST',
                     data: request,
                     headers: { 'Content-Type': 'application/json', 'api-key': restApiKey }
@@ -274,7 +274,7 @@
                 };
                 console.log(request);
                 $http({
-                    url: 'https://rest.bosbec.io/2/workflows',
+                    url: settingsFactory.rest + 'workflows',
                     method: 'POST',
                     data: request,
                     headers: { 'Content-Type': 'application/json', 'api-key': restApiKey }
@@ -303,7 +303,7 @@
                     }
                 };
                 $http({
-                    url: 'https://rest.bosbec.io/2/workflows',
+                    url: settingsFactory.rest + 'workflows',
                     method: 'POST',
                     data: request,
                     headers: { 'Content-Type': 'application/json', 'api-key': restApiKey }

@@ -11,28 +11,6 @@
 
         function init() {
             console.log("LOGOUT");
-            //$rootScope.keepMeSignedIn = false;
-            //$localStorage.savedCredentials.keepMeSignedIn = $rootScope.keepMeSignedIn;
-            //$rootScope.authenticationToken = undefined;
-
-            //if (deviceFactory.isDevice()) {
-            //    deviceFactory.unregisterDevice(
-            //        function(status) {
-            //            //alert("unregisteredDevice success");
-            //            console.log("unregisteredDevice success");
-            //            afterLogout(3000);
-            //        },
-            //        function(status) {
-            //            //alert("unregisteredDevice error");
-            //            console.log("unregisteredDevice error");
-            //            afterLogout(3000);
-            //        });
-            //    afterLogout(3000);
-            //} else {
-            //    afterLogout(3000);
-            //}
-
-            //afterLogout(3000);
         }
 
         init();
