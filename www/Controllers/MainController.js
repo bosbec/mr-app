@@ -139,6 +139,7 @@ mrApp.controller('MainController', [
             $rootScope.keepMeSignedIn = false;
             $localStorage.savedCredentials.keepMeSignedIn = $rootScope.keepMeSignedIn;
             $rootScope.authenticationToken = undefined;
+            $localStorage.mobileResponseCredentials = null;
 
             if (deviceFactory.isDevice()) {
                 deviceFactory.unregisterDevice(

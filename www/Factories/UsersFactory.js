@@ -221,7 +221,7 @@
                     }
                 };
                 $http({
-                    url: 'https://rest.mobileresponse.io/1/workflows',
+                    url: 'https://rest.bosbec.io/2/workflows',
                         method: 'POST',
                         data: request,
                         headers: { 'Content-Type': 'application/json', 'api-key': restApiKey }
@@ -250,7 +250,7 @@
                     }
                 };
                 $http({
-                    url: 'https://rest.mobileresponse.io/1/workflows',
+                    url: 'https://rest.bosbec.io/2/workflows',
                     method: 'POST',
                     data: request,
                     headers: { 'Content-Type': 'application/json', 'api-key': restApiKey }
@@ -274,7 +274,7 @@
                 };
                 console.log(request);
                 $http({
-                    url: 'https://rest.mobileresponse.io/1/workflows',
+                    url: 'https://rest.bosbec.io/2/workflows',
                     method: 'POST',
                     data: request,
                     headers: { 'Content-Type': 'application/json', 'api-key': restApiKey }
@@ -303,7 +303,7 @@
                     }
                 };
                 $http({
-                    url: 'https://rest.mobileresponse.io/1/workflows',
+                    url: 'https://rest.bosbec.io/2/workflows',
                     method: 'POST',
                     data: request,
                     headers: { 'Content-Type': 'application/json', 'api-key': restApiKey }
@@ -325,7 +325,7 @@
                         "EmailAdress": email
                     }
                 };
-                console.log(requestResetRequest);
+                //console.log(requestResetRequest);
                 apiFactory.functions.call('public/request-change-forgotten-password-code',
                     requestResetRequest,
                     function(response) {

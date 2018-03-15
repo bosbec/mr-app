@@ -10,7 +10,7 @@
         xmlns:gap = "http://phonegap.com/ns/1.0"
         xmlns:android = "http://schemas.android.com/apk/res/android"
         id        = "se.bosbec.Messmr1"
-        version   = "4.0.0">
+        version   = "4.0.1">
   <!-- VERSION HERE -->
  
   <name>Bosbec</name>
@@ -25,7 +25,7 @@
 
   <gap:config-file platform="ios" parent="CFBundleShortVersionString">
     <!--<string>0.3.49</string>-->
-    <string>4.0.0</string>
+    <string>4.0.1</string>
     <!-- VERSION HERE -->
   </gap:config-file>
   

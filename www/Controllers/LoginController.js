@@ -7,10 +7,12 @@
         if (command === "logout") {
             logout();
         }
-        
+
+        $scope.useAdminLogIn = false;
         $scope.saveCredentials = true;
         $scope.keepMeSignedIn = true;
         $scope.signingin = false;
+
 
         $scope.successText = null;
         $scope.errorText = null;
@@ -56,6 +58,11 @@
             $scope.$emit('viewChanged', 'login');
             settingsFactory.initSettings();
             $scope.credentials = $localStorage.savedCredentials;
+            if ($scope.credentials && $scope.credentials.useAdminLogIn) {
+                $scope.useAdminLogIn = $scope.credentials.useAdminLogIn;
+            }
+
+            $scope.appVersion = settingsFactory.getAppVersion();
 
             if ($localStorage.showIntro === undefined || $localStorage.showIntro) {
                 // show intro...
@@ -91,6 +98,7 @@
         $scope.ClearCredentials = function () {
             //console.log("Cleared credentials");
             $localStorage.savedCredentials = null;
+            $localStorage.mobileResponseCredentials = null;
             $scope.credentials = null;
         };
 
@@ -246,10 +254,12 @@
                 'instanceName': instanceName,
                 'UserName': userName,
                 'Password': password,
+                'UseAdminLogIn': $scope.useAdminLogIn,
                 'metaData': {
                     'deviceType': deviceFactory.getDeviceType()
                 }
             };
+            //console.log("credentials", credentials);
             apiFactory.functions.authenticate(credentials,
                 function (response) {
                     if (response != null) {
@@ -258,9 +268,18 @@
                             $localStorage.savedCredentials = {
                                 'userName': userName,
                                 'password': password,
+                                'useAdminLogIn': $scope.useAdminLogIn,
                                 'deviceType': deviceFactory.getDeviceType(),
                                 'keepMeSignedIn': $scope.keepMeSignedIn
                             };
+
+                            if ($scope.useAdminLogIn) {
+                                $localStorage.mobileResponseCredentials = {
+                                    "appUserId": apiFactory.myAppUser.appUserId,
+                                    "UserName": userName,
+                                    "Password": password
+                                };
+                            }
                         }
                         $rootScope.keepMeSignedIn = $scope.keepMeSignedIn;
                         $rootScope.authenticationToken = response;

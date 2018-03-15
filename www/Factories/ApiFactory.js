@@ -63,7 +63,7 @@
                 request.data.metaData.appId = settingsFactory.getAppId();
                 request.data.metaData.appVersion = settingsFactory.getAppVersion();
                 //request.data.metaData.deviceType = deviceFactory.getDeviceType();
-                //console.log(request);
+                console.log(request);
                 call('authentication/authenticate',
                     request,
                     function(response) {

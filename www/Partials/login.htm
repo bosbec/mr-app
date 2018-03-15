@@ -14,17 +14,21 @@
                             <a ng-show="!signin.show" href="" ng-click="ShowSignin()">Back to sign in</a>
                         </div>
                         <div ng-show="signin.show">
-                            <!--<h1><img  class="form-signin-heading" src="images/mobile-response-logo.png"/></h1>-->
                             <h2 class="form-signin-heading">Sign in</h2>
                             <div ng-if="signin.error.show" class="error-label">{{ signin.error.message }}</div>
-                            <input type="text" ng-disabled="signingin" ng-model="credentials.userName" class="form-control" placeholder="UserName" required autofocus>
+                            <input type="text" ng-disabled="signingin" ng-model="credentials.userName" class="form-control" placeholder="UserName, Phone, Email" required autofocus>
                             <input type="password" ng-disabled="signingin" ng-model="credentials.password" class="form-control" placeholder="Password" required>
-                            <label class="checkbox">
-                                <input type="checkbox" ng-disabled="signingin" ng-model="saveCredentials" value="saveCredentials"> Remember me
-                            </label>
-                            <label class="checkbox">
-                                <input type="checkbox" ng-disabled="signingin" ng-model="keepMeSignedIn" value="keepMeSignedIn"> Keep me signed in
-                            </label>
+                            <div>
+                                <label class="checkbox">
+                                    <input type="checkbox" ng-disabled="signingin" ng-model="useAdminLogIn" value="useAdminLogIn"> Use Bosbec Admin Credentials
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" ng-disabled="signingin" ng-model="saveCredentials" value="saveCredentials"> Remember me
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" ng-disabled="signingin" ng-model="keepMeSignedIn" value="keepMeSignedIn"> Keep me signed in
+                                </label>
+                            </div>
                             <button class="btn btn-lg btn-primary btn-block" ng-disabled="signingin" ng-click="Login()" type="submit"><span ng-show="!signingin">Sign in </span><i class="fa fa-circle-o-notch fa-spin fa-1x fa-fw" ng-show="signingin"></i></button>
                             <a ng-show="credentials!=null" href="" ng-click="ClearCredentials()">Clear credentials</a>
                         </div>
@@ -45,7 +49,7 @@
                             <input type="text" ng-model="register.userName" class="form-control" placeholder="UserName (*)" required>
                             <input type="password" ng-model="register.password" class="form-control" placeholder="Password (*)" required>
                             <input type="password" ng-model="register.password2" class="form-control" placeholder="Password again (*)" required>
-                            <br/>
+                            <br />
                             <button class="btn btn-lg btn-primary btn-block" ng-disabled="registrationForm.$invalid" ng-click="Register()" type="submit">Register</button>
                             <a ng-show="!registrationForm.$invalid" href="" ng-click="ClearRegistration()">Clear registration</a>
                         </div>
@@ -60,7 +64,7 @@
                         <div ng-show="forgotPassword.show">
                             <h3>Request reset password</h3>
                             <div>Enter your username, phone number or email address and we will send you a link to reset your password</div>
-                            <br/>
+                            <br />
                             <div ng-if="forgotPassword.error.show" class="error-label">{{ forgotPassword.error.message }}</div>
                             <div ng-if="forgotPassword.success.show" class="success-label">{{ forgotPassword.success.message }}</div>
                             <input type="text" ng-model="forgotPassword.userName" ng-required="!(forgotPassword.userPhone || forgotPassword.userEmail)" class="form-control" placeholder="UserName">
@@ -73,8 +77,11 @@
                 </div>
 
             </div>
-
+            <div class="list-group-item text-center">
+                Version: {{appVersion}}
+            </div>
         </div>
+
     </div>
     
     <div ui-content-for="overlays">

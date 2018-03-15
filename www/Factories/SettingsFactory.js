@@ -105,13 +105,13 @@
 
             function initSettings() {
                 if ($localStorage.settings === undefined) {
-                    console.log("Init localStorage.settings");
+                    //console.log("Init localStorage.settings");
                     $localStorage.settings = {
                         'numberOfConversations': defaultNumberOfConversations,
                         'numberOfMessages': defaultNumberOfMessages,
                         'checkWhatsNewInterval': defaultCheckWhatsNewInterval
                     };
-                    console.log($localStorage.settings);
+                    //console.log($localStorage.settings);
                 }
             }
 
