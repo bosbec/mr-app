@@ -57,11 +57,25 @@
 //]);
 
 
-mrApp.controller('MessagesController', [
-    'ApiFactory', '$scope', '$location', '$routeParams', '$window', 'moment', 'UsersFactory', 'ConversationsFactory', '$timeout', '$filter', 'SharedState', 'SettingsFactory',
-    function (apiFactory, $scope, $location, $routeParams, $window, moment, usersFactory, conversationsFactory, $timeout, $filter, SharedState, settingsFactory) {
+mrApp.controller('MessagesController',
+[
+    'ApiFactory', '$scope', '$location', '$routeParams', '$window', 'moment', 'UsersFactory', 'ConversationsFactory',
+    '$timeout', '$filter', 'SharedState', 'SettingsFactory',
+    function(apiFactory,
+        $scope,
+        $location,
+        $routeParams,
+        $window,
+        moment,
+        usersFactory,
+        conversationsFactory,
+        $timeout,
+        $filter,
+        SharedState,
+        settingsFactory) {
 
         var conversationId = $routeParams.param1;
+        $scope.conversation = null;
 
         $scope.isSwipe = false;
         $scope.showHideMessage = false;
@@ -76,16 +90,17 @@ mrApp.controller('MessagesController', [
         $scope.activeFormUrl = '';
 
         $scope.messages = {
+        
         };
 
-        $scope.openFormModal = function (formId) {
+        $scope.openFormModal = function(formId) {
             var formUrl = settingsFactory.getUrls().forms + formId + "?appuserid=" + usersFactory.myUser().id;
             //console.log("openFormModal", formUrl);
             SharedState.set('formModalUrl', formUrl);
             SharedState.turnOn('formModal');
         };
 
-        $scope.openBosbecFormInModal = function (url) {
+        $scope.openBosbecFormInModal = function(url) {
             if (url.indexOf("?") >= 0) {
                 url = url + "&";
             } else {
@@ -97,13 +112,13 @@ mrApp.controller('MessagesController', [
             SharedState.turnOn('formModal');
         };
 
-        $scope.openBosbecLinkInModal = function (url) {
+        $scope.openBosbecLinkInModal = function(url) {
             //console.log("openBosbecLinkInModal:" + url);
             SharedState.set('formModalUrl', url);
             SharedState.turnOn('formModal');
         };
 
-        $scope.openExternalLink = function (url) {
+        $scope.openExternalLink = function(url) {
             //console.log("openExternalLink:" + url);
             $window.open(url, '_blank');
         };
@@ -111,15 +126,17 @@ mrApp.controller('MessagesController', [
         function showAlert(text, type, duration) {
             if (type === 'success') {
                 $scope.successText = text;
-                $timeout(function () {
-                    $scope.successText = null;
-                }, duration);
+                $timeout(function() {
+                        $scope.successText = null;
+                    },
+                    duration);
             }
             if (type === 'error') {
                 $scope.errorText = text;
-                $timeout(function () {
-                    $scope.errorText = null;
-                }, duration);
+                $timeout(function() {
+                        $scope.errorText = null;
+                    },
+                    duration);
             }
 
         }
@@ -131,6 +148,7 @@ mrApp.controller('MessagesController', [
             }
             listMessages($scope.authenticationToken, conversationId);
             $scope.conversation = conversationsFactory.getCurrentConversation();
+            $scope.conversation.viewSettings = "normal";
 
             SharedState.initialize($scope, 'formModalUrl', '');
 
@@ -140,7 +158,7 @@ mrApp.controller('MessagesController', [
         function linkify(text) {
             var urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
             return text.replace(urlRegex,
-                function (url) {
+                function(url) {
                     return '<a href="' + url + '" target="_blank" class="externalLink">' + url + '</a>';
                     //return '<a ng-click="openExternalLink(' + url + ');" class="externalLink">' + url + '</a>';
                 });
@@ -160,7 +178,7 @@ mrApp.controller('MessagesController', [
         function handleLinks(text) {
             var urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
             text = text.replace(urlRegex,
-                function (url) {
+                function(url) {
                     //return '<a href="' + url + '" class="externalLink">' + url + '</a>';
                     // check if url is in settingsurls => our own
                     if (isBosbecExternalUrl(url)) {
@@ -172,12 +190,16 @@ mrApp.controller('MessagesController', [
                             url +
                             '</a>';
                     } else {
-                        return '<a href="' + url + '" target="_blank" class="externalLink" testdirective>' + url + '</a>';
+                        return '<a href="' +
+                            url +
+                            '" target="_blank" class="externalLink" testdirective>' +
+                            url +
+                            '</a>';
                     }
                 });
             return text;
         }
-        
+
         function extractGuid(value) {
             var re = /([a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12})/i;
 
@@ -191,17 +213,15 @@ mrApp.controller('MessagesController', [
 
             return match ? match[1] : null;
         }
-        
+
         function addDynamicMetadata(message) {
             var urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
             message.content = message.content.replace(urlRegex,
-                function (url) {
-                    //console.log("url", url);
+                function(url) {
                     // check if url is in settingsurls => our own
                     if (isBosbecExternalUrl(url)) {
-                        
+
                         var extractedValue = extractGuid(url);
-                        //console.log("extractGuid", extractedValue);
                         if (extractedValue != null) {
                             message.metaData.push({
                                 "_type": "bosbecForm",
@@ -227,11 +247,24 @@ mrApp.controller('MessagesController', [
             return message;
         }
 
+        function handleViewSettings(message) {
+            if (message.metaData.length > 0) {
+                message.metaData.forEach(function (item) {
+                    if (item.name === "viewsetting") {
+                        console.log("viewSetting: " + item.value);
+                        $scope.conversation.viewSettings = item.value;
+                    }
+                });
+            }
+            return message;
+        }
+
         function formatText(text) {
             var linebreakRegex = /([\n])/g;
-            return text.replace(linebreakRegex, function (row) {
-                return "<br />";
-            });
+            return text.replace(linebreakRegex,
+                function(row) {
+                    return "<br />";
+                });
         }
 
         function parseAuthor(messages) {
@@ -245,15 +278,15 @@ mrApp.controller('MessagesController', [
             return messages;
         }
 
-        $scope.LoadMore = function () {
-            var callback = function (messages) {
+        $scope.LoadMore = function() {
+            var callback = function(messages) {
                 $scope.messages = [].concat($scope.messages, messages);
             };
             $scope.currentPage = $scope.currentPage + 1;
             getMessages(conversationId, $scope.currentPage, callback);
         };
 
-        function getMessages(conversationId,pageIndex,callback) {
+        function getMessages(conversationId, pageIndex, callback) {
             var listMessagesRequest = {
                 authenticationToken: $scope.authenticationToken,
                 data: {
@@ -263,82 +296,75 @@ mrApp.controller('MessagesController', [
                     'pageSize': settingsFactory.getNumberOfMessages()
                 }
             };
-            apiFactory.functions.call('conversations/list-messages', listMessagesRequest, function (response) {
-                $scope.totalPages = response.data.maxPages;
-                var formatTimestamp = settingsFactory.getFormatTimestamp();
+            apiFactory.functions.call('conversations/list-messages',
+                listMessagesRequest,
+                function (response) {
+                    $scope.totalPages = response.data.maxPages;
+                    var formatTimestamp = settingsFactory.getFormatTimestamp();
 
-                for (var i = 0; i < response.data.items.length; i++) {
-                    //response.data.items[i].content = linkify(response.data.items[i].content);
-                    response.data.items[i].content = formatText(response.data.items[i].content);
+                    for (var i = 0; i < response.data.items.length; i++) {
+                        response.data.items[i].content = formatText(response.data.items[i].content);
+                        response.data.items[i] = addDynamicMetadata(response.data.items[i]);
 
-                    //response.data.items[i].content = handleLinks(response.data.items[i].content);
-                    response.data.items[i] = addDynamicMetadata(response.data.items[i]);
-
-                    if (response.data.items[i].metaData.length > 0) {
-
-                        if (response.data.items[i].metaData[0]._type === "form") {
-                            var formObj = angular.fromJson(response.data.items[i].metaData[0].value);
-                            response.data.items[i].formId = formObj.id;
+                        if (response.data.items[i].metaData.length > 0) {
+                            
+                            if (response.data.items[i].metaData[0]._type === "form" || response.data.items[i].metaData[0]._type === "messageMetaDataForm") {
+                                var formObj = angular.fromJson(response.data.items[i].metaData[0].value);
+                                response.data.items[i].formId = formObj.id;
+                            }
                         }
 
-                        //if (response.data.items[i].metaData[0]._type === "image") {
-                        //    if (response.data.items[i].metaData[0].contentType === 'image/jpeg') {
-                        //        response.data.items[i].metaData[0].thumbnail = response.data.items[i].metaData[0].thumbnail.replace('///', 'http://');
-                        //        response.data.items[i].metaData[0].url = response.data.items[i].metaData[0].url.replace('///', 'http://');
-                        //    }
-                        //}
-
-                        //if (response.data.items[i].metaData[0]._type === "file") {
-                        //    if (response.data.items[i].metaData[0].contentType === 'application/pdf') {
-                        //        response.data.items[i].metaData[0].url = response.data.items[i].metaData[0].url + '.pdf';
-                        //    }
-                        //}
+                        if (formatTimestamp) {
+                            response.data.items[i].createdOnFormatted = moment.utc(response.data.items[i].createdOn)
+                                .fromNow();
+                        } else {
+                            response.data.items[i].createdOnFormatted = moment
+                                .utc(response.data.items[i].createdOnDetail)
+                                .format("YYYY-MM-DD HH:mm:ss.SSS");
+                        }
                     }
 
-                    if (formatTimestamp) {
-                        response.data.items[i].createdOnFormatted = moment.utc(response.data.items[i].createdOn)
-                            .fromNow();
-                    } else {
-                        response.data.items[i].createdOnFormatted = moment.utc(response.data.items[i].createdOnDetail)
-                            .format("YYYY-MM-DD HH:mm:ss.SSS");
-                    }
-                }
+                    response.data.items[0] = handleViewSettings(response.data.items[0]);
+                    response.data.items = parseAuthor(response.data.items);
+                    response.data.items = $filter('orderBy')(response.data.items, ['createdOnDetail', 'createdOn']);
+                    callback(response.data.items);
 
-                response.data.items = parseAuthor(response.data.items);
-                callback(response.data.items);
-                
-            });
+                });
         }
 
         function listMessages(token, conversationId) {
-            getMessages(conversationId,$scope.PageIndex,function(messages) {
+            getMessages(conversationId,
+                $scope.PageIndex,
+                function(messages) {
 
-                $scope.messages = messages;
-                scrollToLast();
+                    $scope.messages = messages;
+                    scrollToLast();
 
-                var markAsReadRequest = {
-                    authenticationToken: $scope.authenticationToken,
-                    data: {
-                        'conversationId': conversationId
-                    }
-                };
-                apiFactory.functions.call('conversations/conversation-read', markAsReadRequest, function (response) {
-                    //console.log("Conversation is read: " + conversationId);
+                    var markAsReadRequest = {
+                        authenticationToken: $scope.authenticationToken,
+                        data: {
+                            'conversationId': conversationId
+                        }
+                    };
+                    apiFactory.functions.call('conversations/conversation-read',
+                        markAsReadRequest,
+                        function(response) {
+                            //console.log("Conversation is read: " + conversationId);
+                        });
                 });
-            });
         }
 
         function scrollToLast() {
             // TODO: add $watch last-message instead
-            $timeout(function () {
-                var elem = angular.element(document.getElementById('chat-container'));
-                var scrollableContentController = elem.controller('scrollableContent');
-                scrollableContentController.scrollTo(angular.element(document.getElementById('last-message')));
-            },
+            $timeout(function() {
+                    var elem = angular.element(document.getElementById('chat-container'));
+                    var scrollableContentController = elem.controller('scrollableContent');
+                    scrollableContentController.scrollTo(angular.element(document.getElementById('last-message')));
+                },
                 400);
         }
 
-        $scope.sendMessage = function (message) {
+        $scope.sendMessage = function(message) {
             if (message == null) {
                 showAlert('No text in message', 'error', 1000);
             } else {
@@ -358,13 +384,16 @@ mrApp.controller('MessagesController', [
                     }
                 };
                 //console.log(replyRequest);
-                apiFactory.functions.call('conversations/reply', replyRequest, function (response) {
-                    showAlert('Message sent', 'success', 1000);
-                    listMessages($scope.authenticationToken, conversationId);
-                }, function (error) {
-                    showAlert('Message sent', 'error', 5000);
-                    console.log(error);
-                });
+                apiFactory.functions.call('conversations/reply',
+                    replyRequest,
+                    function(response) {
+                        showAlert('Message sent', 'success', 1000);
+                        listMessages($scope.authenticationToken, conversationId);
+                    },
+                    function(error) {
+                        showAlert('Message sent', 'error', 5000);
+                        console.log(error);
+                    });
 
             }
 
@@ -386,7 +415,8 @@ mrApp.controller('MessagesController', [
             $timeout(function() {
                     //console.log("message", message);
                     if (confirm("Do you want to hide '" + message.content.substr(0, 30) + "'")) {
-                        conversationsFactory.hideMessage(conversationId, message.messageId,
+                        conversationsFactory.hideMessage(conversationId,
+                            message.messageId,
                             function(response) {
                                 //console.log("reload after hide");
                                 $location.path('/messages/' + conversationId + "/reload=" + message.messageId);
@@ -402,12 +432,15 @@ mrApp.controller('MessagesController', [
 
 
         // handler
-        var onNewMessages = function (event, newMessages) {
+        var onNewMessages = function(event, newMessages) {
             var reload = false;
             var foundConversations = $filter('filter')(newMessages, { conversationId: conversationId }, true);
             if (foundConversations.length > 0) {
                 for (var i = 0; i < newMessages.length && !reload; i++) {
-                    var foundMessage = $filter('filter')($scope.messages, { messageId: newMessages[i].messageId }, true);
+                    var foundMessage = $filter('filter')($scope
+                        .messages,
+                        { messageId: newMessages[i].messageId },
+                        true);
                     if (foundMessage.length === 0) {
                         reload = true;
                     }

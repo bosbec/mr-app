@@ -17,11 +17,22 @@
             listConversations(apiFactory.getToken(), inboxId, $scope.currentPage);
         }
 
+        function handleLinks(text) {
+            var urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+            return text.replace(urlRegex,
+                function(url) {
+                    return "";
+                });
+        }
+
         function formatConversationList(conversations) {
             var previewLength = 100;
             for (var i = 0; i < conversations.length; i++) {
-                if (conversations[i].content.length > previewLength) {
-                    conversations[i].content = conversations[i].content.substr(0, previewLength) + " ...";
+                conversations[i].content = handleLinks(conversations[i].content);
+                if (deviceFactory.isDevice()) {
+                    if (conversations[i].content.length > previewLength) {
+                        conversations[i].content = conversations[i].content.substr(0, previewLength) + " ...";
+                    }
                 }
             }
             return conversations;
@@ -42,11 +53,7 @@
                 settingsFactory.getNumberOfConversations(),
                 function (conversationsObject) {
                     $scope.totalPages = conversationsObject.maxPages;
-                    if (deviceFactory.isDevice()) {
-                        callback(formatConversationList(conversationsObject.items));
-                    } else {
-                        callback(conversationsObject.items);
-                    }
+                    callback(formatConversationList(conversationsObject.items));
                 },
                 function (error) {
                     console.log("getConversations", error);

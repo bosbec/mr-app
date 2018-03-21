@@ -59,16 +59,11 @@
 
             function authenticate(userCredentials, callback, error) {
                 var request = { data: userCredentials };
-                //request.data.metaData = {};
                 request.data.metaData.appId = settingsFactory.getAppId();
                 request.data.metaData.appVersion = settingsFactory.getAppVersion();
-                //request.data.metaData.deviceType = deviceFactory.getDeviceType();
-                console.log(request);
                 call('authentication/authenticate',
                     request,
                     function(response) {
-                        //console.log("Authenticate");
-                        //console.log(response);
                         if (response.data != null) {
                             angular.copy({ appUserId: response.data.appUserId }, appUser);
                             authenticationToken = response.data.id;
@@ -90,6 +85,9 @@
                 $http({
                         url: apiSettings.baseApiUrl + url,
                         method: apiSettings.method,
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
                         data: request
                     })
                     .then(function(response) {

@@ -30,7 +30,7 @@
 
         <div class="scrollable">
             <div class="scrollable-content" ui-turn-off="mainSidebar">
-                
+
                 <div class="app-name">
                     <a href="#/login">
                         <img src="images/Logo-Bosbec-w200-padding.png" style="width: 100px;" class="logo" alt="Bosbec" />
@@ -38,13 +38,11 @@
                 </div>
                 <div ng-show="validateLoad('inboxes')" class="list-group" toggle="off" bubble target="mainSidebar">
                     <a ng-repeat="inbox in inboxes" class="list-group-item" href="#/conversations/{{ inbox.inboxId }}">
-                        <img ng-show="inbox.icon" height="20" alt="inboxIcon" src="{{ inbox.icon }}" /> {{ inbox.inboxDisplayName }} <i class="fa fa-chevron-right pull-right"></i>
+                        <img ng-show="inbox.icon" height="20" alt="inboxIcon" ng-src="{{ inbox.icon }}" /> {{ inbox.inboxDisplayName }} <i class="fa fa-chevron-right pull-right"></i>
                     </a>
                 </div>
                 <div>
                     <a class="list-group-item" ng-show="validateLoad('mobileresponse')" href="#/mr/services"><img src="images/mr/Job-128x128.png" width="24" /> Services</a>
-                    <!--<a class="list-group-item" ng-show="validateLoad('mobileresponse')" href="#/mr/groups"><img src="images/mr/Group-128x128.png" width="24" /> Groups</a>
-                    <a class="list-group-item" ng-show="validateLoad('mobileresponse')" href="#/mr/units"><img src="images/mr/Unit-128x128.png" width="24" /> Units</a>-->
                     <a class="list-group-item" ng-show="validateLoad('mobileresponse')" href="#/connect"><img src="images/mr/Trigger-128x128.png" width="24" /> Disconnect</a>
                 </div>
                 <div ng-show="validateLoad('mobileresponse')">
@@ -105,7 +103,6 @@
         <!-- Bottom Navbar -->
         <div ng-show="currentView!='conversation'" class="navbar navbar-app navbar-absolute-bottom">
             <div class="btn-group justified">
-                <!--<a ng-show="validateLoad('profile')" href="#/profile/{{ myAppUser.id }}" class="btn btn-navbar btn-icon-only" ng-class="{'navbar-active-item': currentView === 'profile'}"><i class="fa fa-2x fa-user"></i></a>-->
                 <a ng-show="validateLoad('mobileresponse')" href="#/mr/services" class="btn btn-navbar btn-icon-only" ng-class="{'navbar-active-item': currentView === 'services'}"><i class="fa fa-2x fa-cogs"></i></a>
                 <a ng-show="!validateLoad('mobileresponse')" href="#/profile/{{ myAppUser.id }}" class="btn btn-navbar btn-icon-only" ng-class="{'navbar-active-item': currentView === 'profile'}"><i class="fa fa-2x fa-user"></i></a>
 
@@ -122,14 +119,17 @@
 
     </div>
 
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>-->
-
-    <script src="js/angular/angular.min.js" type="text/javascript"></script>
+    <!--<script src="js/angular/angular.min.js" type="text/javascript"></script>
     <script src="js/angular/angular-route.min.js" type="text/javascript"></script>
     <script src="js/angular/angular-resource.min.js" type="text/javascript"></script>
-
     <script src="js/angular/angular-touch.min.js" type="text/javascript"></script>
-    <script src="js/angular/angular-sanitize.js" type="text/javascript"></script>
+    <script src="js/angular/angular-sanitize.js" type="text/javascript"></script>-->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.11/angular.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.11/angular-route.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.11/angular-resource.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.11/angular-touch.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.11/angular-sanitize.min.js" type="text/javascript"></script>
 
     <script src="js/ng-cordova.js" type="text/javascript"></script>
     <script src="js/mobile-angular-ui/dist/js/mobile-angular-ui.min.js" type="text/javascript"></script>

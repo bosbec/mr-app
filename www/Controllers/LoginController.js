@@ -85,14 +85,8 @@
         };
 
         function setSigningIn(state) {
-            //is signing in
-            if (state) {
-
-            } else {
-                
-            }
-            $scope.signingin = state;
             $rootScope.signingin = state;
+            //$scope.signingin = state;
         }
 
         $scope.ClearCredentials = function () {
@@ -259,7 +253,6 @@
                     'deviceType': deviceFactory.getDeviceType()
                 }
             };
-            //console.log("credentials", credentials);
             apiFactory.functions.authenticate(credentials,
                 function (response) {
                     if (response != null) {
@@ -371,12 +364,10 @@
         function login() {
             console.log('--- LOGIN ---');
             setSigningIn(true);
-            console.log("deviceType:", deviceFactory.getDeviceType());
             apiLogin(apiFactory.apiSettings.instanceName,
                 $scope.credentials.userName,
                 $scope.credentials.password,
                 function (response) {
-                    //console.log("login: " + response);
                     setSigningIn(false);
 
                     if (response.email == null && response.phoneNumber == null) {
@@ -396,6 +387,7 @@
         }
 
         $scope.Login = function () {
+            console.log("Sign in");
             if (!$scope.signinForm.$invalid) {
                 login();
             }
