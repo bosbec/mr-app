@@ -76,6 +76,7 @@ mrApp.controller('MessagesController',
 
         var conversationId = $routeParams.param1;
         $scope.conversation = null;
+        $scope.newMessage = null;
 
         $scope.isSwipe = false;
         $scope.showHideMessage = false;
@@ -368,9 +369,9 @@ mrApp.controller('MessagesController',
             if (message == null) {
                 showAlert('No text in message', 'error', 1000);
             } else {
-
-                $scope.newMessage = null;
-
+                this.newMessage = "";
+                $scope.newMessage = "";
+                
                 var sendTo = [];
                 angular.copy($scope.conversation.participants, sendTo);
                 sendTo.push($scope.conversation.userId);
@@ -386,11 +387,11 @@ mrApp.controller('MessagesController',
                 //console.log(replyRequest);
                 apiFactory.functions.call('conversations/reply',
                     replyRequest,
-                    function(response) {
+                    function (response) {
                         showAlert('Message sent', 'success', 1000);
                         listMessages($scope.authenticationToken, conversationId);
                     },
-                    function(error) {
+                    function (error) {
                         showAlert('Message sent', 'error', 5000);
                         console.log(error);
                     });

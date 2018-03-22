@@ -59,12 +59,14 @@
             </div>
         </div>
     </div>
-    <form ng-submit="sendMessage(newMessage)" name="newMessageForm">
-        <div ng-if="conversation.viewSettings!='noreply'" class="send-chat-message-container">
-            <div class="send-chat-message-text"><textarea ng-model="newMessage" enter-submit="sendMessage(newMessage)" class="form-control send-chat-message-textarea" placeholder="Compose message" required></textarea></div>
-            <div class="send-chat-message-btn" ng-click="sendMessage(newMessage)"><a href="" class="navbar-active-item" ng-disable="newMessagesForm.$invalid"><span><i class="fa fa-arrow-right"></i></span></a></div>
-        </div>
-    </form>
+    <div ng-if="conversation.viewSettings!='noreply'">
+        <form name="newMessageForm">
+            <div class="send-chat-message-container">
+                <div class="send-chat-message-text"><textarea ng-model="newMessage" enter-submit="sendMessage(newMessage)" class="form-control send-chat-message-textarea" placeholder="Compose message" required></textarea></div>
+                <div class="send-chat-message-btn" ng-click="sendMessage(newMessage)"><a href="" class="navbar-active-item" ng-disable="newMessagesForm.$invalid"><span><i class="fa fa-arrow-right"></i></span></a></div>
+            </div>
+        </form>
+    </div>
 
     <div ui-content-for="modals">
         <div ng-include="'Partials/overlay.htm'"></div>

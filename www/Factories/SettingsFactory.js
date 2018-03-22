@@ -5,7 +5,7 @@
         function ($localStorage) {
 
             var appId = "com.bosbec.mr-app";
-            var appVersion = "0.3.52";
+            var appVersion = "0.3.53";
             //var appId = "se.bosbec.Messmr1";
             //var appVersion = "4.0.3";
 
