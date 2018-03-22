@@ -7,7 +7,7 @@
             //var appId = "com.bosbec.mr-app";
             //var appVersion = "0.3.53";
             var appId = "se.bosbec.Messmr1";
-            var appVersion = "4.0.4";
+            var appVersion = "4.0.5";
 
             var defaultNumberOfConversations = 15;
             var defaultNumberOfMessages = 20;
