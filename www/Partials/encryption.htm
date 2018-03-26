@@ -1,0 +1,50 @@
+﻿<div ng-controller="EncryptionController">
+    <div class="scrollable content-container">
+        <div class="scrollable-content overthrow">
+
+            <div class="list-group">
+                <h1>Encryption keys</h1>
+                <div class="list-group-item">
+                    <div ng-show="!showAddKeyForm">
+                        <button class="btn btn-primary" ng-click="ShowAddEncryptionKey();"><i class="fa fa-plus"></i> Add key</button>
+                    </div>
+
+                    <div ng-show="showAddKeyForm">
+                        
+                        <div>
+                            <form name="addEncryptionKeyForm">
+                                <label>Name</label>
+                                <input type="text" ng-model="keyName" class="form-control">
+
+                                <label>Alias</label>
+                                <input type="text" ng-model="keyAlias" class="form-control">
+
+                                <label>Key</label>
+                                <textarea ng-model="key" class="form-control"></textarea>
+
+                                <button class="btn btn-primary" ng-click="AddEncryptionKey(keyName, 'aes', key, keyAlias);">Save key</button>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div ng-repeat="key in encryptionKeys" class="list-group-item">
+                    <div>
+                        <h2>{{key.name}}</h2>
+                        <div>Type: {{key.type}}</div>
+                        <div>Created: {{key.createdOn}}</div>
+                        <div>Alias: <span ng-repeat="aliasname in key.alias">{{aliasname}}</span></div>
+                    </div>
+                </div>
+                
+                <div class="list-group-item">
+                    <button class="btn btn-primary" ng-click="ClearStoredEncryptionKeys();"> Clear all stored keys</button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>

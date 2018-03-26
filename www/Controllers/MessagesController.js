@@ -25,42 +25,10 @@
     }
 });
 
-//mrApp.directive('testdirective', ['$compile', function ($compile) {
-//    return {
-//        restrict: 'AEC',
-//        link: function (scope, element, attrs) {
-//            console.log('Link cycle', element, attrs);
-//            //console.log("element: " + element[0]);
-//            //window.elem = element;
-//            //element[0].href = "nuersattejagdettahahahaha.com";
-
-
-//            element[0].addEventListener("click", function (ev) {
-//                console.log("clickEvent: ", ev.target);
-
-//                $scope.openBosbecLinkInModal(ev.target);
-//                return false;
-//            });
-//            //setTimeout(function() { scope.$apply() });
-//            scope.$watch(
-//                function (scope) {
-//                    return scope.$eval(attrs.compile);
-//                },
-//                function (value) {
-//                    element.html(value);
-//                    $compile(element.contents())(scope);
-//                }
-//            );
-//        }
-//    };
-//}
-//]);
-
-
 mrApp.controller('MessagesController',
 [
     'ApiFactory', '$scope', '$location', '$routeParams', '$window', 'moment', 'UsersFactory', 'ConversationsFactory',
-    '$timeout', '$filter', 'SharedState', 'SettingsFactory',
+    '$timeout', '$filter', 'SharedState', 'SettingsFactory', 'EncryptionFactory',
     function(apiFactory,
         $scope,
         $location,
@@ -72,7 +40,8 @@ mrApp.controller('MessagesController',
         $timeout,
         $filter,
         SharedState,
-        settingsFactory) {
+        settingsFactory,
+        encryptionFactory) {
 
         var conversationId = $routeParams.param1;
         $scope.conversation = null;
@@ -250,7 +219,7 @@ mrApp.controller('MessagesController',
 
         function handleViewSettings(message) {
             if (message.metaData.length > 0) {
-                message.metaData.forEach(function (item) {
+                message.metaData.forEach(function(item) {
                     if (item.name === "viewsetting") {
                         console.log("viewSetting: " + item.value);
                         $scope.conversation.viewSettings = item.value;
@@ -299,7 +268,7 @@ mrApp.controller('MessagesController',
             };
             apiFactory.functions.call('conversations/list-messages',
                 listMessagesRequest,
-                function (response) {
+                function(response) {
                     $scope.totalPages = response.data.maxPages;
                     var formatTimestamp = settingsFactory.getFormatTimestamp();
 
@@ -308,8 +277,9 @@ mrApp.controller('MessagesController',
                         response.data.items[i] = addDynamicMetadata(response.data.items[i]);
 
                         if (response.data.items[i].metaData.length > 0) {
-                            
-                            if (response.data.items[i].metaData[0]._type === "form" || response.data.items[i].metaData[0]._type === "messageMetaDataForm") {
+
+                            if (response.data.items[i].metaData[0]._type === "form" ||
+                                response.data.items[i].metaData[0]._type === "messageMetaDataForm") {
                                 var formObj = angular.fromJson(response.data.items[i].metaData[0].value);
                                 response.data.items[i].formId = formObj.id;
                             }
@@ -341,6 +311,8 @@ mrApp.controller('MessagesController',
                     $scope.messages = messages;
                     scrollToLast();
 
+                    console.log($scope.messages);
+
                     var markAsReadRequest = {
                         authenticationToken: $scope.authenticationToken,
                         data: {
@@ -371,7 +343,7 @@ mrApp.controller('MessagesController',
             } else {
                 this.newMessage = "";
                 $scope.newMessage = "";
-                
+
                 var sendTo = [];
                 angular.copy($scope.conversation.participants, sendTo);
                 sendTo.push($scope.conversation.userId);
@@ -381,17 +353,39 @@ mrApp.controller('MessagesController',
                     data: {
                         'conversationId': conversationId,
                         'message': message,
-                        'metadata': [{}]
+                        'metadata': [
+                            {
+                                '_type': 'generic',
+                                'groupOrder': 0,
+                                'contentType': 'text',
+                                'name': 'encryption',
+                                'value': 'aes'
+                            },
+                            {
+                                '_type': 'generic',
+                                'groupOrder': 1,
+                                'contentType': 'text',
+                                'name': 'key-name',
+                                'value': 'my-aes-key-name'
+                            },
+                            {
+                                '_type': 'generic',
+                                'groupOrder': 2,
+                                'contentType': 'text',
+                                'name': 'iv',
+                                'value': 'random-string-as-iv'
+                            }
+                        ]
                     }
                 };
-                //console.log(replyRequest);
+                console.log(replyRequest);
                 apiFactory.functions.call('conversations/reply',
                     replyRequest,
-                    function (response) {
+                    function(response) {
                         showAlert('Message sent', 'success', 1000);
                         listMessages($scope.authenticationToken, conversationId);
                     },
-                    function (error) {
+                    function(error) {
                         showAlert('Message sent', 'error', 5000);
                         console.log(error);
                     });

@@ -212,6 +212,7 @@
             }
 
             function sendVerificationSms(phone, appUserId, callback, error) {
+                console.log(settingsFactory.getUrls().rest);
                 var request = {
                     "workflowId": "fbda91c4-d3e4-4721-81f0-cf785e8adfce",
                     "triggerNames": "send-verify-phone-sms",
@@ -221,7 +222,7 @@
                     }
                 };
                 $http({
-                    url: settingsFactory.rest + 'workflows',
+                    url: settingsFactory.getUrls().rest + 'workflows',
                         method: 'POST',
                         data: request,
                         headers: { 'Content-Type': 'application/json', 'api-key': restApiKey }
@@ -250,7 +251,7 @@
                     }
                 };
                 $http({
-                    url: settingsFactory.rest + 'workflows',
+                    url: settingsFactory.getUrls().rest + 'workflows',
                     method: 'POST',
                     data: request,
                     headers: { 'Content-Type': 'application/json', 'api-key': restApiKey }
@@ -274,7 +275,7 @@
                 };
                 console.log(request);
                 $http({
-                    url: settingsFactory.rest + 'workflows',
+                    url: settingsFactory.getUrls().rest + 'workflows',
                     method: 'POST',
                     data: request,
                     headers: { 'Content-Type': 'application/json', 'api-key': restApiKey }
@@ -303,7 +304,7 @@
                     }
                 };
                 $http({
-                    url: settingsFactory.rest + 'workflows',
+                    url: settingsFactory.getUrls().rest + 'workflows',
                     method: 'POST',
                     data: request,
                     headers: { 'Content-Type': 'application/json', 'api-key': restApiKey }

@@ -52,6 +52,7 @@
                     <a class="list-group-item" ng-show="validateLoad('connect')==true && validateLoad('mobileresponse')==false && validateLoad('profile') == true" href="#/connect"><img src="images/mr/Trigger-128x128.png" width="24" /> Connect</a>
                     <a class="list-group-item" ng-show="validateLoad('profile')" href="#/profile/{{ myAppUser.id }}"><i class="fa fa-user"></i> Profile</a>
                     <a class="list-group-item" ng-show="validateLoad('profile')" href="#/settings"><i class="fa fa-cog"></i> Settings</a>
+                    <a class="list-group-item" ng-show="validateLoad('profile')" href="#/encryption"><i class="fa fa-user-secret"></i> Encryption</a>
                     <a class="list-group-item" ng-show="validateLoad('profile')" href="#/intro/manual"><i class="fa fa-question"></i> Introduction</a>
                     <a class="list-group-item" ng-show="validateLoad('logout')" ng-click="Logout()"><i class="fa fa-sign-out"></i> Logout</a>
                 </div>
@@ -125,17 +126,21 @@
     <script src="js/angular/angular-touch.min.js" type="text/javascript"></script>
     <script src="js/angular/angular-sanitize.js" type="text/javascript"></script>-->
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.11/angular.min.js" type="text/javascript"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.11/angular-route.min.js" type="text/javascript"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.11/angular-resource.min.js" type="text/javascript"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.11/angular-touch.min.js" type="text/javascript"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.11/angular-sanitize.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.11/angular.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.11/angular-route.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.11/angular-resource.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.11/angular-touch.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.11/angular-sanitize.min.js" type="text/javascript"></script>
 
     <script src="js/ng-cordova.js" type="text/javascript"></script>
     <script src="js/mobile-angular-ui/dist/js/mobile-angular-ui.min.js" type="text/javascript"></script>
     <script src="js/mobile-angular-ui/dist/js/mobile-angular-ui.gestures.min.js"></script>
     <script src="js/moment.min.js"></script>
     <script src="js/angular-moment.min.js"></script>
+
+    <script src="js/encryption/angularjs-crypto.js"></script>
+    <script src="js/encryption/CryptoJSCipher.js"></script>
+    <script src="js/encryption/aes.js"></script>
 
     <script src="Scripts/init.js" type="text/javascript"></script>
     <script src="Scripts/config.js" type="text/javascript"></script>
@@ -148,7 +153,7 @@
     <script src="Factories/DeviceFactory.js" type="text/javascript"></script>
     <script src="Factories/SettingsFactory.js"></script>
     <script src="Factories/MobileResponseFactory.js"></script>
-
+    <script src="Factories/EncryptionFactory.js"></script>
 
     <script src="Controllers/MainController.js" type="text/javascript"></script>
     <script src="Controllers/LoginController.js" type="text/javascript"></script>
@@ -161,6 +166,7 @@
     <script src="Controllers/SettingsController.js" type="text/javascript"></script>
     <script src="Controllers/ConnectController.js" type="text/javascript"></script>
     <script src="Controllers/VerifyController.js" type="text/javascript"></script>
+    <script src="Controllers/EncryptionController.js" type="text/javascript"></script>
 
     <script src="Controllers/MrGroupsController.js"></script>
     <script src="Controllers/MrUnitsController.js"></script>
