@@ -348,36 +348,45 @@ mrApp.controller('MessagesController',
                 angular.copy($scope.conversation.participants, sendTo);
                 sendTo.push($scope.conversation.userId);
 
+                //var replyRequest = {
+                //    authenticationToken: $scope.authenticationToken,
+                //    data: {
+                //        'conversationId': conversationId,
+                //        'message': message,
+                //        'metadata': [
+                //            {
+                //                '_type': 'generic',
+                //                'groupOrder': 0,
+                //                'contentType': 'text',
+                //                'name': 'encryption-type',
+                //                'value': 'aes'
+                //            },
+                //            {
+                //                '_type': 'generic',
+                //                'groupOrder': 1,
+                //                'contentType': 'text',
+                //                'name': 'encryption-key',
+                //                'value': 'bjorntestkey'
+                //            },
+                //            {
+                //                '_type': 'generic',
+                //                'groupOrder': 2,
+                //                'contentType': 'text',
+                //                'name': 'encryption-iv',
+                //                'value': 'abcdef9876543210abcdef9876543210'
+                //            }
+                //        ]
+                //    }
+                //};
                 var replyRequest = {
                     authenticationToken: $scope.authenticationToken,
                     data: {
                         'conversationId': conversationId,
                         'message': message,
-                        'metadata': [
-                            {
-                                '_type': 'generic',
-                                'groupOrder': 0,
-                                'contentType': 'text',
-                                'name': 'encryption',
-                                'value': 'aes'
-                            },
-                            {
-                                '_type': 'generic',
-                                'groupOrder': 1,
-                                'contentType': 'text',
-                                'name': 'key-name',
-                                'value': 'my-aes-key-name'
-                            },
-                            {
-                                '_type': 'generic',
-                                'groupOrder': 2,
-                                'contentType': 'text',
-                                'name': 'iv',
-                                'value': 'random-string-as-iv'
-                            }
-                        ]
+                        'metadata': []
                     }
                 };
+
                 console.log(replyRequest);
                 apiFactory.functions.call('conversations/reply',
                     replyRequest,

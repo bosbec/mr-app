@@ -167,7 +167,6 @@
                                     //console.log(conversations);
                                     response.data.items = conversations;
                                     callback(response.data);
-
                                 },
                                 function(e) {
                                     error(e);
