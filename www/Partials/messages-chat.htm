@@ -11,7 +11,7 @@
                     <a ng-click="LoadMore()" class="btn">Load more ... (page {{currentPage}} / {{totalPages}})</a>
                 </div>
                 <div ng-repeat="message in messages" id="{{'msg'+ ($index + 1)}}" class="list-group-item message-chat" ui-swipe-left='swipeLeft(message);' 
-                     ng-class="{ 'message-chat-me': message.author === 'me', 'message-chat-other': message.author === 'other', 'last-message': $index >= messages.length-1}" ng-class="(!message.isRead) ? 'new-item' : ''">
+                     ng-class="{ 'message-chat-me': message.author === 'me', 'message-chat-other': message.author === 'other', 'last-message': $index >= messages.length-1}">
                     <div ng-show="showHideMessage" class="hideMessageContainer">
                         <a href="#" class="text-danger" ng-click="hideMessage(message);"><i class="fa fa-2x fa-minus-circle"></i></a>
                     </div>
@@ -19,7 +19,8 @@
                         <img class="avatar" ng-if="conversation.avatars" ng-repeat="avatar in conversation.avatars" ng-show="avatar.avatar != null && avatar.userId == message.authorId" height="50" alt="avatar" ng-src="{{ avatar.avatar }}"/>
                     </div>
                     <div>
-                        <div><b>{{ message.authorDisplayName }}</b>
+                        <div>
+                            <i ng-show="message.secure" class="fas fa-lock-open"></i> <b>{{ message.authorDisplayName }}</b>
                         </div>
                         <div ng-bind-html="message.content"></div>
                         <div ng-repeat="metadata in message.metaData">

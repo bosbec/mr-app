@@ -14,10 +14,10 @@
     <link href="js/mobile-angular-ui/dist/css/mobile-angular-ui-base.css" rel="stylesheet" type="text/css" />
     <link href="js/mobile-angular-ui/dist/css/mobile-angular-ui-desktop.min.css" rel="stylesheet" type="text/css"/>
 
-    <link href="css/font-awesome.css" rel="stylesheet" />
+    <!--<link href="css/font-awesome.css" rel="stylesheet" />-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" integrity="sha384-3AB7yXWz4OeoZcPbieVW64vVXEwADiYyAEhwilzWsLw+9FgqpyjjStpPnpBO8o8S" crossorigin="anonymous">
 
     <link rel="stylesheet" href="css/style.css" type="text/css"/>
-
 
 </head>
 <body ng-controller="MainController">
@@ -59,6 +59,33 @@
 
             </div>
         </div>
+
+    </div>
+
+    <div ng-controller="RightSidebarController" class="sidebar sidebar-right" toggleable parent-active-class="sidebar-right-in" id="rightSidebar">
+
+        <div class="scrollable">
+            <div class="scrollable-content">
+
+                <div class="list-group">
+                    <div class="list-group-item">
+                        <b>Choose encryption key</b>
+                    </div>
+                    <!--<div class="list-group-item">Current encryption keyName: {{currentEncryptionKey}}</div>-->
+                    <div ng-repeat="key in encryptionKeys" class="list-group-item" ng-click="SetEncryptionKey(key.name);">
+                        <span>
+                            <i ng-show="currentEncryptionKey == key.name" class="fas fa-check"></i>
+                            <i ng-hide="currentEncryptionKey == key.name" class="far fa-square"></i> {{key.name}}
+                        </span>
+                    </div>
+                    <div class="list-group-item">
+                        <a href="#/encryption"> Add/Edit encryption keys</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
     </div>
 
     <div class="app">
@@ -72,9 +99,12 @@
 
             <!--BARS-->
             <div class="btn-group pull-left navbar-icongroup">
-                <div ui-turn-on="mainSidebar" class="btn btn-navbar sidebar-toggle">
+                <div ng-hide="currentView=='conversation'" ui-turn-on="mainSidebar" class="btn btn-navbar sidebar-toggle">
                     <i ui-if="!mainSidebar" class="fa fa-2x fa-bars"></i>
                     <i ui-if="mainSidebar" class="fa fa-2x fa-arrow-left"></i>
+                </div>
+                <div ng-show="currentView=='conversation'" class="btn btn-navbar">
+                    <a href="#/conversations/{{ inbox.inboxId }}" ng-click="hideConversation()"><span><i class="fa fa-2x fa-arrow-left"></i></span></a>
                 </div>
             </div>
 
@@ -88,15 +118,18 @@
                 <div ng-show="alertNewMessage" class="btn btn-navbar">
                     <a href="#/conversations/{{ inbox.inboxId }}"><span><i class="fa fa-2x fa-comment"></i></span></a>
                 </div>
-
+                
                 <div ng-show="currentView=='conversation'" class="btn btn-navbar">
+                    <span ng-if="IsEncrypted();"><i class="fas fa-2x fa-lock"></i></span>
+                    <a ui-turn-on="rightSidebar" ng-click="OpenRightSidebar();"><span><i class="fas fa-2x fa-cog"></i></span></a>
+                </div>
+
+                <!--<div ng-show="currentView=='conversation'" class="btn btn-navbar">
                     <a href="#/conversations/{{ inbox.inboxId }}" ng-click="hideConversation()"><span><i class="fa fa-2x fa-times-circle"></i></span></a>
-                </div>
-
-
-                <div ng-show="currentView=='group-members-list'" class="btn btn-navbar">
+                </div>-->
+                <!--<div ng-show="currentView=='group-members-list'" class="btn btn-navbar">
                     <a href="#/mr/groups/" ng-click="hideGroupMembers()"><span><i class="fa fa-2x fa-times-circle"></i></span></a>
-                </div>
+                </div>-->
             </div>
 
         </div>
@@ -108,7 +141,7 @@
                 <a ng-show="!validateLoad('mobileresponse')" href="#/profile/{{ myAppUser.id }}" class="btn btn-navbar btn-icon-only" ng-class="{'navbar-active-item': currentView === 'profile'}"><i class="fa fa-2x fa-user"></i></a>
 
                 <a ng-show="validateLoad('inbox')" href="#/conversations/{{ inbox.inboxId }}" class="btn btn-navbar btn-icon-only" ng-class="{'navbar-active-item': currentView === 'conversations'}"><i class="fa fa-2x fa-inbox"></i></a>
-                <a ng-show="validateLoad('inbox')" href="#/newconversation/" class="btn btn-navbar btn-icon-only" ng-class="{'navbar-active-item': currentView === 'newconversation'}"><i class="fa fa-2x fa-pencil"></i></a>
+                <a ng-show="validateLoad('inbox')" href="#/newconversation/" class="btn btn-navbar btn-icon-only" ng-class="{'navbar-active-item': currentView === 'newconversation'}"><i class="fa fa-2x fa-edit"></i></a>
 
             </div>
         </div>
@@ -167,6 +200,7 @@
     <script src="Controllers/ConnectController.js" type="text/javascript"></script>
     <script src="Controllers/VerifyController.js" type="text/javascript"></script>
     <script src="Controllers/EncryptionController.js" type="text/javascript"></script>
+    <script src="Controllers/RightSidebarController.js" type="text/javascript"></script>
 
     <script src="Controllers/MrGroupsController.js"></script>
     <script src="Controllers/MrUnitsController.js"></script>

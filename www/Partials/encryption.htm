@@ -3,14 +3,17 @@
         <div class="scrollable-content overthrow">
 
             <div class="list-group">
-                <h1>Encryption keys</h1>
+                <div class="list-group-item">
+                    <h1>Encryption keys</h1>
+                </div>
+
                 <div class="list-group-item">
                     <div ng-show="!showAddKeyForm">
                         <button class="btn btn-primary" ng-click="ShowAddEncryptionKey();"><i class="fa fa-plus"></i> Add key</button>
                     </div>
 
                     <div ng-show="showAddKeyForm">
-                        
+
                         <div>
                             <form name="addEncryptionKeyForm">
                                 <label>Name</label>
@@ -34,10 +37,13 @@
                         <h2>{{key.name}}</h2>
                         <div>Type: {{key.type}}</div>
                         <div>Created: {{key.createdOn}}</div>
-                        <div>Alias: <span ng-repeat="aliasname in key.alias">{{aliasname}}</span></div>
+                        <div>Key: {{key.key}}</div>
+                        <div>
+                            Alias: <span ng-repeat="aliasname in key.alias">{{aliasname}}</span>
+                        </div>
                     </div>
                 </div>
-                
+
                 <div class="list-group-item">
                     <button class="btn btn-primary" ng-click="ClearStoredEncryptionKeys();"> Clear all stored keys</button>
                 </div>

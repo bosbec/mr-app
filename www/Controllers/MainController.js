@@ -273,6 +273,19 @@ mrApp.controller('MainController', [
         $scope.hideGroupMembers = function () {
             $scope.currentView = 'groups-list';
         };
+        
+        $scope.OpenRightSidebar = function() {
+            $rootScope.$broadcast('openRightSidebar', null);
+        };
+
+        $scope.IsEncrypted = function() {
+            var conversation = conversationsFactory.getCurrentConversation();
+            if (conversation != null) {
+                return conversationsFactory.usesEncryption(conversation.itemId);
+            } else {
+                return false;
+            }
+        };
 
         //$scope.swipeRight = function () {
         //    console.log("SwipeRight: " + $scope.currentView);

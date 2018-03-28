@@ -1,5 +1,5 @@
 ﻿angular.module('ConversationsFactory', [])
-    .factory('ConversationsFactory',['$http', '$timeout', '$filter', 'ApiFactory', 'UsersFactory',function($http, $timeout, $filter, apiFactory, usersFactory) {
+    .factory('ConversationsFactory', ['$http', '$timeout', '$filter', '$localStorage', 'ApiFactory', 'UsersFactory',function($http, $timeout, $filter, $localStorage, apiFactory, usersFactory) {
 
             var conversations = [];
             var currentConversation = null;
@@ -243,6 +243,58 @@
                     });
             }
 
+            function getEncryptionKeyName(conversationId) {
+                var encryptionSettings = $filter('filter')($localStorage.encryptedConversations,
+                    { 'conversationId': conversationId });
+                
+                if (encryptionSettings.length > 0) {
+                    return encryptionSettings[0].keyName;
+                } else {
+                    return "";
+                }
+           }
+
+            function setEncryptionKeyName(conversationId, keyName) {
+                var encryptionSettings = $filter('filter')($localStorage.encryptedConversations,
+                    { 'conversationId': conversationId });
+
+                if (encryptionSettings.length > 0) {
+                    encryptionSettings[0].keyName = keyName;
+                } else {
+                    var newEncryptionSetting = {
+                        "conversationId": conversationId,
+                        "keyName": keyName
+                    };
+                    $localStorage.encryptedConversations.push(newEncryptionSetting);
+                }
+
+            }
+
+            function removeEncryptionKeyName(conversationId) {
+                var removeIndex = $localStorage.encryptedConversations.indexOf($filter('filter')($localStorage
+                    .encryptedConversations,
+                    { 'conversationId': conversationId }));
+                $localStorage.encryptedConversations.splice(removeIndex, 1);
+            }
+
+            function usesEncryption(conversationId) {
+                if (getEncryptionKeyName(conversationId) !== "") {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+            function init() {
+                console.log("Init ConversationsFactory");
+                if (!$localStorage.encryptedConversations) {
+                    $localStorage.encryptedConversations = [];
+                    console.log("Init encryptedConversations array localStorage", $localStorage.encryptedConversations);
+                }
+            }
+
+            init();
+
             return {
                 conversations: conversations,
                 listConversations: listConversations,
@@ -252,7 +304,11 @@
                 whatIsNew: whatIsNew,
                 createNewConversation: createNewConversation,
                 hideConversation: hideConversation,
-                hideMessage: hideMessage
+                hideMessage: hideMessage,
+                setEncryptionKeyName: setEncryptionKeyName,
+                getEncryptionKeyName: getEncryptionKeyName,
+                removeEncryptionKeyName: removeEncryptionKeyName,
+                usesEncryption: usesEncryption
             };
 
         }

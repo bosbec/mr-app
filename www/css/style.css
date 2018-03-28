@@ -7,7 +7,7 @@ a {
 .app {
     background-color: white;
 }
-.sidebar-left {
+.sidebar-left, .sidebar-right {
     background-color: #aaaaaa;
 }
 
@@ -227,6 +227,9 @@ a {
 }
 #last-message {
     color: white;
+}
+.message-secure {
+    border-left: 5px solid lightgreen;
 }
 
 .send-chat-message-container {
