@@ -286,7 +286,7 @@ mrApp.controller('MessagesController',
                                         //console.log("success decrypt: ", decryptedMessage);
                                         useEncryption = true;
                                     },
-                                    function(error) {
+                                    function (error) {
                                         console.log("error decrypt: ", error);
                                     });
                             } 

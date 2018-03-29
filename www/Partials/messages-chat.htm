@@ -20,9 +20,10 @@
                     </div>
                     <div>
                         <div>
-                            <i ng-show="message.secure" class="fas fa-lock-open"></i> <b>{{ message.authorDisplayName }}</b>
+                            <i ng-show="message.secure" class="fas" ng-class="{'fa-lock-open': message.encryptionError === undefined, 'fa-lock': !message.encryptionError !== undefined}"></i> <b>{{ message.authorDisplayName }}</b>
                         </div>
-                        <div ng-bind-html="message.content"></div>
+                        <div ng-hide="message.encryptionError" ng-bind-html="message.content"></div>
+                        <div ng-show="message.encryptionError" ng-bind-html="message.encryptionError"></div>
                         <div ng-repeat="metadata in message.metaData">
                             <div ng-if="metadata._type == 'image' || metadata._type == 'file' || metadata._type == 'position' || metadata._type == 'form' || metadata._type == 'externalLink' || metadata._type == 'bosbecLink' || metadata._type == 'bosbecForm' || metadata._type == 'messageMetaDataForm'" class="attachment">
                                 <a ng-if="metadata._type == 'image'" ng-click="openExternalLink(metadata.url);">
@@ -52,6 +53,7 @@
                             </div>
                         </div>
                         <span class="smallDateTime" ng-class="{ 'smallDateTime-me': message.author === 'me'}">{{ message.createdOnFormatted }}</span>
+                        <span ng-show="message.secure" class="smallDateTime" ng-class="{ 'smallDateTime-me': message.author === 'me'}">{{ message.encryptionKeyName }}</span>
                     </div>
                 </div>
                 <div id="last-message" class="list-group-item message-chat-end">

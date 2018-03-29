@@ -66,12 +66,15 @@
                     }
                 }
 
+                message.secure = true;
+
                 if (encryptionType !== "" && encryptionKeyName !== "" && encryptionIv !== "") {
                     decryptAES(message.content, encryptionKeyName, encryptionIv, function (response) {
                         message.content = response;
-                        message.secure = true;
                         callback(message);
-                    }, function(e) {
+                    }, function (e) {
+                        message.encryptionError = "Unable to decrypt secure message. <br />Missing key: '<b>" +
+                            encryptionKeyName +"</b>'";
                         error(e);
                     });
                 } else {
