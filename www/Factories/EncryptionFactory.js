@@ -13,7 +13,7 @@
             function encryptAES(messageText, keyName, iv, callback, error) {
                 var privateKey = getEncryptionKeyByName(keyName);
                 if (privateKey != null) {
-                    var encrypted = CryptoJS.AES.encrypt(messageText, CryptoJS.enc.Hex.parse(privateKey), { iv: CryptoJS.enc.Hex.parse(iv) });
+                    var encrypted = CryptoJS.AES.encrypt(messageText, CryptoJS.enc.Hex.parse(privateKey.key), { iv: CryptoJS.enc.Hex.parse(iv) });
                     callback(encrypted.ciphertext.toString(CryptoJS.enc.Base64));
                 } else {
                     error("Key not found: " + keyName);
@@ -27,7 +27,7 @@
                     var cipherParams = CryptoJS.lib.CipherParams.create({
                         ciphertext: CryptoJS.enc.Base64.parse(encryptedText)
                     });
-                    var decrypted = CryptoJS.AES.decrypt(cipherParams, CryptoJS.enc.Hex.parse(privateKey), { iv: CryptoJS.enc.Hex.parse(iv) });
+                    var decrypted = CryptoJS.AES.decrypt(cipherParams, CryptoJS.enc.Hex.parse(privateKey.key), { iv: CryptoJS.enc.Hex.parse(iv) });
                     decryptedText = decrypted.toString(CryptoJS.enc.Utf8);
                     if (decryptedText !== "") {
                         callback(decryptedText);
@@ -82,7 +82,8 @@
 
             function getEncryptionKeyName(conversationId) {
                 var encryptionSettings = $filter('filter')($localStorage.encryptedConversations,
-                    { 'conversationId': conversationId });
+                    { 'conversationId': conversationId },
+                    true);
 
                 if (encryptionSettings.length > 0) {
                     return encryptionSettings[0].keyName;
@@ -92,16 +93,11 @@
             }
 
             function getEncryptionKeys() {
-                return $localStorage.encryptionKeys;
+                return $filter('filter')($localStorage.encryptionKeys, {});
             }
 
             function getEncryptionKeyByName(keyName) {
-                for (var i = 0; i < $localStorage.encryptionKeys.length; i++) {
-                    if ($localStorage.encryptionKeys[i].name === keyName) {
-                        return $localStorage.encryptionKeys[i].key;
-                    }
-                }
-                return null;
+                return $filter('filter')($localStorage.encryptionKeys, { 'name': keyName }, true)[0];
             }
 
             function addEncryptionKey(name, type, key, alias) {
@@ -114,6 +110,25 @@
                     "version": 1
                 };
                 $localStorage.encryptionKeys.push(newKey);
+            }
+
+            function updateEncryptionKey(key) {
+                var storedKey = $filter('filter')($localStorage.encryptionKeys, { 'name': key.name }, true)[0];
+                if (storedKey !== undefined) {
+                    console.log("storedKey", storedKey);
+                    storedKey.name = key.name;
+                    storedKey.key = key.key;
+                    storedKey.version = storedKey.version + 1;
+                    console.log("updated storedKey", storedKey);
+                }
+            }
+
+            function deleteEncryptionKey(keyName) {
+                var removeIndex = $localStorage.encryptionKeys.indexOf($filter('filter')($localStorage
+                    .encryptionKeys,
+                    { 'name': keyName },
+                    true)[0]);
+                $localStorage.encryptionKeys.splice(removeIndex, 1);
             }
             
             function clearStoredEncryptionKeys() {
@@ -137,7 +152,10 @@
                 generateIv: generateIv,
                 clearStoredEncryptionKeys: clearStoredEncryptionKeys,
                 getEncryptionKeys: getEncryptionKeys,
-                getEncryptionKeyName: getEncryptionKeyName
+                getEncryptionKeyName: getEncryptionKeyName,
+                getEncryptionKeyByName: getEncryptionKeyByName,
+                updateEncryptionKey: updateEncryptionKey,
+                deleteEncryptionKey: deleteEncryptionKey
             };
         }
     ]);

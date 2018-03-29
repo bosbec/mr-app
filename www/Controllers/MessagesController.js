@@ -280,13 +280,14 @@ mrApp.controller('MessagesController',
                         // check if encrypted -> decrypt content
                         if (response.data.items[i].metaData.length > 0) {
                             if ($filter('filter')(response.data.items[i].metaData, { 'name': 'encryptionkey' }).length > 0) {
+                                //console.log("decrypt message",response.data.items[i]);
                                 encryptionFactory.decryptMessage(response.data.items[i],
                                     function(decryptedMessage) {
-                                        //console.log("success decrypt", response);
+                                        //console.log("success decrypt: ", decryptedMessage);
                                         useEncryption = true;
                                     },
                                     function(error) {
-                                        console.log("error decrypt", error);
+                                        console.log("error decrypt: ", error);
                                     });
                             } 
                         }
