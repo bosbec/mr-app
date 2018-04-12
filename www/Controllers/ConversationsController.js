@@ -115,10 +115,17 @@
         var onNewMessages = function(event, messages) {
             //console.log("CC: Handle new message event");
             listConversations(apiFactory.getToken(), inboxId);
-        }
+        };
+
+        var onResume = function(event, state) {
+            $location.reload();
+        };
 
         // start subscribing
         $scope.$on('newMessages', onNewMessages);
+
+        // start subscribing
+        $scope.$on('appResumed', onResume);
 
         init();
     }
