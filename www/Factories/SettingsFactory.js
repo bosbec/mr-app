@@ -5,7 +5,7 @@
         function ($localStorage) {
 
             var appId = "com.bosbec.mr-app";
-            var appVersion = "0.3.56";
+            var appVersion = "0.3.57";
             //var appId = "se.bosbec.Messmr1";
             //var appVersion = "4.0.6";
 
@@ -55,6 +55,17 @@
 
             function getSettings() {
                 return $localStorage.settings;
+            }
+
+            function getDeviceTypeName() {
+                if ($localStorage.deviceTypeName === undefined) {
+                    return "unknown";
+                }
+                return $localStorage.deviceTypeName;
+            }
+
+            function setDeviceTypeName(deviceTypeName) {
+                $localStorage.deviceTypeName = deviceTypeName;
             }
 
             function getNumberOfConversations() {
@@ -170,7 +181,9 @@
                 getFormatTimestamp: getFormatTimestamp,
                 clearLocalStorage: clearLocalStorage,
                 getAppId: getAppId,
-                getAppVersion: getAppVersion
+                getAppVersion: getAppVersion,
+                setDeviceTypeName: setDeviceTypeName,
+                getDeviceTypeName: getDeviceTypeName
             };
         }
     ]);

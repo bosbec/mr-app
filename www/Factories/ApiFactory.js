@@ -84,7 +84,7 @@
                 }
                 request.data.metaData.appId = settingsFactory.getAppId();
                 request.data.metaData.appVersion = settingsFactory.getAppVersion();
-                //request.data.metaData.deviceType = deviceFactory.getDeviceType();
+                request.data.metaData.deviceType = settingsFactory.getDeviceTypeName();
                 $http({
                         url: apiSettings.baseApiUrl + url,
                         method: apiSettings.method,

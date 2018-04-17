@@ -274,6 +274,7 @@
                                 };
                             }
                         }
+
                         $rootScope.keepMeSignedIn = $scope.keepMeSignedIn;
                         $rootScope.authenticationToken = response;
 

@@ -310,9 +310,10 @@ mrApp.controller('MainController', [
         
         function onViewLoaded() {
 
-            console.log("onViewLoaded[Main]");
+            //console.log("onViewLoaded[Main]");
 
             $scope.deviceType = deviceFactory.getDeviceTypeId();
+            settingsFactory.setDeviceTypeName(deviceFactory.getDeviceType());
 
             //var token = $rootScope.authenticationToken;
             var token = apiFactory.authenticationToken();

@@ -141,7 +141,7 @@
                     document.addEventListener('deviceready',
                         function () {
 
-                            document.addEventListener("resume", settings.onResume, false);
+                            document.addEventListener("resume", settings.onResume, { passive: false });
 
                             var afterRegisterSuccess = function(token) {
                                 //console.log(token);

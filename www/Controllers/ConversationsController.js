@@ -12,7 +12,7 @@
         $scope.isSwipe = false;
 
         function init() {
-            console.log("conversation", inboxId);
+            //console.log("conversation", inboxId);
             $scope.$emit('viewChanged', 'conversations');
             $rootscope.currentInboxId = inboxId;
             listConversations(apiFactory.getToken(), inboxId, $scope.currentPage);
@@ -44,7 +44,7 @@
                 $scope.conversations = conversations;
                 $scope.$emit('showAlertNewMessage', false);
                 //console.log("conversations loaded", $scope.conversations);
-                console.log("conversations loaded");
+                //console.log("conversations loaded");
             };
             getConversations(token, inboxId, $scope.currentPage, callback);
         }
