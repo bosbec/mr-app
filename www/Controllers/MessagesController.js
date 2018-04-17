@@ -389,7 +389,7 @@ mrApp.controller('MessagesController',
                         data: {
                             'conversationId': conversationId,
                             'message': message,
-                            'metadata': [
+                            'metaData': [
                                 {
                                     '_type': 'generic',
                                     'groupOrder': 0,
@@ -419,7 +419,7 @@ mrApp.controller('MessagesController',
                         data: {
                             'conversationId': conversationId,
                             'message': message,
-                            'metadata': [{}]
+                            'metaData': [{}]
                         }
                     };
                 }
