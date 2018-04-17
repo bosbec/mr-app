@@ -26,8 +26,8 @@
                 //// test
                 //return {
                 //    "appapi": "http://appapi.test.mobileresponse.se/1/",
-                //    "api2": "https://api2-test.bosbec.io/",
-                //    "apps": "https://apps-test.bosbec.io/#",
+                //    "api2": "http://api2-test.bosbec.io/",
+                //    "apps": "http://apps-test.bosbec.io/#",
                 //    "forms": "http://m.test.mobileresponse.se/form/",
                 //    "rest": "http://rest.test.mobileresponse.se/2"
                 //};

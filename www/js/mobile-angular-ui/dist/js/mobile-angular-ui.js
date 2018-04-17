@@ -127,7 +127,13 @@
 
 		layer.addEventListener('click', this.onClick, true);
 		layer.addEventListener('touchstart', this.onTouchStart, false);
-		layer.addEventListener('touchmove', this.onTouchMove, false);
+        //layer.addEventListener('touchmove', this.onTouchMove, false);
+	    layer.addEventListener('touchmove',
+	        function(e) {
+                e.preventDefault();
+	            this.onTouchMove(e);
+	        },
+	        { passive: false });
 		layer.addEventListener('touchend', this.onTouchEnd, false);
 		layer.addEventListener('touchcancel', this.onTouchCancel, false);
 

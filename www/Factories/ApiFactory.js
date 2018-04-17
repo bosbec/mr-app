@@ -38,7 +38,6 @@
 
             function autoAuthenticate(callback, error) {
                 var storedCredentials = $localStorage.savedCredentials;
-
                 if (storedCredentials === undefined) {
                     console.log("missing credentials");
                     error(function() {
@@ -59,8 +58,6 @@
 
             function authenticate(userCredentials, callback, error) {
                 var request = { data: userCredentials };
-                request.data.metaData.appId = settingsFactory.getAppId();
-                request.data.metaData.appVersion = settingsFactory.getAppVersion();
                 call('authentication/authenticate',
                     request,
                     function(response) {
@@ -82,6 +79,12 @@
 
             function call(url, request, callback, error) {
                 $rootScope.$broadcast('loading', true);
+                if (request.data.metaData === undefined) {
+                    request.data.metaData = {};
+                }
+                request.data.metaData.appId = settingsFactory.getAppId();
+                request.data.metaData.appVersion = settingsFactory.getAppVersion();
+                //request.data.metaData.deviceType = deviceFactory.getDeviceType();
                 $http({
                         url: apiSettings.baseApiUrl + url,
                         method: apiSettings.method,
