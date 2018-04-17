@@ -47,10 +47,7 @@
                     var credentials = {
                         'instanceName': apiSettings.instanceName,
                         'UserName': storedCredentials.userName,
-                        'Password': storedCredentials.password,
-                        'metaData': {
-                            'deviceType': storedCredentials.deviceType
-                        }
+                        'Password': storedCredentials.password
                     };
                     authenticate(credentials, callback, error);
                 }
@@ -79,12 +76,12 @@
 
             function call(url, request, callback, error) {
                 $rootScope.$broadcast('loading', true);
-                if (request.data.metaData === undefined) {
-                    request.data.metaData = {};
+                if (request.data.requestMetaData === undefined) {
+                    request.data.requestMetaData = {};
                 }
-                request.data.metaData.appId = settingsFactory.getAppId();
-                request.data.metaData.appVersion = settingsFactory.getAppVersion();
-                request.data.metaData.deviceType = settingsFactory.getDeviceTypeName();
+                request.data.requestMetaData.appId = settingsFactory.getAppId();
+                request.data.requestMetaData.appVersion = settingsFactory.getAppVersion();
+                request.data.requestMetaData.deviceType = settingsFactory.getDeviceTypeName();
                 $http({
                         url: apiSettings.baseApiUrl + url,
                         method: apiSettings.method,
