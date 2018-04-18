@@ -125,17 +125,42 @@
 			layer.addEventListener('mouseup', this.onMouse, true);
 		}
 
-		layer.addEventListener('click', this.onClick, true);
-		layer.addEventListener('touchstart', this.onTouchStart, false);
-        //layer.addEventListener('touchmove', this.onTouchMove, false);
-	    layer.addEventListener('touchmove',
+		//layer.addEventListener('click', this.onClick, true);
+		//layer.addEventListener('touchstart', this.onTouchStart, false);
+  //      layer.addEventListener('touchmove', this.onTouchMove, false);
+  //      layer.addEventListener('touchend', this.onTouchEnd, false);
+		//layer.addEventListener('touchcancel', this.onTouchCancel, false);
+
+        layer.addEventListener('click', this.onClick, true);
+	    layer.addEventListener('touchstart',
 	        function(e) {
-                e.preventDefault();
-	            this.onTouchMove(e);
+	            console.log("touchstart", e);
+	            e.preventDefault();
+	            this.onTouchStart(e);
 	        },
 	        { passive: false });
-		layer.addEventListener('touchend', this.onTouchEnd, false);
-		layer.addEventListener('touchcancel', this.onTouchCancel, false);
+        layer.addEventListener('touchmove',
+            function (e) {
+                console.log("touchmove", e);
+                e.preventDefault();
+                this.onTouchMove(e);
+            },
+            { passive: false });
+	    layer.addEventListener('touchend',
+	        function(e) {
+	            console.log("touchend", e);
+	            e.preventDefault();
+	            this.onTouchEnd(e);
+	        },
+	        { passive: false });
+	    layer.addEventListener('touchcancel',
+	        function(e) {
+	            console.log("touchcancel", e);
+	            e.preventDefault();
+	            this.onTouchCancel(e);
+	        },
+	        { passive: false });
+        
 
 		// Hack is required for browsers that don't support Event#stopImmediatePropagation (e.g. Android 2)
 		// which is how FastClick normally stops click events bubbling to callbacks registered on the FastClick
@@ -441,16 +466,20 @@
 		}
 
 		this.trackingClick = true;
-		this.trackingClickStart = event.timeStamp;
+        //this.trackingClickStart = event.timeStamp;
+        this.trackingClickStart = (new Date()).getTime();                       // ------------------ Björn: Change due to iOS 11.3
 		this.targetElement = targetElement;
 
 		this.touchStartX = touch.pageX;
 		this.touchStartY = touch.pageY;
 
 		// Prevent phantom clicks on fast double-tap (issue #36)
-		if ((event.timeStamp - this.lastClickTime) < this.tapDelay) {
-			event.preventDefault();
-		}
+		//if ((event.timeStamp - this.lastClickTime) < this.tapDelay) { 
+		//	event.preventDefault();
+		//}
+        if ((this.trackingClickStart - this.lastClickTime) < this.tapDelay) {   // ------------------ Björn: Change due to iOS 11.3
+            event.preventDefault();
+        }
 
 		return true;
 	};
@@ -529,22 +558,44 @@
 
 		if (!this.trackingClick) {
 			return true;
-		}
+        }
 
-		// Prevent phantom clicks on fast double-tap (issue #36)
-		if ((event.timeStamp - this.lastClickTime) < this.tapDelay) {
-			this.cancelNextClick = true;
-			return true;
-		}
+        
 
-		if ((event.timeStamp - this.trackingClickStart) > this.tapTimeout) {
-			return true;
-		}
+		//// Prevent phantom clicks on fast double-tap (issue #36)
+		//if ((event.timeStamp - this.lastClickTime) < this.tapDelay) {
+		//	this.cancelNextClick = true;
+		//	return true;
+		//}
 
-		// Reset to prevent wrong click cancel on input (issue #156).
-		this.cancelNextClick = false;
+		//if ((event.timeStamp - this.trackingClickStart) > this.tapTimeout) {
+		//	return true;
+		//}
 
-		this.lastClickTime = event.timeStamp;
+		//// Reset to prevent wrong click cancel on input (issue #156).
+		//this.cancelNextClick = false;
+
+		//this.lastClickTime = event.timeStamp;
+
+        //                                                          ----------------------- Björn: due to iOS 11.3 issue
+        var touchEndTime = (new Date()).getTime();
+
+        if ((touchEndTime - this.lastClickTime) < this.tapDelay) {
+            this.cancelNextClick = true;
+            return true;
+        }
+
+        if ((touchEndTime - this.trackingClickStart) > this.tapTimeout) {
+            return true;
+        }
+
+        // Reset to prevent wrong click cancel on input (issue #156).
+        this.cancelNextClick = false;
+
+
+//        this.lastClickTime = event.timeStamp;
+         //                                                          ----------------------- Björn: due to iOS 11.3 issue
+	    this.lastClickTime = touchEndTime;
 
 		trackingClickStart = this.trackingClickStart;
 		this.trackingClick = false;
@@ -577,10 +628,17 @@
 
 			// Case 1: If the touch started a while ago (best guess is 100ms based on tests for issue #36) then focus will be triggered anyway. Return early and unset the target element reference so that the subsequent click will be allowed through.
 			// Case 2: Without this exception for input elements tapped when the document is contained in an iframe, then any inputted text won't be visible even though the value attribute is updated as the user types (issue #37).
-			if ((event.timeStamp - trackingClickStart) > 100 || (deviceIsIOS && window.top !== window && targetTagName === 'input')) {
-				this.targetElement = null;
-				return false;
-			}
+			//if ((event.timeStamp - trackingClickStart) > 100 || (deviceIsIOS && window.top !== window && targetTagName === 'input')) {
+			//	this.targetElement = null;
+			//	return false;
+			//}
+
+            //                                                          ----------------------- Björn: due to iOS 11.3 issue
+            if ((touchEndTime - trackingClickStart) > 100 || (deviceIsIOS && window.top !== window && targetTagName === 'input')) {
+                this.targetElement = null;
+                return false;
+            }
+
 
 			this.focus(targetElement);
 			this.sendClick(targetElement, event);
