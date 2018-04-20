@@ -48,6 +48,15 @@
 
             }
 
+            function parseMessageBody(rawMessage) {
+                var parsedMessages = rawMessage.split(" ");
+                if (parsedMessages.length > 1) {
+                    return parsedMessages[parsedMessages.length - 1];
+                }
+                return rawMessage;
+
+            }
+
             function decryptMessage(message, callback, error) {
                 // get encryptiontype, encryptionkey, encryptioniv from message metadata
                 var encryptionType = "";
@@ -69,7 +78,8 @@
                 message.secure = true;
 
                 if (encryptionType !== "" && encryptionKeyName !== "" && encryptionIv !== "") {
-                    decryptAES(message.content, encryptionKeyName, encryptionIv, function (response) {
+                    var parsedMessageBody = parseMessageBody(message.content);
+                    decryptAES(parsedMessageBody, encryptionKeyName, encryptionIv, function (response) {
                         message.content = response;
                         callback(message);
                     }, function (e) {

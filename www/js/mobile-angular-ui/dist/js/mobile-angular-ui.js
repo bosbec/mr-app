@@ -131,37 +131,6 @@
         layer.addEventListener('touchend', this.onTouchEnd, false);
 		layer.addEventListener('touchcancel', this.onTouchCancel, false);
 
-     //   layer.addEventListener('click', this.onClick, true);
-	    //layer.addEventListener('touchstart',
-	    //    function(e) {
-	    //        console.log("touchstart", e);
-	    //        e.preventDefault();
-	    //        this.onTouchStart(e);
-	    //    },
-	    //    { passive: false });
-     //   layer.addEventListener('touchmove',
-     //       function (e) {
-     //           console.log("touchmove", e);
-     //           e.preventDefault();
-     //           this.onTouchMove(e);
-     //       },
-     //       { passive: false });
-	    //layer.addEventListener('touchend',
-	    //    function(e) {
-	    //        console.log("touchend", e);
-	    //        e.preventDefault();
-	    //        this.onTouchEnd(e);
-	    //    },
-	    //    { passive: false });
-	    //layer.addEventListener('touchcancel',
-	    //    function(e) {
-	    //        console.log("touchcancel", e);
-	    //        e.preventDefault();
-	    //        this.onTouchCancel(e);
-	    //    },
-	    //    { passive: false });
-        
-
 		// Hack is required for browsers that don't support Event#stopImmediatePropagation (e.g. Android 2)
 		// which is how FastClick normally stops click events bubbling to callbacks registered on the FastClick
 		// layer when they are cancelled.
@@ -426,9 +395,7 @@
 		if (event.targetTouches.length > 1) {
 			return true;
         }
-
-	    //console.log("onTouchStart",event);
-
+        
 		targetElement = this.getTargetElementFromEventTarget(event.target);
 		touch = event.targetTouches[0];
 
@@ -581,9 +548,7 @@
 
         //                                                          ----------------------- Björn: due to iOS 11.3 issue
         var touchEndTime = (new Date()).getTime();
-
-        console.log("onTouchEnd", (touchEndTime - this.trackingClickStart));
-
+        
         if ((touchEndTime - this.lastClickTime) < this.tapDelay) {
             this.cancelNextClick = true;
             return true;

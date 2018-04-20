@@ -17,20 +17,20 @@
                             <form name="editEncryptionKeyForm" ng-model="currentKey">
                                 <div class="form-section">
                                     <label>Name</label>
-                                    <input type="text" ng-model="currentKey.name" class="form-control">
+                                    <input type="text" ng-model="currentKey.name" required class="form-control">
                                 </div>
                                 <div class="form-section">
                                     <label>Alias</label>
                                     <input type="text" ng-model="currentKey.alias" class="form-control">
                                 </div>
                                 <div class="form-section">
-                                    <label>Key</label>
-                                    <textarea ng-model="currentKey.key" class="form-control"></textarea>
+                                    <label>Key (exactly 32 characters) {{currentKey.key.length}}</label>
+                                    <textarea ng-model="currentKey.key" ng-minlength="32" ng-maxlength="32" required class="form-control"></textarea>
                                 </div>
                                 <div class="form-section">
                                     <button class="btn btn-primary" ng-click="CancelEditEncryptionKey();">Cancel</button>
                                     <button ng-hide="newKey" class="btn btn-danger" ng-click="DeleteEncryptionKey(currentKey);">Delete</button>
-                                    <button class="btn btn-primary" ng-click="SaveEncryptionKey(currentKey);">Save key</button>
+                                    <button class="btn btn-primary" ng-disabled="!editEncryptionKeyForm.$valid" ng-click="SaveEncryptionKey(currentKey);">Save key</button>
                                 </div>
                             </form>
 
