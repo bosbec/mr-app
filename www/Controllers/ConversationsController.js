@@ -120,16 +120,16 @@
             listConversations(apiFactory.getToken(), inboxId);
         };
 
-        var onResume = function (event, state) {
-            console.log("appResumed ConversationController:", event);
-            $location.reload();
-        };
+        //var onResume = function (event, state) {
+        //    console.log("appResumed ConversationController:", event);
+        //    $location.reload();
+        //};
 
         // start subscribing
         $scope.$on('newMessages', onNewMessages);
 
         // start subscribing
-        $scope.$on('appResumed', onResume);
+        //$scope.$on('appResumed', onResume);
 
         init();
     }
