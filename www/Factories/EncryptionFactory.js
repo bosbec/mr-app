@@ -28,12 +28,20 @@
                         ciphertext: CryptoJS.enc.Base64.parse(encryptedText)
                     });
                     var decrypted = CryptoJS.AES.decrypt(cipherParams, CryptoJS.enc.Hex.parse(privateKey.key), { iv: CryptoJS.enc.Hex.parse(iv) });
-                    decryptedText = decrypted.toString(CryptoJS.enc.Utf8);
-                    if (decryptedText !== "") {
-                        callback(decryptedText);
-                    } else {
-                        error("unable to decrypt");
+                    //console.log("decrypted", decrypted);
+                    try {
+                        decryptedText = decrypted.toString(CryptoJS.enc.Utf8);
+                        //console.log("decryptedText", decryptedText);
+                        if (decryptedText !== "") {
+                            callback(decryptedText);
+                        } else {
+                            error("unable to decrypt");
+                        }
+                    } catch (e) {
+                        console.error(e, e.stack);
+                        error("wrong format");
                     }
+                    
                 } else {
                     error("Key not found: " + keyName);
                 }
@@ -54,7 +62,19 @@
                     return parsedMessages[parsedMessages.length - 1];
                 }
                 return rawMessage;
+            }
 
+            function splitMessageBody(rawMessage, splitBy, returnLast) {
+                var parsedMessages = rawMessage.split(splitBy);
+                if (parsedMessages.length > 1) {
+                    if (returnLast) {
+                        return parsedMessages[parsedMessages.length - 1];
+                    } else {
+                        return parsedMessages[0];
+                    }
+                    
+                }
+                return "";
             }
 
             function decryptMessage(message, callback, error) {
@@ -79,8 +99,20 @@
 
                 if (encryptionType !== "" && encryptionKeyName !== "" && encryptionIv !== "") {
                     var parsedMessageBody = parseMessageBody(message.content);
+
+                    //var encryptedMessageBodyPart = splitMessageBody(message.content, " ", true);
+                    //console.log("encryptedMessageBodyPart", encryptedMessageBodyPart);
+
+                    var clearTextMessageBodyPart = splitMessageBody(message.content, ":", false);
+                    //console.log("clearTextMessageBodyPart", clearTextMessageBodyPart);
+                    
                     decryptAES(parsedMessageBody, encryptionKeyName, encryptionIv, function (response) {
-                        message.content = response;
+                        if (clearTextMessageBodyPart !== "") {
+                            message.content = clearTextMessageBodyPart + ": " + response;
+                        } else {
+                            message.content = response;
+                        }
+                       
                         callback(message);
                     }, function (e) {
                         message.encryptionError = "Unable to decrypt secure message. <br />Missing key: '<b>" +
