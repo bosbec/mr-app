@@ -5,7 +5,7 @@
         function ($localStorage) {
 
             var appId = "com.bosbec.mr-app";
-            var appVersion = "0.3.62";
+            var appVersion = "0.3.63";
             //var appId = "se.bosbec.Messmr1";
             //var appVersion = "4.0.7";
 
@@ -108,7 +108,7 @@
             }
 
             function setCheckWhatsNewInterval(value) {
-                if (value > 0 && value < 3600) {
+                if (value > 4 && value < 3600) {
                     $localStorage.settings.checkWhatsNewInterval = parseInt(value);
                 } else {
                     $localStorage.settings.checkWhatsNewInterval = defaultCheckWhatsNewInterval;

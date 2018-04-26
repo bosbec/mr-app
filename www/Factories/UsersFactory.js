@@ -10,10 +10,10 @@
 
             function getInboxUserDetails(token, inboxId, userIds, callback) {
                 var inboxUserDetailsRequest = {
-                    authenticationToken: apiFactory.getToken(),
-                    data: {
-                        'inboxId': inboxId,
-                        'userIds': userIds
+                    "authenticationToken": apiFactory.getToken(),
+                    "data": {
+                        "inboxId": inboxId,
+                        "userIds": userIds
                     }
                 };
                 apiFactory.functions.call('inboxes/get-users',
@@ -57,9 +57,9 @@
             function getUser(appUserId, callback, error) {
 
                 var appUserDetailsRequest = {
-                    authenticationToken: apiFactory.getToken(),
-                    data: {
-                        'userId': appUserId
+                    "authenticationToken": apiFactory.getToken(),
+                    "data": {
+                        "userId": appUserId
                     }
                 };
 
@@ -85,10 +85,10 @@
 
             function registerUser(instanceName, userName, password, callback, error) {
                 var registerUserRequest = {
-                    'data': {
-                        'instanceName': apiFactory.apiSettings.instanceName,
-                        'userName': userName,
-                        'password': password
+                    "data": {
+                        "instanceName": apiFactory.apiSettings.instanceName,
+                        "userName": userName,
+                        "password": password
                     }
                 };
                 //console.log("reg request", registerUserRequest);
@@ -126,8 +126,8 @@
             function updateProfile(firstName, lastName, email, phone, avatar, callback, error) {
                 
                 var updateProfileRequest = {
-                    "AuthenticationToken": apiFactory.getToken(),
-                    "Data": {
+                    "authenticationToken": apiFactory.getToken(),
+                    "data": {
                         "Firstname": firstName,
                         "Lastname": lastName,
                         "Avatar": avatar
@@ -146,11 +146,12 @@
             function updatePhone(phone, callback, error) {
 
                 var updateProfileRequest = {
-                    "AuthenticationToken": apiFactory.getToken(),
-                    "Data": {
+                    "authenticationToken": apiFactory.getToken(),
+                    "data": {
                         "PhoneNumber": phone
                     }
                 };
+                //console.log("users/change-information", updateProfileRequest);
                 apiFactory.functions.call('users/change-information',
                     updateProfileRequest,
                     function (response) {
@@ -164,8 +165,8 @@
             function updateEmail(email, callback, error) {
 
                 var updateProfileRequest = {
-                    "AuthenticationToken": apiFactory.getToken(),
-                    "Data": {
+                    "authenticationToken": apiFactory.getToken(),
+                    "data": {
                         "EmailAddress": email
                     }
                 };
@@ -181,8 +182,8 @@
 
             function findUser(searchText, inboxId, callback, error) {
                 var findUserRequest = {
-                    authenticationToken: apiFactory.getToken(),
-                    data: {
+                    "authenticationToken": apiFactory.getToken(),
+                    "data": {
                         'inboxId': inboxId,
                         'query': searchText
                     }
@@ -212,7 +213,7 @@
             }
 
             function sendVerificationSms(phone, appUserId, callback, error) {
-                console.log(settingsFactory.getUrls().rest);
+                //console.log(settingsFactory.getUrls().rest);
                 var request = {
                     "workflowId": "fbda91c4-d3e4-4721-81f0-cf785e8adfce",
                     "triggerNames": "send-verify-phone-sms",
@@ -273,7 +274,6 @@
                         "app-user-id": appUserId
                     }
                 };
-                console.log(request);
                 $http({
                     url: settingsFactory.getUrls().rest + 'workflows',
                     method: 'POST',
@@ -319,7 +319,7 @@
 
             function requestResetPassword(username, phone, email, callback, error) {
                 var requestResetRequest = {
-                    "Data": {
+                    "data": {
                         "InstanceName": apiFactory.apiSettings.instanceName,
                         "Username": username,
                         "PhoneNumber": phone,

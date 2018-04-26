@@ -106,7 +106,6 @@
                 email,
                 appUserId,
                 function (response) {
-                    console.log(response);
                     if (response.data.data.foundunit === appUserId) {
                         showAlert('Found matching code, email is confirmed.', 'success', 3000);
                         usersFactory.updateEmail(email,
