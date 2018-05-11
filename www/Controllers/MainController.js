@@ -338,7 +338,7 @@ mrApp.controller('MainController', [
                                 $scope.inboxes[0].inboxId,
                                 function (response) {
                                     if ($scope.inboxes[0].inboxId != undefined) {
-                                        console.log("viewLoaded -> conversations", $scope.inboxes[0].inboxId);
+                                        //console.log("viewLoaded -> conversations", $scope.inboxes[0].inboxId);
                                         $location.path('/conversations/' + $scope.inboxes[0].inboxId);
                                     }
                                 });
