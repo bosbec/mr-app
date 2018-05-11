@@ -12,6 +12,7 @@
         $scope.isSwipe = false;
 
         function init() {
+            //console.log("conversation", inboxId);
             $scope.$emit('viewChanged', 'conversations');
             $rootscope.currentInboxId = inboxId;
             listConversations(apiFactory.getToken(), inboxId, $scope.currentPage);
@@ -42,6 +43,8 @@
             var callback = function (conversations) {
                 $scope.conversations = conversations;
                 $scope.$emit('showAlertNewMessage', false);
+                //console.log("conversations loaded", $scope.conversations);
+                //console.log("conversations loaded");
             };
             getConversations(token, inboxId, $scope.currentPage, callback);
         }
@@ -115,10 +118,18 @@
         var onNewMessages = function(event, messages) {
             //console.log("CC: Handle new message event");
             listConversations(apiFactory.getToken(), inboxId);
-        }
+        };
+
+        //var onResume = function (event, state) {
+        //    console.log("appResumed ConversationController:", event);
+        //    $location.reload();
+        //};
 
         // start subscribing
         $scope.$on('newMessages', onNewMessages);
+
+        // start subscribing
+        //$scope.$on('appResumed', onResume);
 
         init();
     }

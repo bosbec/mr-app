@@ -7,7 +7,12 @@ a {
 .app {
     background-color: white;
 }
-.sidebar-left {
+
+.fa-ellipsis-v {
+    padding-right: 8px;
+    padding-left: 8px;
+}
+.sidebar-left, .sidebar-right {
     background-color: #aaaaaa;
 }
 
@@ -68,6 +73,10 @@ a {
     border: 0;
     background-color: white;
     display: block;
+}
+
+.form-section {
+    padding-bottom: 10px;
 }
 
 .content-container {
@@ -227,6 +236,9 @@ a {
 }
 #last-message {
     color: white;
+}
+.message-secure {
+    border-left: 5px solid lightgreen;
 }
 
 .send-chat-message-container {

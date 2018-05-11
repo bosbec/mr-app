@@ -5,9 +5,9 @@
         function ($localStorage) {
 
             var appId = "com.bosbec.mr-app";
-            var appVersion = "0.3.54";
+            var appVersion = "0.3.65";
             //var appId = "se.bosbec.Messmr1";
-            //var appVersion = "4.0.6";
+            //var appVersion = "4.0.10";
 
             var defaultNumberOfConversations = 15;
             var defaultNumberOfMessages = 20;
@@ -26,8 +26,8 @@
                 //// test
                 //return {
                 //    "appapi": "http://appapi.test.mobileresponse.se/1/",
-                //    "api2": "https://api2-test.bosbec.io/",
-                //    "apps": "https://apps-test.bosbec.io/#",
+                //    "api2": "http://api2-test.bosbec.io/",
+                //    "apps": "http://apps-test.bosbec.io/#",
                 //    "forms": "http://m.test.mobileresponse.se/form/",
                 //    "rest": "http://rest.test.mobileresponse.se/2"
                 //};
@@ -55,6 +55,17 @@
 
             function getSettings() {
                 return $localStorage.settings;
+            }
+
+            function getDeviceTypeName() {
+                if ($localStorage.deviceTypeName === undefined) {
+                    return "unknown";
+                }
+                return $localStorage.deviceTypeName;
+            }
+
+            function setDeviceTypeName(deviceTypeName) {
+                $localStorage.deviceTypeName = deviceTypeName;
             }
 
             function getNumberOfConversations() {
@@ -97,7 +108,7 @@
             }
 
             function setCheckWhatsNewInterval(value) {
-                if (value > 0 && value < 3600) {
+                if (value > 4 && value < 3600) {
                     $localStorage.settings.checkWhatsNewInterval = parseInt(value);
                 } else {
                     $localStorage.settings.checkWhatsNewInterval = defaultCheckWhatsNewInterval;
@@ -170,7 +181,9 @@
                 getFormatTimestamp: getFormatTimestamp,
                 clearLocalStorage: clearLocalStorage,
                 getAppId: getAppId,
-                getAppVersion: getAppVersion
+                getAppVersion: getAppVersion,
+                setDeviceTypeName: setDeviceTypeName,
+                getDeviceTypeName: getDeviceTypeName
             };
         }
     ]);
