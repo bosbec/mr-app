@@ -5,13 +5,17 @@
         xmlns:gap = "http://phonegap.com/ns/1.0"
         xmlns:android = "http://schemas.android.com/apk/res/android"
         id        = "com.bosbec.mr-app"
+<<<<<<< HEAD
         version   = "0.3.66">
+=======
+        version   = "0.3.65">
+>>>>>>> origin/master
 <!--<widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         xmlns:android = "http://schemas.android.com/apk/res/android"
         id        = "se.bosbec.Messmr1"
-        version   = "4.0.6">-->
-  <!-- VERSION HERE -->
+        version   = "4.0.10">-->
+   VERSION HERE 
   
   <name>Bosbec</name>
 
@@ -25,6 +29,15 @@
      permission on your app, which PhoneGap requires.
  -->
   <!--<preference name="permissions"                value="none"/>-->
+  
+  <edit-config target="NSLocationAlwaysUsageDescription" file="*-Info.plist" mode="overwrite">
+    <string>Bosbec will not track your location, this is only due to framework requesting it</string>
+</edit-config>
+  
+  <edit-config target="NSLocationWhenInUseUsageDescription" file="*-Info.plist" mode="overwrite">
+    <string>Bosbec will not track your location, this is only due to framework requesting it</string>
+</edit-config>
+  
   <!-- Customize your app and platform with the preference element. -->
   <preference name="orientation"                value="default" />
   <!-- all: default means both landscape and portrait are enabled -->

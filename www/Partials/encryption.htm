@@ -1,0 +1,62 @@
+﻿<div ng-controller="EncryptionController">
+    <div class="scrollable content-container">
+        <div class="scrollable-content overthrow">
+
+            <div class="list-group">
+                <div class="list-group-item">
+                    <h1>Encryption keys</h1>
+                </div>
+
+                <div class="list-group-item">
+                    <div ng-show="!showEditKeyForm" class="">
+                        <button class="btn btn-primary" ng-click="ShowAddEncryptionKey();"><i class="fa fa-plus"></i> </button>
+                    </div>
+
+                    <div ng-show="showEditKeyForm">
+                        <div>
+                            <form name="editEncryptionKeyForm" ng-model="currentKey">
+                                <div class="form-section">
+                                    <label>Name</label>
+                                    <input type="text" ng-model="currentKey.name" required class="form-control">
+                                </div>
+                                <div class="form-section">
+                                    <label>Alias</label>
+                                    <input type="text" ng-model="currentKey.alias" class="form-control">
+                                </div>
+                                <div class="form-section">
+                                    <label>Key (exactly 32 characters) {{currentKey.key.length}}</label>
+                                    <textarea ng-model="currentKey.key" ng-minlength="32" ng-maxlength="32" required class="form-control"></textarea>
+                                </div>
+                                <div class="form-section">
+                                    <button class="btn btn-primary" ng-click="CancelEditEncryptionKey();">Cancel</button>
+                                    <button ng-hide="newKey" class="btn btn-danger" ng-click="DeleteEncryptionKey(currentKey);">Delete</button>
+                                    <button class="btn btn-primary" ng-disabled="!editEncryptionKeyForm.$valid" ng-click="SaveEncryptionKey(currentKey);">Save key</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div ng-repeat="key in encryptionKeys" class="list-group-item" ng-click="EditEncryptionKey(key);">
+                    <div>
+                        <h2>{{key.name}}</h2>
+                        <div>Type: {{key.type}}</div>
+                        <div>Created: {{key.createdOn}}</div>
+                        <div>Key: {{key.key}}</div>
+                        <div>
+                            Alias: {{key.alias}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="list-group-item">
+                    <button class="btn btn-danger" ng-click="ClearStoredEncryptionKeys();"> Clear all stored keys</button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>

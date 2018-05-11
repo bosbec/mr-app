@@ -273,6 +273,19 @@ mrApp.controller('MainController', [
         $scope.hideGroupMembers = function () {
             $scope.currentView = 'groups-list';
         };
+        
+        $scope.OpenRightSidebar = function() {
+            $rootScope.$broadcast('openRightSidebar', null);
+        };
+
+        $scope.IsEncrypted = function() {
+            var conversation = conversationsFactory.getCurrentConversation();
+            if (conversation != null) {
+                return conversationsFactory.usesEncryption(conversation.itemId);
+            } else {
+                return false;
+            }
+        };
 
         //$scope.swipeRight = function () {
         //    console.log("SwipeRight: " + $scope.currentView);
@@ -305,8 +318,11 @@ mrApp.controller('MainController', [
         $scope.$on('loadingDone', loadingDone);
         
         function onViewLoaded() {
-            
+
+            //console.log("onViewLoaded[Main]");
+
             $scope.deviceType = deviceFactory.getDeviceTypeId();
+            settingsFactory.setDeviceTypeName(deviceFactory.getDeviceType());
 
             //var token = $rootScope.authenticationToken;
             var token = apiFactory.authenticationToken();
@@ -322,6 +338,7 @@ mrApp.controller('MainController', [
                                 $scope.inboxes[0].inboxId,
                                 function (response) {
                                     if ($scope.inboxes[0].inboxId != undefined) {
+                                        console.log("viewLoaded -> conversations", $scope.inboxes[0].inboxId);
                                         $location.path('/conversations/' + $scope.inboxes[0].inboxId);
                                     }
                                 });

@@ -12,7 +12,8 @@ var mrApp = angular.module('mrApp', [
     'ConversationsFactory',
     'DeviceFactory',
     'SettingsFactory',
-    'MobileResponseFactory'
+    'MobileResponseFactory',
+    'EncryptionFactory'
 ]);
 
 mrApp.run(function () {

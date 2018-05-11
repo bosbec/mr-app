@@ -25,42 +25,10 @@
     }
 });
 
-//mrApp.directive('testdirective', ['$compile', function ($compile) {
-//    return {
-//        restrict: 'AEC',
-//        link: function (scope, element, attrs) {
-//            console.log('Link cycle', element, attrs);
-//            //console.log("element: " + element[0]);
-//            //window.elem = element;
-//            //element[0].href = "nuersattejagdettahahahaha.com";
-
-
-//            element[0].addEventListener("click", function (ev) {
-//                console.log("clickEvent: ", ev.target);
-
-//                $scope.openBosbecLinkInModal(ev.target);
-//                return false;
-//            });
-//            //setTimeout(function() { scope.$apply() });
-//            scope.$watch(
-//                function (scope) {
-//                    return scope.$eval(attrs.compile);
-//                },
-//                function (value) {
-//                    element.html(value);
-//                    $compile(element.contents())(scope);
-//                }
-//            );
-//        }
-//    };
-//}
-//]);
-
-
 mrApp.controller('MessagesController',
 [
     'ApiFactory', '$scope', '$location', '$routeParams', '$window', 'moment', 'UsersFactory', 'ConversationsFactory',
-    '$timeout', '$filter', 'SharedState', 'SettingsFactory',
+    '$timeout', '$filter', 'SharedState', 'SettingsFactory', 'EncryptionFactory',
     function(apiFactory,
         $scope,
         $location,
@@ -72,7 +40,8 @@ mrApp.controller('MessagesController',
         $timeout,
         $filter,
         SharedState,
-        settingsFactory) {
+        settingsFactory,
+        encryptionFactory) {
 
         var conversationId = $routeParams.param1;
         $scope.conversation = null;
@@ -150,6 +119,8 @@ mrApp.controller('MessagesController',
             listMessages($scope.authenticationToken, conversationId);
             $scope.conversation = conversationsFactory.getCurrentConversation();
             $scope.conversation.viewSettings = "normal";
+
+            // check if conversation uses encryption 
 
             SharedState.initialize($scope, 'formModalUrl', '');
 
@@ -250,7 +221,7 @@ mrApp.controller('MessagesController',
 
         function handleViewSettings(message) {
             if (message.metaData.length > 0) {
-                message.metaData.forEach(function (item) {
+                message.metaData.forEach(function(item) {
                     if (item.name === "viewsetting") {
                         console.log("viewSetting: " + item.value);
                         $scope.conversation.viewSettings = item.value;
@@ -281,7 +252,8 @@ mrApp.controller('MessagesController',
 
         $scope.LoadMore = function() {
             var callback = function(messages) {
-                $scope.messages = [].concat($scope.messages, messages);
+                //$scope.messages = [].concat($scope.messages, messages);
+                $scope.messages = [].concat(messages, $scope.messages);
             };
             $scope.currentPage = $scope.currentPage + 1;
             getMessages(conversationId, $scope.currentPage, callback);
@@ -299,22 +271,40 @@ mrApp.controller('MessagesController',
             };
             apiFactory.functions.call('conversations/list-messages',
                 listMessagesRequest,
-                function (response) {
+                function(response) {
                     $scope.totalPages = response.data.maxPages;
                     var formatTimestamp = settingsFactory.getFormatTimestamp();
+                    var useEncryption = false;
 
                     for (var i = 0; i < response.data.items.length; i++) {
+
+                        // check if encrypted -> decrypt content
+                        if (response.data.items[i].metaData.length > 0) {
+                            if ($filter('filter')(response.data.items[i].metaData, { 'name': 'encryptionkey' }).length > 0) {
+                                //console.log("decrypt message",response.data.items[i]);
+                                encryptionFactory.decryptMessage(response.data.items[i],
+                                    function(decryptedMessage) {
+                                        //console.log("success decrypt: ", decryptedMessage);
+                                        useEncryption = true;
+                                    },
+                                    function (error) {
+                                        console.log("error decrypt: ", error);
+                                    });
+                            } 
+                        }
+                        
                         response.data.items[i].content = formatText(response.data.items[i].content);
                         response.data.items[i] = addDynamicMetadata(response.data.items[i]);
 
                         if (response.data.items[i].metaData.length > 0) {
                             
-                            if (response.data.items[i].metaData[0]._type === "form" || response.data.items[i].metaData[0]._type === "messageMetaDataForm") {
+                            if (response.data.items[i].metaData[0]._type === "form" ||
+                                response.data.items[i].metaData[0]._type === "messageMetaDataForm") {
                                 var formObj = angular.fromJson(response.data.items[i].metaData[0].value);
                                 response.data.items[i].formId = formObj.id;
                             }
                         }
-
+                        
                         if (formatTimestamp) {
                             response.data.items[i].createdOnFormatted = moment.utc(response.data.items[i].createdOn)
                                 .fromNow();
@@ -340,6 +330,8 @@ mrApp.controller('MessagesController',
 
                     $scope.messages = messages;
                     scrollToLast();
+
+                    //console.log($scope.messages);
 
                     var markAsReadRequest = {
                         authenticationToken: $scope.authenticationToken,
@@ -371,27 +363,75 @@ mrApp.controller('MessagesController',
             } else {
                 this.newMessage = "";
                 $scope.newMessage = "";
-                
+
                 var sendTo = [];
                 angular.copy($scope.conversation.participants, sendTo);
                 sendTo.push($scope.conversation.userId);
 
-                var replyRequest = {
-                    authenticationToken: $scope.authenticationToken,
-                    data: {
-                        'conversationId': conversationId,
-                        'message': message,
-                        'metadata': [{}]
-                    }
-                };
-                //console.log(replyRequest);
+                var replyRequest = null;
+
+                // if conversation.encrypted -> get key name, encrypt content and add encryption metadata
+                if (conversationsFactory.usesEncryption(conversationId)) {
+                    var newIv = encryptionFactory.generateIv();
+                    var conversationKeyName = conversationsFactory.getEncryptionKeyName(conversationId);
+                    encryptionFactory
+                        .encryptMessage(message,
+                            conversationKeyName,
+                            newIv,
+                            function(response) {
+                                message = response;
+                            },
+                            function(error) {
+                                console.log(error);
+                            });
+
+                    replyRequest = {
+                        authenticationToken: $scope.authenticationToken,
+                        data: {
+                            'conversationId': conversationId,
+                            'message': message,
+                            'metaData': [
+                                {
+                                    '_type': 'generic',
+                                    'groupOrder': 0,
+                                    'contentType': 'text',
+                                    'name': 'encryptiontype',
+                                    'value': 'aes'
+                                }, {
+                                    '_type': 'generic',
+                                    'groupOrder': 1,
+                                    'contentType': 'text',
+                                    'name': 'encryptionkey',
+                                    'value': conversationKeyName
+                                }, {
+                                    '_type': 'generic',
+                                    'groupOrder': 2,
+                                    'contentType': 'text',
+                                    'name': 'encryptioniv',
+                                    'value': newIv
+                                }
+                            ]
+                        }
+                    };
+
+                } else {
+                    replyRequest = {
+                        authenticationToken: $scope.authenticationToken,
+                        data: {
+                            'conversationId': conversationId,
+                            'message': message,
+                            'metaData': [{}]
+                        }
+                    };
+                }
+
                 apiFactory.functions.call('conversations/reply',
                     replyRequest,
-                    function (response) {
+                    function(response) {
                         showAlert('Message sent', 'success', 1000);
                         listMessages($scope.authenticationToken, conversationId);
                     },
-                    function (error) {
+                    function(error) {
                         showAlert('Message sent', 'error', 5000);
                         console.log(error);
                     });

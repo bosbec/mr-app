@@ -255,10 +255,10 @@
                     'deviceType': deviceFactory.getDeviceType()
                 }
             };
+
             apiFactory.functions.authenticate(credentials,
                 function (response) {
                     if (response != null) {
-
                         if ($scope.saveCredentials) {
                             $localStorage.savedCredentials = {
                                 'userName': userName,
@@ -276,6 +276,7 @@
                                 };
                             }
                         }
+
                         $rootScope.keepMeSignedIn = $scope.keepMeSignedIn;
                         $rootScope.authenticationToken = response;
 
