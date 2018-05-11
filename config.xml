@@ -5,17 +5,13 @@
         xmlns:gap = "http://phonegap.com/ns/1.0"
         xmlns:android = "http://schemas.android.com/apk/res/android"
         id        = "com.bosbec.mr-app"
-<<<<<<< HEAD
         version   = "0.3.66">
-=======
-        version   = "0.3.65">
->>>>>>> origin/master
 <!--<widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         xmlns:android = "http://schemas.android.com/apk/res/android"
         id        = "se.bosbec.Messmr1"
         version   = "4.0.10">-->
-   VERSION HERE 
+   <!--VERSION HERE--> 
   
   <name>Bosbec</name>
 
