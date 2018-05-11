@@ -4,8 +4,22 @@
 a {
     color: #2196f3;
 }
+
+.mainLoading {
+    display: block;
+    height: 100vh;
+    padding: 15px;
+}
+.mainContainer {
+    display: none;
+}
+.sidebar {
+    display: none;
+}
+
 .app {
     background-color: white;
+    display: none;
 }
 .sidebar-left {
     background-color: #aaaaaa;

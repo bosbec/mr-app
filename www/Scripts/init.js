@@ -17,6 +17,7 @@ var mrApp = angular.module('mrApp', [
 
 mrApp.run(function () {
     console.log("--- RUN ---");
+
 });
 
 mrApp.filter('trustUrl', ['$sce', function ($sce) {

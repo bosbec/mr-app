@@ -294,6 +294,15 @@ mrApp.controller('MainController', [
         //        //SharedState.turnOn('mainSidebar');
         //    }
         //};
+
+        function loadingDone(event, state) {
+            console.log("[Main] Loading done handler");
+            $scope.mainLoading = { 'display': 'none' };
+            $scope.sidebar = { 'display': 'block' };
+            $scope.app = { 'display': 'block' };
+        }
+
+        $scope.$on('loadingDone', loadingDone);
         
         function onViewLoaded() {
             

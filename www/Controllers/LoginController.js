@@ -64,6 +64,8 @@
 
             $scope.appVersion = settingsFactory.getAppVersion();
 
+            $scope.$emit('loadingDone', 'login');
+
             if ($localStorage.showIntro === undefined || $localStorage.showIntro) {
                 // show intro...
                 SharedState.initialize($scope, 'introModal', '');
