@@ -7,8 +7,12 @@ a {
 
 .mainLoading {
     display: block;
-    height: 100vh;
-    padding: 15px;
+    position: absolute;
+    top: 200px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 25px;
 }
 .mainContainer {
     display: none;

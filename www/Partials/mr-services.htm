@@ -5,16 +5,23 @@
             <div class="list-group" ng-show="items.length">
 
                 <div ng-repeat="item in items | filter: !item.data.underConstruction" class="list-group-item">
-                    
+
                     <div class="service-list-item" ng-click="OpenService(item)">
                         <!--<div class="service-list-item-icon"><i class="fa fa-3x fa-exclamation-circle"></i></div>-->
                         <div class="list-item-avatar">
-                            <img class="service-list-item-image" alt="services-symbol" src="images/mr/Job-128x128.png"/>
+                            <img class="service-list-item-image" alt="services-symbol" src="images/mr/Job-128x128.png" />
                         </div>
                         <div>
                             <a ng-click="OpenService(item)" class="btn btn-primary pull-right">Open</a><b>{{item.data.templateName}}</b>
                         </div>
-                         <!--<div>{{item.data.description | limitTo:30}}</div>-->
+                        <!--<div>{{item.data.description | limitTo:30}}</div>-->
+                    </div>
+
+                </div>
+
+                <div ng-if="items.length < 1" class="list-group-item">
+                    <div>
+                        <b>You have no services to show</b>
                     </div>
 
                 </div>

@@ -41,7 +41,7 @@
                             <button class="btn btn-primary intro-btn" ng-click="gotoPage(currentPage-1);">Previous</button><br/>
                         </div>
                         <div class="intro-dots">
-                            <i ng-repeat="dot in introContent track by $index" ng-class="{'fa-circle': $index+1 == currentPage,'fa-circle-thin': $index+1 != currentPage}" class="fa text-primary"></i>
+                            <i ng-repeat="dot in introContent track by $index" ng-class="{'fas': $index+1 == currentPage,'far': $index+1 != currentPage}" class="fa-circle text-primary"></i>
                         </div>
                         <div class="pull-right" ng-show="currentPage<numberOfPages">
                             <button class="btn btn-primary intro-btn" ng-click="gotoPage(currentPage+1);">Next</button><br/>

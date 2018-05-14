@@ -15,7 +15,7 @@
     <link href="js/mobile-angular-ui/dist/css/mobile-angular-ui-desktop.min.css" rel="stylesheet" type="text/css" />
 
     <!--<link href="css/font-awesome.css" rel="stylesheet" />-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" integrity="sha384-3AB7yXWz4OeoZcPbieVW64vVXEwADiYyAEhwilzWsLw+9FgqpyjjStpPnpBO8o8S" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
     <link rel="stylesheet" href="css/style.css" type="text/css" />
 
@@ -54,7 +54,7 @@
                     <a class="list-group-item" ng-show="validateLoad('profile')" href="#!/settings"><i class="fa fa-cog"></i> Settings</a>
                     <a class="list-group-item" ng-show="validateLoad('profile')" href="#!/encryption"><i class="fa fa-user-secret"></i> Encryption</a>
                     <a class="list-group-item" ng-show="validateLoad('profile')" href="#!/intro/manual"><i class="fa fa-question"></i> Introduction</a>
-                    <a class="list-group-item" ng-show="validateLoad('logout')" ng-click="Logout()"><i class="fa fa-sign-out"></i> Logout</a>
+                    <a class="list-group-item" ng-show="validateLoad('logout')" ng-click="Logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
                 </div>
 
             </div>
@@ -122,15 +122,8 @@
                 <div ng-show="currentView=='conversation'" class="btn btn-navbar">
                     <span ng-if="IsEncrypted();"><i class="fas fa-2x fa-lock"></i></span>
                     <a ui-turn-on="rightSidebar" ng-click="OpenRightSidebar();"><span><i class="fas fa-2x fa-ellipsis-v"></i></span></a>
-                    <!--<a ui-turn-on="rightSidebar" ng-click="OpenRightSidebar();"><span><i class="fas fa-2x fa-cog" style="padding-right: 7px;"></i></span></a>-->
                 </div>
 
-                <!--<div ng-show="currentView=='conversation'" class="btn btn-navbar">
-                    <a href="#!/conversations/{{ inbox.inboxId }}" ng-click="hideConversation()"><span><i class="fa fa-2x fa-times-circle"></i></span></a>
-                </div>-->
-                <!--<div ng-show="currentView=='group-members-list'" class="btn btn-navbar">
-                    <a href="#!/mr/groups/" ng-click="hideGroupMembers()"><span><i class="fa fa-2x fa-times-circle"></i></span></a>
-                </div>-->
             </div>
 
         </div>
@@ -139,7 +132,7 @@
         <div ng-show="currentView!='conversation'" class="navbar navbar-app navbar-absolute-bottom">
             <div class="btn-group justified">
                 <a ng-show="validateLoad('mobileresponse')" href="#!/mr/services" class="btn btn-navbar btn-icon-only" ng-class="{'navbar-active-item': currentView === 'services'}"><i class="fa fa-2x fa-cogs"></i></a>
-                <a ng-show="!validateLoad('mobileresponse')" href="#!/profile/{{ myAppUser.id }}" class="btn btn-navbar btn-icon-only" ng-class="{'navbar-active-item': currentView === 'profile'}"><i class="fa fa-2x fa-user"></i></a>
+                <a ng-show="!validateLoad('mobileresponse') && validateLoad('inbox')" href="#!/profile/{{ myAppUser.id }}" class="btn btn-navbar btn-icon-only" ng-class="{'navbar-active-item': currentView === 'profile'}"><i class="fa fa-2x fa-user"></i></a>
 
                 <a ng-show="validateLoad('inbox')" href="#!/conversations/{{ inbox.inboxId }}" class="btn btn-navbar btn-icon-only" ng-class="{'navbar-active-item': currentView === 'conversations'}"><i class="fa fa-2x fa-inbox"></i></a>
                 <a ng-show="validateLoad('inbox')" href="#!/newconversation/" class="btn btn-navbar btn-icon-only" ng-class="{'navbar-active-item': currentView === 'newconversation'}"><i class="fa fa-2x fa-edit"></i></a>
@@ -156,24 +149,13 @@
 
     <div ng-style="mainLoading" class="mainLoading">
         <div class="text-center">
-            <img src="splash.png" />
+            <img src="images/Logo-Bosbec-w200-padding.png" />
         </div>
         <div class="text-center">
             loading ...
         </div>
     </div>
-
-    <!--<script src="js/angular/angular.min.js" type="text/javascript"></script>
-        <script src="js/angular/angular-route.min.js" type="text/javascript"></script>
-        <script src="js/angular/angular-resource.min.js" type="text/javascript"></script>
-        <script src="js/angular/angular-touch.min.js" type="text/javascript"></script>
-        <script src="js/angular/angular-sanitize.js" type="text/javascript"></script>-->
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.11/angular.min.js" type="text/javascript"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.11/angular-route.min.js" type="text/javascript"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.11/angular-resource.min.js" type="text/javascript"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.11/angular-touch.min.js" type="text/javascript"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.11/angular-sanitize.min.js" type="text/javascript"></script>-->
-
+    
     <script src="js/angular/1.6.9/angular.min.js" type="text/javascript"></script>
     <script src="js/angular/1.6.9/angular-route.min.js" type="text/javascript"></script>
     <script src="js/angular/1.6.9/angular-resource.min.js" type="text/javascript"></script>

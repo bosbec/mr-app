@@ -64,15 +64,17 @@
 
             $scope.appVersion = settingsFactory.getAppVersion();
 
-            $scope.$emit('loadingDone', 'login');
-
+            
             if ($localStorage.showIntro === undefined || $localStorage.showIntro) {
                 // show intro...
                 SharedState.initialize($scope, 'introModal', '');
                 SharedState.turnOn('introModal');
+                $scope.$emit('loadingDone', 'showIntro');
             } else {
                 if ($scope.credentials != null && $scope.credentials.keepMeSignedIn) {
                     login();
+                } else {
+                    $scope.$emit('loadingDone', 'showLogin');
                 }
             }
 
@@ -89,6 +91,9 @@
         function setSigningIn(state) {
             $rootScope.signingin = state;
             //$scope.signingin = state;
+            //if (!state) {
+            //    $scope.$emit('loadingDone', 'signingin');
+            //}
         }
 
         $scope.ClearCredentials = function () {
@@ -293,8 +298,7 @@
                                     });
 
                                 var registerDeviceSettings = {
-                                    //"appid": "64032-F5A58", //com.bosbec.mr-app
-                                    "appid": "5C009-84885", //se.bosbec.Messmr1
+                                    "appid": settingsFactory.getAppPushId(),
                                     "projectid": "71435688512",
                                     "onPushReceived": function (push) {
                                         // push received when app is open/foreground => use whatsnew
@@ -372,7 +376,6 @@
                 $scope.credentials.password,
                 function (response) {
                     setSigningIn(false);
-
                     if (response.email == null && response.phoneNumber == null) {
                         $location.path('/profile/' + response.id);
                     }

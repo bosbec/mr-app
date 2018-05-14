@@ -40,9 +40,12 @@
         }
 
         function listConversations(token, inboxId, pageIndex) {
-            var callback = function (conversations) {
+            var callback = function(conversations) {
                 $scope.conversations = conversations;
+                
                 $scope.$emit('showAlertNewMessage', false);
+                $scope.$emit('loadingDone', 'conversations'); // hides loading
+
                 //console.log("conversations loaded", $scope.conversations);
                 //console.log("conversations loaded");
             };

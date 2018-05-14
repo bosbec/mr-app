@@ -309,10 +309,13 @@ mrApp.controller('MainController', [
         //};
 
         function loadingDone(event, state) {
-            console.log("[Main] Loading done handler");
+            console.log("[Main] Loading done handler: ", state);
+
             $scope.mainLoading = { 'display': 'none' };
-            $scope.sidebar = { 'display': 'block' };
             $scope.app = { 'display': 'block' };
+
+            SharedState.turnOn('mainSidebar');
+            SharedState.turnOff('mainSidebar');
         }
 
         $scope.$on('loadingDone', loadingDone);
@@ -326,11 +329,11 @@ mrApp.controller('MainController', [
 
             //var token = $rootScope.authenticationToken;
             var token = apiFactory.authenticationToken();
-
+            
             if (token != undefined) {
 
                 if ($scope.inboxes == undefined) {
-
+                    
                     listInboxes(token,
                         function (response) {
 

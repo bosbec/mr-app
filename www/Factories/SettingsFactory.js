@@ -4,10 +4,12 @@
         '$localStorage',
         function ($localStorage) {
 
-            //var appId = "com.bosbec.mr-app";
-            //var appVersion = "0.3.66";
-            var appId = "se.bosbec.Messmr1";
-            var appVersion = "4.0.11";
+            var appId = "com.bosbec.mr-app";
+            var appVersion = "0.3.68";
+            var appPushId = "64032-F5A58";
+            //var appId = "se.bosbec.Messmr1";
+            //var appVersion = "4.0.11";
+            //var appPushId = "5C009-84885";
 
             var defaultNumberOfConversations = 15;
             var defaultNumberOfMessages = 20;
@@ -159,6 +161,10 @@
                 return appVersion;
             }
 
+            function getAppPushId() {
+                return appPushId;
+            }
+
             function init() {
                 initSettings();
             }
@@ -182,6 +188,7 @@
                 clearLocalStorage: clearLocalStorage,
                 getAppId: getAppId,
                 getAppVersion: getAppVersion,
+                getAppPushId: getAppPushId,
                 setDeviceTypeName: setDeviceTypeName,
                 getDeviceTypeName: getDeviceTypeName
             };

@@ -24,6 +24,7 @@
         }
 
         function init() {
+            $scope.$emit('loadingDone', 'profile');
             if (appUserId !== undefined) {
                 $scope.$emit('viewChanged', 'profile');
                 getAppUserDetails(appUserId);
