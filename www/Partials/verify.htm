@@ -29,7 +29,7 @@
                                 </div>
                                 <div>Prefix: {{verificationResponse.country.prefix}}</div>
                             </div>
-                            <button ng-show="verificationResponse.valid" class="btn btn-lg btn-primary btn-block" ng-click="SendVerificationSms(phoneNumber)" type="submit">Send verification SMS</button>
+                            <button ng-show="verificationResponse.valid" class="btn btn-lg btn-primary btn-block" ng-click="SendVerificationSms(verificationResponse.number)" type="submit">Send verification SMS</button>
                         </div>
                     </form>
 
@@ -50,7 +50,7 @@
 
                             <label>Code</label>
                             <input type="text" ng-model="verificationCodePhone" class="form-control" placeholder="" autofocus>
-                            <button class="btn btn-lg btn-primary btn-block" ng-click="ValidateCodePhone(verificationCodePhone,phoneNumber)" type="submit">Validate code</button>
+                            <button class="btn btn-lg btn-primary btn-block" ng-click="ValidateCodePhone(verificationCodePhone,verificationResponse.number)" type="submit">Validate code</button>
                             
                         </div>
                     </form>

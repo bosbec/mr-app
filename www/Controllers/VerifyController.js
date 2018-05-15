@@ -65,7 +65,8 @@
                 });
         }
 
-        function validateCodePhone(code,phone) {
+        function validateCodePhone(code, phone) {
+            console.log("validate: ", phone);
             usersFactory.validateCodePhone(code,
                 phone,
                 appUserId,
@@ -130,7 +131,7 @@
             validateNumber(phone);
         };
 
-        $scope.SendVerificationSms = function(phone) {
+        $scope.SendVerificationSms = function (phone) {
             sendVerificationSms(phone, appUserId);
         };
 
