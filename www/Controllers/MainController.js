@@ -308,17 +308,26 @@ mrApp.controller('MainController', [
         //    }
         //};
 
-        function loadingDone(event, state) {
-            console.log("[Main] Loading done handler: ", state);
-
+        function onLoadingDone(event, state) {
             $scope.mainLoading = { 'display': 'none' };
             $scope.app = { 'display': 'block' };
 
-            SharedState.turnOn('mainSidebar');
-            SharedState.turnOff('mainSidebar');
+            if ($window.innerWidth > 990) {
+                SharedState.turnOn('mainSidebar');
+            }
         }
 
-        $scope.$on('loadingDone', loadingDone);
+        $scope.$on('loadingDone', onLoadingDone);
+
+        function onShowMainSidebar(event, state) {
+            //console.log("showMainSidebar: ", SharedState.get('mainSidebar'));
+            //console.log("width: " + $window.innerWidth + " height: " + $window.innerHeight);
+            if ($window.innerWidth >= 990) {
+                SharedState.turnOn('mainSidebar');
+            }
+        }
+
+        $scope.$on('showMainSidebar', onShowMainSidebar);
         
         function onViewLoaded() {
 

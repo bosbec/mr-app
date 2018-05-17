@@ -2,24 +2,19 @@
     return {
         restrict: 'A',
         link: function (scope, elem, attrs) {
-
+            
             elem.bind('keydown', function (event) {
+                //console.log(event);
+                scope.$emit('showMainSidebar', 'messages');
+
                 var code = event.keyCode || event.which;
 
                 //enter=submit, shift+enter=line break
                 if (code === 13 && event.ctrlKey) {
                     event.preventDefault();
                     scope.$apply(attrs.enterSubmit);
-
                 }
 
-                ////enter=submit, shift+enter=line break
-                //if (code === 13) {
-                //    if (!event.shiftKey) {
-                //        event.preventDefault();
-                //        scope.$apply(attrs.enterSubmit);
-                //    }
-                //}
             });
         }
     }
@@ -27,21 +22,8 @@
 
 mrApp.controller('MessagesController',
 [
-    'ApiFactory', '$scope', '$location', '$routeParams', '$window', 'moment', 'UsersFactory', 'ConversationsFactory',
-    '$timeout', '$filter', 'SharedState', 'SettingsFactory', 'EncryptionFactory',
-    function(apiFactory,
-        $scope,
-        $location,
-        $routeParams,
-        $window,
-        moment,
-        usersFactory,
-        conversationsFactory,
-        $timeout,
-        $filter,
-        SharedState,
-        settingsFactory,
-        encryptionFactory) {
+    'ApiFactory', '$scope', '$location', '$routeParams', '$window', 'moment', 'UsersFactory', 'ConversationsFactory','$timeout', '$filter', 'SharedState', 'SettingsFactory', 'EncryptionFactory',
+    function(apiFactory,$scope,$location,$routeParams,$window,moment,usersFactory,conversationsFactory,$timeout,$filter,SharedState,settingsFactory,encryptionFactory) {
 
         var conversationId = $routeParams.param1;
         $scope.conversation = null;

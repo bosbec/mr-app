@@ -90,10 +90,6 @@
 
         function setSigningIn(state) {
             $rootScope.signingin = state;
-            //$scope.signingin = state;
-            //if (!state) {
-            //    $scope.$emit('loadingDone', 'signingin');
-            //}
         }
 
         $scope.ClearCredentials = function () {

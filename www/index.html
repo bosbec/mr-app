@@ -71,6 +71,7 @@
                     <div class="list-group-item">
                         <b>Choose encryption key</b>
                     </div>
+
                     <!--<div class="list-group-item">Current encryption keyName: {{currentEncryptionKey}}</div>-->
                     <div ng-repeat="key in encryptionKeys" class="list-group-item" ng-click="SetEncryptionKey(key.name);">
                         <span>
@@ -155,7 +156,7 @@
             loading ...
         </div>
     </div>
-    
+
     <script src="js/angular/1.6.9/angular.min.js" type="text/javascript"></script>
     <script src="js/angular/1.6.9/angular-route.min.js" type="text/javascript"></script>
     <script src="js/angular/1.6.9/angular-resource.min.js" type="text/javascript"></script>
