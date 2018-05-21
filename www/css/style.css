@@ -104,6 +104,7 @@ a {
 .modal-header {
     height: 50px;
     background-color: #2196f3;
+    border-bottom: 0;
 }
 
 .modal-body {
