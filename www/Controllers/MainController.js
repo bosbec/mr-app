@@ -312,7 +312,7 @@ mrApp.controller('MainController', [
             $scope.mainLoading = { 'display': 'none' };
             $scope.app = { 'display': 'block' };
 
-            if ($window.innerWidth > 990) {
+            if ($window.innerWidth >= 990) {
                 SharedState.turnOn('mainSidebar');
             }
         }

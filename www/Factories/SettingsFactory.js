@@ -5,7 +5,7 @@
         function ($localStorage) {
 
             var appId = "com.bosbec.mr-app";
-            var appVersion = "0.3.70";
+            var appVersion = "0.3.71";
             var appPushId = "64032-F5A58";
             //var appId = "se.bosbec.Messmr1";
             //var appVersion = "4.0.12";
@@ -22,7 +22,7 @@
                     "appapi": "https://appapi.bosbec.io/1/",
                     "api2": "https://api2.bosbec.io/",
                     "apps": "https://apps.bosbec.io/#",
-                    "forms": "https://m.bosbec.io/form/",
+                    "forms": "https://form.bosbec.io/#!/form/",
                     "rest": "https://rest.bosbec.io/2/"
                 };
                 //// test
@@ -30,7 +30,7 @@
                 //    "appapi": "http://appapi.test.mobileresponse.se/1/",
                 //    "api2": "http://api2-test.bosbec.io/",
                 //    "apps": "http://apps-test.bosbec.io/#",
-                //    "forms": "http://m.test.mobileresponse.se/form/",
+                //    "forms": "http://form-test.bosbec.io/#!/form/",
                 //    "rest": "http://rest.test.mobileresponse.se/2"
                 //};
             }
@@ -51,7 +51,9 @@
                     'http://m.mobileresponse.io',
                     'http://m.mobileresponse.se',
                     'https://qlnk.se',
-                    'http://qlnk.se'
+                    'http://qlnk.se',
+                    'http://form-test.bosbec.io',
+                    'https://form.bosbec.io'
                 ];
             }
 

@@ -253,7 +253,8 @@ mrApp.controller('MessagesController',
             };
             apiFactory.functions.call('conversations/list-messages',
                 listMessagesRequest,
-                function(response) {
+                function (response) {
+                    //console.log(response.data.items[0]);
                     $scope.totalPages = response.data.maxPages;
                     var formatTimestamp = settingsFactory.getFormatTimestamp();
                     var useEncryption = false;
@@ -279,9 +280,9 @@ mrApp.controller('MessagesController',
                         response.data.items[i] = addDynamicMetadata(response.data.items[i]);
 
                         if (response.data.items[i].metaData.length > 0) {
-                            
                             if (response.data.items[i].metaData[0]._type === "form" ||
                                 response.data.items[i].metaData[0]._type === "messageMetaDataForm") {
+
                                 var formObj = angular.fromJson(response.data.items[i].metaData[0].value);
                                 response.data.items[i].formId = formObj.id;
                             }
