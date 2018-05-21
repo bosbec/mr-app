@@ -110,7 +110,7 @@ a {
     padding: 0 !important;
     overflow: scroll !important;
     -webkit-overflow-scrolling: touch !important;
-    height: 90vh;
+    height: calc( 100% - 50px);
 }
 
 .modal-close {
