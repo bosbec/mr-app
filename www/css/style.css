@@ -109,8 +109,6 @@ a {
 
 .modal-body {
     padding: 0 !important;
-    /*overflow: scroll !important;
-    -webkit-overflow-scrolling: touch !important;*/
     height: calc(100vh - 50px);
 }
 
@@ -126,6 +124,8 @@ a {
     display: block;
     width: 100%;
     height: calc(100vh - 50px);
+    overflow: scroll !important;
+    -webkit-overflow-scrolling: touch !important;
 }
 
 .form-section {
