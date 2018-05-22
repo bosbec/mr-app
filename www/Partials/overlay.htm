@@ -7,7 +7,8 @@
         </div>
         <div class="modal-content">
             <div class="modal-body">
-                <iframe class="formModalIframe" src="{{ activeFormUrl | trustUrl }}" iframe-onload="iframeLoadedCallBack()" style="width: 100% !important; height: 100% !important; overflow: scroll !important; -webkit-overflow-scrolling: touch !important" scrolling="yes"></iframe>
+                <!--<iframe class="formModalIframe" src="{{ activeFormUrl | trustUrl }}" iframe-onload="iframeLoadedCallBack()" style="width: 100% !important; height: 100% !important; overflow: scroll !important; -webkit-overflow-scrolling: touch !important" scrolling="yes"></iframe>-->
+                <iframe class="formModalIframe" ng-src="{{ activeFormUrl | trustUrl }}" style="width: 100% !important; height: 100%" scrolling="yes"></iframe>
             </div>
         </div>
     </div>
