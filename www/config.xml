@@ -5,7 +5,7 @@
         xmlns:gap = "http://phonegap.com/ns/1.0"
         xmlns:android = "http://schemas.android.com/apk/res/android"
         id        = "com.bosbec.mr-app"
-        version   = "0.3.75">
+        version   = "0.3.76">
 <!--<widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         xmlns:android = "http://schemas.android.com/apk/res/android"
@@ -24,7 +24,7 @@
   </author>
 
   <gap:config-file platform="ios" parent="CFBundleShortVersionString">
-    <string>0.3.75</string>
+    <string>0.3.76</string>
     <!--<string>4.0.12</string>-->
     <!-- VERSION HERE -->
   </gap:config-file>
