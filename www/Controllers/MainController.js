@@ -16,37 +16,37 @@
     ]);
 
 mrApp.controller('FormModalController',
-    [
-        '$scope', '$timeout', 'SharedState',
-        function ($scope, $timeout, SharedState) {
+[
+    '$scope', '$timeout', 'SharedState',
+    function($scope, $timeout, SharedState) {
 
-            $scope.activeFormUrl = "Partials/loading.htm";
-
-            function loadIframe() {
-                //console.log("iFrameLoaded: " + SharedState.get('formModalUrl'));
-                if ($scope.activeFormUrl !== SharedState.get('formModalUrl')) {
-                    console.log("change iframe", SharedState.get('formModalUrl'));
-                    $scope.activeFormUrl = SharedState.get('formModalUrl');
-                }
+        $scope.activeFormUrl = "Partials/loading.htm";
+        
+        function loadIframe() {
+            //console.log("iFrameLoaded: " + SharedState.get('formModalUrl'));
+            if ($scope.activeFormUrl !== SharedState.get('formModalUrl')) {
+                console.log("change iframe", SharedState.get('formModalUrl'));
+                $scope.activeFormUrl = SharedState.get('formModalUrl');
             }
+        }
 
-            $scope.iframeLoadedCallBack = function () {
-                loadIframe();
-            }
+        $scope.iframeLoadedCallBack = function (event) {
+            console.log("iframe loaded callback: ", $scope.activeFormUrl);
+            //loadIframe();
+        }
 
-            function init() {
-                //console.log("Init: " + SharedState.get('formModalUrl'));
-                //loadIframe();
-                $timeout(function () {
+        function init() {
+            //console.log("Init: " + SharedState.get('formModalUrl'));
+            $timeout(function() {
                     loadIframe();
                 },
-                    2000);
-            }
-
-            init();
-
+                2000);
         }
-    ]);
+
+        init();
+
+    }
+]);
 
 mrApp.controller('MainController', [
     'ApiFactory', '$rootScope', '$scope', '$location','$window', '$localStorage', '$filter', '$timeout', 'ConversationsFactory', 'DeviceFactory','SettingsFactory', 'SharedState',
