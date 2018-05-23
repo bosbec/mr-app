@@ -280,12 +280,15 @@ mrApp.controller('MessagesController',
                         response.data.items[i] = addDynamicMetadata(response.data.items[i]);
 
                         if (response.data.items[i].metaData.length > 0) {
-                            if (response.data.items[i].metaData[0]._type === "form" ||
-                                response.data.items[i].metaData[0]._type === "messageMetaDataForm") {
+                            for (var j = 0; j < response.data.items[i].metaData.length; j++) {
+                                if (response.data.items[i].metaData[j]._type === "form" ||
+                                    response.data.items[i].metaData[j]._type === "messageMetaDataForm") {
 
-                                var formObj = angular.fromJson(response.data.items[i].metaData[0].value);
-                                response.data.items[i].formId = formObj.id;
+                                    var formObj = angular.fromJson(response.data.items[i].metaData[j].value);
+                                    response.data.items[i].formId = formObj.id;
+                                }
                             }
+                            
                         }
                         
                         if (formatTimestamp) {
