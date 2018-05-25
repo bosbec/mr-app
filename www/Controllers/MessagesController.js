@@ -254,7 +254,7 @@ mrApp.controller('MessagesController',
             apiFactory.functions.call('conversations/list-messages',
                 listMessagesRequest,
                 function (response) {
-                    //console.log(response.data.items[0]);
+                    console.log(response.data.items[0]);
                     $scope.totalPages = response.data.maxPages;
                     var formatTimestamp = settingsFactory.getFormatTimestamp();
                     var useEncryption = false;
