@@ -359,6 +359,8 @@
                     $scope.signin.error.show = true;
                     console.log("Login failed");
 
+                    $scope.$emit('loadingDone', 'loginFailed');
+
                     error(e);
                 });
 

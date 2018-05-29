@@ -61,6 +61,8 @@ mrApp.controller('MainController', [
 
         $scope.autoLoginAttempts = 0;
 
+        $scope.showOverride = false;
+
         var checkWhatsNew = function() {
             //console.log("What-is-new");
             conversationsFactory.whatIsNew(function(messages) {
@@ -308,6 +310,10 @@ mrApp.controller('MainController', [
         //    }
         //};
 
+        $scope.OverrideLoading = function() {
+            $scope.$emit('loadingDone', 'override');
+        }
+
         function onLoadingDone(event, state) {
             $scope.mainLoading = { 'display': 'none' };
             $scope.app = { 'display': 'block' };
@@ -342,7 +348,7 @@ mrApp.controller('MainController', [
             if (token != undefined) {
 
                 if ($scope.inboxes == undefined) {
-                    
+
                     listInboxes(token,
                         function (response) {
 
