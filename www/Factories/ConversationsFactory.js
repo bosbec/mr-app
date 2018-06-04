@@ -7,15 +7,10 @@
             var lastUpdate = null;
 
             function whatIsNew(callback, error) {
-
-                if (lastUpdate == null) {
-                    lastUpdate = $filter('date')(new Date() - (5 * 60000), 'yyyy-MM-ddTHH:mm:ssZ');
-                }
-
+                
                 var whatIsNewRequest = {
                     authenticationToken: apiFactory.getToken(),
                     data: {
-                        'lastUpdate': lastUpdate,
                         'deviceId': 'XXX-YYY'
                     }
                 };
@@ -23,12 +18,9 @@
                 apiFactory.functions.call('conversations/what-is-new',
                     whatIsNewRequest,
                     function(response) {
-                        lastUpdate = $filter('date')(new Date() - (1 * 60000), 'yyyy-MM-ddTHH:mm:ssZ');
-
+                        
                         if (response.data.messages.length > 0) {
-                            //filterWhatsNewResponse(response.data.messages);
                             callback(response.data.messages);
-                            //console.log(response.data.messages);
                         } else {
                             callback(null);
                         }
