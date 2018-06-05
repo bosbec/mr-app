@@ -100,7 +100,10 @@ mrApp.controller('MessagesController',
             }
             listMessages($scope.authenticationToken, conversationId);
             $scope.conversation = conversationsFactory.getCurrentConversation();
-            $scope.conversation.viewSettings = "normal";
+            console.log("conversation", $scope.conversation);
+            if ($scope.conversation != null) {
+                $scope.conversation.viewSettings = "normal";
+            }
 
             // check if conversation uses encryption 
 
