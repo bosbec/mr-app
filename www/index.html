@@ -148,14 +148,14 @@
 
     </div>
 
-<div ng-style="mainLoading" class="mainLoading">
-    <div class="loadingContainer">
-        <div class="text-center">
-            <img ng-click="OverrideLoading()" src="images/Logo-Bosbec-w200-padding.png" />
+    <div ng-style="mainLoading" class="mainLoading">
+        <div class="loadingContainer">
+            <div class="text-center">
+                <img ng-click="OverrideLoading()" src="images/Logo-Bosbec-w200-padding.png" />
+            </div>
+            <div class="loadingTextContainer">loading<span class="loading"></span></div>
         </div>
-        <div class="loadingTextContainer">loading<span class="loading"></span></div>
     </div>
-</div>
 
 
     <script src="js/angular/1.6.9/angular.min.js" type="text/javascript"></script>
@@ -173,7 +173,11 @@
 
     <script src="js/encryption/angularjs-crypto.js"></script>
     <script src="js/encryption/CryptoJSCipher.js"></script>
+
     <script src="js/encryption/aes.js"></script>
+    <script src="js/encryption/pbkdf2.js"></script>
+
+
 
     <script src="Scripts/init.js" type="text/javascript"></script>
     <script src="Scripts/config.js" type="text/javascript"></script>

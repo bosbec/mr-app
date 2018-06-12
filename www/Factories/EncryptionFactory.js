@@ -180,6 +180,23 @@
                 $localStorage.encryptionKeys = [];
             }
 
+            function generateKey(password, salt, bitSize) {
+
+                var iterations = 1000;
+                var config = {
+                    keySize: bitSize / 32,
+                    iterations: iterations
+                };
+
+                var hexSalt = salt;
+                var cryptoSalt = CryptoJS.enc.Hex.parse(hexSalt);
+
+                var generatedKey = CryptoJS.PBKDF2(password, cryptoSalt, config);
+                //console.log("generatedKey", generatedKey.toString());
+                return generatedKey.toString();
+
+            }
+
             function init() {
                 console.log("Init EncryptionFactory");
                 if (!$localStorage.encryptionKeys) {
@@ -200,7 +217,8 @@
                 getEncryptionKeyName: getEncryptionKeyName,
                 getEncryptionKeyByName: getEncryptionKeyByName,
                 updateEncryptionKey: updateEncryptionKey,
-                deleteEncryptionKey: deleteEncryptionKey
+                deleteEncryptionKey: deleteEncryptionKey,
+                generateKey: generateKey
             };
         }
     ]);

@@ -6,7 +6,7 @@
                 <div class="list-group-item">
                     <h1>Encryption keys</h1>
                 </div>
-
+                
                 <div class="list-group-item">
                     <div ng-show="!showEditKeyForm" class="">
                         <button class="btn btn-primary" ng-click="ShowAddEncryptionKey();"><i class="fa fa-plus"></i> </button>
@@ -14,8 +14,8 @@
 
                     <div ng-show="showEditKeyForm">
                         <div>
-                            <form name="editEncryptionKeyForm" ng-model="currentKey">
-                                <div class="form-section">
+                            <form ng-show="!showGenerateKeyForm" name="editEncryptionKeyForm" ng-model="currentKey">
+                                <div ng-show="!showGenerateKeyForm" class="form-section">
                                     <label>Name</label>
                                     <input type="text" ng-model="currentKey.name" required class="form-control">
                                 </div>
@@ -23,14 +23,40 @@
                                     <label>Alias</label>
                                     <input type="text" ng-model="currentKey.alias" class="form-control">
                                 </div>
-                                <div class="form-section">
-                                    <label>Key (exactly 32 characters) {{currentKey.key.length}}</label>
-                                    <textarea ng-model="currentKey.key" ng-minlength="32" ng-maxlength="32" required class="form-control"></textarea>
+                                <div ng-show="!showGenerateKeyForm" class="form-section">
+                                    <label>Key (AES128: length 32, AES256: length 64) {{currentKey.key.length}}</label><button class="btn btn-primary btn-sm pull-right" ng-click="ShowGenerateKey();">Generate new key</button>
+                                    <textarea ng-model="currentKey.key" ng-minlength="32" ng-maxlength="64" required class="form-control"></textarea>
                                 </div>
+
                                 <div class="form-section">
                                     <button class="btn btn-primary" ng-click="CancelEditEncryptionKey();">Cancel</button>
                                     <button ng-hide="newKey" class="btn btn-danger" ng-click="DeleteEncryptionKey(currentKey);">Delete</button>
-                                    <button class="btn btn-primary" ng-disabled="!editEncryptionKeyForm.$valid" ng-click="SaveEncryptionKey(currentKey);">Save key</button>
+                                    <button ng-show="!showGenerateKeyForm" class="btn btn-primary" ng-disabled="!editEncryptionKeyForm.$valid" ng-click="SaveEncryptionKey(currentKey);">Save key</button>
+                                </div>
+                            </form>
+                            
+                            <form ng-show="showGenerateKeyForm">
+                                <div>
+                                    <h3>Generate new key</h3>
+                                    <div class="form-section">
+                                        <label>Bit size</label>
+                                        <div>
+                                            <input type="radio" ng-model="currentKey.bitSize" value="128" /> <span>128 bit</span>
+                                            <input type="radio" ng-model="currentKey.bitSize" value="256" checked="checked" /> <span>256 bit</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-section">
+                                        <label>Passphrase</label>
+                                        <textarea ng-model="currentKey.passphrase" ng-minlength="3" ng-maxlength="50" class="form-control"></textarea>
+                                    </div>
+                                    <div class="form-section">
+                                        <label>Salt</label>
+                                        <textarea ng-model="currentKey.salt" ng-minlength="3" ng-maxlength="30" class="form-control"></textarea>
+                                    </div>
+                                    <div class="form-section">
+                                        <button class="btn btn-primary" ng-click="CancelGenerateKey();">Cancel</button>
+                                        <button ng-show="showGenerateKeyForm" class="btn btn-primary" ng-disabled="!currentKey.salt || !currentKey.passphrase" ng-click="GenerateKey(currentKey.passphrase,currentKey.salt,currentKey.bitSize);">Generate key</button>
+                                    </div>
                                 </div>
                             </form>
 

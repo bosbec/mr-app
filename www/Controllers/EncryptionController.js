@@ -4,6 +4,7 @@
 
         $scope.encryptionKeys = [];
         $scope.showEditKeyForm = false;
+        $scope.showGenerateKeyForm = false;
         $scope.currentKey = null;
         $scope.newKey = false;
         
@@ -21,6 +22,7 @@
         $scope.CancelEditEncryptionKey = function () {
             $scope.currentKey = null;
             $scope.showEditKeyForm = false;
+            $scope.showGenerateKeyForm = false;
             $scope.newKey = false;
         };
 
@@ -36,6 +38,7 @@
                 "name": "",
                 "type": "",
                 "key": "",
+                "bitSize": 256,
                 "alias": [],
                 "createdOn": moment.utc(Date.now()).format("YYYY-MM-DD HH:mm:ss.SSS"),
                 "version": 1
@@ -55,6 +58,22 @@
             encryptionFactory.clearStoredEncryptionKeys();
             angular.copy(encryptionFactory.getEncryptionKeys(), $scope.encryptionKeys);
             console.log("Clear stored keys", $localStorage.encryptionKeys);
+        };
+
+        $scope.ShowGenerateKey = function () {
+            $scope.showGenerateKeyForm = true;
+        };
+
+        $scope.GenerateKey = function (passphrase, salt, bitSize) { //bitSize: 128 eller 256
+            var generatedKey = encryptionFactory.generateKey(passphrase, salt, bitSize);
+            $scope.currentKey.key = generatedKey;
+            console.log("generatedKey: ", $scope.currentKey.key);
+            $scope.showGenerateKeyForm = false;
+        };
+
+        $scope.CancelGenerateKey = function () {
+            $scope.showEditKeyForm = true;
+            $scope.showGenerateKeyForm = false;
         };
         
         function init() {

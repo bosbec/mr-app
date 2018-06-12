@@ -217,6 +217,12 @@ a {
   border-top-right-radius: 0;
 }
 
+.form-group-sub-section {
+    border: 1px solid silver;
+    padding: 10px;
+    margin: 5px;
+}
+
 .sign-in-logo {
     margin-left: 50%;
 }
