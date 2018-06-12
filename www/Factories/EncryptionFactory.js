@@ -192,7 +192,6 @@
                 var cryptoSalt = CryptoJS.enc.Hex.parse(hexSalt);
 
                 var generatedKey = CryptoJS.PBKDF2(password, cryptoSalt, config);
-                //console.log("generatedKey", generatedKey.toString());
                 return generatedKey.toString();
 
             }

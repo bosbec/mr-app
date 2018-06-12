@@ -24,8 +24,11 @@
                                     <input type="text" ng-model="currentKey.alias" class="form-control">
                                 </div>
                                 <div ng-show="!showGenerateKeyForm" class="form-section">
-                                    <label>Key (AES128: length 32, AES256: length 64) {{currentKey.key.length}}</label><button class="btn btn-primary btn-sm pull-right" ng-click="ShowGenerateKey();">Generate new key</button>
+                                    <label>Key </label>
                                     <textarea ng-model="currentKey.key" ng-minlength="32" ng-maxlength="64" required class="form-control"></textarea>
+                                    <div class="section">
+                                        <button class="btn btn-primary btn-sm pull-right" ng-click="ShowGenerateKey();">Generate new key</button>
+                                    </div>
                                 </div>
 
                                 <div class="form-section">
@@ -42,7 +45,7 @@
                                         <label>Bit size</label>
                                         <div>
                                             <input type="radio" ng-model="currentKey.bitSize" value="128" /> <span>128 bit</span>
-                                            <input type="radio" ng-model="currentKey.bitSize" value="256" checked="checked" /> <span>256 bit</span>
+                                            <input type="radio" ng-model="currentKey.bitSize" value="256" /> <span>256 bit</span>
                                         </div>
                                     </div>
                                     <div class="form-section">

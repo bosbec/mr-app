@@ -49,7 +49,6 @@
 
         $scope.EditEncryptionKey = function(key) {
             $scope.currentKey = encryptionFactory.getEncryptionKeyByName(key.name);
-            //angular.copy(key, $scope.currentKey);
             $scope.showEditKeyForm = true;
             $scope.newKey = false;
         };
@@ -67,7 +66,6 @@
         $scope.GenerateKey = function (passphrase, salt, bitSize) { //bitSize: 128 eller 256
             var generatedKey = encryptionFactory.generateKey(passphrase, salt, bitSize);
             $scope.currentKey.key = generatedKey;
-            console.log("generatedKey: ", $scope.currentKey.key);
             $scope.showGenerateKeyForm = false;
         };
 
@@ -78,7 +76,6 @@
         
         function init() {
             angular.copy(encryptionFactory.getEncryptionKeys(), $scope.encryptionKeys);
-            //$scope.encryptionKeys = encryptionFactory.getEncryptionKeys();
         }
 
         init();

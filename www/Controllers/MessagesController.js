@@ -100,7 +100,6 @@ mrApp.controller('MessagesController',
             }
             listMessages($scope.authenticationToken, conversationId);
             $scope.conversation = conversationsFactory.getCurrentConversation();
-            console.log("conversation", $scope.conversation);
             if ($scope.conversation != null) {
                 $scope.conversation.viewSettings = "normal";
             }
