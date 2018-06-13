@@ -30,6 +30,7 @@
             var previewLength = 100;
             for (var i = 0; i < conversations.length; i++) {
                 conversations[i].content = handleLinks(conversations[i].content);
+
                 if (deviceFactory.isDevice()) {
                     if (conversations[i].content.length > previewLength) {
                         conversations[i].content = conversations[i].content.substr(0, previewLength) + " ...";

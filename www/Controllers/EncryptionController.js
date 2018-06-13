@@ -1,13 +1,32 @@
 ﻿mrApp.controller('EncryptionController', [
-    '$rootScope','$scope', '$localStorage', 'EncryptionFactory',
-    function ($rootScope, $scope, $localStorage, encryptionFactory) {
+    '$rootScope', '$scope', '$localStorage','$timeout', 'EncryptionFactory',
+    function ($rootScope, $scope, $localStorage, $timeout, encryptionFactory) {
 
         $scope.encryptionKeys = [];
         $scope.showEditKeyForm = false;
         $scope.showGenerateKeyForm = false;
         $scope.currentKey = null;
         $scope.newKey = false;
-        
+        $scope.copyButtonText = "Copy to clipboard";
+
+        $scope.clipboardSuccess = function(e) {
+            //console.log("clipboard success: ", e.text, e.trigger);
+            $scope.copyButtonText = "Copied!";
+            $timeout(function() {
+                    $scope.copyButtonText = "Copy to clipboard";
+                },
+                2000);
+        };
+
+        $scope.clipboardError = function () {
+            console.log("clipboard error");
+            $scope.copyButtonText = "Failed!";
+            $timeout(function () {
+                $scope.copyButtonText = "Copy to clipboard";
+            },
+                2000);
+        };
+
         $scope.SaveEncryptionKey = function (key) {
             if (encryptionFactory.getEncryptionKeyByName(key.name) === undefined) {
                 encryptionFactory.addEncryptionKey(key.name, 'aes', key.key, [key.alias]);

@@ -5,7 +5,7 @@
         function ($localStorage) {
 
             var appId = "com.bosbec.mr-app";
-            var appVersion = "0.3.83";
+            var appVersion = "0.3.84";
             var appPushId = "64032-F5A58";
             //var appId = "se.bosbec.Messmr1";
             //var appVersion = "4.0.13";
@@ -27,7 +27,8 @@
                 };
                 //// test
                 //return {
-                //    "appapi": "http://appapi.test.mobileresponse.se/1/",
+                //    //"appapi": "http://appapi.test.mobileresponse.se/1/",
+                //    "appapi": "http://localhost:8884/1/",
                 //    "api2": "http://api2-test.bosbec.io/",
                 //    "apps": "http://apps-test.bosbec.io/#",
                 //    "forms": "http://form-test.bosbec.io/#!/form/",

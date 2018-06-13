@@ -13,7 +13,8 @@ var mrApp = angular.module('mrApp', [
     'DeviceFactory',
     'SettingsFactory',
     'MobileResponseFactory',
-    'EncryptionFactory'
+    'EncryptionFactory',
+    'ngclipboard'
 ]);
 
 mrApp.run(function () {
