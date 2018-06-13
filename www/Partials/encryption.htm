@@ -27,7 +27,7 @@
                                     <label>Key </label>
                                     <textarea ng-model="currentKey.key" ng-minlength="32" ng-maxlength="64" required class="form-control"></textarea>
                                     <div class="section">
-                                        <button class="btn btn-sm" ngclipboard ngclipboard-success="clipboardSuccess(e, this);" ngclipboard-error="clipboardError(e);" data-clipboard-text="{{currentKey.key}}">
+                                        <button class="btn btn-primary btn-sm" ngclipboard ngclipboard-success="clipboardSuccess(e, this);" ngclipboard-error="clipboardError(e);" data-clipboard-text="{{currentKey.key}}">
                                             {{copyButtonText}}
                                         </button>
                                         <button class="btn btn-primary btn-sm pull-right" ng-click="ShowGenerateKey();">
