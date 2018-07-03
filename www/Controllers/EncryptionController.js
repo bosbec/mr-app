@@ -29,7 +29,7 @@
 
         $scope.SaveEncryptionKey = function (key) {
             if (encryptionFactory.getEncryptionKeyByName(key.name) === undefined) {
-                encryptionFactory.addEncryptionKey(key.name, 'aes', key.key, [key.alias]);
+                encryptionFactory.addEncryptionKey(key.name, 'aes', key.key, key.alias);
             } else {
                 encryptionFactory.updateEncryptionKey(key);
             }
@@ -58,7 +58,7 @@
                 "type": "",
                 "key": "",
                 "bitSize": 256,
-                "alias": [],
+                "alias": "",
                 "createdOn": moment.utc(Date.now()).format("YYYY-MM-DD HH:mm:ss.SSS"),
                 "version": 1
             };
