@@ -27,8 +27,7 @@
                 };
                 //// test
                 //return {
-                //    //"appapi": "http://appapi.test.mobileresponse.se/1/",
-                //    "appapi": "http://localhost:8884/1/",
+                //    "appapi": "http://appapi.test.mobileresponse.se/1/",
                 //    "api2": "http://api2-test.bosbec.io/",
                 //    "apps": "http://apps-test.bosbec.io/#",
                 //    "forms": "http://form-test.bosbec.io/#!/form/",

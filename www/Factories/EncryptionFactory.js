@@ -142,26 +142,14 @@
             }
 
             function getEncryptionKeyByName(keyName) {
-                console.log("getEncryptionKeyByName", keyName);
+                //console.log("getEncryptionKeyByName", keyName);
                 if ($filter('filter')($localStorage.encryptionKeys, { 'name': keyName }, true).length > 0) {
                     return $filter('filter')($localStorage.encryptionKeys, { 'name': keyName }, true)[0];
                 } else {
                     if ($filter('filter')($localStorage.encryptionKeys, { 'alias': keyName }, true).length > 0) {
                         return $filter('filter')($localStorage.encryptionKeys, { 'alias': keyName }, true)[0];
-                    }
-                    // check in alias
-                    //console.log("alias", $filter('filter')($localStorage.encryptionKeys, { 'alias': keyName }, true)[0]);
-                    //console.log(key.alias);
-                    // if key.alias is not empty check for , => split 
-                    //if (key.alias !== undefined) {
-                    //    console.log(key.alias.indexOf(","));
-                    //    if (key.alias.indexOf(",") > 0) {
-                    //        var keyAliases = key.alias.split(",");
-                    //        console.log("keyAliases", keyAliases);
-                    //    }
-                    //}
+                    } 
                 }
-
             }
 
             function addEncryptionKey(name, type, key, alias) {
