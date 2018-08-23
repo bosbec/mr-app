@@ -13,7 +13,7 @@
 
         function init() {
             //console.log("conversation", inboxId);
-            $scope.$emit('loadingInformation', 'Get conversations'); // loading info
+            $scope.$emit('loadingInformation', '(10/11) Get conversations'); // loading info
             $scope.$emit('viewChanged', 'conversations');
             $rootscope.currentInboxId = inboxId;
             listConversations(apiFactory.getToken(), inboxId, $scope.currentPage);
@@ -60,7 +60,7 @@
                 pageIndex,
                 settingsFactory.getNumberOfConversations(),
                 function (conversationsObject) {
-                    $scope.$emit('loadingInformation', 'Format conversations'); // loading info
+                    $scope.$emit('loadingInformation', '(11/11) Format conversations'); // loading info
                     $scope.totalPages = conversationsObject.maxPages;
                     callback(formatConversationList(conversationsObject.items));
                 },

@@ -55,10 +55,10 @@
         $scope.$on('autoLoginFailedFinal(', onAutoLoginFailedFinal);
 
         function init() {
-            $scope.$emit('loadingInformation', 'Init login'); // loading info
+            $scope.$emit('loadingInformation', '(1/11) Init login'); // loading info
             $scope.$emit('viewChanged', 'login');
             settingsFactory.initSettings();
-            $scope.$emit('loadingInformation', 'Get settings'); // loading info
+            $scope.$emit('loadingInformation', '(2/11) Get settings'); // loading info
             $scope.credentials = $localStorage.savedCredentials;
             if ($scope.credentials && $scope.credentials.useAdminLogIn) {
                 $scope.useAdminLogIn = $scope.credentials.useAdminLogIn;
@@ -260,7 +260,7 @@
 
             apiFactory.functions.authenticate(credentials,
                 function (response) {
-                    $scope.$emit('loadingInformation', 'Authentication success'); // loading info
+                    $scope.$emit('loadingInformation', '(4/11) Authentication success'); // loading info
                     if (response != null) {
                         if ($scope.saveCredentials) {
                             $localStorage.savedCredentials = {
@@ -282,12 +282,12 @@
 
                         $rootScope.keepMeSignedIn = $scope.keepMeSignedIn;
                         $rootScope.authenticationToken = response;
-                        $scope.$emit('loadingInformation', 'Get user details'); // loading info
+                        $scope.$emit('loadingInformation', '(5/10) Get user details'); // loading info
                         usersFactory.getUser(apiFactory.myAppUser.appUserId,
                             function (response) {
                                 $rootScope.myAppUser = response;
 
-                                $scope.$emit('loadingInformation', 'Bosbec admin login'); // loading info
+                                $scope.$emit('loadingInformation', '(6/11) Bosbec admin login'); // loading info
                                 mobileResponseFactory.functions.autoAuthenticate(
                                     function(response) {
                                         console.log("[SUCCESS] Mobile Response auto login");
@@ -318,7 +318,7 @@
                                 };
                                 //alert("isDevice: " + deviceFactory.isDevice);
                                 if (deviceFactory.isDevice) {
-                                    $scope.$emit('loadingInformation', 'Register device'); // loading info
+                                    $scope.$emit('loadingInformation', '(7/11) Register device'); // loading info
                                     var statusFlag = false;
 
                                     $timeout(function() {
@@ -331,7 +331,7 @@
 
                                     deviceFactory.registerDevice(registerDeviceSettings,
                                         function (status) {
-                                            $scope.$emit('loadingInformation', 'Device registered'); // loading info
+                                            $scope.$emit('loadingInformation', '(8/11) Device registered'); // loading info
                                             console.log("registerDevice: status", status);
                                             statusFlag = true;
                                             if (status) {
@@ -373,7 +373,7 @@
         function login() {
             console.log('--- LOGIN ---');
             setSigningIn(true);
-            $scope.$emit('loadingInformation', 'Init api'); // loading info
+            $scope.$emit('loadingInformation', '(3/11) Init api'); // loading info
             apiLogin(apiFactory.apiSettings.instanceName,
                 $scope.credentials.userName,
                 $scope.credentials.password,
@@ -382,7 +382,7 @@
                     if (response.email == null && response.phoneNumber == null) {
                         $location.path('/profile/' + response.id);
                     }
-                    $scope.$emit('loadingInformation', 'Login process completed'); // loading info
+                    $scope.$emit('loadingInformation', '(9/11) Login process completed'); // loading info
                     if ($rootScope.currentInboxId != undefined) {
                         $location.path('/conversations/' + $rootScope.currentInboxId);
                     } else {
