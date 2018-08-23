@@ -153,7 +153,8 @@
             <div class="text-center">
                 <img ng-click="OverrideLoading()" src="images/Logo-Bosbec-w200-padding.png" />
             </div>
-            <div class="loadingTextContainer">loading<span class="loading"></span></div>
+            <div ng-style="loadingTextInformation" class="loadingTextInformation">{{loadingInformation}}</div>
+            <div ng-style="loadingTextContainer" class="loadingTextContainer">loading<span class="loading"></span></div>
         </div>
     </div>
 

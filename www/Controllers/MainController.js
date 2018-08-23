@@ -59,6 +59,8 @@ mrApp.controller('MainController', [
         $scope.alertLoading = false;
         $scope.deviceType = 0;
 
+        $scope.loadingInformation = "";
+
         $scope.autoLoginAttempts = 0;
 
         $scope.showOverride = false;
@@ -324,6 +326,14 @@ mrApp.controller('MainController', [
         }
 
         $scope.$on('loadingDone', onLoadingDone);
+
+        function onLoadingInformation(event, state) {
+            $scope.loadingTextContainer = { 'display': 'none' };
+            $scope.loadingTextInformation = { 'display': 'block' };
+            $scope.loadingInformation = "" + state;
+        }
+
+        $scope.$on('loadingInformation', onLoadingInformation);
 
         function onShowMainSidebar(event, state) {
             //console.log("showMainSidebar: ", SharedState.get('mainSidebar'));

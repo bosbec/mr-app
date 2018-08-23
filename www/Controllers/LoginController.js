@@ -55,15 +55,16 @@
         $scope.$on('autoLoginFailedFinal(', onAutoLoginFailedFinal);
 
         function init() {
+            $scope.$emit('loadingInformation', 'Init login'); // loading info
             $scope.$emit('viewChanged', 'login');
             settingsFactory.initSettings();
+            $scope.$emit('loadingInformation', 'Get settings'); // loading info
             $scope.credentials = $localStorage.savedCredentials;
             if ($scope.credentials && $scope.credentials.useAdminLogIn) {
                 $scope.useAdminLogIn = $scope.credentials.useAdminLogIn;
             }
 
             $scope.appVersion = settingsFactory.getAppVersion();
-
             
             if ($localStorage.showIntro === undefined || $localStorage.showIntro) {
                 // show intro...
@@ -259,6 +260,7 @@
 
             apiFactory.functions.authenticate(credentials,
                 function (response) {
+                    $scope.$emit('loadingInformation', 'Authentication success'); // loading info
                     if (response != null) {
                         if ($scope.saveCredentials) {
                             $localStorage.savedCredentials = {
@@ -280,11 +282,12 @@
 
                         $rootScope.keepMeSignedIn = $scope.keepMeSignedIn;
                         $rootScope.authenticationToken = response;
-
+                        $scope.$emit('loadingInformation', 'Get user details'); // loading info
                         usersFactory.getUser(apiFactory.myAppUser.appUserId,
-                            function(response) {
+                            function (response) {
                                 $rootScope.myAppUser = response;
 
+                                $scope.$emit('loadingInformation', 'Bosbec admin login'); // loading info
                                 mobileResponseFactory.functions.autoAuthenticate(
                                     function(response) {
                                         console.log("[SUCCESS] Mobile Response auto login");
@@ -292,7 +295,7 @@
                                     function(error) {
                                         console.log("[WARN] Mobile Response auto login: ", error);
                                     });
-
+                                
                                 var registerDeviceSettings = {
                                     "appid": settingsFactory.getAppPushId(),
                                     "projectid": "71435688512",
@@ -315,7 +318,7 @@
                                 };
                                 //alert("isDevice: " + deviceFactory.isDevice);
                                 if (deviceFactory.isDevice) {
-
+                                    $scope.$emit('loadingInformation', 'Register device'); // loading info
                                     var statusFlag = false;
 
                                     $timeout(function() {
@@ -328,6 +331,7 @@
 
                                     deviceFactory.registerDevice(registerDeviceSettings,
                                         function (status) {
+                                            $scope.$emit('loadingInformation', 'Device registered'); // loading info
                                             console.log("registerDevice: status", status);
                                             statusFlag = true;
                                             if (status) {
@@ -369,6 +373,7 @@
         function login() {
             console.log('--- LOGIN ---');
             setSigningIn(true);
+            $scope.$emit('loadingInformation', 'Init api'); // loading info
             apiLogin(apiFactory.apiSettings.instanceName,
                 $scope.credentials.userName,
                 $scope.credentials.password,
@@ -377,7 +382,7 @@
                     if (response.email == null && response.phoneNumber == null) {
                         $location.path('/profile/' + response.id);
                     }
-
+                    $scope.$emit('loadingInformation', 'Login process completed'); // loading info
                     if ($rootScope.currentInboxId != undefined) {
                         $location.path('/conversations/' + $rootScope.currentInboxId);
                     } else {

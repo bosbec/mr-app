@@ -14,7 +14,19 @@ a {
     margin-right: auto;
     padding: 25px;
 }
+
+.loadingTextInformation {
+    display: none;
+    padding-top: 20px;
+    width: 200px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .loadingTextContainer {
+    display: block;
+    padding-top: 20px;
     width: 70px;
     margin-left: auto;
     margin-right: auto;
