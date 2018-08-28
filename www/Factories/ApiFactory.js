@@ -88,6 +88,7 @@
                         headers: {
                             "Content-Type": "application/json"
                         },
+                        timeout: 5*1000,
                         data: request
                     })
                     .then(function(response) {

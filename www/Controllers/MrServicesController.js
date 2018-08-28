@@ -21,7 +21,7 @@
             mobileResponseFactory.functions.call("services/list-services",
                 listServicesRequest,
                 function (response) {
-                    console.log("list services", response.data.items);
+                    //console.log("list services", response.data.items);
                     $scope.items = response.data.items;
                 },
                 function (error) {
@@ -81,6 +81,22 @@
 
             SharedState.set('formModalUrl', externalUrl);
             SharedState.turnOn('formModal');
+        };
+
+        $scope.OpenServiceWebview = function (item) {
+            //console.log("Open item: ", item);
+            var externalUrl = "";
+            if (item.data.dashboard !== undefined) {
+                externalUrl = appsBaseUrl + "/services/" + item.id + "?token=" + mobileResponseFactory.getToken();
+            } else {
+                externalUrl = appsBaseUrl + "/services/execute/" + item.id + "?token=" + mobileResponseFactory.getToken();
+            }
+            externalUrl = externalUrl + "&caller=app&appuserid=" + usersFactory.myUser().id;
+            //$window.open(externalUrl, '_system');
+            $window.open(externalUrl, '_blank', 'location=yes');
+
+            //SharedState.set('formModalUrl', externalUrl);
+            //SharedState.turnOn('formModal');
         };
         
 

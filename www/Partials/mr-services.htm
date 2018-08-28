@@ -6,13 +6,13 @@
 
                 <div ng-repeat="item in items | filter: !item.data.underConstruction" class="list-group-item">
 
-                    <div class="service-list-item" ng-click="OpenService(item)">
+                    <div class="service-list-item" ng-click="OpenServiceWebview(item)">
                         <!--<div class="service-list-item-icon"><i class="fa fa-3x fa-exclamation-circle"></i></div>-->
                         <div class="list-item-avatar">
                             <img class="service-list-item-image" alt="services-symbol" src="images/mr/Job-128x128.png" />
                         </div>
                         <div>
-                            <a ng-click="OpenService(item)" class="btn btn-primary pull-right">Open</a><b>{{item.data.templateName}}</b>
+                            <a ng-click="OpenServiceWebview(item)" class="btn btn-primary pull-right">Open</a><b>{{item.data.templateName}}</b>
                         </div>
                         <!--<div>{{item.data.description | limitTo:30}}</div>-->
                     </div>

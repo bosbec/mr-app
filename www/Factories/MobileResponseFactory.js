@@ -60,6 +60,7 @@
                 $http({
                         url: apiSettings.baseApiUrl + url,
                         method: apiSettings.method,
+                        timeout: 5*1000,
                         data: request
                     })
                     .then(function (response) {
