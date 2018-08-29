@@ -21,7 +21,6 @@
             mobileResponseFactory.functions.call("services/list-services",
                 listServicesRequest,
                 function (response) {
-                    //console.log("list services", response.data.items);
                     $scope.items = response.data.items;
                 },
                 function (error) {
@@ -42,7 +41,6 @@
                 "authenticationToken": mobileResponseFactory.getToken(),
                 "data": requestData
             };
-            //console.log(executeServicesRequest);
             mobileResponseFactory.functions.call("workflows/execute-with-parameters",
                 executeServicesRequest,
                 function(response) {
@@ -97,6 +95,12 @@
 
             //SharedState.set('formModalUrl', externalUrl);
             //SharedState.turnOn('formModal');
+        };
+
+        $scope.OpenWebView = function (url) {
+            //$window.open(externalUrl, '_system');
+            cordova.inAppBrowser.open(url, '_blank', 'location=yes');
+            //$window.open(externalUrl, '_blank', 'location=yes');
         };
         
 

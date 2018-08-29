@@ -4,6 +4,14 @@
 
             <div class="list-group" ng-show="items.length">
 
+                <div class="list-group-item">
+                    <div class="service-list-item">
+                        <div>
+                            <a ng-click="OpenWebView('https://www.google.se')" class="btn btn-primary pull-right">Open</a><b>WebView Test</b>
+                        </div>
+                    </div>
+                </div>
+
                 <div ng-repeat="item in items | filter: !item.data.underConstruction" class="list-group-item">
 
                     <div class="service-list-item" ng-click="OpenServiceWebview(item)">

@@ -5,14 +5,14 @@
         xmlns:gap = "http://phonegap.com/ns/1.0"
         xmlns:android = "http://schemas.android.com/apk/res/android"
         id        = "com.bosbec.mr-app"
-        version   = "0.3.88">
-<!--<widget xmlns     = "http://www.w3.org/ns/widgets"
+        version   = "0.3.89">
+  <!--<widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         xmlns:android = "http://schemas.android.com/apk/res/android"
         id        = "se.bosbec.Messmr1"
         version   = "4.0.14">-->
-   <!--VERSION HERE--> 
-  
+  <!--VERSION HERE-->
+
   <name>Bosbec</name>
 
   <description>
@@ -25,15 +25,15 @@
      permission on your app, which PhoneGap requires.
  -->
   <!--<preference name="permissions"                value="none"/>-->
-  
+
   <edit-config target="NSLocationAlwaysUsageDescription" file="*-Info.plist" mode="overwrite">
     <string>Bosbec will not track your location, this is only due to framework requesting it</string>
-</edit-config>
-  
+  </edit-config>
+
   <edit-config target="NSLocationWhenInUseUsageDescription" file="*-Info.plist" mode="overwrite">
     <string>Bosbec will not track your location, this is only due to framework requesting it</string>
-</edit-config>
-  
+  </edit-config>
+
   <!-- Customize your app and platform with the preference element. -->
   <preference name="orientation"                value="default" />
   <!-- all: default means both landscape and portrait are enabled -->
@@ -68,21 +68,22 @@
 
   <!--This is the one PhoneGap Build acts on, leave out to get latest stable-->
   <!--Can only build one at a time in phonegap build, comment out either iOS or Android below-->
- 
+
   <!--iOS version, cli 6.5.0, push 7.1.0-->
   <!--<preference name="phonegap-version" />
   <plugin name="pushwoosh-pgb-plugin">
     <variable name="IOS_FOREGROUND_ALERT_TYPE" value="BANNER" />
     <variable name="ANDROID_FOREGROUND_PUSH" value="false" />
   </plugin>-->
-  
+
   <!--Android version, cli 7.0.1, push 7.0.6-->
   <preference name="phonegap-version" value="cli-7.0.1" />
+
   <plugin name="pushwoosh-pgb-plugin" version="7.0.6">
     <variable name="IOS_FOREGROUND_ALERT_TYPE" value="BANNER" />
     <variable name="ANDROID_FOREGROUND_PUSH" value="false" />
   </plugin>
-  
+
   <icon src="www/icon.png" />
   <splash src="www/splash.png" />
 
@@ -135,15 +136,19 @@
     <splash height="960" platform="ios" src="res/screens/ios/Default@2x~iphone.png" width="640" />
     <splash height="480" platform="ios" src="res/screens/ios/Default~iphone.png" width="320" />
   </platform>
-  
-    <content src="index.html" />
-    <plugin name="cordova-plugin-whitelist" spec="1" />
-    <access origin="*" />
-    <allow-intent href="http://*/*" />
-    <allow-intent href="https://*/*" />
-    <allow-intent href="tel:*" />
-    <allow-intent href="sms:*" />
-    <allow-intent href="mailto:*" />
-    <allow-intent href="geo:*" />
-    <allow-navigation href="*" />
+
+  <content src="index.html" />
+
+  <plugin name="cordova-plugin-inappbrowser" />
+  <plugin name="cordova-plugin-whitelist" spec="1" />
+
+  <access origin="*" />
+  <allow-intent href="http://*/*" />
+  <allow-intent href="https://*/*" />
+  <allow-intent href="tel:*" />
+  <allow-intent href="sms:*" />
+  <allow-intent href="mailto:*" />
+  <allow-intent href="geo:*" />
+  <allow-navigation href="*" />
 </widget>
+
