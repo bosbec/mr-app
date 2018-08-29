@@ -91,7 +91,7 @@
             }
             externalUrl = externalUrl + "&caller=app&appuserid=" + usersFactory.myUser().id;
             //$window.open(externalUrl, '_system');
-            $window.open(externalUrl, '_blank', 'location=yes');
+            $window.open(externalUrl, '_blank', 'location=no,closebuttoncaption=close,closebuttoncolor=#ff0000,hardwareback=no');
 
             //SharedState.set('formModalUrl', externalUrl);
             //SharedState.turnOn('formModal');
@@ -99,7 +99,8 @@
 
         $scope.OpenWebView = function (url) {
             //$window.open(externalUrl, '_system');
-            cordova.inAppBrowser.open(url, '_blank', 'location=yes');
+            $window.open(url, '_self', 'location=no,toolbar=no,closebuttoncaption=close,closebuttoncolor=#ff0000,hardwareback=no');
+            //cordova.inAppBrowser.open(url, '_blank', 'location=no');
             //$window.open(externalUrl, '_blank', 'location=yes');
         };
         
