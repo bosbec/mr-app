@@ -124,13 +124,18 @@ mrApp.config(function ($routeProvider) {
     $routeProvider.when('/login/:param1',
     {
         templateUrl: 'Partials/login.htm'
-        });
+    });
 
     $routeProvider.when('/encryption',
-        {
-            templateUrl: 'Partials/encryption.htm',
-            resolve: checkToken
-        });
+    {
+        templateUrl: 'Partials/encryption.htm',
+        resolve: checkToken
+    });
+
+    $routeProvider.when('/webviewtest',
+    {
+        templateUrl: 'Partials/webviewtest.htm'
+    });
 
     $routeProvider.otherwise({
         redirectTo: '/login'

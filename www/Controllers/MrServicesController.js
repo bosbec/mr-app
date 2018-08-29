@@ -91,19 +91,11 @@
             }
             externalUrl = externalUrl + "&caller=app&appuserid=" + usersFactory.myUser().id;
             //$window.open(externalUrl, '_system');
-            $window.open(externalUrl, '_blank', 'location=no,closebuttoncaption=close,closebuttoncolor=#ff0000,hardwareback=no');
+            $window.open(externalUrl, '_blank', 'location=yes,closebuttoncaption=Close,footer=yes,hardwareback=no,hidenavigationbuttons=yes');
 
             //SharedState.set('formModalUrl', externalUrl);
             //SharedState.turnOn('formModal');
         };
-
-        $scope.OpenWebView = function (url) {
-            //$window.open(externalUrl, '_system');
-            $window.open(url, '_self', 'location=no,toolbar=no,closebuttoncaption=close,closebuttoncolor=#ff0000,hardwareback=no');
-            //cordova.inAppBrowser.open(url, '_blank', 'location=no');
-            //$window.open(externalUrl, '_blank', 'location=yes');
-        };
-        
 
         $scope.ToggleInfo = function (item) {
             if (item.expand) {
