@@ -64,6 +64,7 @@ mrApp.controller('MainController', [
         $scope.autoLoginAttempts = 0;
 
         $scope.showOverride = false;
+        $scope.showCreateNewConversation = false;
 
         var checkWhatsNew = function() {
             //console.log("What-is-new");
@@ -282,6 +283,10 @@ mrApp.controller('MainController', [
             $rootScope.$broadcast('openRightSidebar', null);
         };
 
+        $scope.startConversation = function() {
+            $rootScope.$broadcast('startConversation', null);
+        }
+
         $scope.IsEncrypted = function() {
             var conversation = conversationsFactory.getCurrentConversation();
             if (conversation != null) {
@@ -458,6 +463,10 @@ mrApp.controller('MainController', [
                 });
 
         }
+
+        $scope.$on('showNewConversation',function(event, args) {
+            $scope.showCreateNewConversation = args;
+        })
 
 
 

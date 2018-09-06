@@ -18,6 +18,9 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
     <link rel="stylesheet" href="css/style.css" type="text/css" />
+    <link href="css/material-design-iconic-font.min.css" rel="stylesheet" />
+    <link href="css/ng-tags-input.min.css" rel="stylesheet" />
+    <link href="css/ng-tags-input.bootstrap.min.css" rel="stylesheet" />
 
 </head>
 <body ng-controller="MainController">
@@ -124,6 +127,10 @@
                     <span ng-if="IsEncrypted();"><i class="fas fa-2x fa-lock"></i></span>
                     <a ui-turn-on="rightSidebar" ng-click="OpenRightSidebar();"><span><i class="fas fa-2x fa-ellipsis-v"></i></span></a>
                 </div>
+                
+                <div ng-show="currentView=='newconversation'" class="btn btn-navbar">
+                    <a ng-if="showCreateNewConversation" ng-click="startConversation();"><span><i class="zmdi zmdi-mail-send zmdi-hc-2x"></i></span></a>
+                </div>
 
             </div>
 
@@ -171,6 +178,7 @@
     <script src="js/mobile-angular-ui/dist/js/mobile-angular-ui.gestures.min.js"></script>
     <script src="js/moment.min.js"></script>
     <script src="js/angular-moment.min.js"></script>
+    <script src="js/ng-tags-input.min.js"></script>
 
     <script src="js/encryption/angularjs-crypto.js"></script>
     <script src="js/encryption/CryptoJSCipher.js"></script>
@@ -200,6 +208,7 @@
     <script src="Controllers/IntroController.js" type="text/javascript"></script>
     <script src="Controllers/ConversationsController.js" type="text/javascript"></script>
     <script src="Controllers/MessagesController.js" type="text/javascript"></script>
+    <script src="Controllers/NewMessageController.js" type="text/javascript"></script>
     <script src="Controllers/ProfileController.js" type="text/javascript"></script>
     <script src="Controllers/NewConversationController.js" type="text/javascript"></script>
     <script src="Controllers/SettingsController.js" type="text/javascript"></script>

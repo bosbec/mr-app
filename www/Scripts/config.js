@@ -53,6 +53,12 @@ mrApp.config(function ($routeProvider) {
     {
         templateUrl: 'Partials/messages-chat.htm',
         resolve: checkToken
+    });
+
+    $routeProvider.when('/new-message/',
+        {
+            templateUrl: 'Partials/new-message-chat.htm',
+            resolve: checkToken
         });
 
     $routeProvider.when('/messages/:param1/:param2',

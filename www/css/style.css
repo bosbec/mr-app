@@ -1,6 +1,7 @@
-﻿html,body {
-    height:100%;
+﻿html, body {
+    height: 100%;
 }
+
 a {
     color: #2196f3;
 }
@@ -61,6 +62,7 @@ a {
 .mainContainer {
     display: none;
 }
+
 .sidebar {
     display: none;
 }
@@ -74,6 +76,7 @@ a {
     padding-right: 8px;
     padding-left: 8px;
 }
+
 .sidebar-left, .sidebar-right {
     background-color: #aaaaaa;
 }
@@ -88,6 +91,7 @@ a {
     border-bottom: 1px solid #ccc;
     line-height: 50px;
 }
+
 .navbar-app {
     border-bottom: 1px solid #ccc;
     height: 51px;
@@ -150,38 +154,39 @@ a {
 }
 
 .login {
-	background-color: #fff
+    background-color: #fff
 }
 
 .smallDateTime {
-	font-size: 0.8em;
-	color: #999;
+    font-size: 0.8em;
+    color: #999;
 }
 
 .smallDateTime-me {
     font-size: 0.8em;
     color: #96cdf9;
 }
+
 .error-label {
-	color: black;
+    color: black;
     background-color: lightcoral;
-	padding: 7px;
-	margin: 7px 0;
-	border: 1px solid #fbb;
+    padding: 7px;
+    margin: 7px 0;
+    border: 1px solid #fbb;
 }
 
 .success-label {
     color: black;
-	background-color: lightgreen;
-	padding: 7px;
-	margin: 7px 0;
-	border: 1px solid #fbb;
+    background-color: lightgreen;
+    padding: 7px;
+    margin: 7px 0;
+    border: 1px solid #fbb;
 }
 
 .form-signin {
-  max-width: 330px;
-  padding: 15px;
-  margin: 0 auto;
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
 }
 
 .form-new-conversation {
@@ -189,44 +194,51 @@ a {
     padding: 15px;
     margin: 0 auto;
 }
-.form-new-conversation input[type="text"] {
-  margin-bottom: 10px;
-}
+
+    .form-new-conversation input[type="text"] {
+        margin-bottom: 10px;
+    }
 
 
 .form-signin .form-signin-heading,
 .form-signin .checkbox {
-  margin-bottom: 10px;
+    margin-bottom: 10px;
 }
+
 .form-signin .checkbox {
-  font-weight: normal;
+    font-weight: normal;
 }
+
 .form-signin .form-control {
-  position: relative;
-  height: auto;
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
-  padding: 10px;
-  font-size: 16px;
+    position: relative;
+    height: auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 10px;
+    font-size: 16px;
 }
-.form-signin .form-control:focus {
-  z-index: 2;
-}
+
+    .form-signin .form-control:focus {
+        z-index: 2;
+    }
+
 .form-signin input[type="text"] {
-  margin-bottom: 10px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
+    margin-bottom: 10px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
 }
+
 .form-signin input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
 }
+
 .form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
 
 .form-group-sub-section {
@@ -238,6 +250,7 @@ a {
 .sign-in-logo {
     margin-left: 50%;
 }
+
 .new-item {
     background-color: lightgreen;
 }
@@ -263,22 +276,26 @@ a {
     margin-left: 20%;
     margin-right: 20%;
 }
+
 .list-item-avatar {
     float: left;
     padding-right: 10px;
     margin-left: -10px;
     margin-top: -5px;
 }
+
 .list-item-button {
     float: right;
     margin-top: -5px;
     margin-right: -10px;
 }
+
 .list-item-attachment {
     float: right;
     margin-top: -5px;
     margin-right: -10px;
 }
+
 .content-container-chat {
     margin-top: 50px;
     padding-bottom: 75px;
@@ -288,15 +305,18 @@ a {
     width: 75%;
     margin: 6px 6px 6px 6px;
 }
+
 .message-chat-me {
     background-color: #2196f3;
     color: white;
     float: right;
 }
+
 .message-chat-other {
     background-color: #dddddd;
     float: left;
 }
+
 .message-chat-end {
     float: left;
     width: 100%;
@@ -305,9 +325,11 @@ a {
     background-color: inherit;
     border: 0;
 }
+
 #last-message {
     color: white;
 }
+
 .message-secure {
     border-left: 5px solid lightgreen;
 }
@@ -336,16 +358,16 @@ a {
         color: white;
     }
 
-.send-chat-message-textarea.ng-invalid {
-    border: 0;
-}
-    
-    .send-chat-message-btn {
-        display: inline-block;
-        float: right;
-        margin-top: -50px;
-        padding: 10px;
+    .send-chat-message-textarea.ng-invalid {
+        border: 0;
     }
+
+.send-chat-message-btn {
+    display: inline-block;
+    float: right;
+    margin-top: -50px;
+    padding: 10px;
+}
 
 .attachment {
     background-color: white;
@@ -355,15 +377,19 @@ a {
     margin-top: 5px;
     border-radius: 6px;
 }
-.attachment img {
-    padding: 3px;
-}
-.attachment i {
-    margin-right: 5px;
-}
+
+    .attachment img {
+        padding: 3px;
+    }
+
+    .attachment i {
+        margin-right: 5px;
+    }
+
 .externalLink {
     display: block;
 }
+
 .btn-align-right {
     display: inline;
     float: right;
@@ -388,6 +414,7 @@ a {
     resize: both;
     height: 40px;
 }
+
 .profile-avatar {
     border-radius: 75px;
     border: 1px solid #ccc;
@@ -426,32 +453,39 @@ a {
     padding-top: 20px;
     font-size: 18px;
 }
+
 .intro-ingress {
     font-size: 12px;
     font-style: italic;
 }
+
 .intro-footer {
     padding: 5px;
 }
+
 .intro-text {
     font-size: 12px;
 }
+
 .intro-btn {
     width: 85px;
 }
+
 .intro-close {
     margin-top: -1px;
     margin-right: -15px;
 }
+
 .intro-dots {
     position: absolute;
     padding-top: 5px;
     margin-left: 30%;
     float: left;
 }
-.intro-dots i {
-    padding: 1px;
-}
+
+    .intro-dots i {
+        padding: 1px;
+    }
 
 @media screen and (orientation:landscape) {
     .intro-image {
@@ -469,17 +503,21 @@ a {
     margin-left: -10px;
     margin-top: -5px;
 }
+
 .item-symbol {
     float: left;
     resize: both;
     height: 32px;
 }
+
 .item-symbol-unit {
     height: 42px;
 }
+
 .unit-info-container {
     display: inline-block;
 }
+
 .unit-metadata-container {
     display: block;
     float: none;
@@ -489,10 +527,12 @@ a {
     padding: 10px;
     margin-top: 5px;
 }
+
 .unit-metadata-item {
     display: block;
     float: none;
 }
+
 .unit-metadata-key {
     display: inline;
     background: #007aff;
@@ -500,9 +540,11 @@ a {
     padding: 1px 5px 1px 5px;
     border-radius: 3px;
 }
+
 .unit-metadata-value {
     display: inline;
 }
+
 .hideMessageContainer {
     float: right;
 }
@@ -518,16 +560,19 @@ a {
     background-color: #fff;
     padding-top: 10px;
 }
+
 .service-exe-text {
     width: 80%;
     display: inline-block;
 }
+
 .service-exe-btn {
     width: 19%;
     float: right;
     display: inline-block;
     height: 100%;
 }
+
 .service-list-item {
     height: 30px;
 }
@@ -541,4 +586,175 @@ a {
     width: 40px;
 }
 
+.search-header {
+    width: calc(100% - 20px);
+    margin: 0 auto;
+}
 
+/*.selected-recipients {
+    min-height: 30px;
+}*/
+
+.flex-conversation {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.nothing-found-symbol {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    flex-direction: column;
+    flex: 1 1 auto;
+    margin-bottom: 50px;
+}
+
+.recipient-list {
+    width: calc(100% - 20px);
+    margin: 0 auto;
+}
+
+.ellipsis {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+tags-input .tags {
+    box-shadow: none !important;
+}
+
+    tags-input .tags .tag-item {
+        background-color: #f8f8f8 !important;
+        border: 0 !important;
+        color: #464646 !important;
+    }
+
+        tags-input .tags .tag-item .remove-button {
+            color: #3F97F6 !important;
+        }
+
+    tags-input .tags .input {
+        width: 0;
+    }
+
+input[type="search"] {
+    -webkit-appearance: searchfield;
+    border: 0;
+    border-bottom: 1px solid gainsboro;
+}
+
+    input[type="search"]::-webkit-search-cancel-button {
+        -webkit-appearance: searchfield-cancel-button;
+    }
+
+.input-group-addon {
+    border: 0;
+}
+
+.url-avatar {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+
+.recipient-height {
+    height: 100%;
+    width: 100%;
+    padding: 5px 0;
+}
+
+.recipient-name {
+    float: left;
+    margin-left: 10px;
+    max-width: 80%;
+}
+
+.recipient-display-name {
+    font-weight: bold;
+}
+
+.search-avatar {
+    width: 40px;
+    height: 100%;
+    float: left;
+    padding: 2px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.no-avatar-size {
+    font-size: 19px;
+}
+
+.w-90 {
+    width: 90% !important; 
+}
+
+.m-b-15 {
+    margin-bottom: 15px;
+}
+
+.flex-1-1 {
+    flex: 1 1 auto;
+    display: flex;
+}
+
+.icon-color {
+    color: #dcdcdc;
+}
+
+.fg-line {
+    position: relative;
+    vertical-align: top;
+}
+
+    .fg-line:not(.form-group) {
+        display: inline-block;
+        width: 100%;
+    }
+
+    .fg-line .form-control:disabled {
+        color: #9d9d9d;
+        background: transparent;
+    }
+
+    .fg-line:not(.disabled):after,
+    .fg-line:not(.readonly):after {
+        position: absolute;
+        z-index: 3;
+        bottom: 0;
+        left: 0;
+        height: 2px;
+        width: 0;
+        content: "";
+        -webkit-transition: all;
+        -o-transition: all;
+        transition: all;
+        -webkit-transition-duration: 300ms;
+        transition-duration: 300ms;
+    }
+
+    .fg-line:not([class*=has-]):after {
+        background: #2196f3;
+    }
+
+    .fg-line.readonly .form-control {
+        color: #9d9d9d;
+        background: transparent;
+    }
+
+    .fg-line.fg-toggled:after {
+        width: 100%;
+    }
+
+.recipient-tags {
+    width: calc(100% - 20px);
+    margin: 0 auto;
+}

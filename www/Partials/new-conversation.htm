@@ -1,66 +1,40 @@
-﻿<div ng-controller="NewConversationController">
-
-    <div ng-show="successText!=null" class="alert alert-success">{{ successText }}</div>
-    <div ng-show="errorText!=null" class="alert alert-danger">{{ errorText }}</div>
-
-    <div class="scrollable content-container">
-        <div class="scrollable-content section overthrow">
-
-            <div class="list-group">
-
-                <div class="list-group-item text-center">
-                    <h1>New Conversation</h1>
-                </div>
-
-                <div class="list-group-item">
-
-                    <form name="findUserForm" role="form" class="form-group form-new-conversation">
-                        <h2>Add recipient</h2>
-                        <label>Find by username, email or phone</label>
-                        <input type="text" ng-model="searchText" class="form-control" ng-minlength="3" placeholder="Search for user" required>
-                        <button class="btn btn-lg btn-primary btn-block" ng-click="FindUser(searchText,inboxId)" ng-disabled="!findUserForm.$valid" type="submit">Find user</button>
-                        <hr/>
-                        <div ng-show="searchResult.items.length > 0">
-                            <label>Search results: {{ searchResult.numberOfItems }}, showing {{ searchResult.items.length }}</label>
-                            <div class="list-group">
-                                <div ng-repeat="user in searchResult.items" class="list-group-item">
-                                    <div class="list-item-button">
-                                        <button class="btn btn-sm btn-primary" ng-click="AddRecipient(user);" type="submit">+</button>
-                                    </div>
-                                    <div class="list-item-avatar">
-                                        <img ng-show="user.avatar != null" width="30" alt="avatar" src="{{ user.avatar }}"/>
-                                    </div>
-                                    <div class="list-group-item-text">{{user.userDisplayName}} ({{user.username}}) [phone:{{user.phoneNumber}}, email:{{user.email}}]</div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-
-                </div>
-
-                <div class="list-group-item">
-                    <form name="newConversationForm" role="form" class="form-group form-new-conversation">
-                        <div class="list-group">
-                            <div ng-repeat="user in recipients" class="list-group-item">
-                                <div class="list-item-button">
-                                    <button class="btn btn-sm btn-primary" ng-click="RemoveRecipient(user);" type="submit">-</button>
-                                </div>
-                                <div class="list-item-avatar">
-                                    <img ng-show="user.avatar != null" width="30" alt="avatar" src="{{ user.avatar }}"/>
-                                </div>
-                                <div class="list-group-item-text">{{user.userDisplayName}} ({{user.username}}) [phone:{{user.phoneNumber}}, email:{{user.email}}]</div>
-                            </div>
-                        </div>
-                        <label>Message text</label>
-                        <textarea ng-model="messageText" class="form-control" placeholder="Message text" required></textarea>
-                        <button class="btn btn-lg btn-primary btn-block" ng-click="CreateNewConversation(inboxId,messageText)" ng-disabled="!newConversationForm.$valid" type="submit">Create new conversation</button>
-                    </form>
-                </div>
-
+﻿<div class="flex-conversation" style="overflow-y: scroll;" ng-controller="NewConversationController as ncc">
+    <div>
+        <tags-input on-tag-removed="ncc.removeTag()" class="recipient-tags" ng-model="ncc.tags"></tags-input>
+    </div>
+    <div class="search-header m-b-15" style="">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="zmdi zmdi-search"></i></span>
+            <div class="fg-line w-90">
+                <input type="search" class="form-control" placeholder="Search" ng-focus="ncc.setFocus($event)" ng-blur="ncc.removeFocus($event)" ng-model-options="{ debounce: 600 }" ng-model="ncc.searchfor" ng-change="ncc.searchRecipient()"/>
             </div>
-
         </div>
-
+    </div>
+    <div class="flex-1-1" ng-if="ncc.searchResult.length === 0">
+        <div class="nothing-found-symbol">
+            <i class="zmdi zmdi-search zmdi-hc-5x icon-color"></i>
+            <span>Search for recipients</span>
+        </div>
+    </div>
+    <div class="recipient-list" ng-if="ncc.searchResult.items.length > 0">
+        <div style="height: 50px;" ng-repeat="recipient in ncc.searchResult.items | limitTo: 10" ng-click="ncc.addRecipient(recipient)">
+            <div class="recipient-height">
+                <div ng-if="recipient.avatar === null || recipient.avatar.length === 0" class="search-avatar" style="color: {{recipient.color.text}}; background-color:{{recipient.color.background}};">
+                    <span class="no-avatar-size">{{recipient.userDisplayName.slice(0,1) | uppercase}}</span>
+                </div>
+                <div ng-if="recipient.avatar.length > 0" class="search-avatar">
+                    <img ng-if="recipient.avatar.length > 0" ng-src="{{recipient.avatar}}" class="url-avatar">
+                </div>
+                <div class="recipient-name">
+                    <div id="firstName && lastname">
+                        <span class="recipient-display-name">{{recipient.userDisplayName}}</span>
+                    </div>
+                    <div id="username" class="ellipsis">
+                        {{recipient.username}}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

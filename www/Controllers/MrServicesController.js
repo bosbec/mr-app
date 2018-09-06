@@ -91,7 +91,7 @@
             }
             externalUrl = externalUrl + "&caller=app&appuserid=" + usersFactory.myUser().id;
             //$window.open(externalUrl, '_system');
-            $window.open(externalUrl, '_blank', 'location=no,closebuttoncaption=Close,hardwareback=yes,toolbar=yes,toolbarcolor=#2196f3,closebuttoncolor=#ffffff,toolbartranslucent=no,toolbarposition=bottom');
+            $window.open(externalUrl, '_blank', 'location=no,closebuttoncaption=Close,hardwareback=no,toolbar=yes,toolbarcolor=#2196f3,closebuttoncolor=#ffffff,toolbartranslucent=no,toolbarposition=bottom');
 
             //Android
 

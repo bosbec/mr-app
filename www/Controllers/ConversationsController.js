@@ -1,6 +1,6 @@
-﻿mrApp.controller('ConversationsController',[
-    'ApiFactory', '$scope', '$rootScope', '$location', '$routeParams','$timeout', 'UsersFactory', 'ConversationsFactory','SettingsFactory','DeviceFactory','SharedState',
-    function (apiFactory, $scope, $rootscope, $location, $routeParams, $timeout, usersFactory, conversationsFactory,settingsFactory, deviceFactory,SharedState) {
+﻿mrApp.controller('ConversationsController', [
+    'ApiFactory', '$scope', '$rootScope', '$location', '$routeParams', '$timeout', 'UsersFactory', 'ConversationsFactory', 'SettingsFactory', 'DeviceFactory', 'SharedState',
+    function (apiFactory, $scope, $rootscope, $location, $routeParams, $timeout, usersFactory, conversationsFactory, settingsFactory, deviceFactory, SharedState) {
 
         var inboxId = $routeParams.param1;
 
@@ -22,7 +22,7 @@
         function handleLinks(text) {
             var urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
             return text.replace(urlRegex,
-                function(url) {
+                function (url) {
                     return "";
                 });
         }
@@ -30,8 +30,9 @@
         function formatConversationList(conversations) {
             var previewLength = 100;
             for (var i = 0; i < conversations.length; i++) {
-                conversations[i].content = handleLinks(conversations[i].content);
-
+                if (conversations[i].content) {
+                    conversations[i].content = handleLinks(conversations[i].content);
+                }
                 if (deviceFactory.isDevice()) {
                     if (conversations[i].content.length > previewLength) {
                         conversations[i].content = conversations[i].content.substr(0, previewLength) + " ...";
@@ -42,9 +43,8 @@
         }
 
         function listConversations(token, inboxId, pageIndex) {
-            var callback = function(conversations) {
+            var callback = function (conversations) {
                 $scope.conversations = conversations;
-                
                 $scope.$emit('showAlertNewMessage', false);
                 $scope.$emit('loadingDone', 'conversations'); // hides loading
 
@@ -69,16 +69,16 @@
                 });
         }
 
-        $scope.ListMessagesInConversation = function(conversation) {
-            $timeout(function() {
-                    if ($scope.isSwipe) {
-                        console.log("Swipe, not click");
-                    } else {
+        $scope.ListMessagesInConversation = function (conversation) {
+            $timeout(function () {
+                if ($scope.isSwipe) {
+                    console.log("Swipe, not click");
+                } else {
 
-                        conversationsFactory.setCurrentConversation(conversation);
-                        $location.path('/messages/' + conversation.itemId);
-                    }
-                },
+                    conversationsFactory.setCurrentConversation(conversation);
+                    $location.path('/messages/' + conversation.itemId);
+                }
+            },
                 (10));
         };
 
@@ -94,34 +94,34 @@
         $scope.swipeRight = function (conversation) {
             // show sidebar/meny
             $scope.isSwipe = true;
-            $timeout(function() {
-                    SharedState.turnOn('mainSidebar');
-                    $scope.isSwipe = false;
-                },
+            $timeout(function () {
+                SharedState.turnOn('mainSidebar');
+                $scope.isSwipe = false;
+            },
                 (100));
         };
 
-        $scope.swipeLeft = function(conversation) {
+        $scope.swipeLeft = function (conversation) {
             // hide/remove conversation
             $scope.isSwipe = true;
-            $timeout(function() {
+            $timeout(function () {
                 if (confirm("Do you want to hide '" + conversation.name + "'")) {
                     conversationsFactory.hideConversation(conversation.itemId,
-                        function(response) {
+                        function (response) {
                             console.log("reload after hide");
                             $location.path('/conversations/' + inboxId + "/reload=" + conversation.itemId);
                         },
-                        function(error) {
+                        function (error) {
                             console.log("error on hide", error);
                         });
                 }
-                    $scope.isSwipe = false;
-                },
+                $scope.isSwipe = false;
+            },
                 (100));
         };
-        
+
         // handler
-        var onNewMessages = function(event, messages) {
+        var onNewMessages = function (event, messages) {
             //console.log("CC: Handle new message event");
             listConversations(apiFactory.getToken(), inboxId);
         };

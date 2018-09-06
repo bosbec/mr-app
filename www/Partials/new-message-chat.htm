@@ -1,0 +1,25 @@
+﻿<div ng-controller="NewMessageController as nmc">
+    <div class="scrollable content-container content-container-chat" ui-swipe-right='swipeRight();'>
+        <div id="chat-container" class="scrollable-content">
+            <div class="list-group">
+            </div>
+        </div>
+    </div>
+    <div>
+        <form name="newMessageForm">
+            <div class="send-chat-message-container">
+                <div class="send-chat-message-text"><textarea ng-model="nmc.newMessage" enter-submit="createConversationAndSendMessage(newMessage)" class="form-control send-chat-message-textarea" placeholder="Write a message" required></textarea></div>
+                <div class="send-chat-message-btn" ng-click="nmc.createConversationAndSendMessage(nmc.newMessage)"><a href="" class="navbar-active-item" ng-disable="newMessagesForm.$invalid"><span><i class="zmdi zmdi-mail-send"></i></span></a></div>
+            </div>
+        </form>
+    </div>
+
+    <div ui-content-for="modals">
+        <div ng-include="'Partials/overlay.htm'"></div>
+    </div>
+</div>
+
+
+
+
+

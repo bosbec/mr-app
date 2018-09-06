@@ -14,7 +14,8 @@ var mrApp = angular.module('mrApp', [
     'SettingsFactory',
     'MobileResponseFactory',
     'EncryptionFactory',
-    'ngclipboard'
+    'ngclipboard',
+    'ngTagsInput'
 ]);
 
 mrApp.run(function () {
