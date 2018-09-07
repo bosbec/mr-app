@@ -1,13 +1,15 @@
 ﻿<div class="flex-conversation" style="overflow-y: scroll;" ng-controller="NewConversationController as ncc">
     <div>
-        <tags-input on-tag-removed="ncc.removeTag()" class="recipient-tags" ng-model="ncc.tags"></tags-input>
+        <tags-input on-tag-removed="ncc.removeTag($tag)" class="recipient-tags" ng-model="ncc.tags"></tags-input>
     </div>
     <div class="search-header m-b-15" style="">
         <div class="input-group">
-            <span class="input-group-addon"><i class="zmdi zmdi-search"></i></span>
-            <div class="fg-line w-90">
-                <input type="search" class="form-control" placeholder="Search" ng-focus="ncc.setFocus($event)" ng-blur="ncc.removeFocus($event)" ng-model-options="{ debounce: 600 }" ng-model="ncc.searchfor" ng-change="ncc.searchRecipient()"/>
-            </div>
+            <span class="input-group-addon" ng-click="ncc.searchRecipient($event)"><i class="zmdi zmdi-search"></i></span>
+            <form acton="." ng-submit="ncc.blurElement()">
+                <div class="fg-line w-90">
+                    <input type="search" id="search-box" class="form-control" placeholder="Search" ng-focus="ncc.setFocus($event)" ng-blur="ncc.removeFocus($event)" ng-change="ncc.searchRecipient($event)" ng-model-options="{ debounce: 500 }" ng-model="ncc.searchfor" ng-click="" />
+                </div>
+            </form>
         </div>
     </div>
     <div class="flex-1-1" ng-if="ncc.searchResult.length === 0">
@@ -19,11 +21,18 @@
     <div class="recipient-list" ng-if="ncc.searchResult.items.length > 0">
         <div style="height: 50px;" ng-repeat="recipient in ncc.searchResult.items | limitTo: 10" ng-click="ncc.addRecipient(recipient)">
             <div class="recipient-height">
-                <div ng-if="recipient.avatar === null || recipient.avatar.length === 0" class="search-avatar" style="color: {{recipient.color.text}}; background-color:{{recipient.color.background}};">
-                    <span class="no-avatar-size">{{recipient.userDisplayName.slice(0,1) | uppercase}}</span>
+                <div ng-if="!recipient.active">
+                    <div ng-if="recipient.avatar === null || recipient.avatar.length === 0" class="search-avatar" style="color: {{recipient.color.text}}; background-color:{{recipient.color.background}};">
+                        <span class="no-avatar-size">{{recipient.userDisplayName.slice(0,1) | uppercase}}</span>
+                    </div>
+                    <div ng-if="recipient.avatar.length > 0" class="search-avatar">
+                        <img ng-if="recipient.avatar.length > 0" ng-src="{{recipient.avatar}}" class="url-avatar">
+                    </div>
                 </div>
-                <div ng-if="recipient.avatar.length > 0" class="search-avatar">
-                    <img ng-if="recipient.avatar.length > 0" ng-src="{{recipient.avatar}}" class="url-avatar">
+                <div ng-if="recipient.active" class="search-avatar">
+                    <div class="recipient-active">
+                        <i class="zmdi zmdi-check zmdi-hc-2x mr-blue"></i>
+                    </div>
                 </div>
                 <div class="recipient-name">
                     <div id="firstName && lastname">

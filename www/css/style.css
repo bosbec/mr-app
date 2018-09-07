@@ -586,14 +586,13 @@ a {
     width: 40px;
 }
 
+.chat-box {
+    border-radius: 3px;
+}
 .search-header {
     width: calc(100% - 20px);
     margin: 0 auto;
 }
-
-/*.selected-recipients {
-    min-height: 30px;
-}*/
 
 .flex-conversation {
     height: 100%;
@@ -674,12 +673,27 @@ input[type="search"] {
     max-width: 80%;
 }
 
+.recipient-active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f8f8;
+    border-radius: 50%;
+    height: 100%;
+    width: 100%;
+}
+
+input[disabled] {
+    background-color: #ffffff;
+}
+
 .recipient-display-name {
     font-weight: bold;
 }
 
 .search-avatar {
     width: 40px;
+    height: 40px !important;
     height: 100%;
     float: left;
     padding: 2px;
@@ -708,6 +722,10 @@ input[type="search"] {
 
 .icon-color {
     color: #dcdcdc;
+}
+
+.mr-blue {
+    color: #3F97F6;
 }
 
 .fg-line {

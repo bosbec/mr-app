@@ -10,7 +10,7 @@
                 <div ng-show="currentPage < totalPages" class="center-block">
                     <a ng-click="LoadMore()" class="btn">Load more ... (page {{currentPage}} / {{totalPages}})</a>
                 </div>
-                <div ng-repeat="message in messages" id="{{'msg'+ ($index + 1)}}" class="list-group-item message-chat" ui-swipe-left='swipeLeft(message);' 
+                <div ng-repeat="message in messages" id="{{'msg'+ ($index + 1)}}" class="list-group-item message-chat chat-box" ui-swipe-left='swipeLeft(message);' 
                      ng-class="{ 'message-chat-me': message.author === 'me', 'message-chat-other': message.author === 'other', 'last-message': $index >= messages.length-1}">
                     <div ng-show="showHideMessage" class="hideMessageContainer">
                         <a href="#" class="text-danger" ng-click="hideMessage(message);"><i class="fa fa-2x fa-minus-circle"></i></a>

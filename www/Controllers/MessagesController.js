@@ -354,8 +354,7 @@ mrApp.controller('MessagesController',
                 $scope.newMessage = "";
 
                 var sendTo = [];
-                console.log("$scope.conversation", $scope.conversation);
-                console.log("message", message);
+
                 angular.copy($scope.conversation.participants, sendTo);
                 sendTo.push($scope.conversation.userId);
 

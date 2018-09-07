@@ -12,6 +12,7 @@
             vm.page = 1;
             vm.recipients = [];
             vm.searchResult = [];
+            
             vm.colors = [
                 "#E26A45", "#E78C48", "#EEAD4D", "#FDF44C", "#B2D367", "#8BC56E", "#60B874", "#58BBB4", "#4AC0F7",
                 "#5A8ECF", "#5F76BD", "#625DAC", "#8160AC", "#9F63AC", "#E06CAB", "#E16B7A"
@@ -41,14 +42,14 @@
                     return;
                 }
 
-                usersFactory.findUser(vm.searchfor,
-                    vm.inboxId,
-                    function (response) {
+                usersFactory.findUser(vm.searchfor, vm.inboxId, function (response) {
                         vm.searchResult = {
                             'numberOfItems': response.length,
                             'resultsToShow': 10,
                             'items': response
                         };
+
+                        vm.checkActive(vm.searchResult);
 
                         for (var i = 0; i < vm.searchResult.items.length; i++) {
                             var colorCode = vm.colors[parseInt(MD5(vm.searchResult.items[i].username)[0], 16)];
@@ -67,6 +68,9 @@
                         return;
                     }
                 }
+
+                recipient.active = true;
+
                 var newRecipient = { text: recipient.username, recipient: recipient };
                 vm.tags.push(newRecipient);
 
@@ -75,9 +79,17 @@
                 }
             }
 
-            vm.removeTag = function() {
+            vm.removeTag = function(removedTag) {
                 if (vm.tags.length === 0) {
                     $scope.$emit('showNewConversation', false);
+                }
+
+                for (var i = 0; i < vm.searchResult.items.length; i++) {
+                    if (removedTag.recipient.userId === vm.searchResult.items[i].userId) {
+                        vm.searchResult.items [i].active = false;
+                        console.log("here???");
+                        return;
+                    }
                 }
             }
 
@@ -104,6 +116,26 @@
 
             vm.removeFocus = function(event) {
                angular.element(event.target.parentNode).removeClass('fg-toggled');
+            }
+
+            vm.checkIfEmpty = function (args) {
+                if (args.length === 0) {
+                    vm.searchResult = [];
+                }
+            }
+
+            vm.blurElement = function () {
+                document.getElementById("search-box").blur();
+            }
+
+            vm.checkActive = function() {
+                for (var i = 0; i < vm.tags.length; i++) {
+                    vm.searchResult.items.filter(obj => {
+                        if (obj.userId === vm.tags[i].recipient.userId) {
+                            obj.active = true;
+                        }
+                    });
+                }
             }
 
             $scope.$on('startConversation', vm.startConversation);
