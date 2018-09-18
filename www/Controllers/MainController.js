@@ -49,8 +49,8 @@ mrApp.controller('FormModalController',
 ]);
 
 mrApp.controller('MainController', [
-    'ApiFactory', '$rootScope', '$scope', '$location','$window', '$localStorage', '$filter', '$timeout', 'ConversationsFactory', 'DeviceFactory','SettingsFactory', 'SharedState',
-    function(apiFactory, $rootScope, $scope, $location, $window, $localStorage, $filter, $timeout, conversationsFactory, deviceFactory,settingsFactory, SharedState) {
+    'ApiFactory', '$rootScope', '$scope', '$location','$window', '$localStorage', '$filter', '$timeout', 'ConversationsFactory', 'DeviceFactory','SettingsFactory','UsersFactory', 'SharedState',
+    function(apiFactory, $rootScope, $scope, $location, $window, $localStorage, $filter, $timeout, conversationsFactory, deviceFactory,settingsFactory,usersFactory, SharedState) {
 
         $scope.inConversation = false;
         $scope.currentView = 'main';
@@ -69,7 +69,7 @@ mrApp.controller('MainController', [
         var checkWhatsNew = function() {
             //console.log("What-is-new");
             conversationsFactory.whatIsNew(function(messages) {
-                    if (messages != null && messages.length > 0) {
+                    if (messages !== null && messages.length > 0) {
                         //BROADCAST
                         $scope.$broadcast('newMessages', messages);
                     }
@@ -111,6 +111,46 @@ mrApp.controller('MainController', [
         }
 
         $scope.$on('userIsInactive', onInactiveUser);
+
+        function onNewMessages(event, messages) {
+            //console.log("onNewMessage: ", messages);
+            var showNotification = function (title, options) {
+
+                if (window.hasOwnProperty("Notification")) {
+
+                    if (["granted", "denied"].indexOf(Notification.permission) === -1) {
+                        Notification.requestPermission().then(function (result) {
+                            showNotification(title, options);
+                        });
+                        return;
+
+                    } else if (Notification.permission === "granted") {
+                        var notification = new Notification(title, options);
+                        notification.onclick = function (event) {
+                            window.focus();
+                            this.close();
+                        };
+                    }
+                }
+
+            };
+            var flag = true;
+            for (var i = messages.length-1; i >= 0 && flag; i--) {
+                if (messages[i].authorId !== usersFactory.myUser().id) {
+                    // new message - not from myself
+                    showNotification("" + messages[0].authorDisplayName,
+                    {
+                        icon: 'https://s3-eu-west-1.amazonaws.com/mobileresponse-files/Logo.png',
+                        body: '' + messages[0].content,
+                        silent: true
+                        });
+                    flag = false;
+                } 
+            }
+            
+        }
+
+        $scope.$on('newMessages', onNewMessages);
 
         function onShowAlertNewMessage(event, state) {
             $scope.alertNewMessage = state;

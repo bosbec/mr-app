@@ -261,7 +261,7 @@
             apiFactory.functions.authenticate(credentials,
                 function (response) {
                     $scope.$emit('loadingInformation', '(4/11) Authentication success'); // loading info
-                    if (response != null) {
+                    if (response !== null) {
                         if ($scope.saveCredentials) {
                             $localStorage.savedCredentials = {
                                 'userName': userName,
@@ -296,28 +296,30 @@
                                         console.log("[WARN] Mobile Response auto login: ", error);
                                     });
                                 
-                                var registerDeviceSettings = {
-                                    "appid": settingsFactory.getAppPushId(),
-                                    "projectid": "71435688512",
-                                    "onPushReceived": function (push) {
-                                        // push received when app is open/foreground => use whatsnew
-                                        console.log("RootBroadcast: onPushReceived", push);
-                                        //alert('newPush');
-                                        $rootScope.$broadcast('pushReceived', push);
-                                    },
-                                    "onResume": function() {
-                                        console.log("RootBroadcast: appResumed");
-                                        //alert("appResumed");
-                                        $rootScope.$broadcast('appResumed', true);
-                                    },
-                                    "onPushNotification": function (push) {
-                                        // push notification is opened from banner => get conversationid and goto conversation
-                                        console.log("RootBroadcast: pushNotification", push);
-                                        $rootScope.$broadcast('pushNotification', push);
-                                    }
-                                };
-                                //alert("isDevice: " + deviceFactory.isDevice);
-                                if (deviceFactory.isDevice) {
+                                //alert("isDevice: " + deviceFactory.getDeviceType());
+                                if (deviceFactory.getDeviceType() === "Android" || deviceFactory.getDeviceType() === "iOS" ) {
+
+                                    var registerDeviceSettings = {
+                                        "appid": settingsFactory.getAppPushId(),
+                                        "projectid": "71435688512",
+                                        "onPushReceived": function (push) {
+                                            // push received when app is open/foreground => use whatsnew
+                                            console.log("RootBroadcast: onPushReceived", push);
+                                            //alert('newPush');
+                                            $rootScope.$broadcast('pushReceived', push);
+                                        },
+                                        "onResume": function () {
+                                            console.log("RootBroadcast: appResumed");
+                                            //alert("appResumed");
+                                            $rootScope.$broadcast('appResumed', true);
+                                        },
+                                        "onPushNotification": function (push) {
+                                            // push notification is opened from banner => get conversationid and goto conversation
+                                            console.log("RootBroadcast: pushNotification", push);
+                                            $rootScope.$broadcast('pushNotification', push);
+                                        }
+                                    };
+
                                     $scope.$emit('loadingInformation', '(7/11) Register device'); // loading info
                                     var statusFlag = false;
 
@@ -342,6 +344,22 @@
                                             callback(response);
                                         });
 
+                                } else if (deviceFactory.getDeviceType() === "Web") {
+
+                                    callback(false);
+
+                                    //var showNotification = function(title, options) {
+                                    //    if (window.hasOwnProperty("Notification")) {
+                                    //        if (["granted", "denied"].indexOf(Notification.permission) === -1) {
+                                    //            Notification.requestPermission().then(function (result) {
+                                    //                showNotification(title, options);
+                                    //            });
+                                    //            return;
+                                    //        } else if (Notification.permission === "granted") {
+                                    //            var notification = new Notification(title, options);
+                                    //        }
+                                    //    }
+                                    //};
                                 }
                             },
                             function(e) {

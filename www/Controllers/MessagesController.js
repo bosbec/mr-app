@@ -483,7 +483,7 @@ mrApp.controller('MessagesController',
             if (foundConversations.length === 0 && newMessages.length > 0) {
                 $scope.$emit('showAlertNewMessage', true);
             }
-        }
+        };
 
         // start subscribing
         $scope.$on('newMessages', onNewMessages);

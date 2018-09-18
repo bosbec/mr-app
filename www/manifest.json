@@ -1,0 +1,7 @@
+{
+  "name": "Bosbec",
+  "short_name": "Bosbec Webapp",
+  "gcm_sender_id": "71435688512",
+  "display": "standalone",
+  "gcm_user_visible_only": true
+}

@@ -122,7 +122,7 @@
             }
 
             function setCurrentConversation(conversation) {
-                console.log("conversation", conversation);
+                //console.log("conversation", conversation);
                 currentConversation = conversation;
             }
 
