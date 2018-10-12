@@ -329,7 +329,7 @@ mrApp.controller('MainController', [
 
         $scope.IsEncrypted = function() {
             var conversation = conversationsFactory.getCurrentConversation();
-            if (conversation != null) {
+            if (conversation !== null) {
                 return conversationsFactory.usesEncryption(conversation.itemId);
             } else {
                 return false;
@@ -400,9 +400,9 @@ mrApp.controller('MainController', [
             //var token = $rootScope.authenticationToken;
             var token = apiFactory.authenticationToken();
             
-            if (token != undefined) {
+            if (token !== undefined) {
 
-                if ($scope.inboxes == undefined) {
+                if ($scope.inboxes === undefined) {
 
                     listInboxes(token,
                         function (response) {
@@ -426,39 +426,39 @@ mrApp.controller('MainController', [
         $scope.$on('$viewContentLoaded', onViewLoaded);
 
         $rootScope.validateLoad = function(part) {
-            if (part == 'inboxes') {
-                if ($scope.inboxes != undefined) {
+            if (part === 'inboxes') {
+                if ($scope.inboxes !== undefined) {
                     return true;
                 }
-            } else if (part == 'inbox') {
-                if ($scope.inbox != undefined) {
+            } else if (part === 'inbox') {
+                if ($scope.inbox !== undefined) {
                     return true;
                 }
-            } else if (part == 'profile') {
-                if ($rootScope.myAppUser != undefined) {
+            } else if (part === 'profile') {
+                if ($rootScope.myAppUser !== undefined) {
                     return true;
                 }
-            } else if (part == 'logout') {
-                if ($rootScope.authenticationToken != undefined) {
+            } else if (part === 'logout') {
+                if ($rootScope.authenticationToken !== undefined) {
                     return true;
                 }
-            } else if (part == 'newConversation') {
-                if ($rootScope.authenticationToken != undefined) {
+            } else if (part === 'newConversation') {
+                if ($rootScope.authenticationToken !== undefined) {
                     return true;
                 }
             }
-            else if (part == 'connect') {
-                if ($rootScope.myAppUser != undefined) {
+            else if (part === 'connect') {
+                if ($rootScope.myAppUser !== undefined) {
                     var userMetaData = $rootScope.myAppUser.metaData;
-                    if (userMetaData != undefined) {
+                    if (userMetaData !== undefined) {
                         if (userMetaData[0].mobileresponse === "allow") {
                             return true;
                         } 
                     }
                 }
             }
-            else if (part == 'mobileresponse') {
-                if ($rootScope.mobileResponseToken != undefined) {
+            else if (part === 'mobileresponse') {
+                if ($rootScope.mobileResponseToken !== undefined) {
                     return true;
                 }
             }
