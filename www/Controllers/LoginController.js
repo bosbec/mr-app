@@ -13,19 +13,18 @@
         $scope.keepMeSignedIn = true;
         $scope.signingin = false;
 
-
         $scope.successText = null;
         $scope.errorText = null;
 
         function showAlert(text, type, duration) {
-            if (type == 'success') {
+            if (type === 'success') {
                 $scope.successText = text;
                 $timeout(function () {
                     $scope.successText = null;
                     $scope.signingin = false;
                 }, duration);
             }
-            if (type == 'error') {
+            if (type === 'error') {
                 $scope.errorText = text;
                 $timeout(function () {
                     $scope.errorText = null;
@@ -72,7 +71,7 @@
                 SharedState.turnOn('introModal');
                 $scope.$emit('loadingDone', 'showIntro');
             } else {
-                if ($scope.credentials != null && $scope.credentials.keepMeSignedIn) {
+                if ($scope.credentials !== null && $scope.credentials.keepMeSignedIn) {
                     login();
                 } else {
                     $scope.$emit('loadingDone', 'showLogin');
@@ -160,7 +159,7 @@
                         console.log("SUCCESS: Register response");
                         console.log(response);
 
-                        if (response.data.userId != null) {
+                        if (response.data.userId !== null) {
                             var newUserId = response.data.userId;
                             apiLogin(apiFactory.apiSettings.instanceName,
                                 userName,
@@ -397,11 +396,11 @@
                 $scope.credentials.password,
                 function (response) {
                     setSigningIn(false);
-                    if (response.email == null && response.phoneNumber == null) {
+                    if (response.email === null && response.phoneNumber === null) {
                         $location.path('/profile/' + response.id);
                     }
                     $scope.$emit('loadingInformation', '(9/11) Login process completed'); // loading info
-                    if ($rootScope.currentInboxId != undefined) {
+                    if ($rootScope.currentInboxId !== undefined) {
                         $location.path('/conversations/' + $rootScope.currentInboxId);
                     } else {
                         $location.path('/main');

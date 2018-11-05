@@ -62,7 +62,7 @@
                         "userId": appUserId
                     }
                 };
-
+                console.log("user details", appUserDetailsRequest);
                 apiFactory.functions.call('users/details-for-user',
                     appUserDetailsRequest,
                     function(response) {

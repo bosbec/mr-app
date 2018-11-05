@@ -59,7 +59,7 @@
                     <a class="list-group-item" ng-show="validateLoad('connect')==true && validateLoad('mobileresponse')==false && validateLoad('profile') == true" href="#!/connect"><img src="images/mr/Trigger-128x128.png" width="24" /> Connect</a>
                     <a class="list-group-item" ng-show="validateLoad('profile')" href="#!/profile/{{ myAppUser.id }}"><i class="fa fa-user"></i> Profile</a>
                     <a class="list-group-item" ng-show="validateLoad('profile')" href="#!/settings"><i class="fa fa-cog"></i> Settings</a>
-                    <a class="list-group-item" ng-show="validateLoad('profile')" href="#!/encryption"><i class="fa fa-user-secret"></i> Encryption</a>
+                    <a class="list-group-item" ng-show="validateLoad('mobileresponse')" href="#!/encryption"><i class="fa fa-user-secret"></i> Encryption</a>
                     <a class="list-group-item" ng-show="validateLoad('profile')" href="#!/intro/manual"><i class="fa fa-question"></i> Introduction</a>
                     <a class="list-group-item" ng-show="validateLoad('logout')" ng-click="Logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
                 </div>
@@ -127,7 +127,7 @@
                     <a href="#!/conversations/{{ inbox.inboxId }}"><span><i class="fa fa-2x fa-comment"></i></span></a>
                 </div>
 
-                <div ng-show="currentView=='conversation'" class="btn btn-navbar">
+                <div ng-show="currentView=='conversation' && validateLoad('mobileresponse')" class="btn btn-navbar">
                     <span ng-if="IsEncrypted();"><i class="fas fa-2x fa-lock"></i></span>
                     <a ui-turn-on="rightSidebar" ng-click="OpenRightSidebar();"><span><i class="fas fa-2x fa-ellipsis-v"></i></span></a>
                 </div>
@@ -166,6 +166,7 @@
             </div>
             <div ng-style="loadingTextInformation" class="loadingTextInformation">{{loadingInformation}}</div>
             <div ng-style="loadingTextContainer" class="loadingTextContainer">loading<span class="loading"></span></div>
+            <div ng-style="loadingAbortButton" class="loadingAbortButton"><a ng-click="OverrideLoading()">Abort login</a></div>
         </div>
     </div>
 

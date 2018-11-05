@@ -26,7 +26,7 @@
                 if (storedCredentials === null || storedCredentials === undefined) {
                     error("missing credentials");
                 } else {
-                    if (storedCredentials.appUserId != apiFactory.myAppUser.appUserId) {
+                    if (storedCredentials.appUserId !== apiFactory.myAppUser.appUserId) {
                         error("Incorrect credentials");
                     } else {
                         authenticate(storedCredentials, callback, error);
@@ -40,7 +40,7 @@
                 call('authenticate',
                     request,
                     function(response) {
-                        if (response.data != null) {
+                        if (response.data !== null) {
                             //console.log(response.data);
                             angular.copy({ administrator: response.data.administratorId }, administrator);
                             authenticationToken = response.data.id;

@@ -58,7 +58,8 @@
                 call('authentication/authenticate',
                     request,
                     function(response) {
-                        if (response.data != null) {
+                        if (response.data !== null) {
+                            console.log("auth", response);
                             angular.copy({ appUserId: response.data.appUserId }, appUser);
                             authenticationToken = response.data.id;
                             $rootScope.authenticationToken = response.data.id;

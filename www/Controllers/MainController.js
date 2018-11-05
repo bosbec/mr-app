@@ -60,10 +60,9 @@ mrApp.controller('MainController', [
         $scope.deviceType = 0;
 
         $scope.loadingInformation = "";
-
+        
         $scope.autoLoginAttempts = 0;
 
-        $scope.showOverride = false;
         $scope.showCreateNewConversation = false;
 
         var checkWhatsNew = function() {
@@ -357,9 +356,11 @@ mrApp.controller('MainController', [
         //    }
         //};
 
-        $scope.OverrideLoading = function() {
-            $scope.$emit('loadingDone', 'override');
-        }
+        $scope.OverrideLoading = function () {
+            console.log("OverrideLoading");
+            $scope.$emit('logout', 'logout');
+            //$scope.$emit('loadingDone', 'override');
+        };
 
         function onLoadingDone(event, state) {
             $scope.mainLoading = { 'display': 'none' };
@@ -375,6 +376,12 @@ mrApp.controller('MainController', [
         function onLoadingInformation(event, state) {
             $scope.loadingTextContainer = { 'display': 'none' };
             $scope.loadingTextInformation = { 'display': 'block' };
+
+            if (state === "(1/11) Init login") {
+                $timeout(function () {
+                    $scope.loadingAbortButton = { 'display': 'block' }; // if login fails or is slow, show an abort button
+                }, 2000);
+            }
             $scope.loadingInformation = "" + state;
         }
 
