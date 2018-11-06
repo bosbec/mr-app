@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- config.xml reference: https://build.phonegap.com/docs/config-xml -->
-<widget xmlns     = "http://www.w3.org/ns/widgets"
+<!--<widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         xmlns:android = "http://schemas.android.com/apk/res/android"
         id        = "com.bosbec.mr-app"
-        version   = "0.3.96">
-  <!--<widget xmlns     = "http://www.w3.org/ns/widgets"
+        version   = "0.3.96">-->
+  <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         xmlns:android = "http://schemas.android.com/apk/res/android"
         id        = "se.bosbec.Messmr1"
-        version   = "4.0.15">-->
+        version   = "4.0.16">
   <!--VERSION HERE-->
 
   <name>Bosbec</name>
