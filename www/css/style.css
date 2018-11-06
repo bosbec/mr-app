@@ -93,9 +93,21 @@ a {
     background-color: #aaaaaa;
 }
 
+.list-group-item {
+    cursor: pointer;
+}
+
 .list-group-item.active, .list-group-item.active:focus {
     background-color: #2196f3;
     border-color: #2196f3;
+}
+
+.list-group-item:hover {
+    background-color: #f8f8f8;
+}
+
+.menu-item.active:hover {
+    background-color: #2196f3;
 }
 
 .app-name {
@@ -318,16 +330,25 @@ a {
     margin: 6px 6px 6px 6px;
 }
 
+
 .message-chat-me {
     background-color: #2196f3;
     color: white;
     float: right;
+    cursor: default;
 }
+    .message-chat-me:hover {
+        background-color: #2196f3;
+    }
 
 .message-chat-other {
     background-color: #dddddd;
     float: left;
+    cursor: default;
 }
+    .message-chat-other:hover {
+        background-color: #dddddd;
+    }
 
 .message-chat-end {
     float: left;
