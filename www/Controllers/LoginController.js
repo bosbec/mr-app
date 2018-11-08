@@ -71,7 +71,8 @@
                 SharedState.turnOn('introModal');
                 $scope.$emit('loadingDone', 'showIntro');
             } else {
-                if ($scope.credentials !== null && $scope.credentials.keepMeSignedIn) {
+                console.log($scope.credentials);
+                if ($scope.credentials !== undefined && $scope.credentials !== null && $scope.credentials.keepMeSignedIn) {
                     login();
                 } else {
                     $scope.$emit('loadingDone', 'showLogin');
