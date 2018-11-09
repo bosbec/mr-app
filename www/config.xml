@@ -32,9 +32,6 @@
   <preference name="StatusBarOverlaysWebView" value="true" />
   <preference name="StatusBarBackgroundColor" value="#FFFFFF" />
 
-  <preference name="android-minSdkVersion"      value="26" />
-  <!-- android: MIN SDK version supported on the target device. MAX version is blank by default. -->
-
   <!--
     Define access to external domains.
     <access />            - a blank access tag denies access to all external resources.

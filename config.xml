@@ -63,6 +63,8 @@
   <!-- android: app install location. 'auto' will choose. 'internalOnly' is device memory. 'preferExternal' is SDCard. -->
   <preference name="android-minSdkVersion"      value="26" />
   <!-- android: MIN SDK version supported on the target device. MAX version is blank by default. -->
+  <preference name="android-targetSdkVersion"     value="26" />
+  
   <preference name="DisallowOverscroll"         value="true" />
   <preference name="UIWebViewBounce"            value="false" />
 
@@ -77,7 +79,8 @@
   </plugin>-->
 
   <!--Android version, cli 7.0.1, push 7.0.6-->
-  <preference name="phonegap-version" value="cli-7.0.1" />
+  <!--<preference name="phonegap-version" value="cli-7.0.1" />-->
+  <preference name="phonegap-version" value="cli-8.0.0" />
 
   <plugin name="pushwoosh-pgb-plugin" version="7.0.6">
     <variable name="IOS_FOREGROUND_ALERT_TYPE" value="BANNER" />
