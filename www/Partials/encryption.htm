@@ -25,7 +25,7 @@
                                 </div>
                                 <div ng-show="!showGenerateKeyForm" class="form-section">
                                     <label>Key </label>
-                                    <textarea ng-model="currentKey.key" ng-minlength="32" ng-maxlength="64" required class="form-control"></textarea>
+                                    <input type="text" ng-model="currentKey.key" ng-minlength="32" ng-maxlength="64" required class="form-control" />
                                     <div class="section">
                                         <button class="btn btn-primary btn-sm" ngclipboard ngclipboard-success="clipboardSuccess(e, this);" ngclipboard-error="clipboardError(e);" data-clipboard-text="{{currentKey.key}}">
                                             {{copyButtonText}}
@@ -33,11 +33,8 @@
                                         <button class="btn btn-primary btn-sm pull-right" ng-click="ShowGenerateKey();">
                                             Generate new key
                                         </button>
-                                        
                                     </div>
-                                    
                                 </div>
-
                                 <div class="form-section">
                                     <button class="btn btn-primary" ng-click="CancelEditEncryptionKey();">Cancel</button>
                                     <button ng-hide="newKey" class="btn btn-danger" ng-click="DeleteEncryptionKey(currentKey);">Delete</button>
@@ -48,13 +45,13 @@
                             <form ng-show="showGenerateKeyForm">
                                 <div>
                                     <h3>Generate new key</h3>
-                                    <div class="form-section">
+                                    <!--<div class="form-section">
                                         <label>Bit size</label>
                                         <div>
                                             <input type="radio" ng-model="currentKey.bitSize" value="128" /> <span>128 bit</span>
-                                            <input type="radio" ng-model="currentKey.bitSize" value="256" /> <span>256 bit</span>
+                                            <input type="radio" ng-model="currentKey.bitSize" value="256" checked="checked" /> <span>256 bit</span>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <div class="form-section">
                                         <label>Passphrase</label>
                                         <textarea ng-model="currentKey.passphrase" ng-minlength="3" ng-maxlength="50" class="form-control"></textarea>
@@ -64,7 +61,8 @@
                                         <textarea ng-model="currentKey.salt" ng-minlength="3" ng-maxlength="30" class="form-control"></textarea>
                                     </div>
                                     <div class="form-section">
-                                        <button class="btn btn-primary" ng-click="CancelGenerateKey();">Cancel</button>
+                                        <!--<button class="btn btn-primary" ng-click="CancelGenerateKey();">Cancel</button>-->
+                                        <button class="btn btn-primary" ng-click="CancelGenerateKey();">Enter manually</button>
                                         <button ng-show="showGenerateKeyForm" class="btn btn-primary" ng-disabled="!currentKey.salt || !currentKey.passphrase" ng-click="GenerateKey(currentKey.passphrase,currentKey.salt,currentKey.bitSize);">Generate key</button>
                                     </div>
                                 </div>
@@ -86,9 +84,9 @@
                     </div>
                 </div>
 
-                <div class="list-group-item">
+                <!--<div class="list-group-item">
                     <button class="btn btn-danger" ng-click="ClearStoredEncryptionKeys();"> Clear all stored keys</button>
-                </div>
+                </div>-->
 
             </div>
 

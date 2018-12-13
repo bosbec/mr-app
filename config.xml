@@ -5,7 +5,7 @@
         xmlns:gap = "http://phonegap.com/ns/1.0"
         xmlns:android = "http://schemas.android.com/apk/res/android"
         id        = "com.bosbec.mr-app"
-        version   = "0.3.99">
+        version   = "0.3.100">
   <!--<widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         xmlns:android = "http://schemas.android.com/apk/res/android"
@@ -138,6 +138,8 @@
     <splash height="1024" platform="ios" src="res/screens/ios/Default-Portrait~ipad.png" width="768" />
     <splash height="960" platform="ios" src="res/screens/ios/Default@2x~iphone.png" width="640" />
     <splash height="480" platform="ios" src="res/screens/ios/Default~iphone.png" width="320" />
+    <!--2732x2732-->
+    <splash src="res/screens/ios/Default@2x~universal~anyany.png" />
   </platform>
 
   <content src="index.html" />

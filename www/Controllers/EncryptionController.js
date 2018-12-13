@@ -21,9 +21,9 @@
         $scope.clipboardError = function () {
             console.log("clipboard error");
             $scope.copyButtonText = "Failed!";
-            $timeout(function () {
-                $scope.copyButtonText = "Copy to clipboard";
-            },
+            $timeout(function() {
+                    $scope.copyButtonText = "Copy to clipboard";
+                },
                 2000);
         };
 
@@ -52,7 +52,7 @@
             angular.copy($localStorage.encryptionKeys, $scope.encryptionKeys);
         };
 
-        $scope.ShowAddEncryptionKey = function() {
+        $scope.ShowAddEncryptionKey = function () {
             $scope.currentKey = {
                 "name": "",
                 "type": "",
@@ -63,6 +63,7 @@
                 "version": 1
             };
             $scope.showEditKeyForm = true;
+            $scope.showGenerateKeyForm = true;
             $scope.newKey = true;
         };
 
@@ -82,8 +83,8 @@
             $scope.showGenerateKeyForm = true;
         };
 
-        $scope.GenerateKey = function (passphrase, salt, bitSize) { //bitSize: 128 eller 256
-            var generatedKey = encryptionFactory.generateKey(passphrase, salt, bitSize);
+        $scope.GenerateKey = function (passphrase, salt, bitSize) { //bitSize: 128 eller 256 - change to always 256
+            var generatedKey = encryptionFactory.generateKey(passphrase, salt, 256);
             $scope.currentKey.key = generatedKey;
             $scope.showGenerateKeyForm = false;
         };
