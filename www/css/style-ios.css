@@ -5,7 +5,7 @@
 }
 
 .navbar-header {
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 .navbar-footer {
@@ -18,29 +18,29 @@
 
 .content-container {
     background-color: #f7f7f7;
-    padding-top: 10px;
+    padding-top: 20px;
 }
 
 .app-body {
-    padding-top: 10px;
+    padding-top: 20px;
     background-color: #f7f7f7;
 }
 
 .app-name {
-    padding-top: 10px;
+    padding-top: 20px;
 }
 
 #rightSidebar {
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 .conversations {
-    height: 98vh;
+    height: 97vh;
 }
 
 .content-container-chat {
-    height: 97vh;
+    height: 96vh;
 }
 .send-chat-message-container {
-    padding-bottom: 10px;
+    padding-bottom: 20px;
 }
