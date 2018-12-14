@@ -1,10 +1,57 @@
 ﻿body {
-    padding-top: 20px;
-    background-color: gray;
+    background-color: #f7f7f7;
+    padding-top: constant(safe-area-inset-top); /* iOS 11.0 */
+    padding-top: env(safe-area-inset-top); /* iOS 11.2 */
 }
-.modal {
+
+
+.navbar-header {
+    margin-top: 30px;
+}
+
+.navbar-footer {
+    margin-bottom: constant(safe-area-inset-bottom); /* iOS 11.0 */
+    margin-bottom: env(safe-area-inset-bottom); /* iOS 11.2 */
+    margin-bottom: 30px;
+    border-top: 1px solid silver;
+    border-bottom: 0;
+}
+
+.content-container {
+    background-color: #f7f7f7;
+    padding-top: 30px;
+}
+
+.navbar-app {
+    
+}
+
+.app-body {
+    padding-top: 30px;
+    background-color: #f7f7f7;
+}
+
+.app-name {
+    padding-top: 30px;
+}
+
+#rightSidebar {
+    margin-top: 30px;
+}
+
+.conversations {
+    height: 96vh;
+}
+
+.content-container-chat {
+    height: 95vh;
+}
+.send-chat-message-container {
+    padding-bottom: 30px;
+}
+/*.modal {
     margin-top: 20px;
 }
 .modal-body {
    height: 85vh !important;
-}
+}*/

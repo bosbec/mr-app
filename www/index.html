@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
     <link rel="stylesheet" href="css/style.css" type="text/css" />
+    <link rel="stylesheet" href="css/style-ios.css" type="text/css" />
     <link href="css/material-design-iconic-font.min.css" rel="stylesheet" />
     <link href="css/ng-tags-input.min.css" rel="stylesheet" />
     <link href="css/ng-tags-input.bootstrap.min.css" rel="stylesheet" />
@@ -100,7 +101,7 @@
     <div ng-style="app" class="app">
 
         <!-- Top Navbar -->
-        <div class="navbar navbar-app navbar-absolute-top">
+        <div class="navbar navbar-app navbar-absolute-top navbar-header">
             <!--INBOX ICON-->
             <div class="navbar-brand navbar-brand-center sidebar-toggle" yield-to="title">
                 <span ui-if="!mainSidebar"><img src="images/Logo-Bosbec-w200-padding.png" style="width: 100px;" /></span>
@@ -142,13 +143,14 @@
         </div>
 
         <!-- Bottom Navbar -->
-        <div ng-show="currentView!='conversation'" class="navbar navbar-app navbar-absolute-bottom">
+        <div ng-show="currentView!='conversation'" class="navbar navbar-app navbar-absolute-bottom navbar-footer">
             <div class="btn-group justified">
                 <a ng-show="validateLoad('mobileresponse')" href="#!/mr/services" class="btn btn-navbar btn-icon-only" ng-class="{'navbar-active-item': currentView === 'services'}"><i class="fa fa-2x fa-cogs"></i></a>
-                <a ng-show="!validateLoad('mobileresponse') && validateLoad('inbox')" href="#!/profile/{{ myAppUser.id }}" class="btn btn-navbar btn-icon-only" ng-class="{'navbar-active-item': currentView === 'profile'}"><i class="fa fa-2x fa-user"></i></a>
+                <a ng-show="!validateLoad('mobileresponse') && validateLoad('inbox')" href="#!/settings" class="btn btn-navbar btn-icon-only" ng-class="{'navbar-active-item': currentView === 'settings'}"><i class="fa fa-2x fa-cog"></i></a>
 
                 <a ng-show="validateLoad('inbox')" href="#!/conversations/{{ inbox.inboxId }}" class="btn btn-navbar btn-icon-only" ng-class="{'navbar-active-item': currentView === 'conversations'}"><i class="fa fa-2x fa-inbox"></i></a>
-                <a ng-show="validateLoad('inbox')" href="#!/newconversation/" class="btn btn-navbar btn-icon-only" ng-class="{'navbar-active-item': currentView === 'newconversation'}"><i class="fa fa-2x fa-edit"></i></a>
+                <!--<a ng-show="validateLoad('inbox')" href="#!/newconversation/" class="btn btn-navbar btn-icon-only" ng-class="{'navbar-active-item': currentView === 'newconversation'}"><i class="fa fa-2x fa-edit"></i></a>-->
+                <a ng-show="validateLoad('inbox')" href="#!/profile/{{ myAppUser.id }}" class="btn btn-navbar btn-icon-only" ng-class="{'navbar-active-item': currentView === 'profile'}"><i class="fa fa-2x fa-user"></i></a>
 
             </div>
         </div>
