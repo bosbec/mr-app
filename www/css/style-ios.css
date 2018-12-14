@@ -5,7 +5,7 @@
 }
 
 .navbar-header {
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 .navbar-footer {
@@ -18,20 +18,20 @@
 
 .content-container {
     background-color: #f7f7f7;
-    padding-top: 20px;
+    padding-top: 30px;
 }
 
 .app-body {
-    padding-top: 20px;
+    padding-top: 30px;
     background-color: #f7f7f7;
 }
 
 .app-name {
-    padding-top: 20px;
+    padding-top: 30px;
 }
 
 #rightSidebar {
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 .conversations {
