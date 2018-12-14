@@ -5,7 +5,7 @@
         xmlns:gap = "http://phonegap.com/ns/1.0"
         xmlns:android = "http://schemas.android.com/apk/res/android"
         id        = "com.bosbec.mr-app"
-        version   = "0.3.101">
+        version   = "0.3.102">
   <!--<widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         xmlns:android = "http://schemas.android.com/apk/res/android"
@@ -79,8 +79,8 @@
   </plugin>-->
 
   <!--Android version, cli 7.0.1, push 7.0.6-->
-  <preference name="phonegap-version" value="cli-7.0.1" />
-  <!--<preference name="phonegap-version" value="cli-7.1.0" />-->
+  <!--<preference name="phonegap-version" value="cli-7.0.1" />-->
+  <preference name="phonegap-version" value="cli-7.1.0" />
 
   <plugin name="pushwoosh-pgb-plugin" version="7.0.6">
     <variable name="IOS_FOREGROUND_ALERT_TYPE" value="BANNER" />
@@ -128,6 +128,7 @@
     <icon height="58" platform="ios" src="res/icons/ios/icon-small@2x.png" width="58" />
     <icon height="87" platform="ios" src="res/icons/ios/icon-small@3x.png" width="87" />
     <icon height="1024" platform="ios" src="res/icons/ios/icon-1024.png" width="1024" />
+    <icon height="167" platform="ios" src="res/icons/ios/icon-167x167.png" width="167" />
     <!--<splash height="1136" platform="ios" src="res/screens/ios/Default-568h@2x~iphone.png" width="640" />
     <splash height="1334" platform="ios" src="res/screens/ios/Default-667h.png" width="750" />
     <splash height="2208" platform="ios" src="res/screens/ios/Default-736h.png" width="1242" />
@@ -139,7 +140,7 @@
     <splash height="960" platform="ios" src="res/screens/ios/Default@2x~iphone.png" width="640" />
     <splash height="480" platform="ios" src="res/screens/ios/Default~iphone.png" width="320" />-->
     <!--2732x2732-->
-    <splash src="res/screen/ios/Default@2x~universal~anyany.png" />
+    <splash src="res/screens/ios/Default@2x~universal~anyany.png" />
   </platform>
   <engine name="ios" spec="latest" />
   <plugin name="cordova-plugin-splashscreen" spec="^4.0.3" />
