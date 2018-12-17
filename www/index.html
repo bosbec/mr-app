@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
     <link rel="stylesheet" href="css/style.css" type="text/css" />
-    <link rel="stylesheet" href="css/style-ios.css" type="text/css" />
+    
     <link href="css/material-design-iconic-font.min.css" rel="stylesheet" />
     <link href="css/ng-tags-input.min.css" rel="stylesheet" />
     <link href="css/ng-tags-input.bootstrap.min.css" rel="stylesheet" />
@@ -133,7 +133,7 @@
                     <span ng-if="IsEncrypted();"><i class="fas fa-2x fa-lock"></i></span>
                     <a ui-turn-on="rightSidebar" ng-click="OpenRightSidebar();"><span><i class="fas fa-2x fa-ellipsis-v"></i></span></a>
                 </div>
-                
+
                 <div ng-show="currentView=='newconversation'" class="btn btn-navbar">
                     <a ng-if="showCreateNewConversation" ng-click="startConversation();"><span><i class="zmdi zmdi-mail-send zmdi-hc-2x"></i></span></a>
                 </div>
@@ -172,7 +172,6 @@
             <div ng-style="loadingAbortButton" class="loadingAbortButton"><a ng-click="OverrideLoading()">Abort login</a></div>
         </div>
     </div>
-
 
     <script src="js/angular/1.6.9/angular.min.js" type="text/javascript"></script>
     <script src="js/angular/1.6.9/angular-route.min.js" type="text/javascript"></script>
@@ -231,6 +230,8 @@
 
     <script src="cordova.js" type="text/javascript"></script>
     <script src="js/index.js" type="text/javascript"></script>
+
+    <link ng-if="deviceType === 1" rel="stylesheet" href="css/style-ios.css" type="text/css" />
 
 </body>
 </html>

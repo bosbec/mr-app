@@ -4,43 +4,45 @@
     padding-top: env(safe-area-inset-top); /* iOS 11.2 */
 }
 
+.navbar-app {
+    height: 81px;
+}
+
 .navbar-header {
-    margin-top: 30px;
+    padding-top: 30px;
 }
 
 .navbar-footer {
     margin-bottom: constant(safe-area-inset-bottom); /* iOS 11.0 */
     margin-bottom: env(safe-area-inset-bottom); /* iOS 11.2 */
-    margin-bottom: 20px;
-    border-top: 1px solid silver;
-    border-bottom: 0;
+    background-color: #f7f7f7;
+}
+
+.has-navbar-top .app-body {
+    padding-top: 89px;
+}
+
+.has-navbar-bottom .app-body {
+    padding-bottom: 81px;
 }
 
 .content-container {
-    background-color: #f7f7f7;
-    padding-top: 30px;
+    margin-top: 80px;
+    padding-bottom: 150px;
 }
 
 .app-body {
-    padding-top: 30px;
-    background-color: #f7f7f7;
+    padding-top: 80px;
 }
 
-.app-name {
-    padding-top: 30px;
-}
-
-#rightSidebar {
+#mainSidebar {
     margin-top: 30px;
 }
 
-.conversations {
-    height: 97vh;
+#rightSidebar {
+    margin-top: 40px;
 }
 
-.content-container-chat {
-    height: 96vh;
-}
 .send-chat-message-container {
-    padding-bottom: 20px;
+    padding-bottom: 30px;
 }
