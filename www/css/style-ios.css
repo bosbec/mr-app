@@ -1,11 +1,9 @@
 ﻿body {
     background-color: #f7f7f7;
-    padding-top: constant(safe-area-inset-top); /* iOS 11.0 */
-    padding-top: env(safe-area-inset-top); /* iOS 11.2 */
 }
 
 .navbar-app {
-    height: 81px;
+    height: 80px;
 }
 
 .navbar-header {
@@ -13,17 +11,15 @@
 }
 
 .navbar-footer {
-    margin-bottom: constant(safe-area-inset-bottom); /* iOS 11.0 */
-    margin-bottom: env(safe-area-inset-bottom); /* iOS 11.2 */
     background-color: #f7f7f7;
 }
 
 .has-navbar-top .app-body {
-    padding-top: 89px;
+    padding-top: 80px;
 }
 
 .has-navbar-bottom .app-body {
-    padding-bottom: 81px;
+    padding-bottom: 80px;
 }
 
 .content-container {
@@ -45,4 +41,15 @@
 
 .send-chat-message-container {
     padding-bottom: 30px;
+}
+
+.modal-header {
+    height: 80px;
+    padding-top: 40px;
+    background-color: #2196f3;
+    border-bottom: 0;
+}
+
+.modal-close {
+    margin-top: 0;
 }
