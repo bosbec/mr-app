@@ -308,7 +308,7 @@ mrApp.controller('MainController', [
         $scope.OpenAdminWebview = function () {
             var externalUrl = "https://www.bosbec.io/#!/withtoken/" + mobileResponseFactory.getToken();
             console.log(externalUrl);
-            $window.open(externalUrl, '_blank', 'location=no,closebuttoncaption=Close,hardwareback=no,toolbar=yes,toolbarcolor=#2196f3,closebuttoncolor=#ffffff,toolbartranslucent=no,toolbarposition=bottom');
+            $window.open(externalUrl, '_blank', 'location=no,zoom=no,closebuttoncaption=Close,hardwareback=no,toolbar=yes,toolbarcolor=#2196f3,closebuttoncolor=#ffffff,toolbartranslucent=no,toolbarposition=bottom');
         };
 
         $scope.Logout = function () {
@@ -408,7 +408,6 @@ mrApp.controller('MainController', [
             //console.log("onViewLoaded[Main]");
 
             $scope.deviceType = deviceFactory.getDeviceTypeId();
-            console.log("viewLoaded: deviceType", $scope.deviceType);
             settingsFactory.setDeviceTypeName(deviceFactory.getDeviceType());
 
             //var token = $rootScope.authenticationToken;
