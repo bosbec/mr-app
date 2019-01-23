@@ -103,6 +103,11 @@
             //SharedState.turnOn('formModal');
         };
 
+        $scope.OpenAdminWebview = function () {
+            var externalUrl = "https://www.bosbec.io/#!/withtoken/" + mobileResponseFactory.getToken();
+            $window.open(externalUrl, '_blank', 'location=no,closebuttoncaption=Close,hardwareback=no,toolbar=yes,toolbarcolor=#2196f3,closebuttoncolor=#ffffff,toolbartranslucent=no,toolbarposition=bottom');
+        };
+
         $scope.ToggleInfo = function (item) {
             if (item.expand) {
                 item.expand = false;
@@ -128,7 +133,8 @@
         function init() {
             $scope.$emit('viewChanged', 'services');
             SharedState.initialize($scope, 'formModalUrl', '');
-            listServices();
+            $scope.OpenAdminWebview();
+            //listServices();
         }
 
         init();
