@@ -51,7 +51,7 @@
                     </a>
                 </div>
                 <div>
-                    <a class="list-group-item" ng-show="validateLoad('mobileresponse')" href="#!/mr/services"><img src="images/mr/Job-128x128.png" width="24" /> Services</a>
+                    <a class="list-group-item" ng-show="validateLoad('mobileresponse')" ng-click="OpenAdminWebview()"><img src="images/mr/Job-128x128.png" width="24" /> Services</a>
                     <a class="list-group-item" ng-show="validateLoad('mobileresponse')" href="#!/connect"><img src="images/mr/Trigger-128x128.png" width="24" /> Disconnect</a>
                 </div>
                 <div ng-show="validateLoad('mobileresponse')">
@@ -231,7 +231,7 @@
     <script src="cordova.js" type="text/javascript"></script>
     <script src="js/index.js" type="text/javascript"></script>
 
-    <link ng-if="deviceType === 0" rel="stylesheet" href="css/style-ios.css" type="text/css" />
+    <link ng-if="deviceType === 1" rel="stylesheet" href="css/style-ios.css" type="text/css" />
 
 </body>
 </html>

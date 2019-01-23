@@ -323,13 +323,14 @@
                                     $scope.$emit('loadingInformation', '(7/11) Register device'); // loading info
                                     var statusFlag = false;
 
-                                    $timeout(function() {
-                                            if (!statusFlag) {
-                                                //alert("timedout");
-                                                callback(false);
-                                            }
-                                        },
-                                        15000);
+                                    //Todo: Do we need this?
+                                    //$timeout(function() {
+                                    //        if (!statusFlag) {
+                                    //            //alert("timedout");
+                                    //            callback(false);
+                                    //        }
+                                    //    },
+                                    //    15000);
 
                                     deviceFactory.registerDevice(registerDeviceSettings,
                                         function (status) {

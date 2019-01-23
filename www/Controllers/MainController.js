@@ -49,8 +49,8 @@ mrApp.controller('FormModalController',
 ]);
 
 mrApp.controller('MainController', [
-    'ApiFactory', '$rootScope', '$scope', '$location','$window', '$localStorage', '$filter', '$timeout', 'ConversationsFactory', 'DeviceFactory','SettingsFactory','UsersFactory', 'SharedState',
-    function(apiFactory, $rootScope, $scope, $location, $window, $localStorage, $filter, $timeout, conversationsFactory, deviceFactory,settingsFactory,usersFactory, SharedState) {
+    'ApiFactory', '$rootScope', '$scope', '$location', '$window', '$localStorage', '$filter', '$timeout', 'ConversationsFactory', 'DeviceFactory', 'SettingsFactory', 'UsersFactory', 'MobileResponseFactory', 'SharedState',
+    function (apiFactory, $rootScope, $scope, $location, $window, $localStorage, $filter, $timeout, conversationsFactory, deviceFactory, settingsFactory, usersFactory, mobileResponseFactory, SharedState) {
 
         $scope.inConversation = false;
         $scope.currentView = 'main';
@@ -305,6 +305,12 @@ mrApp.controller('MainController', [
         
         $scope.$on('viewChanged', onViewChanged);
 
+        $scope.OpenAdminWebview = function () {
+            var externalUrl = "https://www.bosbec.io/#!/withtoken/" + mobileResponseFactory.getToken();
+            console.log(externalUrl);
+            $window.open(externalUrl, '_blank', 'location=no,closebuttoncaption=Close,hardwareback=no,toolbar=yes,toolbarcolor=#2196f3,closebuttoncolor=#ffffff,toolbartranslucent=no,toolbarposition=bottom');
+        };
+
         $scope.Logout = function () {
             //console.log("Logout");
             onLogout();
@@ -402,6 +408,7 @@ mrApp.controller('MainController', [
             //console.log("onViewLoaded[Main]");
 
             $scope.deviceType = deviceFactory.getDeviceTypeId();
+            console.log("viewLoaded: deviceType", $scope.deviceType);
             settingsFactory.setDeviceTypeName(deviceFactory.getDeviceType());
 
             //var token = $rootScope.authenticationToken;
