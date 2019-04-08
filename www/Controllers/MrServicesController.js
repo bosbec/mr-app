@@ -133,8 +133,8 @@
         function init() {
             $scope.$emit('viewChanged', 'services');
             SharedState.initialize($scope, 'formModalUrl', '');
-            $scope.OpenAdminWebview();
-            //listServices();
+            //$scope.OpenAdminWebview();
+            listServices();
         }
 
         init();

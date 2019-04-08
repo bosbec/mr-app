@@ -52,7 +52,8 @@
                     </a>
                 </div>
                 <div>
-                    <a class="list-group-item" ng-show="validateLoad('mobileresponse')" ng-click="OpenAdminWebview()"><img src="images/mr/Job-128x128.png" width="24" /> Services</a>
+                    <!--<a class="list-group-item" ng-show="validateLoad('mobileresponse')" ng-click="OpenAdminWebview()"><img src="images/mr/Job-128x128.png" width="24" /> Services</a>-->
+                    <a class="list-group-item" ng-show="validateLoad('mobileresponse')" href="#!/mr/services"><img src="images/mr/Job-128x128.png" width="24" /> Services</a>
                     <a class="list-group-item" ng-show="validateLoad('mobileresponse')" href="#!/connect"><img src="images/mr/Trigger-128x128.png" width="24" /> Disconnect</a>
                 </div>
                 <div ng-show="validateLoad('mobileresponse')">
@@ -146,7 +147,8 @@
         <!-- Bottom Navbar -->
         <div ng-show="currentView!='conversation'" class="navbar navbar-app navbar-absolute-bottom navbar-footer">
             <div class="btn-group justified">
-                <a ng-show="validateLoad('mobileresponse')" ng-click="OpenAdminWebview()" class="btn btn-navbar btn-icon-only" ng-class="{'navbar-active-item': currentView === 'services'}"><i class="fa fa-2x fa-cogs"></i></a>
+                <!--<a ng-show="validateLoad('mobileresponse')" ng-click="OpenAdminWebview()" class="btn btn-navbar btn-icon-only" ng-class="{'navbar-active-item': currentView === 'services'}"><i class="fa fa-2x fa-cogs"></i></a>-->
+                <a ng-show="validateLoad('mobileresponse')" href="#!/mr/services" class="btn btn-navbar btn-icon-only" ng-class="{'navbar-active-item': currentView === 'services'}"><i class="fa fa-2x fa-cogs"></i></a>
                 <a ng-show="!validateLoad('mobileresponse') && validateLoad('inbox')" href="#!/settings" class="btn btn-navbar btn-icon-only" ng-class="{'navbar-active-item': currentView === 'settings'}"><i class="fa fa-2x fa-cog"></i></a>
 
                 <a ng-show="validateLoad('inbox')" href="#!/conversations/{{ inbox.inboxId }}" class="btn btn-navbar btn-icon-only" ng-class="{'navbar-active-item': currentView === 'conversations'}"><i class="fa fa-2x fa-inbox"></i></a>
